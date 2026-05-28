@@ -141,20 +141,20 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .loading { position: relative; overflow: hidden; }
 .loading::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); animation: sweep 1.4s infinite; }
 @keyframes sweep { to { transform: translateX(100%); } }
-.chart-card { background: #111518; border: 1px solid var(--line); border-radius: 8px; padding: 12px; min-width: 0; overflow: hidden; }
+.chart-card { background: #111518; border: 1px solid var(--line); border-radius: 8px; padding: 12px; min-width: 0; overflow: hidden; touch-action: pan-y; }
 .chart-head, .chart-foot { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 .chart-head > div { min-width: 0; }
 .chart-head .badge { flex-shrink: 0; }
 .chart-head h3 { margin: 0; }
 .chart-head p, .chart-foot span { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
-.chart-ranges { display: flex; gap: 4px; overflow-x: auto; padding: 4px 0 9px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
-.chart-ranges button { flex: 0 0 auto; min-width: 44px; height: 30px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--muted); font-size: 12px; }
+.chart-ranges { display: flex; gap: 4px; overflow-x: auto; padding: 4px 0 9px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scroll-snap-type: x proximity; }
+.chart-ranges button { flex: 0 0 auto; min-width: 44px; height: 30px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--muted); font-size: 12px; scroll-snap-align: start; }
 .chart-ranges button.active { background: var(--surface-2); color: var(--text); border-color: rgba(66,211,146,.5); }
 .chart-legend { display: flex; gap: 12px; flex-wrap: wrap; margin: -2px 0 8px; color: var(--muted); font-size: 12px; }
 .chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .chart-legend i { width: 18px; height: 3px; border-radius: 99px; display: inline-block; }
 .chart-legend i.dash { background-image: repeating-linear-gradient(90deg, currentColor 0 6px, transparent 6px 11px); }
-.chart-scroll { position: relative; overflow-x: auto; overflow-y: hidden; border-radius: 8px; touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.chart-scroll { position: relative; overflow-x: auto; overflow-y: hidden; border-radius: 8px; touch-action: pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: thin; overscroll-behavior-x: contain; }
 .chart-grid line { stroke: rgba(255,255,255,.08); }
 .chart-grid text, .chart-axis text { fill: var(--muted); font-size: 10px; }
 .chart-marker { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(244,241,234,.65); pointer-events: none; }
@@ -166,6 +166,18 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .octa-chart-block { display: grid; gap: 12px; min-width: 0; }
 .octa-chart-block .chart-card { width: 100%; }
 .octa-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+.signal-profile { display: grid; gap: 13px; }
+.signal-profile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.signal-profile-head h2 { margin-bottom: 5px; }
+.signal-profile-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.4; }
+.signal-profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.signal-profile-grid h3 { margin-bottom: 9px; color: var(--soft); }
+.signal-pill-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.signal-pill { min-height: 66px; border: 1px solid var(--line); border-radius: 8px; background: #111518; padding: 10px; display: grid; align-content: center; gap: 5px; }
+.signal-pill strong { font-size: 13px; }
+.signal-pill span { color: var(--muted); font-size: 11px; line-height: 1.35; }
+.signal-pill.on { border-color: rgba(66,211,146,.34); }
+.signal-pill.off { border-color: rgba(241,189,91,.32); }
 .score-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin: 12px 0; }
 .score-cell { background: #111518; border: 1px solid var(--line); border-radius: 8px; padding: 11px; min-width: 0; }
 .score-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -210,7 +222,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .topline { align-items: flex-start; }
   .status-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .panel, .panel.third { grid-column: 1 / -1; }
-  .metric-row, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .metric-row, .grid-2, .grid-3, .signal-profile-grid { grid-template-columns: 1fr; }
   .octa-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .score-grid, .detail-grid, .radar-summary { grid-template-columns: 1fr; }
   .radar-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -229,6 +241,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .panel { padding: 13px; }
   .chart-card { margin-left: -5px; margin-right: -5px; padding: 10px 8px 11px; border-left: 0; border-right: 0; border-radius: 0; }
   .chart-head { align-items: flex-start; }
+  .chart-head .badge { min-height: 24px; padding: 0 7px; }
   .chart-head h3 { font-size: 14px; }
   .chart-head p { font-size: 11px; }
   .chart-ranges { gap: 6px; padding-bottom: 10px; }
@@ -236,6 +249,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .chart-scroll { margin-left: -2px; margin-right: -2px; }
   .line-chart { height: 220px; }
   .octa-metrics { grid-template-columns: 1fr 1fr; }
+  .signal-pill-list { grid-template-columns: 1fr; }
+  .signal-pill { min-height: 58px; }
   .metric.compact { min-height: 68px; padding: 10px; }
   .metric.compact strong { font-size: 17px; overflow-wrap: anywhere; }
   .toolbar .button { flex: 1 1 auto; }

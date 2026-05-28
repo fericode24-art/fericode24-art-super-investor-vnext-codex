@@ -116,6 +116,20 @@
     insider: "Segnali esterni di supporto, solo quando il profilo li abilita.",
     funds: "Numero di fondi osservati che hanno il titolo in portafoglio.",
   };
+  const LIVE_SIGNAL_PROFILE = {
+    active: [
+      ["Radar 13F", "Conviction, accumulation e crowding"],
+      ["Momentum", "Forza relativa prezzi"],
+      ["Entry status", "Filtro tecnico ingresso/uscita"],
+      ["VIX e optimizer", "Regime, 8 slot, settore, anti-churn"],
+    ],
+    inactive: [
+      ["Insider Form 4", "Cache pronta, non nel live"],
+      ["Earnings / PEAD", "Cache pronta, non nel live"],
+      ["Analyst", "Richiede provider, non nel live"],
+      ["Congressional / squeeze", "Codice presente, non nel live"],
+    ],
+  };
   const chartStore = new Map();
 
   function loadJson(key, fallback) {
@@ -149,7 +163,7 @@
   }
   function repairAndReload(view = state.view || "today") {
     repairLocalState();
-    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=19`;
+    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=20`;
   }
   function fxRate() {
     const x = Number(state.fx?.EURUSD);
@@ -748,7 +762,12 @@
       if (act === "repair-local") repairAndReload(state.view);
       if (act === "reset-octa-local") { if (confirm("Azzerare dati locali OCTA in questa vNext?")) { state.octaPortfolio = {}; state.octaHistory = []; state.octaExecuted = {}; saveJson(LS.octaPortfolio, {}); saveJson(LS.octaHistory, []); saveJson(LS.octaExecuted, {}); render(); } }
     });
+    document.addEventListener("pointerdown", updateChartMarker);
     document.addEventListener("pointermove", updateChartMarker);
+    document.addEventListener("pointercancel", e => {
+      const card = e.target.closest?.(".chart-card");
+      if (card) hideChartMarker(card);
+    }, true);
     document.addEventListener("pointerleave", e => {
       const card = e.target.closest?.(".chart-card");
       if (card) hideChartMarker(card);
@@ -1256,7 +1275,8 @@
     const compareFiltered = Array.isArray(opts.comparePoints) ? filterChartRange(opts.comparePoints, rangeKey) : [];
     const compareClean = Array.isArray(compareFiltered) ? compareFiltered : [];
     const H = 250, padL = 82, padR = 22, padT = 24, padB = 34;
-    const W = Math.max(760, Math.min(3600, clean.length * 10 + padL + padR));
+    const minW = Number(opts.minWidth || 700);
+    const W = Math.max(minW, Math.min(3600, clean.length * 10 + padL + padR));
     const primaryVals = clean.map(p => Number(p.v));
     const compareVals = compareClean.map(p => Number(p.v));
     const vals = primaryVals.concat(compareVals);
@@ -1279,14 +1299,15 @@
       return `<text x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="${f === 0 ? "start" : f === 1 ? "end" : "middle"}">${dateIT(clean[i].d)}</text>`;
     }).join("");
     const context = opts.context ? ` data-context="${esc(opts.context)}"` : "";
-    const controls = CHART_RANGES.map(([key, label]) => `<button class="${key === rangeKey ? "active" : ""}" data-action="chart-range" data-chart="${esc(chartId)}" data-range="${key}"${context}>${label}</button>`).join("");
+    const rangeTitles = { "1D": "1 giorno", "1W": "1 settimana", "1M": "1 mese", "3M": "3 mesi", "1Y": "1 anno", "5Y": "5 anni", MAX: "Massimo disponibile" };
+    const controls = CHART_RANGES.map(([key, label]) => `<button class="${key === rangeKey ? "active" : ""}" data-action="chart-range" data-chart="${esc(chartId)}" data-range="${key}" title="${esc(rangeTitles[key] || label)}" aria-label="${esc(rangeTitles[key] || label)}"${context}>${label}</button>`).join("");
     const comparePath = compareClean.length >= 2
       ? compareClean.map((p,i) => `${i ? "L" : "M"}${xFor(compareClean, i).toFixed(1)} ${y(Number(p.v)).toFixed(1)}`).join(" ")
       : "";
     const compareSvg = comparePath ? `<path d="${comparePath}" fill="none" stroke="${esc(opts.compareColor || "#83a8ff")}" stroke-width="2.2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"></path>` : "";
     const legend = comparePath ? `<div class="chart-legend"><span><i style="background:${col}"></i>${esc(opts.primaryLabel || "Portafoglio")}</span><span><i class="dash" style="background:${esc(opts.compareColor || "#83a8ff")}"></i>${esc(opts.compareLabel || "Confronto")}</span></div>` : "";
     chartStore.set(chartId, { points: clean, fmt });
-    return `<div class="chart-card" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll"><svg class="line-chart" style="width:${W}px" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${fmt(first)}</span><strong>${fmt(last)}</strong></div></div>`;
+    return `<div class="chart-card" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" style="width:${W}px" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${fmt(first)}</span><strong>${fmt(last)}</strong></div></div>`;
   }
   function octaSeries() {
     const out = new Map();
@@ -1321,7 +1342,7 @@
     const stats = octaStats();
     if (pts.length < 2) return `<div class="notice">Andamento OCTA pronto: servono quotazioni storiche, le carico appena disponibili.</div>`;
     return `<div class="octa-chart-block">
-      ${lineChart(pts, "Andamento OCTA", v => eur(v, 0), "octa")}
+      ${lineChart(pts, "Andamento OCTA", v => eur(v, 0), "octa", { minWidth: 640 })}
       <div class="octa-metrics">
         <div class="metric compact"><span>Valore stimato</span><strong>${eurMaybe(stats.value, 0)}</strong></div>
         <div class="metric compact"><span>Costo iniziale</span><strong>${eurMaybe(stats.cost, 0)}</strong></div>
@@ -1352,14 +1373,39 @@
   function backtestMini() {
     return `<div class="row-list"><div class="kv"><span>Profilo validato</span><strong>fast path</strong></div><div class="kv"><span>Segnali esterni live</span><strong>disattivati</strong></div><div class="kv"><span>Fonte</span><strong>backtest.json</strong></div></div>`;
   }
+  function signalPills(items, cls) {
+    return items.map(([name, desc]) => `<div class="signal-pill ${cls}"><strong>${esc(name)}</strong><span>${esc(desc)}</span></div>`).join("");
+  }
+  function liveSignalProfilePanel(compact = false) {
+    return `<div class="signal-profile ${compact ? "compact" : ""}">
+      <div class="signal-profile-head">
+        <div>
+          <h2>Motore live</h2>
+          <p>Profilo fast path attivo: score da radar 13F, momentum e filtri tecnici.</p>
+        </div>
+        <span class="badge info">skip_external_signals=true</span>
+      </div>
+      <div class="signal-profile-grid">
+        <section>
+          <h3>Usati nello score</h3>
+          <div class="signal-pill-list">${signalPills(LIVE_SIGNAL_PROFILE.active, "on")}</div>
+        </section>
+        <section>
+          <h3>Presenti ma spenti</h3>
+          <div class="signal-pill-list">${signalPills(LIVE_SIGNAL_PROFILE.inactive, "off")}</div>
+        </section>
+      </div>
+    </div>`;
+  }
   function viewOcta() {
     const d = state.octaData || {};
     const signals = d.signals || [];
     const cands = d.candidates || [];
     return `
       <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
-      <section class="panel"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
-      <section class="panel"><div class="panel-head"><div><h2>Radar 40</h2><p>Secondario: aprilo quando vuoi esplorare tutti i candidati.</p></div><button class="button ghost" data-action="toggle-radar">${state.radarOpen ? "Chiudi" : "Apri"} Radar</button></div>${state.radarOpen ? candidateTable(cands) : radarSummary(cands)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
+      <section class="panel full">${liveSignalProfilePanel(true)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Radar 40</h2><p>Secondario: aprilo quando vuoi esplorare tutti i candidati.</p></div><button class="button ghost" data-action="toggle-radar">${state.radarOpen ? "Chiudi" : "Apri"} Radar</button></div>${state.radarOpen ? candidateTable(cands) : radarSummary(cands)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Storico OCTA</h2><p>Operazioni registrate da questa vNext o lette dal cloud.</p></div></div>${octaHistoryTable()}</section>`;
   }
   function octaPortfolioTable() {
@@ -1684,10 +1730,7 @@
     const wf = state.freshnessFile || {};
     const next = nextRefreshInfo();
     return `
-      <section class="panel full"><div class="panel-head"><div><h2>Diagnosi strategia</h2><p>Questa vNext separa profilo validato e profilo da esplorare.</p></div><span class="badge ${f.cls}">${esc(f.label)}</span></div><div class="grid-2">
-        <div class="notice good"><strong>Profilo attivo consigliato</strong><br>QFAS fast path: 13F radar, accumulation, crowding, momentum, entry status tecnico. E il profilo che l'attuale backtest veloce sta realmente validando.</div>
-        <div class="notice warn"><strong>Profilo da testare</strong><br>Insider, PEAD/earnings, analyst, congressional e squeeze sono presenti nel codice ma non consumati nel live attuale. Vanno accesi solo dopo backtest dedicato.</div>
-      </div></section>
+      <section class="panel full"><div class="panel-head"><div><h2>Diagnosi strategia</h2><p>Questa vNext separa profilo validato e profilo da esplorare.</p></div><span class="badge ${f.cls}">${esc(f.label)}</span></div>${liveSignalProfilePanel()}</section>
       <section class="panel"><div class="panel-head"><div><h2>Freshness policy</h2><p>Regola proposta per il segnale del mattino.</p></div><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button></div><div class="row-list">
         <div class="kv"><span>Orario atteso Italia</span><strong>08:35</strong></div>
         <div class="kv"><span>Trading date attesa</span><strong>${dateIT(expectedSignalDate())}</strong></div>
