@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-28T11:50:22.064593+00:00",
+  "generated_at": "2026-05-28T12:41:00.000346+00:00",
   "profile": "cached",
   "passed": true,
   "results": [
@@ -66,13 +66,170 @@
         "pead_active_top40": 0
       },
       "market_shadow": {
-        "status": "missing_cache",
-        "cached_rows_top80": 0,
+        "status": "cache_present",
+        "cached_rows_top80": 22,
         "congressional_nonzero_top80": 0,
         "short_interest_rows_top80": 0,
         "squeeze_watch_top80": 0,
-        "max_abs_shadow_delta": 0.0,
-        "largest_shadow_impacts": []
+        "max_abs_shadow_delta": 5.31,
+        "largest_shadow_impacts": [
+          {
+            "ticker": "WY",
+            "score": 68.7,
+            "entry": 53.12,
+            "shadow_entry": 47.81,
+            "shadow_delta": -5.31,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MKSI",
+            "score": 81.33,
+            "entry": 83.82,
+            "shadow_entry": 83.82,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MRVL",
+            "score": 79.19,
+            "entry": 86.68,
+            "shadow_entry": 86.68,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AMD",
+            "score": 78.45,
+            "entry": 86.02,
+            "shadow_entry": 86.02,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MU",
+            "score": 77.92,
+            "entry": 87.78,
+            "shadow_entry": 87.78,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "GLW",
+            "score": 77.04,
+            "entry": 84.26,
+            "shadow_entry": 84.26,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "RKLB",
+            "score": 76.24,
+            "entry": 87.34,
+            "shadow_entry": 87.34,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SWKS",
+            "score": 75.85,
+            "entry": 72.62,
+            "shadow_entry": 72.62,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "WDC",
+            "score": 75.51,
+            "entry": 87.12,
+            "shadow_entry": 87.12,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SNDK",
+            "score": 75.34,
+            "entry": 88.0,
+            "shadow_entry": 88.0,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "TER",
+            "score": 74.41,
+            "entry": 83.16,
+            "shadow_entry": 83.16,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AKAM",
+            "score": 74.01,
+            "entry": 80.53,
+            "shadow_entry": 80.53,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          }
+        ]
       },
       "largest_rank_moves": [
         {
@@ -175,7 +332,7 @@
       "external_cache": {
         "insider_rows": 200,
         "earnings_rows": 200,
-        "market_rows": 0
+        "market_rows": 40
       }
     },
     {
@@ -241,13 +398,170 @@
         "pead_active_top40": 0
       },
       "market_shadow": {
-        "status": "missing_cache",
-        "cached_rows_top80": 0,
+        "status": "cache_present",
+        "cached_rows_top80": 22,
         "congressional_nonzero_top80": 0,
         "short_interest_rows_top80": 0,
         "squeeze_watch_top80": 0,
-        "max_abs_shadow_delta": 0.0,
-        "largest_shadow_impacts": []
+        "max_abs_shadow_delta": 5.31,
+        "largest_shadow_impacts": [
+          {
+            "ticker": "WY",
+            "score": 68.7,
+            "entry": 53.12,
+            "shadow_entry": 47.81,
+            "shadow_delta": -5.31,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MKSI",
+            "score": 81.33,
+            "entry": 83.82,
+            "shadow_entry": 83.82,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MRVL",
+            "score": 79.19,
+            "entry": 86.68,
+            "shadow_entry": 86.68,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AMD",
+            "score": 78.45,
+            "entry": 86.02,
+            "shadow_entry": 86.02,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MU",
+            "score": 77.92,
+            "entry": 87.78,
+            "shadow_entry": 87.78,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "GLW",
+            "score": 77.04,
+            "entry": 84.26,
+            "shadow_entry": 84.26,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "RKLB",
+            "score": 76.24,
+            "entry": 87.34,
+            "shadow_entry": 87.34,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SWKS",
+            "score": 75.85,
+            "entry": 72.62,
+            "shadow_entry": 72.62,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "WDC",
+            "score": 75.51,
+            "entry": 87.12,
+            "shadow_entry": 87.12,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SNDK",
+            "score": 75.34,
+            "entry": 88.0,
+            "shadow_entry": 88.0,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "TER",
+            "score": 74.41,
+            "entry": 83.16,
+            "shadow_entry": 83.16,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AKAM",
+            "score": 74.01,
+            "entry": 80.53,
+            "shadow_entry": 80.53,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          }
+        ]
       },
       "largest_rank_moves": [
         {
@@ -350,7 +664,7 @@
       "external_cache": {
         "insider_rows": 200,
         "earnings_rows": 200,
-        "market_rows": 0
+        "market_rows": 40
       }
     },
     {
@@ -416,13 +730,170 @@
         "pead_active_top40": 0
       },
       "market_shadow": {
-        "status": "missing_cache",
-        "cached_rows_top80": 0,
+        "status": "cache_present",
+        "cached_rows_top80": 22,
         "congressional_nonzero_top80": 0,
         "short_interest_rows_top80": 0,
         "squeeze_watch_top80": 0,
-        "max_abs_shadow_delta": 0.0,
-        "largest_shadow_impacts": []
+        "max_abs_shadow_delta": 5.03,
+        "largest_shadow_impacts": [
+          {
+            "ticker": "WY",
+            "score": 67.29,
+            "entry": 50.3,
+            "shadow_entry": 45.27,
+            "shadow_delta": -5.03,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MKSI",
+            "score": 81.33,
+            "entry": 83.82,
+            "shadow_entry": 83.82,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MRVL",
+            "score": 79.3,
+            "entry": 86.9,
+            "shadow_entry": 86.9,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AMD",
+            "score": 78.56,
+            "entry": 86.24,
+            "shadow_entry": 86.24,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "MU",
+            "score": 77.92,
+            "entry": 87.78,
+            "shadow_entry": 87.78,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SWKS",
+            "score": 77.17,
+            "entry": 75.25,
+            "shadow_entry": 75.25,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "GLW",
+            "score": 76.93,
+            "entry": 84.04,
+            "shadow_entry": 84.04,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "RKLB",
+            "score": 76.24,
+            "entry": 87.34,
+            "shadow_entry": 87.34,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "WDC",
+            "score": 75.51,
+            "entry": 87.12,
+            "shadow_entry": 87.12,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "SNDK",
+            "score": 75.34,
+            "entry": 88.0,
+            "shadow_entry": 88.0,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "TER",
+            "score": 74.52,
+            "entry": 83.38,
+            "shadow_entry": 83.38,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          },
+          {
+            "ticker": "AKAM",
+            "score": 73.79,
+            "entry": 80.09,
+            "shadow_entry": 80.09,
+            "shadow_delta": 0.0,
+            "congressional": 0.0,
+            "congressional_trades": 0,
+            "congressional_net": 0,
+            "short_interest": null,
+            "short_interest_state": "skipped",
+            "squeeze": "none"
+          }
+        ]
       },
       "largest_rank_moves": [
         {
@@ -525,7 +996,7 @@
       "external_cache": {
         "insider_rows": 200,
         "earnings_rows": 200,
-        "market_rows": 0
+        "market_rows": 40
       }
     }
   ]

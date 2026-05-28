@@ -71,6 +71,7 @@ def test_cached_market_shadow_reports_diagnostic_delta_only():
         momentum_pct=70.0,
         analyst_score=60.0,
         insider_score=80.0,
+        pead_boost=0.0,
         market_cache=cache,
     )
 
@@ -88,5 +89,6 @@ def test_cached_market_shadow_ignores_missing_cache_rows():
         momentum_pct=50.0,
         analyst_score=None,
         insider_score=None,
+        pead_boost=0.0,
         market_cache={"tickers": {}},
     ) == {}

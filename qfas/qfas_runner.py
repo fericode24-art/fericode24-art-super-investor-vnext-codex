@@ -207,6 +207,7 @@ def _cached_market_shadow(
     momentum_pct: Optional[float],
     analyst_score: Optional[float],
     insider_score: Optional[float],
+    pead_boost: float,
     market_cache: Dict,
 ) -> Dict:
     row = (market_cache.get("tickers") or {}).get(ticker.upper()) if market_cache else None
@@ -239,12 +240,15 @@ def _cached_market_shadow(
         "insider_flow": config.ENTRY_WEIGHT_INSIDER,
         "congressional": config.ENTRY_WEIGHT_CONGRESSIONAL,
     }, market_as_of)
-    entry_with_congress = (
+    entry_base = (
         weights.get("momentum", 0.0) * mom +
         weights.get("analyst_composite", 0.0) * analyst_used +
         weights.get("insider_flow", 0.0) * insider_used +
         weights.get("congressional", 0.0) * congressional_used
     )
+    raw_delta = (entry_base + pead_boost) - mom
+    bounded_delta = max(-12.0, min(12.0, raw_delta))
+    entry_with_congress = _clip_score(mom + bounded_delta)
     squeeze_state = "none"
     entry_with_squeeze = entry_with_congress
     if short_interest_used is not None and short_interest_used > config.SQUEEZE_SI_THRESHOLD:
@@ -264,6 +268,7 @@ def _cached_market_shadow(
         "congressional_net": row.get("congressional_net"),
         "short_interest_shadow": short_interest_used,
         "short_interest_raw": row.get("short_interest_raw"),
+        "short_interest_state": row.get("short_interest_state"),
         "squeeze_shadow": squeeze_state,
         "market_shadow_entry": float(shadow_entry),
         "market_shadow_delta": float(shadow_entry - current_entry_score),
@@ -423,6 +428,7 @@ def run_decision_cycle(
                 momentum_pct=mom,
                 analyst_score=entry_res.analyst_score,
                 insider_score=entry_res.insider_score,
+                pead_boost=entry_res.pead_boost,
                 market_cache=market_cache,
             ))
         else:

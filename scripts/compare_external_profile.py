@@ -92,6 +92,7 @@ def _market_shadow_summary(cycle) -> Dict:
             "congressional_trades": audit.get("congressional_trades"),
             "congressional_net": audit.get("congressional_net"),
             "short_interest": audit.get("short_interest_shadow"),
+            "short_interest_state": audit.get("short_interest_state"),
             "squeeze": audit.get("squeeze_shadow"),
         })
     deltas = [float(r["shadow_delta"]) for r in rows]

@@ -13,7 +13,7 @@ on:
       skip_short:
         description: "Salta FINRA short interest"
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: write
@@ -50,8 +50,9 @@ jobs:
           INPUT_SKIP_SHORT: ${{ github.event.inputs.skip_short }}
         run: |
           TOP_N="${INPUT_TOP_N:-80}"
+          SKIP_SHORT="${INPUT_SKIP_SHORT:-true}"
           EXTRA=""
-          if [ "$INPUT_SKIP_SHORT" = "true" ]; then
+          if [ "$SKIP_SHORT" = "true" ]; then
             EXTRA="--skip-short"
           fi
           echo "Prefetch market shadow: top_n=$TOP_N $EXTRA"

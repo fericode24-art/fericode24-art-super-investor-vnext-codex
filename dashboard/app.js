@@ -1158,9 +1158,12 @@
     ];
     if (comp.market_shadow_cached) {
       const congMeta = `${comp.congressional_trades ?? 0} trade, net ${comp.congressional_net ?? 0} - shadow`;
-      const squeezeMeta = `${comp.squeeze_shadow || "none"} - shadow, non pesa nel live`;
+      const shortMeta = comp.short_interest_state === "skipped"
+        ? "FINRA saltato: dato non disponibile, peso zero"
+        : `${comp.squeeze_shadow || "none"} - shadow, non pesa nel live`;
       rows.push(externalMetric("Congress", comp.congressional_shadow, congMeta));
-      rows.push(externalMetric("Squeeze", comp.market_shadow_delta, squeezeMeta, { delta: true }));
+      rows.push(externalMetric("Short interest", comp.short_interest_shadow, shortMeta));
+      rows.push(externalMetric("Delta shadow", comp.market_shadow_delta, "scenario congressional/squeeze, non pesa", { delta: true }));
     }
     const text = mode === "cached"
       ? "Questi valori modificano Entry e quindi Opportunity, classifica Radar 40 e portafoglio target."

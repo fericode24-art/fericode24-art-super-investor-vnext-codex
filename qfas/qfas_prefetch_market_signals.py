@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 import sys
 import time
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -114,7 +114,7 @@ def prefetch(top_n: int = 80, lookback_days: int = 90, include_short: bool = Tru
     universe = build_target_universe(top_n)
     log(f"Universo target: {len(universe)} ticker")
     cache = {
-        "ts": datetime.utcnow().isoformat() + "Z",
+        "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "as_of": as_of.isoformat(),
         "lookback_days": lookback_days,
         "source": "capitoltrades+finra",
