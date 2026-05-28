@@ -25,11 +25,11 @@ Configura questi secrets nel repo vNext:
 
 - `DASHBOARD_URL`: URL pubblico Netlify vNext.
 - `NETLIFY_SITE_ID`: site id Netlify vNext.
-- `NETLIFY_AUTH_TOKEN`: token Netlify con permesso deploy.
 - `SEC_USER_AGENT`: user agent SEC con email reale.
 
 Opzionali:
 
+- `NETLIFY_AUTH_TOKEN`: abilita deploy Netlify diretto dal workflow. Senza questo secret il workflow genera e committa il segnale, ma salta il deploy.
 - `FINNHUB_API_KEY`: abilita segnali analyst/earnings quando usati dal motore.
 - `NTFY_TOPIC`: invia notifiche refresh/failure.
 

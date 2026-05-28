@@ -43,9 +43,9 @@ La produzione attuale non viene toccata. Per pubblicare questa vNext serve un si
 ### GitHub Actions secrets
 
 - `NETLIFY_SITE_ID`
-- `NETLIFY_AUTH_TOKEN`
 - `DASHBOARD_URL`
 - `SEC_USER_AGENT`
+- `NETLIFY_AUTH_TOKEN` opzionale ma necessario per deploy automatico dal workflow
 - `FINNHUB_API_KEY` opzionale
 - `NTFY_TOPIC` opzionale per notifiche
 

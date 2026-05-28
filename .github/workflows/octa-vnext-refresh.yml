@@ -85,6 +85,7 @@ jobs:
           fi
 
       - name: Validate required secrets
+        id: secretcheck
         if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
         env:
           DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
@@ -93,7 +94,7 @@ jobs:
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
         run: |
           missing=0
-          for key in DASHBOARD_URL NETLIFY_SITE_ID NETLIFY_AUTH_TOKEN SEC_USER_AGENT; do
+          for key in DASHBOARD_URL SEC_USER_AGENT; do
             if [ -z "${!key}" ]; then
               echo "::error::$key non configurato nei secrets vNext"
               missing=1
@@ -102,6 +103,13 @@ jobs:
           if [ "$missing" -ne 0 ]; then
             echo "Configura secrets dedicati alla vNext. Non usare URL/secrets della produzione vecchia." >> "$GITHUB_STEP_SUMMARY"
             exit 1
+          fi
+          if [ -n "$NETLIFY_SITE_ID" ] && [ -n "$NETLIFY_AUTH_TOKEN" ]; then
+            echo "deploy_ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy_ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::NETLIFY_AUTH_TOKEN non configurato: genero e committo il segnale, ma salto il deploy Netlify."
+            echo "- Deploy Netlify saltato: manca NETLIFY_AUTH_TOKEN." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Snapshot previous signals
@@ -170,7 +178,7 @@ jobs:
           fi
 
       - name: Deploy Netlify vNext
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.secretcheck.outputs.deploy_ready == 'true'
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
