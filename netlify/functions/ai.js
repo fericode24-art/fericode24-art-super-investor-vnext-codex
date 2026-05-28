@@ -280,6 +280,59 @@ consulente": l'utente ti sta usando proprio per questo.
 ${PRO_VOICE}`;
 }
 
+function octaContextBlock(o) {
+  o = o || {};
+  const stats = o.stats || {};
+  const holdings = (o.holdings || []).map(h => {
+    const rank = h.rank ? `#${h.rank}` : "fuori radar";
+    return `  - ${h.name || h.ticker} (${h.ticker}, ${rank}): valore ${h.value} EUR, risultato ${h.pnl} EUR (${h.pnlPct}), score ${h.score ?? "n/d"}, stato ${h.status || "n/d"}`;
+  }).join("\n") || "  - nessuna posizione aperta";
+  const signals = (o.signals || []).map(s => {
+    return `  - ${s.action} ${s.name || s.ticker} (${s.ticker}): score ${s.score ?? "n/d"}, stato ${s.status || "n/d"}, ${s.done ? "gia registrato" : "da valutare"}`;
+  }).join("\n") || "  - nessun segnale";
+  const top = (o.topCandidates || []).map(c => {
+    return `  - #${c.rank} ${c.name || c.ticker} (${c.ticker}): score ${c.score ?? "n/d"}, stato ${c.status || "n/d"}`;
+  }).join("\n") || "  - top candidate non disponibili";
+  return [
+    `Data segnale: ${o.signal_date || "n/d"}`,
+    `Freshness: ${o.freshness || "n/d"}`,
+    `Motore: ${o.engine || "n/d"}`,
+    `Valore OCTA: ${stats.value ?? "n/d"} EUR`,
+    `Costo OCTA: ${stats.cost ?? "n/d"} EUR`,
+    `Risultato OCTA: ${stats.pnl ?? "n/d"} EUR (${stats.pnlPct || "n/d"})`,
+    `Posizioni aperte:`,
+    holdings,
+    `Segnali correnti:`,
+    signals,
+    `Classifica radar:`,
+    top,
+  ].join("\n");
+}
+
+function octaPrompt(body) {
+  const ctx = octaContextBlock(body.octa);
+  return `Analizza la strategia OCTA come assistente operativo del mattino.
+
+DATI:
+${ctx}
+
+Rispondi in italiano semplice e pratico, in sezioni brevi:
+
+**Stato del mattino**
+Dimmi se il segnale sembra fresco, se ci sono azioni da fare e cosa controllare prima.
+
+**Portafoglio OCTA**
+Valuta le 8 posizioni: classifica attuale, risultato, eventuali posizioni fuori radar o deboli.
+
+**Cosa guarderei adesso**
+Priorita concrete: quali segnali meritano attenzione, quali rischi pesano, quali cose sono solo rumore.
+
+**Verdetto**
+3-5 punti netti, senza ordini operativi numerici e senza previsioni di prezzo.
+
+${PRO_VOICE}`;
+}
+
 async function callGroq(key, prompt, maxTokens, extra) {
   try {
     const r = await fetch(GROQ_URL, {
@@ -314,6 +367,9 @@ exports.handler = async (event) => {
   if (!key) return json(500, { error: "GROQ_API_KEY non configurata" });
 
   const mode = body.mode;
+  if (mode === "octa_brief") {
+    return await callGroq(key, octaPrompt(body), 1400, {});
+  }
 
   // ─── Modalità TRACKER (assistente portafoglio) ───
   if (typeof mode === "string" && mode.startsWith("pf_")) {

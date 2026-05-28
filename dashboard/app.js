@@ -141,6 +141,12 @@
   function esc(v) { return String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
   function eur(n, dec = 0) { return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: dec }).format(Number(n || 0)); }
   function eurMaybe(n, dec = 0) { return Number.isFinite(Number(n)) ? eur(Number(n), dec) : "n/d"; }
+  function compactEur(n) {
+    const x = Number(n || 0), a = Math.abs(x);
+    if (a >= 1000000) return `€${(x / 1000000).toFixed(a >= 10000000 ? 0 : 1)}M`;
+    if (a >= 1000) return `€${(x / 1000).toFixed(a >= 10000 ? 0 : 1)}k`;
+    return eur(x, 0);
+  }
   function pct(n, dec = 1) { const x = Number(n || 0); return (x >= 0 ? "+" : "") + x.toFixed(dec) + "%"; }
   function todayISO() { return new Date().toISOString().slice(0, 10); }
   function dateIT(s) { if (!s) return "n/d"; const [y,m,d] = String(s).slice(0,10).split("-"); return d && m && y ? `${d}/${m}/${y}` : String(s); }
@@ -776,6 +782,7 @@
       if (act === "clear-benchmark") await clearBenchmark();
       if (act === "alloc-view") { state.allocView = b.dataset.alloc || "symbol"; render(); }
       if (act === "ai-pf") await askPortfolioAI();
+      if (act === "ai-octa") await askOctaAI();
       if (act === "ai-ticker") await askTickerAI(b.dataset.ticker);
       if (act === "export-tracker-backup") exportTrackerBackup();
       if (act === "import-tracker-backup") await importTrackerBackup();
@@ -955,12 +962,21 @@
     return false;
   }
   function renderStatusStrip() {
+    const strip = $("#status-strip");
+    if (!strip) return;
+    const show = state.view === "today" || state.view === "strategy";
+    if (!show) {
+      strip.hidden = true;
+      strip.innerHTML = "";
+      return;
+    }
+    strip.hidden = false;
     const f = freshness();
     const signals = state.octaData?.signals || [];
     const pending = signals.filter(s => !isSignalDone(s)).length;
     const syncCls = state.sync.octa === "cloud" ? "good" : "warn";
     const pfCls = state.sync.portfolios === "cloud" ? "good" : "warn";
-    $("#status-strip").innerHTML = `
+    strip.innerHTML = `
       <div class="status-item ${f.cls}"><b>${esc(f.label)}</b><span>${esc(f.detail)}</span></div>
       <div class="status-item ${pending ? "warn" : "good"}"><b>${pending} da eseguire</b><span>${signals.length} segnali nel file OCTA corrente</span></div>
       <div class="status-item ${syncCls}"><b>OCTA ${state.sync.octa === "cloud" ? "cloud" : "locale"}</b><span>${state.sync.octa === "cloud" ? "Portfolio letto dal cloud" : "Cloud non verificato in locale"}</span></div>
@@ -1070,6 +1086,14 @@
     if ((!merged.name || tickerKey(merged.name) === t) && (archive?.name || legacy?.name)) merged.name = archive?.name || legacy?.name;
     if (!merged.opportunity_score && merged.score != null) merged.opportunity_score = merged.score;
     return merged;
+  }
+  function octaRankMap() {
+    const out = {};
+    (state.octaData?.candidates || []).forEach((c, i) => {
+      const t = tickerKey(c.ticker);
+      if (t && !out[t]) out[t] = i + 1;
+    });
+    return out;
   }
   function statusMeta(status) {
     return STATUS_INFO[status] || { label: status || "Status n/d", cls: "info", desc: "Status non presente nel dataset corrente." };
@@ -1362,9 +1386,8 @@
     if (clean.length < 2) return `<div class="empty">Grafico disponibile quando ci sono almeno due punti storici.</div>`;
     const compareFiltered = Array.isArray(opts.comparePoints) ? filterChartRange(opts.comparePoints, rangeKey) : [];
     const compareClean = Array.isArray(compareFiltered) ? compareFiltered : [];
-    const H = 250, padL = 82, padR = 22, padT = 24, padB = 34;
-    const minW = Number(opts.minWidth || 700);
-    const W = Math.max(minW, Math.min(3600, clean.length * 10 + padL + padR));
+    const H = Number(opts.height || 224), padL = 58, padR = 14, padT = 18, padB = 30;
+    const W = Number(opts.width || 720);
     const primaryVals = clean.map(p => Number(p.v));
     const compareVals = compareClean.map(p => Number(p.v));
     const vals = primaryVals.concat(compareVals);
@@ -1374,13 +1397,16 @@
     const y = v => padT + (1 - (v - min) / range) * (H - padT - padB);
     const d = clean.map((p,i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(Number(p.v)).toFixed(1)}`).join(" ");
     const area = `M${x(0).toFixed(1)} ${H-padB} ${clean.map((p,i) => `L${x(i).toFixed(1)} ${y(Number(p.v)).toFixed(1)}`).join(" ")} L${x(clean.length-1).toFixed(1)} ${H-padB} Z`;
-    const first = primaryVals[0], last = primaryVals[primaryVals.length - 1], change = first ? (last / first - 1) * 100 : 0;
+    const first = primaryVals[0], last = primaryVals[primaryVals.length - 1];
+    const manualChange = Number(opts.changePct);
+    const change = Number.isFinite(manualChange) ? manualChange : (first ? (last / first - 1) * 100 : 0);
     const col = change >= 0 ? "#42d392" : "#ff6b6b";
     const fmt = valueFmt || (v => eur(v));
-    const grid = [0, .25, .5, .75, 1].map(f => {
+    const axisFmt = opts.axisFmt || compactEur;
+    const grid = [0, .5, 1].map(f => {
       const val = min + (max - min) * (1 - f);
       const yy = padT + f * (H - padT - padB);
-      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line><text x="${padL - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end">${esc(fmt(val))}</text>`;
+      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line><text x="${padL - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end">${esc(axisFmt(val))}</text>`;
     }).join("");
     const dates = [0, .5, 1].map(f => {
       const i = Math.min(clean.length - 1, Math.round((clean.length - 1) * f));
@@ -1395,16 +1421,15 @@
     const compareSvg = comparePath ? `<path d="${comparePath}" fill="none" stroke="${esc(opts.compareColor || "#83a8ff")}" stroke-width="2.2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"></path>` : "";
     const legend = comparePath ? `<div class="chart-legend"><span><i style="background:${col}"></i>${esc(opts.primaryLabel || "Portafoglio")}</span><span><i class="dash" style="background:${esc(opts.compareColor || "#83a8ff")}"></i>${esc(opts.compareLabel || "Confronto")}</span></div>` : "";
     chartStore.set(chartId, { points: clean, fmt });
-    return `<div class="chart-card" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" style="width:${W}px" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${fmt(first)}</span><strong>${fmt(last)}</strong></div></div>`;
+    return `<div class="chart-card" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${opts.changeLabel ? esc(opts.changeLabel) : pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${fmt(first)}</span><strong>${fmt(last)}</strong></div></div>`;
   }
   function octaSeries() {
-    const out = new Map();
-    const entries = Object.entries(state.octaPortfolio || {});
-    for (const [ticker, pos] of entries) {
+    const entries = Object.entries(state.octaPortfolio || {}).map(([ticker, pos]) => {
       const shares = Number(pos.shares || 0);
-      if (!shares) continue;
+      if (!shares) return null;
       const entryDay = String(pos.entry_date || todayISO()).slice(0, 10);
       const hist = state.priceHistory[ticker] || [];
+      const history = [];
       if (hist.length) {
         const currency = state.quotes[ticker]?.currency || "USD";
         for (const row of hist) {
@@ -1414,23 +1439,48 @@
           const d = new Date(Number(ts) * 1000).toISOString().slice(0, 10);
           if (d < entryDay) continue;
           const closeEur = toEur(close, currency, fxAtDate(d, pos.fx));
-          if (closeEur != null) out.set(d, (out.get(d) || 0) + shares * closeEur);
+          if (closeEur != null) history.push({ d, v: closeEur });
         }
-      } else {
-        const entry = octaEntryUnitEur(pos);
-        if (entry != null) out.set(entryDay, (out.get(entryDay) || 0) + shares * entry);
-        const px = octaLiveUnitEur(ticker, pos);
-        if (px != null) out.set(todayISO(), (out.get(todayISO()) || 0) + shares * px);
       }
+      history.sort((a,b) => a.d.localeCompare(b.d));
+      return { ticker, pos, shares, entryDay, entry: octaEntryUnitEur(pos), history, i: 0, last: null };
+    }).filter(Boolean);
+    if (!entries.length) return [];
+    const dateSet = new Set([todayISO()]);
+    for (const e of entries) {
+      dateSet.add(e.entryDay);
+      e.history.forEach(p => dateSet.add(p.d));
     }
-    return [...out.entries()].map(([d,v]) => ({ d, v }));
+    const out = [];
+    for (const day of [...dateSet].sort()) {
+      let total = 0;
+      for (const e of entries) {
+        if (day < e.entryDay) continue;
+        while (e.i < e.history.length && e.history[e.i].d <= day) {
+          e.last = e.history[e.i].v;
+          e.i += 1;
+        }
+        const live = day === todayISO() ? octaLiveUnitEur(e.ticker, e.pos) : null;
+        const unit = live ?? e.last ?? e.entry;
+        if (unit != null) total += e.shares * unit;
+      }
+      if (total > 0) out.push({ d: day, v: total });
+    }
+    const stats = octaStats();
+    if (stats.value > 0) {
+      const today = todayISO();
+      const found = out.find(p => p.d === today);
+      if (found) found.v = stats.value;
+      else out.push({ d: today, v: stats.value });
+    }
+    return out.sort((a,b) => a.d.localeCompare(b.d));
   }
   function octaPerformanceChart() {
     const pts = octaSeries();
     const stats = octaStats();
     if (pts.length < 2) return `<div class="notice">Andamento OCTA pronto: servono quotazioni storiche, le carico appena disponibili.</div>`;
     return `<div class="octa-chart-block">
-      ${lineChart(pts, "Andamento OCTA", v => eur(v, 0), "octa", { minWidth: 640 })}
+      ${lineChart(pts, "Andamento OCTA", v => eur(v, 0), "octa", { changePct: stats.pnlPct, changeLabel: pct(stats.pnlPct) })}
       <div class="octa-metrics">
         <div class="metric compact"><span>Valore stimato</span><strong>${eurMaybe(stats.value, 0)}</strong></div>
         <div class="metric compact"><span>Costo iniziale</span><strong>${eurMaybe(stats.cost, 0)}</strong></div>
@@ -1451,10 +1501,12 @@
     return { value, cost, pnl, pnlPct: cost ? pnl / cost * 100 : 0 };
   }
   function octaHoldingsMini() {
+    const ranks = octaRankMap();
     const rows = Object.entries(state.octaPortfolio || {}).slice(0, 6).map(([t, p]) => {
       const q = octaLiveUnitEur(t, p);
       const value = Number(p.shares || 0) * Number(q || 0);
-      return `<div class="kv"><span><button class="inline-link" data-action="octa-detail" data-ticker="${esc(t)}">${esc(t)}</button></span><strong>${eurMaybe(value)}</strong></div>`;
+      const rank = ranks[tickerKey(t)];
+      return `<div class="kv"><span><button class="inline-link" data-action="octa-detail" data-ticker="${esc(t)}">${esc(t)}</button>${rank ? ` <span class="rank-badge">#${rank}</span>` : ""}</span><strong>${eurMaybe(value)}</strong></div>`;
     }).join("");
     return rows || `<div class="empty">Nessuna posizione OCTA registrata.</div>`;
   }
@@ -1480,25 +1532,25 @@
           ["Squeeze", "Shadow test FINRA, moltiplicatore spento"],
         ]
       : LIVE_SIGNAL_PROFILE.inactive;
-    const badge = mode === "cached" ? "external_signal_mode=cached" : `external_signal_mode=${mode}`;
+    const badge = mode === "cached" ? "Profilo completo" : "Profilo rapido";
     const desc = mode === "cached"
       ? "Profilo cached attivo: radar, momentum, filtri tecnici e segnali esterni cached pesano nello score."
       : "Profilo fast path attivo: score da radar 13F, momentum e filtri tecnici.";
     return `<div class="signal-profile ${compact ? "compact" : ""}">
       <div class="signal-profile-head">
         <div>
-          <h2>Motore live</h2>
+          <h2>Come decide OCTA</h2>
           <p>${esc(desc)}</p>
         </div>
         <span class="badge ${mode === "cached" ? "good" : "info"}">${esc(badge)}</span>
       </div>
       <div class="signal-profile-grid">
         <section>
-          <h3>Usati nello score</h3>
+          <h3>Pesano davvero</h3>
           <div class="signal-pill-list">${signalPills(active, "on")}</div>
         </section>
         <section>
-          <h3>${mode === "cached" ? "Rimandati" : "Presenti ma spenti"}</h3>
+          <h3>${mode === "cached" ? "In osservazione" : "Presenti ma spenti"}</h3>
           <div class="signal-pill-list">${signalPills(inactive, "off")}</div>
         </section>
       </div>
@@ -1509,13 +1561,14 @@
     const signals = d.signals || [];
     const cands = d.candidates || [];
     return `
-      <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
-      <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button primary" data-action="ai-octa">${icon("brain")}AI OCTA</button><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
+      <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div><button class="button ghost" data-action="ai-octa">${icon("brain")}Controllo AI</button></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
       <section class="panel full">${liveSignalProfilePanel(true)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Radar 40</h2><p>Secondario: aprilo quando vuoi esplorare tutti i candidati.</p></div><button class="button ghost" data-action="toggle-radar">${state.radarOpen ? "Chiudi" : "Apri"} Radar</button></div>${state.radarOpen ? candidateTable(cands) : radarSummary(cands)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Storico OCTA</h2><p>Operazioni registrate da questa vNext o lette dal cloud.</p></div></div>${octaHistoryTable()}</section>`;
   }
   function octaPortfolioTable() {
+    const ranks = octaRankMap();
     const rows = Object.entries(state.octaPortfolio || {}).map(([t, p]) => {
       const shares = Number(p.shares || 0);
       const px = octaLiveUnitEur(t, p);
@@ -1524,9 +1577,10 @@
       const pnl = value - cost;
       const pnlPct = cost ? pnl / cost * 100 : 0;
       const item = octaItem(t);
-      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(t)}">${esc(item.name && item.name !== t ? item.name : t)}</button><div class="muted">${esc(t)}${p.sector ? " · " + esc(p.sector) : ""}</div></td><td class="right">${shares.toFixed(4)}</td><td class="right">${eurMaybe(px, 2)}</td><td class="right">${eurMaybe(value)}</td><td class="right"><span class="badge ${pnl >= 0 ? "good" : "bad"}">${pct(pnlPct)}</span></td></tr>`;
+      const rank = ranks[tickerKey(t)];
+      return `<tr><td><div class="holding-title"><button class="table-link" data-action="octa-detail" data-ticker="${esc(t)}">${esc(item.name && item.name !== t ? item.name : t)}</button>${rank ? `<span class="rank-badge">#${rank}</span>` : `<span class="rank-badge muted">fuori radar</span>`}</div><div class="muted">${esc(t)}${p.sector ? " · " + esc(p.sector) : ""}</div></td><td class="right">${shares.toFixed(4)}</td><td class="right">${eurMaybe(px, 2)}</td><td class="right">${eurMaybe(value)}</td><td class="right"><span class="badge ${pnl >= 0 ? "good" : "bad"}">${pct(pnlPct)}</span></td></tr>`;
     }).join("");
-    return rows ? `<table class="table"><thead><tr><th>Ticker</th><th class="right">Qta</th><th class="right">Prezzo €</th><th class="right">Valore</th><th class="right">P/L</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Quando confermi i BUY, il portafoglio appare qui.</div>`;
+    return rows ? `<table class="table"><thead><tr><th>Posizione</th><th class="right">Qta</th><th class="right">Prezzo €</th><th class="right">Valore</th><th class="right">Risultato</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Quando confermi i BUY, il portafoglio appare qui.</div>`;
   }
   function octaHistoryTable() {
     const rows = (state.octaHistory || []).slice(0, 80).map(h => {
@@ -1632,8 +1686,8 @@
     const cards = (state.tracker.portfolios || []).map(p => `<article class="pf-card ${state.openPf?.id === p.id ? "open" : ""}"><div class="panel-head"><div><h3>${esc(p.name)}</h3><p>Creato ${timeIT(p.created)} · cifrato lato browser</p></div><span class="badge">${icon("lock")}PIN</span></div><button class="button primary" data-action="open-pf" data-id="${esc(p.id)}">Apri</button></article>`).join("");
     const open = state.openPf ? openPortfolioView() : `<div class="empty">Apri un portafoglio o creane uno nuovo.</div>`;
     return `
-      <section class="panel"><div class="panel-head"><div><h2>Archivi</h2><p>Portafogli cifrati nel browser prima del sync.</p></div><button class="button primary" data-action="new-pf">${icon("plus")}Nuovo</button></div><div class="row-list">${cards || `<div class="empty">Nessun portafoglio creato.</div>`}</div></section>
-      <section class="panel"><div class="panel-head"><div><h2>${state.openPf ? esc(state.openPf.name) : "Dettaglio"}</h2><p>Movimenti, valori, grafici e benchmark in EUR.</p></div>${state.openPf ? `<div class="toolbar"><button class="button" data-action="refresh-pf">${icon("refresh")}Prezzi</button><button class="button" data-action="add-tx">${icon("plus")}Movimento</button><button class="button ghost" data-action="import-pf">${icon("upload")}Importa</button><button class="button ghost" data-action="ai-pf">${icon("brain")}AI</button></div>` : ""}</div>${open}</section>`;
+      <section class="panel sidebar"><div class="panel-head"><div><h2>Archivi</h2><p>Portafogli cifrati nel browser prima del sync.</p></div><button class="button primary" data-action="new-pf">${icon("plus")}Nuovo</button></div><div class="row-list">${cards || `<div class="empty">Nessun portafoglio creato.</div>`}</div></section>
+      <section class="panel wide"><div class="panel-head"><div><h2>${state.openPf ? esc(state.openPf.name) : "Dettaglio"}</h2><p>Movimenti, valori, grafici e benchmark in EUR.</p></div>${state.openPf ? `<div class="toolbar"><button class="button primary" data-action="ai-pf">${icon("brain")}AI portafoglio</button><button class="button" data-action="refresh-pf">${icon("refresh")}Prezzi</button><button class="button" data-action="add-tx">${icon("plus")}Movimento</button><button class="button ghost" data-action="import-pf">${icon("upload")}Importa</button></div>` : ""}</div>${open}</section>`;
   }
   function openPortfolioView() {
     const st = portfolioStats(state.openPf);
@@ -1643,7 +1697,8 @@
       const best = sorted[0], worst = sorted[sorted.length - 1];
       return `<div class="grid-2 compact-grid"><div class="notice good"><strong>Migliore</strong><br>${esc(best.name || best.symbol)} · ${pct(best.plPct)}</div><div class="notice bad"><strong>Peggiore</strong><br>${esc(worst.name || worst.symbol)} · ${pct(worst.plPct)}</div></div>`;
     })() : "";
-    return `<div class="metric-row"><div class="metric"><span>Valore</span><strong>${eur(st.value)}</strong></div><div class="metric"><span>Investito</span><strong>${eur(st.invested)}</strong></div><div class="metric"><span>Risultato</span><strong>${eur(st.gain)}</strong></div><div class="metric"><span>Rendimento</span><strong>${pct(st.gainPct)}</strong></div></div><div style="height:12px"></div>${portfolioPerformanceChart(st)}<div style="height:12px"></div>${benchmarkView(st)}<div style="height:12px"></div>${allocationView(st.holdings)}<div style="height:12px"></div>${targetWeightsView(st)}<div style="height:12px"></div>${bestWorst}<div style="height:12px"></div>${rows ? `<table class="table"><thead><tr><th>Strumento</th><th class="right">Qta</th><th class="right">Valore</th><th class="right">P/L</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Aggiungi il primo movimento.</div>`}<div style="height:12px"></div>${txTable(state.openPf.data.transactions)}<div style="height:12px"></div><div class="toolbar"><button class="button ghost" data-action="rename-pf">${icon("edit")}Rinomina</button><button class="button danger" data-action="delete-pf">${icon("trash")}Elimina</button></div>`;
+    const aiCallout = `<section class="detail-section ai-callout"><div><h3>${icon("brain")}AI portafoglio</h3><p>Analizza composizione, rischio e possibili riequilibri usando i dati aperti qui.</p></div><button class="button primary" data-action="ai-pf">Analizza</button></section>`;
+    return `<div class="metric-row"><div class="metric"><span>Valore</span><strong>${eur(st.value)}</strong></div><div class="metric"><span>Investito</span><strong>${eur(st.invested)}</strong></div><div class="metric"><span>Risultato</span><strong>${eur(st.gain)}</strong></div><div class="metric"><span>Rendimento</span><strong>${pct(st.gainPct)}</strong></div></div><div style="height:12px"></div>${aiCallout}<div style="height:12px"></div>${portfolioPerformanceChart(st)}<div style="height:12px"></div>${benchmarkView(st)}<div style="height:12px"></div>${allocationView(st.holdings)}<div style="height:12px"></div>${targetWeightsView(st)}<div style="height:12px"></div>${bestWorst}<div style="height:12px"></div>${rows ? `<table class="table"><thead><tr><th>Strumento</th><th class="right">Qta</th><th class="right">Valore</th><th class="right">Risultato</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Aggiungi il primo movimento.</div>`}<div style="height:12px"></div>${txTable(state.openPf.data.transactions)}<div style="height:12px"></div><div class="toolbar"><button class="button ghost" data-action="rename-pf">${icon("edit")}Rinomina</button><button class="button danger" data-action="delete-pf">${icon("trash")}Elimina</button></div>`;
   }
   function portfolioSeriesFromHistory(st) {
     const raw = state.openPf?.data?.valueHistory || [];
@@ -1961,6 +2016,61 @@
     const st = portfolioStats(state.openPf);
     const body = { mode: "pf_rebalance", portfolio: { name: state.openPf.name, value: Math.round(st.value), invested: Math.round(st.invested), gain: eur(st.gain), holdings: st.holdings.map(h => ({ symbol: h.symbol, name: h.name, weight: h.weight.toFixed(1), value: Math.round(h.value), pl: pct(h.plPct) })) } };
     toast("Analisi AI in corso...");
+    try {
+      const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const j = await r.json();
+      alert(j.answer || j.error || "Nessuna risposta AI.");
+    } catch { alert("AI non disponibile in locale o chiave mancante."); }
+  }
+  async function askOctaAI() {
+    const stats = octaStats();
+    const ranks = octaRankMap();
+    const f = freshness();
+    const engine = liveExternalProfile();
+    const holdings = Object.entries(state.octaPortfolio || {}).map(([t, p]) => {
+      const item = octaItem(t);
+      const px = octaLiveUnitEur(t, p);
+      const value = Number(p.shares || 0) * Number(px || 0);
+      const cost = octaEntryCostEur(p);
+      return {
+        ticker: t,
+        name: item.name || t,
+        rank: ranks[tickerKey(t)] || null,
+        value: Math.round(value),
+        pnl: Math.round(value - cost),
+        pnlPct: pct(cost ? (value / cost - 1) * 100 : 0),
+        score: item.score ?? item.opportunity_score ?? p.score,
+        status: item.entry_status || "n/d",
+      };
+    });
+    const signals = (state.octaData?.signals || []).slice(0, 10).map(s => ({
+      ticker: s.ticker,
+      name: s.name || s.ticker,
+      action: s.action,
+      score: s.score,
+      status: statusMeta(s.entry_status).label,
+      done: isSignalDone(s),
+    }));
+    const topCandidates = (state.octaData?.candidates || []).slice(0, 12).map((c, i) => ({
+      rank: i + 1,
+      ticker: c.ticker,
+      name: octaItem(c.ticker).name || c.ticker,
+      score: c.score ?? c.opportunity_score,
+      status: statusMeta(c.entry_status).label,
+    }));
+    const body = {
+      mode: "octa_brief",
+      octa: {
+        signal_date: state.octaData?.signal_date,
+        freshness: `${f.label}: ${f.detail}`,
+        engine: `${engine.label}: ${engine.detail}`,
+        stats: { value: Math.round(stats.value), cost: Math.round(stats.cost), pnl: Math.round(stats.pnl), pnlPct: pct(stats.pnlPct) },
+        holdings,
+        signals,
+        topCandidates,
+      },
+    };
+    toast("Analisi AI OCTA in corso...");
     try {
       const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const j = await r.json();
