@@ -164,7 +164,7 @@
   }
   function repairAndReload(view = state.view || "today") {
     repairLocalState();
-    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=20`;
+    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=21`;
   }
   function fxRate() {
     const x = Number(state.fx?.EURUSD);

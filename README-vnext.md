@@ -25,7 +25,7 @@ La vNext considera fresco il segnale se `dashboard/data-octa.json.signal_date` c
 
 ## Stato attuale
 
-La vNext locale gira su `http://localhost:5177/?repair=1&view=today&v=20`.
+La vNext locale gira su `http://localhost:5177/?repair=1&view=today&v=21`.
 
 - `dashboard/data-octa.json` e `dashboard/freshness.json` vengono rigenerati dal workflow GitHub Actions.
 - I portafogli letti nel datastore locale vNext sono `Massimo Master` e `Fede Smart`.
@@ -65,6 +65,6 @@ npm run check
 
 Nel browser:
 
-- apri `/?repair=1&view=octa&v=20`
-- apri `/?repair=1&view=portfolios&v=20`
+- apri `/?repair=1&view=octa&v=21`
+- apri `/?repair=1&view=portfolios&v=21`
 - verifica apertura portafoglio con PIN, dettaglio posizione, import, benchmark e grafici.

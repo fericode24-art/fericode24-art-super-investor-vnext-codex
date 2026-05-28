@@ -75,7 +75,7 @@ h3 { font-size: 15px; margin-bottom: 8px; }
 .badge-button.bad { color: var(--red); border-color: rgba(255,107,107,.45); }
 .badge-button.warn { color: var(--amber); border-color: rgba(241,189,91,.45); }
 .badge-button.info { color: var(--cyan); border-color: rgba(103,214,232,.45); }
-.button { min-height: 40px; border-radius: 8px; padding: 0 13px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+.button { min-height: 40px; min-width: 0; max-width: 100%; border-radius: 8px; padding: 0 13px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
 .button svg { width: 18px; height: 18px; }
 .button.primary { background: var(--green); border-color: var(--green); color: #08100c; font-weight: 700; }
 .button.danger { background: rgba(255,107,107,.12); border-color: rgba(255,107,107,.5); color: var(--red); }
@@ -234,7 +234,9 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 }
 @media (max-width: 520px) {
   .panel-head > .button, .panel-head > .toolbar { width: 100%; }
-  .panel-head > .toolbar .button { flex: 1 1 auto; }
+  .panel-head > .toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel-head > .toolbar .button { width: 100%; padding: 0 8px; }
+  .panel-head p { overflow-wrap: anywhere; }
   .status-strip { grid-template-columns: 1fr; }
   .top-actions { flex-shrink: 0; }
   h1 { font-size: 32px; }
@@ -253,7 +255,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .signal-pill { min-height: 58px; }
   .metric.compact { min-height: 68px; padding: 10px; }
   .metric.compact strong { font-size: 17px; overflow-wrap: anywhere; }
-  .toolbar .button { flex: 1 1 auto; }
+  .toolbar .button { flex: 1 1 0; }
   .hide-sm { display: none; }
   .table { font-size: 11px; }
   .table th, .table td { padding: 8px 4px; }
