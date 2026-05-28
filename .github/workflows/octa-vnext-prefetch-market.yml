@@ -1,0 +1,95 @@
+name: OCTA vNext Prefetch Market Shadow
+
+on:
+  schedule:
+    # Early enough to absorb GitHub schedule delays before the 08:35 Europe/Rome refresh.
+    - cron: '50 4 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      top_n:
+        description: "Ticker da prefetchare"
+        type: number
+        default: 80
+      skip_short:
+        description: "Salta FINRA short interest"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: octa-vnext-market-shadow
+  cancel-in-progress: false
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run market shadow prefetch
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+          INPUT_TOP_N: ${{ github.event.inputs.top_n }}
+          INPUT_SKIP_SHORT: ${{ github.event.inputs.skip_short }}
+        run: |
+          TOP_N="${INPUT_TOP_N:-80}"
+          EXTRA=""
+          if [ "$INPUT_SKIP_SHORT" = "true" ]; then
+            EXTRA="--skip-short"
+          fi
+          echo "Prefetch market shadow: top_n=$TOP_N $EXTRA"
+          python -u -m qfas.qfas_prefetch_market_signals --top-n "$TOP_N" $EXTRA
+
+      - name: Validate market shadow cache
+        run: python scripts/validate_prefetch_cache.py market --min-items 1
+
+      - name: Commit market shadow cache
+        run: |
+          if [ ! -f data/backtest/market_signal_cache.json ]; then
+            echo "::error::market_signal_cache.json non generato"
+            exit 1
+          fi
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions OCTA vNext Market Shadow"
+          git add data/backtest/market_signal_cache.json
+          if ! git diff --cached --quiet; then
+            git commit -m "[octa-vnext-market] prefetch $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No market shadow cache changes"
+          fi
+
+      - name: Job summary
+        if: success()
+        run: python scripts/validate_prefetch_cache.py market --min-items 1 --summary >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -z "$NTFY_TOPIC" ] && exit 0
+          curl -fsS -X POST "https://ntfy.sh/$NTFY_TOPIC" \
+            -H "Title: OCTA vNext market shadow prefetch FALLITO" \
+            -H "Priority: default" \
+            -H "Tags: warning" \
+            -H "Click: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            -d "Prefetch congressional/squeeze shadow fallito. Il refresh vNext resta in cached base." || true

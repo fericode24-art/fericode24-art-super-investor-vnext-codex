@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-28T11:12:25.239688+00:00",
+  "generated_at": "2026-05-28T11:50:22.064593+00:00",
   "profile": "cached",
   "passed": true,
   "results": [
@@ -65,6 +65,15 @@
         "analyst_cached_top40": 0,
         "pead_active_top40": 0
       },
+      "market_shadow": {
+        "status": "missing_cache",
+        "cached_rows_top80": 0,
+        "congressional_nonzero_top80": 0,
+        "short_interest_rows_top80": 0,
+        "squeeze_watch_top80": 0,
+        "max_abs_shadow_delta": 0.0,
+        "largest_shadow_impacts": []
+      },
       "largest_rank_moves": [
         {
           "ticker": "AFRM",
@@ -165,7 +174,8 @@
       ],
       "external_cache": {
         "insider_rows": 200,
-        "earnings_rows": 153
+        "earnings_rows": 200,
+        "market_rows": 0
       }
     },
     {
@@ -230,6 +240,15 @@
         "analyst_cached_top40": 0,
         "pead_active_top40": 0
       },
+      "market_shadow": {
+        "status": "missing_cache",
+        "cached_rows_top80": 0,
+        "congressional_nonzero_top80": 0,
+        "short_interest_rows_top80": 0,
+        "squeeze_watch_top80": 0,
+        "max_abs_shadow_delta": 0.0,
+        "largest_shadow_impacts": []
+      },
       "largest_rank_moves": [
         {
           "ticker": "AFRM",
@@ -330,7 +349,8 @@
       ],
       "external_cache": {
         "insider_rows": 200,
-        "earnings_rows": 153
+        "earnings_rows": 200,
+        "market_rows": 0
       }
     },
     {
@@ -394,6 +414,15 @@
         "insider_cached_top40": 8,
         "analyst_cached_top40": 0,
         "pead_active_top40": 0
+      },
+      "market_shadow": {
+        "status": "missing_cache",
+        "cached_rows_top80": 0,
+        "congressional_nonzero_top80": 0,
+        "short_interest_rows_top80": 0,
+        "squeeze_watch_top80": 0,
+        "max_abs_shadow_delta": 0.0,
+        "largest_shadow_impacts": []
       },
       "largest_rank_moves": [
         {
@@ -495,7 +524,8 @@
       ],
       "external_cache": {
         "insider_rows": 200,
-        "earnings_rows": 153
+        "earnings_rows": 200,
+        "market_rows": 0
       }
     }
   ]

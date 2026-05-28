@@ -45,7 +45,7 @@ Audit dettagliato: `../docs/OCTA_SIGNAL_AUDIT.md`.
 | Insider flow | Cache notturna presente, non usata dal live fast path |
 | Earnings / PEAD | Cache notturna presente, non usata dal live fast path |
 | Analyst composite | Codice presente, non usato dal live fast path |
-| Congressional / squeeze | Codice presente, non usato dal live fast path |
+| Congressional / squeeze | Shadow test: cache/report presenti, peso zero nel live finche non validato |
 
 ## Quick test OCTA vNext
 

@@ -201,6 +201,76 @@ def _cached_entry_score(
     )
 
 
+def _cached_market_shadow(
+    ticker: str,
+    current_entry_score: float,
+    momentum_pct: Optional[float],
+    analyst_score: Optional[float],
+    insider_score: Optional[float],
+    market_cache: Dict,
+) -> Dict:
+    row = (market_cache.get("tickers") or {}).get(ticker.upper()) if market_cache else None
+    if not isinstance(row, dict):
+        return {}
+    congressional_score = row.get("congressional_score")
+    short_interest = row.get("short_interest_pct")
+    if congressional_score is None and short_interest is None:
+        return {}
+
+    mom = momentum_pct if momentum_pct is not None else 50.0
+    analyst_used = analyst_score if analyst_score is not None else 50.0
+    insider_used = insider_score if insider_score is not None else 50.0
+    try:
+        congressional_used = float(congressional_score) if congressional_score is not None else 0.0
+    except (TypeError, ValueError):
+        congressional_used = 0.0
+    try:
+        short_interest_used = float(short_interest) if short_interest is not None else None
+    except (TypeError, ValueError):
+        short_interest_used = None
+    raw_as_of = str(market_cache.get("as_of") or date.today())[:10]
+    try:
+        market_as_of = date.fromisoformat(raw_as_of)
+    except ValueError:
+        market_as_of = date.today()
+    weights = renormalize_weights({
+        "momentum": config.ENTRY_WEIGHT_MOMENTUM,
+        "analyst_composite": config.ENTRY_WEIGHT_ANALYST,
+        "insider_flow": config.ENTRY_WEIGHT_INSIDER,
+        "congressional": config.ENTRY_WEIGHT_CONGRESSIONAL,
+    }, market_as_of)
+    entry_with_congress = (
+        weights.get("momentum", 0.0) * mom +
+        weights.get("analyst_composite", 0.0) * analyst_used +
+        weights.get("insider_flow", 0.0) * insider_used +
+        weights.get("congressional", 0.0) * congressional_used
+    )
+    squeeze_state = "none"
+    entry_with_squeeze = entry_with_congress
+    if short_interest_used is not None and short_interest_used > config.SQUEEZE_SI_THRESHOLD:
+        if insider_score is not None and insider_score > config.SQUEEZE_INSIDER_THRESHOLD and mom > config.SQUEEZE_MOMENTUM_THRESHOLD:
+            squeeze_state = "bullish"
+            entry_with_squeeze = entry_with_congress * config.SQUEEZE_MULTIPLIER_BULLISH
+        elif (insider_score is not None and insider_score < 30.0) or mom < 35.0:
+            squeeze_state = "bearish"
+            entry_with_squeeze = entry_with_congress * config.SQUEEZE_MULTIPLIER_BEARISH
+        else:
+            squeeze_state = "watch"
+
+    shadow_entry = _clip_score(entry_with_squeeze)
+    return {
+        "congressional_shadow": congressional_score,
+        "congressional_trades": row.get("congressional_trades"),
+        "congressional_net": row.get("congressional_net"),
+        "short_interest_shadow": short_interest_used,
+        "short_interest_raw": row.get("short_interest_raw"),
+        "squeeze_shadow": squeeze_state,
+        "market_shadow_entry": float(shadow_entry),
+        "market_shadow_delta": float(shadow_entry - current_entry_score),
+        "market_shadow_cached": True,
+    }
+
+
 def run_decision_cycle(
     signal_date: date,
     current_holdings: List[Dict],              # [{ticker, score, sector, status, days_held, pnl_pct}]
@@ -283,9 +353,11 @@ def run_decision_cycle(
     top_candidates_for_entry = [t for t, _ in radar_sorted[:80]]
     insider_cache = {}
     earnings_cache = {}
+    market_cache = {}
     if external_signal_mode == "cached":
         insider_cache = _load_json_cache(ROOT / "data" / "backtest" / "insider_cache.json", {})
         earnings_cache = _load_json_cache(ROOT / "data" / "backtest" / "earnings_cache.json", {})
+        market_cache = _load_json_cache(ROOT / "data" / "backtest" / "market_signal_cache.json", {})
 
     candidates: List[CandidateScore] = []
     for t in valid_universe:
@@ -345,6 +417,14 @@ def run_decision_cycle(
                 "external_signal_mode": "cached",
                 "external_delta": float(entry_score - mom),
             }
+            audit.update(_cached_market_shadow(
+                ticker=t,
+                current_entry_score=entry_score,
+                momentum_pct=mom,
+                analyst_score=entry_res.analyst_score,
+                insider_score=entry_res.insider_score,
+                market_cache=market_cache,
+            ))
         else:
             # Quick path: solo momentum (segnali esterni a peso 0 implicito,
             # niente network calls)
@@ -410,7 +490,18 @@ def run_decision_cycle(
         "insider_flow": config.ENTRY_WEIGHT_INSIDER,
         "congressional": config.ENTRY_WEIGHT_CONGRESSIONAL,
     }
-    active_weights = renormalize_weights(base_weights, signal_date)
+    if external_signal_mode == "cached":
+        audit_weight_basis = {**base_weights, "congressional": 0.0}
+    elif skip_external_signals or external_signal_mode in {"off", "quick"}:
+        audit_weight_basis = {
+            "momentum": 1.0,
+            "analyst_composite": 0.0,
+            "insider_flow": 0.0,
+            "congressional": 0.0,
+        }
+    else:
+        audit_weight_basis = base_weights
+    active_weights = renormalize_weights(audit_weight_basis, signal_date)
 
     from qfas.tax_aware_optimizer import get_dynamic_sub_margin
     sub_margin = get_dynamic_sub_margin(vix_value)
@@ -424,6 +515,7 @@ def run_decision_cycle(
         "external_cache": {
             "insider_rows": len(insider_cache) if isinstance(insider_cache, dict) else 0,
             "earnings_rows": len(earnings_cache) if isinstance(earnings_cache, dict) else 0,
+            "market_rows": len(market_cache.get("tickers", {})) if isinstance(market_cache, dict) else 0,
         },
         "top10_by_opp_score": [
             (c.ticker, round(c.opportunity_score, 1),

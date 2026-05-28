@@ -76,6 +76,36 @@ def _candidate_map(cycle) -> Dict[str, object]:
     return {c.ticker: c for c in cycle.all_candidates}
 
 
+def _market_shadow_summary(cycle) -> Dict:
+    rows = []
+    for c in cycle.all_candidates[:80]:
+        audit = c.audit or {}
+        if not audit.get("market_shadow_cached"):
+            continue
+        rows.append({
+            "ticker": c.ticker,
+            "score": round(float(c.opportunity_score), 2),
+            "entry": round(float(c.entry_score), 2),
+            "shadow_entry": round(float(audit.get("market_shadow_entry") or c.entry_score), 2),
+            "shadow_delta": round(float(audit.get("market_shadow_delta") or 0.0), 2),
+            "congressional": audit.get("congressional_shadow"),
+            "congressional_trades": audit.get("congressional_trades"),
+            "congressional_net": audit.get("congressional_net"),
+            "short_interest": audit.get("short_interest_shadow"),
+            "squeeze": audit.get("squeeze_shadow"),
+        })
+    deltas = [float(r["shadow_delta"]) for r in rows]
+    return {
+        "status": "cache_present" if rows else "missing_cache",
+        "cached_rows_top80": len(rows),
+        "congressional_nonzero_top80": sum(1 for r in rows if float(r.get("congressional") or 0.0) > 0),
+        "short_interest_rows_top80": sum(1 for r in rows if r.get("short_interest") is not None),
+        "squeeze_watch_top80": sum(1 for r in rows if r.get("squeeze") not in (None, "none")),
+        "max_abs_shadow_delta": round(max([abs(d) for d in deltas] or [0.0]), 2),
+        "largest_shadow_impacts": sorted(rows, key=lambda r: abs(float(r["shadow_delta"])), reverse=True)[:12],
+    }
+
+
 def compare_date(signal_date: date) -> Dict:
     off = _run(signal_date, "off")
     cached = _run(signal_date, "cached")
@@ -129,6 +159,7 @@ def compare_date(signal_date: date) -> Dict:
         "top10_overlap": top10_overlap,
         "top8_overlap": top8_overlap,
         "coverage": coverage,
+        "market_shadow": _market_shadow_summary(cached),
         "largest_rank_moves": moves[:12],
         "external_cache": cached.audit_log.get("external_cache", {}),
     }
@@ -156,6 +187,8 @@ def main() -> int:
         print(
             f"{status} {r['date']} top10_overlap={r['top10_overlap']} "
             f"delta_rows={r['coverage']['with_external_delta']} "
+            f"market_shadow_rows={r['market_shadow']['cached_rows_top80']} "
+            f"max_shadow={r['market_shadow']['max_abs_shadow_delta']} "
             f"portfolio={','.join(r['cached_portfolio'])}"
         )
     print(f"report={out_path}")

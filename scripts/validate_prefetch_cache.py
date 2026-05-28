@@ -45,30 +45,58 @@ def _validate_earnings(data: dict[str, Any]) -> list[str]:
     return issues
 
 
+def _validate_market(data: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    tickers = data.get("tickers")
+    if not isinstance(tickers, dict):
+        return ["tickers mancante o non oggetto"]
+    for ticker, row in list(tickers.items())[:500]:
+        if not isinstance(row, dict):
+            issues.append(f"{ticker}: record non oggetto")
+            continue
+        if "congressional_score" not in row:
+            issues.append(f"{ticker}: congressional_score mancante")
+        if "short_interest_pct" not in row:
+            issues.append(f"{ticker}: short_interest_pct mancante")
+    return issues
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("kind", choices=["insider", "earnings"])
+    parser.add_argument("kind", choices=["insider", "earnings", "market"])
     parser.add_argument("--min-items", type=int, default=1)
     parser.add_argument("--summary", action="store_true")
     args = parser.parse_args()
 
-    cache_path = ROOT / "data" / "backtest" / f"{args.kind}_cache.json"
+    filename = "market_signal_cache.json" if args.kind == "market" else f"{args.kind}_cache.json"
+    cache_path = ROOT / "data" / "backtest" / filename
     data = _load_json(cache_path)
-    if len(data) < args.min_items:
+    count = len(data.get("tickers", {})) if args.kind == "market" else len(data)
+    if count < args.min_items:
         raise SystemExit(
-            f"{cache_path.as_posix()} contiene {len(data)} ticker, minimo atteso {args.min_items}"
+            f"{cache_path.as_posix()} contiene {count} ticker, minimo atteso {args.min_items}"
         )
 
-    issues = _validate_insider(data) if args.kind == "insider" else _validate_earnings(data)
+    if args.kind == "insider":
+        issues = _validate_insider(data)
+    elif args.kind == "earnings":
+        issues = _validate_earnings(data)
+    else:
+        issues = _validate_market(data)
     if issues:
         raise SystemExit("Cache non valida:\n" + "\n".join(issues[:20]))
 
-    sample = ", ".join(list(data)[:8])
-    print(f"OK {args.kind} cache: {len(data)} ticker")
+    keys = list(data.get("tickers", data))[:8]
+    sample = ", ".join(keys)
+    print(f"OK {args.kind} cache: {count} ticker")
     if args.summary:
-        title = "Insider Form 4" if args.kind == "insider" else "Earnings 8-K"
+        title = {
+            "insider": "Insider Form 4",
+            "earnings": "Earnings 8-K",
+            "market": "Market shadow",
+        }[args.kind]
         print(f"## OCTA vNext {title} prefetch")
-        print(f"- Ticker in cache: {len(data)}")
+        print(f"- Ticker in cache: {count}")
         print(f"- Sample: {sample or 'n/d'}")
 
 
