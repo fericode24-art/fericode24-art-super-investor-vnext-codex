@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: '0 5 * * 1-5'
   workflow_dispatch:
+    inputs:
+      top_n:
+        description: "Ticker da prefetchare"
+        type: number
+        default: 200
+      max_filings:
+        description: "Form 4 per ticker"
+        type: number
+        default: 20
 
 permissions:
   contents: write
@@ -32,12 +41,31 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Validate required secrets
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          if [ -z "$SEC_USER_AGENT" ]; then
+            echo "::error::SEC_USER_AGENT non configurato nei secrets vNext"
+            echo "Configura SEC_USER_AGENT prima del prefetch insider." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
       - name: Run Form 4 prefetch
         env:
           PYTHONUNBUFFERED: "1"
           PYTHONIOENCODING: "utf-8"
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
-        run: python -u -m qfas.qfas_prefetch_insider --top-n 200 --max-filings 20
+          INPUT_TOP_N: ${{ github.event.inputs.top_n }}
+          INPUT_MAX_FILINGS: ${{ github.event.inputs.max_filings }}
+        run: |
+          TOP_N="${INPUT_TOP_N:-200}"
+          MAX_FILINGS="${INPUT_MAX_FILINGS:-20}"
+          echo "Prefetch insider: top_n=$TOP_N max_filings=$MAX_FILINGS"
+          python -u -m qfas.qfas_prefetch_insider --top-n "$TOP_N" --max-filings "$MAX_FILINGS"
+
+      - name: Validate insider cache
+        run: python scripts/validate_prefetch_cache.py insider --min-items 1
 
       - name: Commit insider cache
         run: |
@@ -55,6 +83,10 @@ jobs:
           else
             echo "No insider cache changes"
           fi
+
+      - name: Job summary
+        if: success()
+        run: python scripts/validate_prefetch_cache.py insider --min-items 1 --summary >> "$GITHUB_STEP_SUMMARY"
 
       - name: Alert on failure
         if: failure()

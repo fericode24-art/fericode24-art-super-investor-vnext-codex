@@ -34,6 +34,7 @@ La vNext locale gira su `http://localhost:5177/?repair=1&view=today&v=19`.
 - Il bottone Ricontrolla nell'app ricarica dati, cloud, freshness e quotazioni. Non esegue il motore OCTA: il refresh del motore resta sul runner GitHub Actions.
 - La UI mostra importi e grafici in EUR. Le quotazioni USD vengono convertite con EUR/USD, e il valore FX compare nei controlli rapidi.
 - Setup runner GitHub documentato in `docs/GITHUB_RUNNER_SETUP.md`.
+- Audit segnali OCTA documentato in `docs/OCTA_SIGNAL_AUDIT.md`.
 
 ## Deploy
 

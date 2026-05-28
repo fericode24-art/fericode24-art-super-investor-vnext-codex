@@ -35,15 +35,17 @@ python -m qfas.qfas_prefetch_earnings --top-n 200
 
 ## Segnali
 
+Audit dettagliato: `../docs/OCTA_SIGNAL_AUDIT.md`.
+
 | Segnale | Stato vNext |
 |---|---|
 | Radar Score 13F + decay + crowding | Attivo |
 | Momentum cross-sectional | Attivo |
 | VIX regime | Attivo |
-| Insider flow | Cache notturna, da validare nel live |
-| Earnings / PEAD | Cache notturna, da validare nel live |
-| Analyst composite | Opzionale con `FINNHUB_API_KEY` |
-| Congressional / squeeze | Presente nel codice, non centrale nel profilo attivo |
+| Insider flow | Cache notturna presente, non usata dal live fast path |
+| Earnings / PEAD | Cache notturna presente, non usata dal live fast path |
+| Analyst composite | Codice presente, non usato dal live fast path |
+| Congressional / squeeze | Codice presente, non usato dal live fast path |
 
 ## Quick test OCTA vNext
 

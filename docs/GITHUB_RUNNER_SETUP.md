@@ -66,4 +66,10 @@ Prima prova manuale:
 4. Controlla che generi `dashboard/data-octa.json` e `dashboard/freshness.json`.
 5. Controlla il deploy sul sito vNext.
 
+Prefetch secondari:
+
+- `OCTA vNext Prefetch Insider`: puo' essere lanciato a mano con `top_n` ridotto per test rapidi.
+- `OCTA vNext Prefetch Earnings`: puo' essere lanciato a mano con `top_n` ridotto per test rapidi.
+- Entrambi validano `SEC_USER_AGENT`, controllano la cache generata e scrivono un summary in GitHub Actions.
+
 Stato verificato: run manuale GitHub Actions + deploy Netlify completati con successo. Una eventuale automazione locale puo' restare solo come backup temporaneo.
