@@ -1,0 +1,174 @@
+# Super Investor Dashboard — config v2.2
+# Tutti i parametri di scoring centralizzati qui.
+
+version: "v2.8"
+
+universe:
+  prefilter_total: 370          # max titoli che passano a Yahoo Finance
+  stage1_candidates: 80         # candidati che passano da Stage 1 a Stage 2
+
+scoring:
+  # Stage 1 — Radar Score (dati lenti, cache 7gg)
+  stage1_base_weights:
+    conviction: 0.40
+    accumulation_trend: 0.30
+    insider_quality: 0.30
+  stage1_modifiers:
+    congressional_strong: 5     # v2.2: ridotto da 10 (>=2 politici)
+    congressional_weak: 3       # v2.2: ridotto da 5  (1 politico)
+    short_squeeze_bonus: 15     # short>8% AND conviction>70
+    short_deterioration: -15    # short>15% AND quality<50
+    activist_13d: 10            # v2.3: SC 13D recente (stake attivista >5%)
+    activist_13g: 5             # v2.3: SC 13G recente (stake passivo >5%)
+  stage1_cap: [0, 130]
+
+  # Stage 2 — Entry Filter Score (dati live, cache 24h)
+  stage2_weights:
+    quality: 0.35
+    value: 0.25
+    momentum: 0.40
+  stage2_cap: [0, 130]
+
+  # Composito finale
+  final_composite:
+    radar_weight: 0.60
+    entry_weight: 0.40
+
+freshness_decay:
+  half_life_days: 60            # decay convinzione 13F
+
+filters:
+  min_avg_daily_volume_usd: 5000000   # ADV minimo (OK per portfolio ~30k EUR)
+  sector_cap: 7                       # v2.8: max 7 titoli per settore. Compromesso
+                                      # rischio/rendimento dal backtest 2021-26: lascia
+                                      # correre la concentrazione, limita il caso peggiore
+  fund_dominance_cap_pct: 15          # un fondo solo non pesa >15% conviction
+  insider_min_distinct: 2             # minimo insider distinti
+  insider_lookback_days: 30
+  congressional_lookback_days: 45
+  conviction_threshold_pct: 3.0       # posizione "high conviction" se >3% portafoglio fondo
+
+quality_red_flags:
+  fcf_negative_quarters: 4
+  share_dilution_max_pct: 0.10
+  revenue_collapse_yoy_min: -0.20
+  debt_ebitda_max: 6.0
+  veto_only_if_xbrl_available: true
+
+entry_multipliers:
+  treno_partito_aggressive: {ret_1m: 0.35, rsi: 72, mult: 0.25}
+  treno_partito_mild: {ret_1m: 0.20, rsi: 65, mult: 0.55}
+  ret_3m_over: {threshold: 0.40, mult: 0.40}
+  ret_6m_over: {threshold: 0.80, mult: 0.30}
+  far_from_ma200: {ratio: 1.30, mult: 0.45}
+  recent_gap: {gap_pct: 0.20, days: 10, mult: 0.40}
+  ritracciamento: {mult: 0.50}
+  setup_fresco:
+    rsi: 65
+    volume_ratio: 1.2
+    max_ma200_distance: 1.20
+    mult: 1.25
+
+portfolio:
+  size_normal: 12
+  size_crowded: 8               # quando market_crowded = true O macro risk-off
+  tier_weights: [1.2, 1.0, 0.8]
+  tier_size: 4
+  cash_fallback_enabled: true
+
+# v2.3 — regime macro da FRED (Federal Reserve, gratuito, no API key)
+macro:
+  hy_spread_series: BAMLH0A0HYM2   # ICE BofA US High Yield spread
+  yield_curve_series: T10Y2Y       # spread 10Y-2Y treasury
+  hy_spread_risk_threshold: 5.0    # HY spread % sopra cui → risk-off
+  defensive_on_risk_off: true      # se risk-off → portafoglio ridotto a 8
+
+skill_multiplier:
+  min_quarters_required: 2      # sotto questa soglia → mult neutro 1.0
+
+cache_ttl_days:
+  13f: 7
+  fundamentals_xbrl: 7
+  yfinance_history: 1
+  finra_short: 14
+  cot: 7
+  capitol_trades: 1
+  activist_13dg: 2
+  macro_fred: 1
+
+api:
+  edgar_user_agent: "SuperInvestor Federico fedezebi@gmail.com"
+  edgar_rate_limit_per_sec: 10
+  generic_rate_limit_per_sec: 5
+
+# ═══════════════ v2.4 — modalità ROTATION_BETA (toggle opzionale) ═══════════════
+# STRATEGY_MODE: "BALANCED_ALPHA" (default = v2.3 intatto) | "ROTATION_BETA" (v2.4)
+# Override via env var STRATEGY_MODE.
+strategy:
+  default_mode: "ROTATION_BETA"   # v2.4: il nuovo motore è ora IL motore
+
+rotation_beta:
+  radar_weights:                 # Stadio 1 — 50% del finale
+    conviction: 0.35
+    accumulation: 0.30
+    insider: 0.25
+    fund_skill: 0.10
+  entry_weights:                 # Stadio 2 — 50% del finale
+    # v2.7 — backtest 2021-26: momentum su (0.30→0.45), beta giù (0.25→0.12).
+    # La penalità beta pesante teneva il portafoglio troppo difensivo (beta
+    # realizzata 0.60). Quality tenuta solida: protegge dai conti deboli.
+    momentum_rs: 0.45
+    beta: 0.12
+    freshness: 0.13
+    quality: 0.18
+    value: 0.12
+  composite:
+    radar_weight: 0.50
+    entry_weight: 0.50
+  beta_score:
+    lookback_days: 252
+    upside_capture_days: 90
+    vol_days: 60
+    beta_spy_cap: 1.8
+  short_modifier_cap: 10         # ROTATION_BETA usa ±10 (v2.3 usa ±15)
+  rotation:
+    holding_min_days: 21
+    delta_score_standard: 8
+    delta_score_hyper: 12
+    hyper_threshold_rotations_30d: 6
+    incumbency_bonus: 5
+    incumbency_min_days: 21
+    incumbency_min_quality: 70
+    buy_new_min_score: 70
+    score_collapse_sell: 50
+    trim_drift_threshold: 0.15
+    trim_target: 0.10
+    # v2.5 — selezione rotazionale: bacino qualità + sostituzione del più debole
+    bacino_size: 35                # pool di qualità da cui pescare i challenger
+    substitution_margin: 15        # v2.7: 7→15 (backtest: Sharpe migliore, meno churn)
+    # v2.6 — gate d'ingresso. Backtest 2021-2026: il gate stretto (solo
+    # fresh/pullback) costava ~150 punti vs S&P 500 per cash-drag. Ora entra
+    # ogni titolo di qualità salvo trend rotto (BROKEN/AVOID restano esclusi).
+    entry_gate_states:
+      - FRESH_BREAKOUT
+      - PULLBACK_IN_TREND
+      - NEUTRAL
+      - CONSOLIDATION
+      - EXTENDED
+  sizing:
+    confidence_cap_low: 0.05     # confidence < 60
+    confidence_cap_mid: 0.08     # confidence 60-80
+    confidence_cap_high: 0.11    # confidence >= 80
+  veto_runway_exception_months: 24
+
+regime_v24:                      # 4 stati: RISK_ON / NEUTRAL / RISK_OFF / PANIC
+  vix_series: VIXCLS
+  panic_vix: 40
+  risk_off_vix: 28
+  risk_on_vix: 18
+  panic_hy_spread: 6.0
+  allocation:
+    RISK_ON:  {holdings: 12, cash_pct: 0}
+    NEUTRAL:  {holdings: 12, cash_pct: 0}
+    RISK_OFF: {holdings: 10, cash_pct: 15}
+    PANIC:    {holdings: 7,  cash_pct: 40}

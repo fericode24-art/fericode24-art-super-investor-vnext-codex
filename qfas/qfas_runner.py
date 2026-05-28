@@ -1,0 +1,281 @@
+"""
+QFAS v2.5 — qfas_runner.py
+
+Orchestratore del decision cycle: per ogni signal_date, prende i dati,
+calcola scoring radar+entry, applica tax_aware_optimizer per produrre il
+portfolio finale.
+
+Single entry point: run_decision_cycle(signal_date, current_holdings).
+
+Audit trail strutturato per ogni decisione (input scores, weights, reasons).
+"""
+from __future__ import annotations
+import logging
+from dataclasses import dataclass, field, asdict
+from datetime import date, timedelta
+from typing import Dict, List, Optional
+
+import numpy as np
+import pandas as pd
+
+from qfas.qfas_config import config, signal_is_available, renormalize_weights
+from qfas.fund_universe import get_active_funds_at, FUND_ACTIVE_PERIODS
+from qfas.signal_decay_scorer import batch_radar_scores, RadarScoreResult
+from qfas.realtime_trigger_engine import (
+    compute_entry_score, compute_momentum_pct, classify_entry_status,
+    EntryScoreResult,
+)
+from qfas.tax_aware_optimizer import (
+    select_portfolio, compute_sector_momentum_rank, PortfolioSlot,
+)
+
+log = logging.getLogger("qfas.runner")
+log.setLevel(logging.INFO)
+
+
+@dataclass
+class CandidateScore:
+    ticker: str
+    radar_score: float
+    entry_score: float
+    opportunity_score: float
+    momentum_pct: float
+    entry_status: str
+    sector: str
+    audit: Dict = field(default_factory=dict)
+
+
+@dataclass
+class DecisionCycleResult:
+    signal_date: date
+    portfolio: List[PortfolioSlot]
+    n_candidates: int
+    n_active_funds: int
+    vix_value: Optional[float]
+    sub_margin_used: float
+    weights_active: Dict[str, float]
+    sector_momentum_rank: List[str]
+    top10_candidates: List[CandidateScore]   # top 10 per audit
+    all_candidates: List[CandidateScore]     # tutti i candidati scoreati (per UI lookup)
+    audit_log: Dict
+
+
+def run_decision_cycle(
+    signal_date: date,
+    current_holdings: List[Dict],              # [{ticker, score, sector, status, days_held, pnl_pct}]
+    universe_tickers: List[str],               # ticker da valutare
+    all_filings_by_fund: Dict[str, List[Dict]], # CIK → list filing 13F
+    prices_by_ticker: Dict[str, pd.Series],     # ticker → serie prezzi giornalieri
+    sectors_by_ticker: Dict[str, str],
+    vix_value: Optional[float] = None,
+    skip_external_signals: bool = False,        # se True, skip Form4/analyst/Capitol network calls
+) -> DecisionCycleResult:
+    """
+    Esegue un ciclo completo di decisione QFAS per signal_date.
+
+    Pipeline:
+      1. Filtro universo (rimuovi ticker senza prezzo o sotto-soglia liquidità)
+      2. Calcola Radar Score per tutti i ticker (batch)
+      3. Calcola Momentum cross-sectional
+      4. Per ciascun candidato (top 60 per radar), calcola Entry Score
+      5. Combina in Opportunity Score (50/50 radar/entry)
+      6. Classifica entry_status (FRESH_BREAKOUT, NEUTRAL, BROKEN, ecc.)
+      7. Calcola sector momentum ranking
+      8. Chiama select_portfolio con anti-churn, TLH, sector cap
+    """
+    log.info(f"Decision cycle {signal_date}: universo {len(universe_tickers)} ticker")
+
+    # ── 1. Filtro universo: ticker con prezzo valido a signal_date
+    cutoff_ts = pd.Timestamp(signal_date)
+    valid_universe = []
+    for t in universe_tickers:
+        s = prices_by_ticker.get(t)
+        if s is None or s.empty:
+            continue
+        valid_at_date = s[s.index <= cutoff_ts].dropna()
+        if len(valid_at_date) < 200:   # serve almeno 200gg di prezzi per scoring
+            continue
+        valid_universe.append(t)
+
+    log.info(f"  universo valido (prezzi >=200gg): {len(valid_universe)}")
+    if len(valid_universe) < config.NUM_POSITIONS:
+        log.warning("Universe troppo piccolo, returning empty portfolio")
+        return DecisionCycleResult(
+            signal_date, [], 0, 0, vix_value, config.SUB_MARGIN_BASE,
+            {}, [], [], {"error": "insufficient_universe"},
+        )
+
+    # ── 2. Radar Score batch (13F-based, con decay + crowding PIT)
+    # prices_at_date per AUM proxy
+    prices_at_date = {}
+    for t in valid_universe:
+        s = prices_by_ticker[t]
+        s_valid = s[s.index <= cutoff_ts].dropna()
+        if not s_valid.empty:
+            prices_at_date[t] = float(s_valid.iloc[-1])
+
+    radar_results = batch_radar_scores(
+        valid_universe, signal_date, all_filings_by_fund, prices_at_date,
+    )
+    raw_convictions = pd.Series({t: r.raw_conviction for t, r in radar_results.items()})
+    if not raw_convictions.empty and raw_convictions.sum() > 0:
+        conviction_pct_map = (raw_convictions.rank(pct=True) * 100.0).to_dict()
+    else:
+        conviction_pct_map = {t: 50.0 for t in radar_results}
+
+    # ── 3. Momentum cross-sectional su tutto l'universo valido
+    momentum_pct_map = compute_momentum_pct(
+        {t: prices_by_ticker[t] for t in valid_universe},
+        signal_date,
+    )
+
+    # ── 4-6. Per ogni candidato calcola Entry Score + classifica status
+    # Per efficienza: limito a top 80 per radar_score (riduce chiamate API esterne)
+    radar_sorted = sorted(radar_results.items(),
+                          key=lambda kv: -kv[1].radar_score)
+    top_candidates_for_entry = [t for t, _ in radar_sorted[:80]]
+
+    candidates: List[CandidateScore] = []
+    for t in valid_universe:
+        radar_result = radar_results[t]
+        radar = radar_result.radar_score
+        mom = momentum_pct_map.get(t, 50.0)
+        radar_audit = {
+            "momentum": float(mom),
+            "conviction": float(conviction_pct_map.get(t, 50.0)),
+            "accumulation": float(radar_result.accumulation_pct),
+            "crowding": float(radar_result.crowding_factor * 100.0),
+            "fund_coverage": float(radar_result.fund_coverage * 100.0),
+            "valid_filings": int(radar_result.num_valid_filings),
+            "active_funds": int(radar_result.num_active_funds),
+        }
+
+        # Per ticker NON in top80 radar OPPURE skip_external_signals → quick path
+        if t in top_candidates_for_entry and not skip_external_signals:
+            entry_res = compute_entry_score(
+                ticker=t, signal_date=signal_date,
+                momentum_pct=mom,
+                insider_score=None,    # calcolato internamente se segnale available
+            )
+            entry_score = entry_res.entry_score_final
+            audit = {
+                **radar_audit,
+                "weights": entry_res.weights_used,
+                "analyst": entry_res.analyst_score,
+                "insider": entry_res.insider_score,
+                "congressional": entry_res.congressional_score,
+                "pead": entry_res.pead_boost,
+                "squeeze": entry_res.squeeze_applied,
+            }
+        else:
+            # Quick path: solo momentum (segnali esterni a peso 0 implicito,
+            # niente network calls)
+            entry_score = mom
+            audit = {**radar_audit, "quick_path": True, "skip_external": skip_external_signals}
+
+        opp_score = (config.OPPORTUNITY_WEIGHT_RADAR * radar +
+                     config.OPPORTUNITY_WEIGHT_ENTRY * entry_score)
+
+        status = classify_entry_status(
+            t, signal_date, prices_by_ticker[t],
+            radar_score=radar,
+        )
+
+        candidates.append(CandidateScore(
+            ticker=t,
+            radar_score=radar,
+            entry_score=entry_score,
+            opportunity_score=opp_score,
+            momentum_pct=mom,
+            entry_status=status,
+            sector=sectors_by_ticker.get(t, "Unknown"),
+            audit=audit,
+        ))
+
+    candidates.sort(key=lambda c: -c.opportunity_score)
+    top10 = candidates[:10]
+
+    # ── 7. Sector momentum ranking
+    tickers_by_sector: Dict[str, List[str]] = {}
+    for c in candidates[:200]:   # top 200 per momentum ranking settore
+        tickers_by_sector.setdefault(c.sector, []).append(c.ticker)
+    sector_rank = compute_sector_momentum_rank(
+        tickers_by_sector,
+        {t: prices_by_ticker[t] for t in valid_universe},
+        signal_date,
+    )
+
+    # ── 8. Selezione portfolio finale
+    candidates_for_opt = [
+        {"ticker": c.ticker, "score": c.opportunity_score,
+         "sector": c.sector, "entry_status": c.entry_status}
+        for c in candidates
+    ]
+    portfolio = select_portfolio(
+        candidates=candidates_for_opt,
+        current_holdings=current_holdings,
+        sector_momentum_rank=sector_rank,
+        vix_value=vix_value,
+        signal_date=signal_date,
+    )
+
+    # Weights effettivi a signal_date (per audit)
+    base_weights = {
+        "momentum": config.ENTRY_WEIGHT_MOMENTUM,
+        "analyst_composite": config.ENTRY_WEIGHT_ANALYST,
+        "insider_flow": config.ENTRY_WEIGHT_INSIDER,
+        "congressional": config.ENTRY_WEIGHT_CONGRESSIONAL,
+    }
+    active_weights = renormalize_weights(base_weights, signal_date)
+
+    from qfas.tax_aware_optimizer import get_dynamic_sub_margin
+    sub_margin = get_dynamic_sub_margin(vix_value)
+
+    audit = {
+        "n_universe_valid": len(valid_universe),
+        "n_radar_scored": len(radar_results),
+        "n_top_entry_computed": len(top_candidates_for_entry),
+        "n_candidates_total": len(candidates),
+        "top10_by_opp_score": [
+            (c.ticker, round(c.opportunity_score, 1),
+             c.entry_status, c.sector) for c in top10
+        ],
+        "selected_portfolio": [
+            (s.ticker, round(s.score, 1), s.sector, s.entry_status, s.reason)
+            for s in portfolio
+        ],
+    }
+
+    return DecisionCycleResult(
+        signal_date=signal_date,
+        portfolio=portfolio,
+        n_candidates=len(candidates),
+        n_active_funds=len(get_active_funds_at(signal_date)),
+        vix_value=vix_value,
+        sub_margin_used=sub_margin,
+        weights_active=active_weights,
+        sector_momentum_rank=sector_rank,
+        top10_candidates=top10,
+        all_candidates=candidates,
+        audit_log=audit,
+    )
+
+
+if __name__ == "__main__":
+    import sys
+    try: sys.stdout.reconfigure(encoding="utf-8")
+    except Exception: pass
+
+    print("QFAS RUNNER self-check")
+    print("=" * 60)
+    print("  run_decision_cycle() pronto.")
+    print("  Input atteso:")
+    print("    - signal_date: date")
+    print("    - current_holdings: List[{ticker, score, sector, status, days_held, pnl_pct}]")
+    print("    - universe_tickers: List[str]")
+    print("    - all_filings_by_fund: Dict[CIK, List[filing dict]]")
+    print("    - prices_by_ticker: Dict[ticker, pd.Series]")
+    print("    - sectors_by_ticker: Dict[ticker, str]")
+    print("    - vix_value: Optional[float]")
+    print("  Output: DecisionCycleResult con portfolio (8 PortfolioSlot) + audit completo")
+    print("✓ OK")

@@ -1,0 +1,1856 @@
+{
+  "run_date": "2026-05-23T00:23:28.467493",
+  "version": "v2.8",
+  "strategy_mode": "ROTATION_BETA",
+  "regime_v24": {
+    "regime": "NEUTRAL",
+    "vix": 16.76,
+    "yield_curve": 0.43,
+    "hy_spread": 2.78,
+    "holdings": 12,
+    "cash_pct": 0,
+    "status": "ok"
+  },
+  "market_crowded": false,
+  "target_portfolio_size": 12,
+  "top60": [
+    {
+      "rank": 1,
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "sector": "Consumer Cyclical",
+      "opportunity_score": 58.4,
+      "confidence_score": 90,
+      "entry_status": "PULLBACK_IN_TREND",
+      "beta_spy": 1.46,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 0
+    },
+    {
+      "rank": 2,
+      "ticker": "STT",
+      "name": "State Street Corporation",
+      "sector": "Financial Services",
+      "opportunity_score": 51.3,
+      "confidence_score": 85,
+      "entry_status": "FRESH_BREAKOUT",
+      "beta_spy": 1.24,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 0
+    },
+    {
+      "rank": 3,
+      "ticker": "HUM",
+      "name": "Humana Inc.",
+      "sector": "Healthcare",
+      "opportunity_score": 43.1,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 0.52,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 4
+    },
+    {
+      "rank": 4,
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "sector": "Technology",
+      "opportunity_score": 42.8,
+      "confidence_score": 90,
+      "entry_status": "FRESH_BREAKOUT",
+      "beta_spy": 1.8,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 1
+    },
+    {
+      "rank": 5,
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 42.5,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.65,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 12
+    },
+    {
+      "rank": 6,
+      "ticker": "OLN",
+      "name": "Olin Corporation",
+      "sector": "Basic Materials",
+      "opportunity_score": 41.3,
+      "confidence_score": 80,
+      "entry_status": "PULLBACK_IN_TREND",
+      "beta_spy": 1.36,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": -3
+    },
+    {
+      "rank": 7,
+      "ticker": "NTRS",
+      "name": "Northern Trust Corporation",
+      "sector": "Financial Services",
+      "opportunity_score": 41.0,
+      "confidence_score": 90,
+      "entry_status": "FRESH_BREAKOUT",
+      "beta_spy": 1.09,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -3
+    },
+    {
+      "rank": 8,
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 40.3,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.73,
+      "in_portfolio": true,
+      "rank_change": 1,
+      "rank_change_30d": 13
+    },
+    {
+      "rank": 9,
+      "ticker": "FDX",
+      "name": "FedEx Corporation",
+      "sector": "Industrials",
+      "opportunity_score": 39.4,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 1.0,
+      "in_portfolio": true,
+      "rank_change": 1,
+      "rank_change_30d": -1
+    },
+    {
+      "rank": 10,
+      "ticker": "BKR",
+      "name": "Baker Hughes Company",
+      "sector": "Energy",
+      "opportunity_score": 39.0,
+      "confidence_score": 90,
+      "entry_status": "PULLBACK_IN_TREND",
+      "beta_spy": 0.76,
+      "in_portfolio": false,
+      "rank_change": 7,
+      "rank_change_30d": 0
+    },
+    {
+      "rank": 11,
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "sector": "Communication Services",
+      "opportunity_score": 38.6,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "beta_spy": 1.34,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": -2
+    },
+    {
+      "rank": 12,
+      "ticker": "LYB",
+      "name": "LyondellBasell Industries NV",
+      "sector": "Basic Materials",
+      "opportunity_score": 38.5,
+      "confidence_score": 80,
+      "entry_status": "EXTENDED",
+      "beta_spy": 0.09,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 2
+    },
+    {
+      "rank": 13,
+      "ticker": "AVGO",
+      "name": "Broadcom Inc.",
+      "sector": "Technology",
+      "opportunity_score": 36.0,
+      "confidence_score": 90,
+      "entry_status": "PULLBACK_IN_TREND",
+      "beta_spy": 2.04,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 5
+    },
+    {
+      "rank": 14,
+      "ticker": "XYZ",
+      "name": "Block, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 36.0,
+      "confidence_score": 80,
+      "entry_status": "PULLBACK_IN_TREND",
+      "beta_spy": 2.08,
+      "in_portfolio": false,
+      "rank_change": -1,
+      "rank_change_30d": 1
+    },
+    {
+      "rank": 15,
+      "ticker": "HSY",
+      "name": "The Hershey Company",
+      "sector": "Consumer Defensive",
+      "opportunity_score": 35.8,
+      "confidence_score": 85,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 0.05,
+      "in_portfolio": true,
+      "rank_change": 0,
+      "rank_change_30d": 7
+    },
+    {
+      "rank": 16,
+      "ticker": "IVZ",
+      "name": "Invesco Ltd",
+      "sector": "Financial Services",
+      "opportunity_score": 35.2,
+      "confidence_score": 80,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 1.67,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -5
+    },
+    {
+      "rank": 17,
+      "ticker": "GFS",
+      "name": "GlobalFoundries Inc.",
+      "sector": "Technology",
+      "opportunity_score": 35.1,
+      "confidence_score": 80,
+      "entry_status": "EXTENDED",
+      "beta_spy": 1.88,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 6
+    },
+    {
+      "rank": 18,
+      "ticker": "WDC",
+      "name": "Western Digital Corporation",
+      "sector": "Technology",
+      "opportunity_score": 34.5,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.41,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 8
+    },
+    {
+      "rank": 19,
+      "ticker": "COLB",
+      "name": "Columbia Banking System, Inc.",
+      "sector": "Financial Services",
+      "opportunity_score": 34.4,
+      "confidence_score": 85,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 1.3,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -7
+    },
+    {
+      "rank": 20,
+      "ticker": "SOLS",
+      "name": "Solstice Advanced Materials Inc",
+      "sector": "Basic Materials",
+      "opportunity_score": 33.6,
+      "confidence_score": 80,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 1.47,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 21,
+      "ticker": "BTI",
+      "name": "British American Tobacco  Indus",
+      "sector": "Consumer Defensive",
+      "opportunity_score": 33.1,
+      "confidence_score": 80,
+      "entry_status": "FRESH_BREAKOUT",
+      "beta_spy": 0.35,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": null
+    },
+    {
+      "rank": 22,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "sector": "Technology",
+      "opportunity_score": 33.0,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 0.96,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -9
+    },
+    {
+      "rank": 23,
+      "ticker": "ASML",
+      "name": "ASML Holding N.V. - New York Re",
+      "sector": "Technology",
+      "opportunity_score": 33.0,
+      "confidence_score": 80,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.1,
+      "in_portfolio": true,
+      "rank_change": 1,
+      "rank_change_30d": 1
+    },
+    {
+      "rank": 24,
+      "ticker": "MICC",
+      "name": "The Magnum Ice Cream Company N.",
+      "sector": "Consumer Defensive",
+      "opportunity_score": 32.7,
+      "confidence_score": 65,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 0.65,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 25,
+      "ticker": "WMB",
+      "name": "Williams Companies, Inc. (The)",
+      "sector": "Energy",
+      "opportunity_score": 32.0,
+      "confidence_score": 90,
+      "entry_status": "FRESH_BREAKOUT",
+      "beta_spy": 0.11,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 0
+    },
+    {
+      "rank": 26,
+      "ticker": "WPM",
+      "name": "Wheaton Precious Metals Corp",
+      "sector": "Basic Materials",
+      "opportunity_score": 31.6,
+      "confidence_score": 80,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 1.15,
+      "in_portfolio": false,
+      "rank_change": 2,
+      "rank_change_30d": -7
+    },
+    {
+      "rank": 27,
+      "ticker": "LRCX",
+      "name": "Lam Research Corporation",
+      "sector": "Technology",
+      "opportunity_score": 31.6,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.72,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": 27
+    },
+    {
+      "rank": 28,
+      "ticker": "AMAT",
+      "name": "Applied Materials, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 31.1,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.24,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -1
+    },
+    {
+      "rank": 29,
+      "ticker": "GLW",
+      "name": "Corning Incorporated",
+      "sector": "Technology",
+      "opportunity_score": 30.6,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "beta_spy": 2.19,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 27
+    },
+    {
+      "rank": 30,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "sector": "Technology",
+      "opportunity_score": 30,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.85,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -2
+    },
+    {
+      "rank": 31,
+      "ticker": "UBER",
+      "name": "Uber Technologies, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.02,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -1
+    },
+    {
+      "rank": 32,
+      "ticker": "CRM",
+      "name": "Salesforce, Inc.",
+      "sector": "Technology",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.63,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 10
+    },
+    {
+      "rank": 33,
+      "ticker": "SIGI",
+      "name": "Selective Insurance Group, Inc.",
+      "sector": "Financial Services",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.28,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 34,
+      "ticker": "MOH",
+      "name": "Molina Healthcare Inc",
+      "sector": "Healthcare",
+      "opportunity_score": 30,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": -0.17,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -2
+    },
+    {
+      "rank": 35,
+      "ticker": "GTES",
+      "name": "Gates Industrial Corporation pl",
+      "sector": "Industrials",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.62,
+      "in_portfolio": false,
+      "rank_change": -27,
+      "rank_change_30d": -29
+    },
+    {
+      "rank": 36,
+      "ticker": "CB",
+      "name": "Chubb Limited",
+      "sector": "Financial Services",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": -0.06,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -3
+    },
+    {
+      "rank": 37,
+      "ticker": "LIN",
+      "name": "Linde plc",
+      "sector": "Basic Materials",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.26,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": -2
+    },
+    {
+      "rank": 38,
+      "ticker": "V",
+      "name": "Visa Inc.",
+      "sector": "Financial Services",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.63,
+      "in_portfolio": false,
+      "rank_change": -1,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 39,
+      "ticker": "CRL",
+      "name": "Charles River Laboratories Inte",
+      "sector": "Healthcare",
+      "opportunity_score": 30,
+      "confidence_score": 80,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.47,
+      "in_portfolio": false,
+      "rank_change": 1,
+      "rank_change_30d": 8
+    },
+    {
+      "rank": 40,
+      "ticker": "VSNT",
+      "name": "Versant Media Group, Inc.",
+      "sector": "Communication Services",
+      "opportunity_score": 30,
+      "confidence_score": 80,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.73,
+      "in_portfolio": false,
+      "rank_change": -1,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 41,
+      "ticker": "NCLH",
+      "name": "Norwegian Cruise Line Holdings ",
+      "sector": "Consumer Cyclical",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 2.29,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 42,
+      "ticker": "VST",
+      "name": "Vistra Corp.",
+      "sector": "Utilities",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.53,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 43,
+      "ticker": "FIS",
+      "name": "Fidelity National Information S",
+      "sector": "Technology",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.63,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": 6
+    },
+    {
+      "rank": 44,
+      "ticker": "TDG",
+      "name": "Transdigm Group Incorporated",
+      "sector": "Industrials",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.76,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -5
+    },
+    {
+      "rank": 45,
+      "ticker": "CHTR",
+      "name": "Charter Communications, Inc.",
+      "sector": "Communication Services",
+      "opportunity_score": 30,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.35,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 46,
+      "ticker": "ABT",
+      "name": "Abbott Laboratories",
+      "sector": "Healthcare",
+      "opportunity_score": 30,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.22,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -15
+    },
+    {
+      "rank": 47,
+      "ticker": "BRO",
+      "name": "Brown & Brown, Inc.",
+      "sector": "Financial Services",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": -0.0,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 48,
+      "ticker": "FERG",
+      "name": "Ferguson Enterprises Inc.",
+      "sector": "Industrials",
+      "opportunity_score": 30,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.21,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 49,
+      "ticker": "CPNG",
+      "name": "Coupang, Inc.",
+      "sector": "Consumer Cyclical",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.3,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 50,
+      "ticker": "META",
+      "name": "Meta Platforms, Inc.",
+      "sector": "Communication Services",
+      "opportunity_score": 30,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.5,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 51,
+      "ticker": "HRI",
+      "name": "Herc Holdings Inc.",
+      "sector": "Industrials",
+      "opportunity_score": 29.8,
+      "confidence_score": 75,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.96,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -11
+    },
+    {
+      "rank": 52,
+      "ticker": "SPOT",
+      "name": "Spotify Technology S.A.",
+      "sector": "Communication Services",
+      "opportunity_score": 29.0,
+      "confidence_score": 80,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.68,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 53,
+      "ticker": "KVUE",
+      "name": "Kenvue Inc.",
+      "sector": "Consumer Defensive",
+      "opportunity_score": 28.2,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.32,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": 2
+    },
+    {
+      "rank": 54,
+      "ticker": "EQIX",
+      "name": "Equinix, Inc.",
+      "sector": "Real Estate",
+      "opportunity_score": 27.8,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "beta_spy": 0.46,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": 3
+    },
+    {
+      "rank": 55,
+      "ticker": "ACN",
+      "name": "Accenture plc",
+      "sector": "Technology",
+      "opportunity_score": 27.1,
+      "confidence_score": 90,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.72,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 56,
+      "ticker": "SNA",
+      "name": "Snap-On Incorporated",
+      "sector": "Industrials",
+      "opportunity_score": 27.1,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.73,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -4
+    },
+    {
+      "rank": 57,
+      "ticker": "SE",
+      "name": "Sea Limited",
+      "sector": "Consumer Cyclical",
+      "opportunity_score": 26.1,
+      "confidence_score": 80,
+      "entry_status": "BROKEN",
+      "beta_spy": 1.45,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -7
+    },
+    {
+      "rank": 58,
+      "ticker": "ALC",
+      "name": "Alcon Inc.",
+      "sector": "Healthcare",
+      "opportunity_score": 25.5,
+      "confidence_score": 80,
+      "entry_status": "BROKEN",
+      "beta_spy": 0.74,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -5
+    },
+    {
+      "rank": 59,
+      "ticker": "FE",
+      "name": "FirstEnergy Corp.",
+      "sector": "Utilities",
+      "opportunity_score": 24.7,
+      "confidence_score": 85,
+      "entry_status": "BROKEN",
+      "beta_spy": -0.01,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": 1
+    },
+    {
+      "rank": 60,
+      "ticker": "ETHB",
+      "name": "iShares Staked Ethereum Trust E",
+      "sector": "Unknown",
+      "opportunity_score": 23.4,
+      "confidence_score": 65,
+      "entry_status": "NEUTRAL",
+      "beta_spy": 2.07,
+      "in_portfolio": false,
+      "rank_change": 0,
+      "rank_change_30d": -2
+    }
+  ],
+  "macro_regime": {
+    "risk_off": false,
+    "hy_spread": 2.78,
+    "yield_curve_2_10": 0.43,
+    "cot_crowded": false,
+    "status": "ok"
+  },
+  "portfolio": [
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com, Inc.",
+      "sector": "Consumer Cyclical",
+      "price": 266.32,
+      "currency": "USD",
+      "opportunity_score": 58.4,
+      "radar_score": 62.5,
+      "entry_score": 54.4,
+      "confidence_score": 90,
+      "entry_status": "PULLBACK_IN_TREND",
+      "components": {
+        "conviction": 100.0,
+        "accumulation": 66.12,
+        "insider": 0.0,
+        "quality": 61.37,
+        "value": 47.66,
+        "momentum": 28.34,
+        "fund_skill": 76.2,
+        "beta": 98.75,
+        "freshness": 100
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [],
+      "n_funds_holding": 17,
+      "top_funds": [
+        "Appaloosa LP",
+        "Baupost Group",
+        "Duquesne Family Office",
+        "Tiger Global Management",
+        "Coatue Management",
+        "Viking Global Investors",
+        "Third Point LLC",
+        "ValueAct Capital",
+        "Light Street Capital Management",
+        "Whale Rock Capital Management"
+      ],
+      "main_signal": "17 fondi \u00b7 accumulation forte (66/100)",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 4.406462840081282,
+      "ret_3m": 29.741317182769844,
+      "ret_6m": 19.59226027414156,
+      "ret_12m": null,
+      "pe_forward": 27.04031,
+      "market_cap": 2864833626112,
+      "beta_spy": 1.46,
+      "rank": 1,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          62.5
+        ],
+        [
+          "2026-05-22",
+          57.5
+        ],
+        [
+          "2026-05-23",
+          58.4
+        ]
+      ],
+      "next_earnings": "2026-07-30",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "STT",
+      "name": "State Street Corporation",
+      "sector": "Financial Services",
+      "price": 153.95,
+      "currency": "USD",
+      "opportunity_score": 51.3,
+      "radar_score": 48.4,
+      "entry_score": 54.3,
+      "confidence_score": 85,
+      "entry_status": "FRESH_BREAKOUT",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 100.0,
+        "insider": 47.75,
+        "quality": 60.23,
+        "value": 54.49,
+        "momentum": 29.32,
+        "fund_skill": 64.7,
+        "beta": 100,
+        "freshness": 90
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 25.0,
+        "size": 60.0,
+        "cluster": 25,
+        "prior_bonus": 10
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining"
+      ],
+      "n_funds_holding": 7,
+      "top_funds": [
+        "Duquesne Family Office",
+        "Oaktree Capital Management",
+        "Sequoia Fund / Ruane Cunniff",
+        "Dodge & Cox",
+        "Polen Capital Management",
+        "First Eagle Investment Management",
+        "Yacktman Asset Management"
+      ],
+      "main_signal": "7 fondi \u00b7 accumulation forte (100/100)",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 1.7851219492510229,
+      "ret_3m": 23.854083887960265,
+      "ret_6m": 36.837119921358386,
+      "ret_12m": null,
+      "pe_forward": 11.14366,
+      "market_cap": 42608283648,
+      "beta_spy": 1.24,
+      "rank": 2,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          56.2
+        ],
+        [
+          "2026-05-22",
+          51.0
+        ],
+        [
+          "2026-05-23",
+          51.3
+        ]
+      ],
+      "next_earnings": "2026-07-14",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "HUM",
+      "name": "Humana Inc.",
+      "sector": "Healthcare",
+      "price": 307.95,
+      "currency": "USD",
+      "opportunity_score": 43.1,
+      "radar_score": 41.5,
+      "entry_score": 44.8,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 66.35,
+        "insider": 58.29,
+        "quality": 59.94,
+        "value": 72.22,
+        "momentum": 31.86,
+        "fund_skill": 69.9,
+        "beta": 48.47,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 47.5,
+        "size": 55.0,
+        "cluster": 25,
+        "prior_bonus": 10
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining"
+      ],
+      "n_funds_holding": 4,
+      "top_funds": [
+        "Duquesne Family Office",
+        "Glenview Capital Management",
+        "Pzena Investment Management",
+        "Diamond Hill Capital Management"
+      ],
+      "main_signal": "4 fondi \u00b7 accumulation forte (66/100)",
+      "main_risk": "Treno gia' partito (momentum + RSI alti); Performance 3M estesa",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 43.26588349809679,
+      "ret_3m": 70.85118834618453,
+      "ret_6m": 35.68118242055145,
+      "ret_12m": null,
+      "pe_forward": 19.893528,
+      "market_cap": 36972941312,
+      "beta_spy": 0.52,
+      "rank": 3,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          43.6
+        ],
+        [
+          "2026-05-22",
+          42.8
+        ],
+        [
+          "2026-05-23",
+          43.1
+        ]
+      ],
+      "next_earnings": "2026-07-29",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices, Inc.",
+      "sector": "Technology",
+      "price": 467.51,
+      "currency": "USD",
+      "opportunity_score": 40.3,
+      "radar_score": 36.2,
+      "entry_score": 44.5,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 28.39,
+        "accumulation": 60.86,
+        "insider": 0.0,
+        "quality": 62.54,
+        "value": 19.53,
+        "momentum": 57.1,
+        "fund_skill": 79.7,
+        "beta": 0,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [],
+      "n_funds_holding": 11,
+      "top_funds": [
+        "Appaloosa LP",
+        "Light Street Capital Management",
+        "Whale Rock Capital Management",
+        "Glenview Capital Management",
+        "Sequoia Fund / Ruane Cunniff",
+        "Dodge & Cox",
+        "Polen Capital Management",
+        "Melqart Asset Management",
+        "First Eagle Investment Management",
+        "Maverick Capital"
+      ],
+      "main_signal": "11 fondi \u00b7 accumulation forte (61/100)",
+      "main_risk": "Treno gia' partito (momentum + RSI alti); Performance 3M estesa; Performance 6M molto estesa; Prezzo lontano da MA200",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 53.11631032839106,
+      "ret_3m": 137.79755607915257,
+      "ret_6m": 109.12995007089484,
+      "ret_12m": null,
+      "pe_forward": 36.07458,
+      "market_cap": 762322092032,
+      "beta_spy": 2.73,
+      "rank": 4,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          35.3
+        ],
+        [
+          "2026-05-22",
+          40.0
+        ],
+        [
+          "2026-05-23",
+          40.3
+        ]
+      ],
+      "next_earnings": "2026-08-04",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "MU",
+      "name": "Micron Technology, Inc.",
+      "sector": "Technology",
+      "price": 751.0,
+      "currency": "USD",
+      "opportunity_score": 42.5,
+      "radar_score": 32.0,
+      "entry_score": 53.0,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 12.78,
+        "accumulation": 67.82,
+        "insider": 0.0,
+        "quality": 63.08,
+        "value": 69.81,
+        "momentum": 62.33,
+        "fund_skill": 71.7,
+        "beta": 0,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining"
+      ],
+      "n_funds_holding": 6,
+      "top_funds": [
+        "Appaloosa LP",
+        "Duquesne Family Office",
+        "Coatue Management",
+        "Markel Group",
+        "Dodge & Cox",
+        "Situational Awareness LP"
+      ],
+      "main_signal": "6 fondi \u00b7 accumulation forte (68/100)",
+      "main_risk": "Momentum recente elevato; Performance 3M estesa; Performance 6M molto estesa; Prezzo lontano da MA200",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 55.89969237252503,
+      "ret_3m": 78.47244739894026,
+      "ret_6m": 232.69256052864128,
+      "ret_12m": null,
+      "pe_forward": 7.309794,
+      "market_cap": 846928216064,
+      "beta_spy": 2.65,
+      "rank": 5,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          37.7
+        ],
+        [
+          "2026-05-22",
+          42.5
+        ],
+        [
+          "2026-05-23",
+          42.5
+        ]
+      ],
+      "next_earnings": "2026-06-24",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "LYB",
+      "name": "LyondellBasell Industries NV",
+      "sector": "Basic Materials",
+      "price": 69.72,
+      "currency": "USD",
+      "opportunity_score": 38.5,
+      "radar_score": 36.3,
+      "entry_score": 40.7,
+      "confidence_score": 80,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 42.34,
+        "insider": 70.58,
+        "quality": 61.8,
+        "value": 77.59,
+        "momentum": 29.25,
+        "fund_skill": 59.4,
+        "beta": 15.57,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 52.5,
+        "size": 77.5,
+        "cluster": 25,
+        "prior_bonus": 10
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining",
+        "low_interest_coverage"
+      ],
+      "n_funds_holding": 3,
+      "top_funds": [
+        "Duquesne Family Office",
+        "Oaktree Capital Management",
+        "Sequoia Fund / Ruane Cunniff"
+      ],
+      "main_signal": "3 fondi \u00b7 accumulation 42/100 \u00b7 3 insider in acquisto",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": -1.4140271249136416,
+      "ret_3m": 24.543778957600004,
+      "ret_6m": 69.77705560911338,
+      "ret_12m": null,
+      "pe_forward": 9.214775,
+      "market_cap": 22504554496,
+      "beta_spy": 0.09,
+      "rank": 6,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          37.8
+        ],
+        [
+          "2026-05-22",
+          38.1
+        ],
+        [
+          "2026-05-23",
+          38.5
+        ]
+      ],
+      "next_earnings": "2026-07-31",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "HSY",
+      "name": "The Hershey Company",
+      "sector": "Consumer Defensive",
+      "price": 194.78,
+      "currency": "USD",
+      "opportunity_score": 35.8,
+      "radar_score": 37.7,
+      "entry_score": 33.8,
+      "confidence_score": 85,
+      "entry_status": "NEUTRAL",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 47.31,
+        "insider": 70.22,
+        "quality": 61.9,
+        "value": 57.11,
+        "momentum": 16.52,
+        "fund_skill": 59.7,
+        "beta": 15.82,
+        "freshness": 50
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 47.5,
+        "size": 26.7,
+        "cluster": 100,
+        "prior_bonus": 30
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining"
+      ],
+      "n_funds_holding": 3,
+      "top_funds": [
+        "Markel Group",
+        "Dodge & Cox",
+        "Maverick Capital"
+      ],
+      "main_signal": "3 fondi \u00b7 accumulation 47/100 \u00b7 3 insider in acquisto",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 2.174625244638828,
+      "ret_3m": -13.178465085065039,
+      "ret_6m": 8.267352832214003,
+      "ret_12m": null,
+      "pe_forward": 19.676336,
+      "market_cap": 39509831680,
+      "beta_spy": 0.05,
+      "rank": 7,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          35.2
+        ],
+        [
+          "2026-05-22",
+          35.5
+        ],
+        [
+          "2026-05-23",
+          35.8
+        ]
+      ],
+      "next_earnings": "2026-07-30",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "sector": "Communication Services",
+      "price": 382.97,
+      "currency": "USD",
+      "opportunity_score": 38.6,
+      "radar_score": 31.4,
+      "entry_score": 45.8,
+      "confidence_score": 90,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 31.76,
+        "accumulation": 44.03,
+        "insider": 0.0,
+        "quality": 63.15,
+        "value": 34.96,
+        "momentum": 28.95,
+        "fund_skill": 70.5,
+        "beta": 100,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [],
+      "n_funds_holding": 19,
+      "top_funds": [
+        "Berkshire Hathaway",
+        "Appaloosa LP",
+        "Baupost Group",
+        "Tiger Global Management",
+        "Coatue Management",
+        "Viking Global Investors",
+        "Lone Pine Capital",
+        "Third Point LLC",
+        "Light Street Capital Management",
+        "Whale Rock Capital Management"
+      ],
+      "main_signal": "19 fondi \u00b7 accumulation 44/100",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 13.007165943792698,
+      "ret_3m": 23.034319360014056,
+      "ret_6m": 30.968981653828244,
+      "ret_12m": null,
+      "pe_forward": 26.500639,
+      "market_cap": 4639851282432,
+      "beta_spy": 1.34,
+      "rank": 8,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          42.6
+        ],
+        [
+          "2026-05-22",
+          38.2
+        ],
+        [
+          "2026-05-23",
+          38.6
+        ]
+      ],
+      "next_earnings": "2026-07-23",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "FDX",
+      "name": "FedEx Corporation",
+      "sector": "Industrials",
+      "price": 394.2,
+      "currency": "USD",
+      "opportunity_score": 39.4,
+      "radar_score": 31.2,
+      "entry_score": 47.7,
+      "confidence_score": 85,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 38.51,
+        "insider": 58.99,
+        "quality": 61.02,
+        "value": 72.0,
+        "momentum": 27.77,
+        "fund_skill": 49.1,
+        "beta": 86.24,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 37.5,
+        "size": 40.0,
+        "cluster": 75,
+        "prior_bonus": 0
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining"
+      ],
+      "n_funds_holding": 6,
+      "top_funds": [
+        "Viking Global Investors",
+        "Sequoia Fund / Ruane Cunniff",
+        "Dodge & Cox",
+        "Ariel Investments",
+        "Maverick Capital",
+        "Diamond Hill Capital Management"
+      ],
+      "main_signal": "6 fondi \u00b7 accumulation 39/100",
+      "main_risk": "Prezzo lontano da MA200",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 0.3845297196865438,
+      "ret_3m": 3.1503503374967545,
+      "ret_6m": 51.51270536442987,
+      "ret_12m": null,
+      "pe_forward": 17.59391,
+      "market_cap": 94058782720,
+      "beta_spy": 1.0,
+      "rank": 9,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          43.0
+        ],
+        [
+          "2026-05-22",
+          39.2
+        ],
+        [
+          "2026-05-23",
+          39.4
+        ]
+      ],
+      "next_earnings": "2026-06-23",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "sector": "Technology",
+      "price": 215.33,
+      "currency": "USD",
+      "opportunity_score": 42.8,
+      "radar_score": 31.1,
+      "entry_score": 54.5,
+      "confidence_score": 90,
+      "entry_status": "FRESH_BREAKOUT",
+      "components": {
+        "conviction": 46.82,
+        "accumulation": 23.54,
+        "insider": 0.0,
+        "quality": 100.0,
+        "value": 46.24,
+        "momentum": 25.33,
+        "fund_skill": 76.9,
+        "beta": 65.46,
+        "freshness": 90
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [],
+      "n_funds_holding": 13,
+      "top_funds": [
+        "Appaloosa LP",
+        "Tiger Global Management",
+        "Coatue Management",
+        "Third Point LLC",
+        "Light Street Capital Management",
+        "Whale Rock Capital Management",
+        "Scion Asset Management",
+        "Sequoia Fund / Ruane Cunniff",
+        "Dodge & Cox",
+        "Polen Capital Management"
+      ],
+      "main_signal": "13 fondi",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 7.85914771056635,
+      "ret_3m": 12.420593046523232,
+      "ret_6m": 15.458748308029048,
+      "ret_12m": null,
+      "pe_forward": 17.027882,
+      "market_cap": 5215507972096,
+      "beta_spy": 1.8,
+      "rank": 10,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          45.2
+        ],
+        [
+          "2026-05-22",
+          42.5
+        ],
+        [
+          "2026-05-23",
+          42.8
+        ]
+      ],
+      "next_earnings": null,
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "OLN",
+      "name": "Olin Corporation",
+      "sector": "Basic Materials",
+      "price": 26.03,
+      "currency": "USD",
+      "opportunity_score": 41.3,
+      "radar_score": 31.2,
+      "entry_score": 51.3,
+      "confidence_score": 80,
+      "entry_status": "PULLBACK_IN_TREND",
+      "components": {
+        "conviction": 0.0,
+        "accumulation": 35.05,
+        "insider": 54.07,
+        "quality": 58.5,
+        "value": 56.63,
+        "momentum": 24.22,
+        "fund_skill": 72.2,
+        "beta": 84.0,
+        "freshness": 100
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {
+        "role": 47.5,
+        "size": 45.0,
+        "cluster": 25,
+        "prior_bonus": 10
+      },
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [
+        "roe_declining",
+        "low_interest_coverage"
+      ],
+      "n_funds_holding": 3,
+      "top_funds": [
+        "First Eagle Investment Management",
+        "Pzena Investment Management",
+        "Yacktman Asset Management"
+      ],
+      "main_signal": "3 fondi \u00b7 accumulation 35/100",
+      "main_risk": "Nessun rischio entry rilevante",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": -0.02030038414685409,
+      "ret_3m": 12.436802162654171,
+      "ret_6m": 41.686414236231826,
+      "ret_12m": null,
+      "pe_forward": 27.938179,
+      "market_cap": 2964759040,
+      "beta_spy": 1.36,
+      "rank": 11,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          45.7
+        ],
+        [
+          "2026-05-22",
+          41.0
+        ],
+        [
+          "2026-05-23",
+          41.3
+        ]
+      ],
+      "next_earnings": "2026-07-30",
+      "price_history": [],
+      "entered_on": "2026-05-22T18:05:51.024294"
+    },
+    {
+      "ticker": "ASML",
+      "name": "ASML Holding N.V. - New York Re",
+      "sector": "Technology",
+      "price": 1632.9,
+      "currency": "USD",
+      "opportunity_score": 33.0,
+      "radar_score": 29.1,
+      "entry_score": 36.8,
+      "confidence_score": 80,
+      "entry_status": "EXTENDED",
+      "components": {
+        "conviction": 6.28,
+        "accumulation": 65.03,
+        "insider": 0.0,
+        "quality": 58.86,
+        "value": 21.98,
+        "momentum": 30.13,
+        "fund_skill": 74.3,
+        "beta": 40.26,
+        "freshness": 40
+      },
+      "modifiers": {
+        "short": 0.0,
+        "congressional": 0.0,
+        "activist": 0.0
+      },
+      "insider_detail": {},
+      "quality_source": "edgar_xbrl",
+      "quality_warnings": [],
+      "n_funds_holding": 9,
+      "top_funds": [
+        "Appaloosa LP",
+        "Coatue Management",
+        "Lone Pine Capital",
+        "Third Point LLC",
+        "Light Street Capital Management",
+        "Dodge & Cox",
+        "Melqart Asset Management",
+        "Maverick Capital",
+        "Situational Awareness LP"
+      ],
+      "main_signal": "9 fondi \u00b7 accumulation forte (65/100)",
+      "main_risk": "Prezzo lontano da MA200",
+      "exit_trigger": "Esce dalla top 12 -> vendita al ciclo cron successivo",
+      "ret_1m": 15.422943826226,
+      "ret_3m": 10.126356140050884,
+      "ret_6m": 57.661680600402335,
+      "ret_12m": null,
+      "pe_forward": 34.32866,
+      "market_cap": 629348499456,
+      "beta_spy": 2.1,
+      "rank": 12,
+      "weight_pct": 8.33,
+      "size_band": "full",
+      "score_history": [
+        [
+          "2026-05-21",
+          33.0
+        ],
+        [
+          "2026-05-22",
+          32.6
+        ],
+        [
+          "2026-05-23",
+          33.0
+        ]
+      ],
+      "next_earnings": "2026-07-15",
+      "price_history": [],
+      "entered_on": "2026-05-23T00:23:28.467666"
+    }
+  ],
+  "summary": {
+    "valid_setups": 12,
+    "cash_slots": 0,
+    "universe_size": 259,
+    "stage2_candidates": 80,
+    "red_flags_triggered": [
+      {
+        "ticker": "TFX",
+        "reasons": [
+          "excessive_leverage_8.5x"
+        ]
+      },
+      {
+        "ticker": "INTC",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "AVTR",
+        "reasons": [
+          "excessive_leverage_23.0x"
+        ]
+      },
+      {
+        "ticker": "HBAN",
+        "reasons": [
+          "share_dilution_29pct"
+        ]
+      },
+      {
+        "ticker": "HUN",
+        "reasons": [
+          "excessive_leverage_10.8x"
+        ]
+      },
+      {
+        "ticker": "GS",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "MSTR",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "RIVN",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "AXP",
+        "reasons": [
+          "excessive_leverage_12.7x"
+        ]
+      },
+      {
+        "ticker": "SNDK",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "LITE",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      },
+      {
+        "ticker": "MKSI",
+        "reasons": [
+          "excessive_leverage_9.1x"
+        ]
+      },
+      {
+        "ticker": "EQT",
+        "reasons": [
+          "revenue_collapse_-58pct"
+        ]
+      },
+      {
+        "ticker": "FITB",
+        "reasons": [
+          "share_dilution_37pct"
+        ]
+      },
+      {
+        "ticker": "PFSI",
+        "reasons": [
+          "fcf_negative_2y_consecutive",
+          "revenue_collapse_-25pct"
+        ]
+      },
+      {
+        "ticker": "MLKN",
+        "reasons": [
+          "excessive_leverage_7.1x"
+        ]
+      },
+      {
+        "ticker": "RIOT",
+        "reasons": [
+          "fcf_negative_2y_consecutive"
+        ]
+      }
+    ],
+    "fund_skill_fallback": [],
+    "data_sources": {
+      "cot": "ok",
+      "fred_macro": "ok",
+      "openinsider_ok": 105,
+      "openinsider_total": 120,
+      "capitoltrades_ok": 0,
+      "xbrl_ok": 79,
+      "xbrl_total": 80,
+      "funds_loaded": 36
+    }
+  },
+  "rotation": {
+    "entries": [
+      "ASML"
+    ],
+    "exits": [
+      "GTES"
+    ],
+    "holds": [
+      "AMZN",
+      "STT",
+      "HUM",
+      "AMD",
+      "MU",
+      "LYB",
+      "HSY",
+      "GOOGL",
+      "FDX",
+      "NVDA",
+      "OLN"
+    ]
+  },
+  "exited_stocks": [
+    {
+      "ticker": "GTES",
+      "name": "Gates Industrial Corporation pl",
+      "sector": "Industrials",
+      "price": 24.48,
+      "currency": "USD",
+      "opportunity_score": 30,
+      "entry_status": "BROKEN"
+    }
+  ]
+}

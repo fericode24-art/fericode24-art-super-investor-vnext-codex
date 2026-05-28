@@ -1,0 +1,14 @@
+.local/
+node_modules/
+netlify/functions/node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.netlify/
+.env
+.env.*
+!netlify/functions/package-lock.json
+data/backtest/prices*.csv
+data/backtest/scored_v25.json
+data/xbrl_cache/
+qfas/cache/

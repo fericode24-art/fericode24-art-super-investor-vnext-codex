@@ -1,0 +1,70 @@
+name: OCTA vNext Prefetch Insider
+
+on:
+  schedule:
+    - cron: '0 5 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: octa-vnext-insider
+  cancel-in-progress: false
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Form 4 prefetch
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python -u -m qfas.qfas_prefetch_insider --top-n 200 --max-filings 20
+
+      - name: Commit insider cache
+        run: |
+          if [ ! -f data/backtest/insider_cache.json ]; then
+            echo "::error::insider_cache.json non generato"
+            exit 1
+          fi
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions OCTA vNext Insider"
+          git add data/backtest/insider_cache.json
+          if ! git diff --cached --quiet; then
+            git commit -m "[octa-vnext-insider] prefetch $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No insider cache changes"
+          fi
+
+      - name: Alert on failure
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -z "$NTFY_TOPIC" ] && exit 0
+          curl -fsS -X POST "https://ntfy.sh/$NTFY_TOPIC" \
+            -H "Title: OCTA vNext insider prefetch FALLITO" \
+            -H "Priority: default" \
+            -H "Tags: warning" \
+            -H "Click: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            -d "Prefetch Form 4 fallito. Il refresh vNext usera la cache precedente." || true

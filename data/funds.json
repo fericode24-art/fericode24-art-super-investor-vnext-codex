@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "version": "v2.2",
+    "description": "Universo curato di 36 fondi attivi ad alta convinzione per analisi 13F. CIK verificati via SEC EDGAR search. v2.2: rimossi 7 quant/macro/HFT, aggiunti 5 stock-picker/concentrati.",
+    "weighting_rules": {
+      "track_record": "base_weight scala 0-1 = stima qualitativa basata su reputation e track record storico",
+      "concentration_bonus": "1.5x se <30 posizioni, 1.2x se <50, 1.0x se >50 (calcolato run-time)",
+      "type_multiplier": {
+        "value_legend": 1.3,
+        "concentrated_picker": 1.25,
+        "activist": 1.2,
+        "tiger_cub": 1.15,
+        "growth_picker": 1.15,
+        "generalist": 0.9
+      }
+    },
+    "long_only_ciks": ["0002045724"],
+    "_v22_changes": {
+      "removed": ["Renaissance Technologies", "Citadel Advisors", "Two Sigma Advisers", "AQR Capital Management", "Marshall Wace LLP", "Bridgewater Associates", "Soros Fund Management"],
+      "added": ["Situational Awareness LP", "Light Street Capital Management", "Whale Rock Capital Management", "Duquesne Family Office", "Melqart Asset Management"]
+    }
+  },
+  "funds": [
+    {"cik": "0001067983", "name": "Berkshire Hathaway", "manager": "Warren Buffett", "type": "value_legend", "base_weight": 1.0},
+    {"cik": "0002026053", "name": "Pershing Square Capital", "manager": "Bill Ackman", "type": "concentrated_picker", "base_weight": 0.95},
+    {"cik": "0001649339", "name": "Scion Asset Management", "manager": "Michael Burry", "type": "concentrated_picker", "base_weight": 0.80},
+    {"cik": "0001656456", "name": "Appaloosa LP", "manager": "David Tepper", "type": "concentrated_picker", "base_weight": 0.95},
+    {"cik": "0001079114", "name": "Greenlight Capital", "manager": "David Einhorn", "type": "value_legend", "base_weight": 0.85},
+    {"cik": "0001167483", "name": "Tiger Global Management", "manager": "Chase Coleman", "type": "tiger_cub", "base_weight": 0.85},
+    {"cik": "0001135730", "name": "Coatue Management", "manager": "Philippe Laffont", "type": "tiger_cub", "base_weight": 0.85},
+    {"cik": "0001103804", "name": "Viking Global Investors", "manager": "Andreas Halvorsen", "type": "tiger_cub", "base_weight": 0.85},
+    {"cik": "0001061165", "name": "Lone Pine Capital", "manager": "Stephen Mandel", "type": "tiger_cub", "base_weight": 0.85},
+    {"cik": "0001040273", "name": "Third Point LLC", "manager": "Dan Loeb", "type": "activist", "base_weight": 0.85},
+    {"cik": "0001345471", "name": "Trian Fund Management", "manager": "Nelson Peltz", "type": "activist", "base_weight": 0.80},
+    {"cik": "0000921669", "name": "Icahn Capital LP", "manager": "Carl Icahn", "type": "activist", "base_weight": 0.80},
+    {"cik": "0001061768", "name": "Baupost Group", "manager": "Seth Klarman", "type": "value_legend", "base_weight": 0.90},
+    {"cik": "0000949509", "name": "Oaktree Capital Management", "manager": "Howard Marks", "type": "value_legend", "base_weight": 0.85},
+    {"cik": "0001418814", "name": "ValueAct Capital", "manager": "Mason Morfit", "type": "activist", "base_weight": 0.85},
+    {"cik": "0001791786", "name": "Elliott Investment Management", "manager": "Paul Singer", "type": "activist", "base_weight": 0.85},
+    {"cik": "0001138995", "name": "Glenview Capital Management", "manager": "Larry Robbins", "type": "concentrated_picker", "base_weight": 0.80},
+    {"cik": "0001517137", "name": "Starboard Value LP", "manager": "Jeff Smith", "type": "activist", "base_weight": 0.80},
+    {"cik": "0001112520", "name": "Akre Capital Management", "manager": "Chuck Akre", "type": "concentrated_picker", "base_weight": 0.85},
+    {"cik": "0001507971", "name": "Sequoia Fund / Ruane Cunniff", "manager": "Ruane Cunniff", "type": "concentrated_picker", "base_weight": 0.80},
+    {"cik": "0001698926", "name": "Markel Group", "manager": "Tom Gayner", "type": "value_legend", "base_weight": 0.80},
+    {"cik": "0001954242", "name": "Dodge & Cox", "manager": "Dodge & Cox", "type": "value_legend", "base_weight": 0.80},
+    {"cik": "0001325447", "name": "First Eagle Investment Management", "manager": "First Eagle", "type": "value_legend", "base_weight": 0.75},
+    {"cik": "0001954929", "name": "Polen Capital Management", "manager": "Polen Capital", "type": "growth_picker", "base_weight": 0.80},
+    {"cik": "0001217541", "name": "Diamond Hill Capital Management", "manager": "Diamond Hill", "type": "value_legend", "base_weight": 0.70},
+    {"cik": "0001027796", "name": "Pzena Investment Management", "manager": "Richard Pzena", "type": "value_legend", "base_weight": 0.75},
+    {"cik": "0000905567", "name": "Yacktman Asset Management", "manager": "Donald Yacktman", "type": "value_legend", "base_weight": 0.75},
+    {"cik": "0000936753", "name": "Ariel Investments", "manager": "John Rogers", "type": "value_legend", "base_weight": 0.75},
+    {"cik": "0000934639", "name": "Maverick Capital", "manager": "Lee Ainslie", "type": "tiger_cub", "base_weight": 0.75},
+    {"cik": "0001608485", "name": "Lansdowne Partners", "manager": "Lansdowne Partners", "type": "concentrated_picker", "base_weight": 0.80},
+    {"cik": "0001427008", "name": "Smead Capital Management", "manager": "Bill Smead", "type": "value_legend", "base_weight": 0.70},
+    {"cik": "0002045724", "name": "Situational Awareness LP", "manager": "Leopold Aschenbrenner", "type": "concentrated_picker", "base_weight": 0.75, "note": "Track record breve, primo 13F 2026. Long-only filter attivo (massive put options da escludere)."},
+    {"cik": "0001569049", "name": "Light Street Capital Management", "manager": "Glen Kacher", "type": "tiger_cub", "base_weight": 0.85},
+    {"cik": "0001387322", "name": "Whale Rock Capital Management", "manager": "Alex Sacerdote", "type": "growth_picker", "base_weight": 0.85},
+    {"cik": "0001536411", "name": "Duquesne Family Office", "manager": "Stanley Druckenmiller", "type": "concentrated_picker", "base_weight": 0.90},
+    {"cik": "0001712901", "name": "Melqart Asset Management", "manager": "Michel Massoud", "type": "concentrated_picker", "base_weight": 0.80}
+  ]
+}

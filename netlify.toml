@@ -1,0 +1,18 @@
+[build]
+  publish = "dashboard"
+  functions = "netlify/functions"
+
+[dev]
+  publish = "dashboard"
+  functions = "netlify/functions"
+  port = 8888
+
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Cache-Control = "no-store"

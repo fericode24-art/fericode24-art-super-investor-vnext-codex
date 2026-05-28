@@ -1,0 +1,253 @@
+name: OCTA vNext Daily Refresh
+
+on:
+  schedule:
+    - cron: '35 6 * * 1-5'
+    - cron: '35 7 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Forza esecuzione anche se US market holiday"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: octa-vnext-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Rome schedule gate
+        id: rome
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          python - <<'PY'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          event = os.environ.get("EVENT_NAME", "")
+          schedule = os.environ.get("EVENT_SCHEDULE", "")
+          if event != "schedule":
+              should = True
+          else:
+              now = datetime.now(ZoneInfo("Europe/Rome"))
+              target = now.replace(hour=8, minute=35, second=0, microsecond=0)
+              utc_hour = target.astimezone(ZoneInfo("UTC")).hour
+              should = schedule.startswith(f"35 {utc_hour} ")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"should_run={'true' if should else 'false'}\n")
+          print(f"Rome schedule gate: schedule={schedule!r}, should_run={should}")
+          PY
+
+      - uses: actions/checkout@v4
+        if: steps.rome.outputs.should_run == 'true'
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        if: steps.rome.outputs.should_run == 'true'
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Python deps
+        if: steps.rome.outputs.should_run == 'true'
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Date and holiday gate
+        id: date
+        if: steps.rome.outputs.should_run == 'true'
+        run: |
+          today=$(date -u +%Y-%m-%d)
+          echo "today=$today" >> "$GITHUB_OUTPUT"
+          HOLIDAYS="2026-01-01 2026-01-19 2026-02-16 2026-04-03 2026-05-25 2026-06-19 2026-07-03 2026-09-07 2026-11-26 2026-12-25 2027-01-01 2027-01-18 2027-02-15 2027-03-26 2027-05-31 2027-06-18 2027-07-05 2027-09-06 2027-11-25 2027-12-24 2028-01-17 2028-02-21 2028-04-14 2028-05-29 2028-06-19 2028-07-04 2028-09-04 2028-11-23 2028-12-25 2029-01-01 2029-01-15 2029-02-19 2029-03-30 2029-05-28 2029-06-19 2029-07-04 2029-09-03 2029-11-22 2029-12-25 2030-01-01 2030-01-21 2030-02-18 2030-04-19 2030-05-27 2030-06-19 2030-07-04 2030-09-02 2030-11-28 2030-12-25"
+          force="${{ github.event.inputs.force_run }}"
+          if [ "$force" = "true" ]; then
+            echo "is_holiday=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Force run requested"
+          elif echo "$HOLIDAYS" | grep -qw "$today"; then
+            echo "is_holiday=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::US market holiday ($today), skipped"
+            echo "## OCTA vNext skipped (US holiday $today)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "is_holiday=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate required secrets
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: |
+          missing=0
+          for key in DASHBOARD_URL NETLIFY_SITE_ID NETLIFY_AUTH_TOKEN SEC_USER_AGENT; do
+            if [ -z "${!key}" ]; then
+              echo "::error::$key non configurato nei secrets vNext"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Configura secrets dedicati alla vNext. Non usare URL/secrets della produzione vecchia." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+      - name: Snapshot previous signals
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        run: |
+          if [ -f dashboard/data-octa.json ]; then
+            cp dashboard/data-octa.json /tmp/data-octa-prev.json
+          else
+            echo '{"signals":[]}' > /tmp/data-octa-prev.json
+          fi
+
+      - name: Cache prices
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        uses: actions/cache@v4
+        with:
+          path: data/backtest/prices_octa.csv
+          key: vnext-prices-octa-${{ steps.date.outputs.today }}
+          restore-keys: vnext-prices-octa-
+
+      - name: Download prices
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+        run: python -u -m qfas.qfas_download_prices
+
+      - name: Run decision cycle
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python -u -m qfas.qfas_export_octa --mode decision
+
+      - name: Validate data-octa.json
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open("dashboard/data-octa.json", encoding="utf-8"))
+          assert "signals" in d, "missing signals"
+          assert "candidates" in d, "missing candidates"
+          assert "regime" in d, "missing regime"
+          assert d.get("signal_date"), "missing signal_date"
+          print(f"OK: {d['signal_date']} - {len(d['signals'])} signals - {len(d['candidates'])} candidates")
+          PY
+
+      - name: Write freshness status
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        run: python scripts/write_freshness.py --strict
+
+      - name: Commit generated dashboard data
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions OCTA vNext"
+          git add dashboard/data-octa.json dashboard/freshness.json
+          if ! git diff --cached --quiet; then
+            git commit -m "[octa-vnext] refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No generated changes"
+          fi
+
+      - name: Deploy Netlify vNext
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          npm install -g netlify-cli@latest
+          npm install --prefix netlify/functions
+          netlify deploy --prod --dir=dashboard --functions=netlify/functions --no-build
+
+      - name: Notify signal diff
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          topic = os.environ.get("NTFY_TOPIC")
+          if not topic:
+              print("NTFY_TOPIC missing, skip notification")
+              raise SystemExit(0)
+          prev = json.load(open("/tmp/data-octa-prev.json", encoding="utf-8"))
+          cur = json.load(open("dashboard/data-octa.json", encoding="utf-8"))
+          prev_pairs = {(s.get("action"), s.get("ticker")) for s in prev.get("signals", [])}
+          new = [s for s in cur.get("signals", []) if (s.get("action"), s.get("ticker")) not in prev_pairs]
+          freshness = json.load(open("dashboard/freshness.json", encoding="utf-8"))
+          url = os.environ.get("DASHBOARD_URL") or "https://app.netlify.com"
+          if not new:
+              title = f"OCTA vNext fresh {cur.get('signal_date')} - 0 nuovi segnali"
+              body = f"Refresh completato. Fresh={freshness.get('fresh')}. Candidates={cur.get('n_candidates', 'n/d')}."
+              priority = "default"
+              tags = "white_check_mark"
+          else:
+              buys = [s for s in new if s.get("action") == "BUY"]
+              sells = [s for s in new if s.get("action") == "SELL"]
+              title = f"OCTA vNext - {len(buys)} BUY - {len(sells)} SELL"
+              lines = []
+              for s in buys[:8]:
+                  lines.append(f"BUY {s.get('ticker')} - score {float(s.get('score') or 0):.0f} - {s.get('entry_status', '?')}")
+              for s in sells[:8]:
+                  lines.append(f"SELL {s.get('ticker')} - {s.get('reason') or s.get('entry_status', '?')}")
+              body = "\n".join(lines)
+              priority = "high"
+              tags = "chart_with_upwards_trend"
+          req = urllib.request.Request(
+              f"https://ntfy.sh/{topic}",
+              data=body.encode("utf-8"),
+              headers={"Title": title, "Priority": priority, "Tags": tags, "Click": url},
+          )
+          urllib.request.urlopen(req, timeout=10).read()
+          print(title)
+          PY
+
+      - name: Alert on failure
+        if: failure() && steps.rome.outputs.should_run == 'true'
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          [ -z "$NTFY_TOPIC" ] && exit 0
+          curl -fsS -X POST "https://ntfy.sh/$NTFY_TOPIC" \
+            -H "Title: OCTA vNext refresh FALLITO" \
+            -H "Priority: high" \
+            -H "Tags: warning" \
+            -H "Click: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            -d "La vNext non ha prodotto un segnale fresco. La produzione attuale resta intatta." || true
+
+      - name: Job summary
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && success()
+        run: |
+          echo "## OCTA vNext Daily Refresh" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          d = json.load(open("dashboard/data-octa.json", encoding="utf-8"))
+          f = json.load(open("dashboard/freshness.json", encoding="utf-8"))
+          print(f"- Signal date: {d.get('signal_date')}")
+          print(f"- Fresh: {f.get('fresh')}")
+          print(f"- Signals: {len(d.get('signals', []))}")
+          print(f"- Candidates: {d.get('n_candidates', 'n/d')}")
+          for s in d.get("signals", [])[:12]:
+              print(f"- {s.get('action')} {s.get('ticker')} score {float(s.get('score') or 0):.0f} - {s.get('entry_status')}")
+          PY
