@@ -238,7 +238,9 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .panel-head > .toolbar .button { width: 100%; padding: 0 8px; }
   .panel-head p { overflow-wrap: anywhere; }
   .status-strip { grid-template-columns: 1fr; }
-  .top-actions { flex-shrink: 0; }
+  .topline { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+  .topline > div:first-child { min-width: 0; }
+  .top-actions { flex-shrink: 1; min-width: 0; }
   h1 { font-size: 32px; }
   .panel { padding: 13px; }
   .chart-card { margin-left: -5px; margin-right: -5px; padding: 10px 8px 11px; border-left: 0; border-right: 0; border-radius: 0; }
@@ -261,6 +263,5 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .table th, .table td { padding: 8px 4px; }
   .table .muted { display: none; }
 }
-
 
 
