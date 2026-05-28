@@ -97,6 +97,7 @@
     check: "08:42 Italia",
     site: "https://super-investor-vnext-codex.netlify.app",
     repo: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions",
+    workflow: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions/workflows/octa-vnext-refresh.yml",
   };
   const STATUS_INFO = {
     FRESH_BREAKOUT: { label: "Compra: slancio", cls: "good", desc: "Nuovo massimo/forza relativa: ingresso ammesso se il titolo e in top score." },
@@ -972,7 +973,7 @@
       <div class="kv"><span>Check freshness</span><strong>${wf.generated_at ? timeIT(wf.generated_at) : "in app"}</strong></div>
       <div class="kv"><span>Expected trading date</span><strong>${dateIT(wf.expected_signal_date || expectedSignalDate())}</strong></div>
       <div class="kv"><span>Workflow message</span><strong>${esc(wf.message || "runtime check")}</strong></div>
-      <div class="toolbar"><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button><a class="button ghost" href="${esc(CLOUD_RUNNER.site)}" target="_blank" rel="noopener">Sito cloud</a></div>
+      <div class="toolbar"><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button><a class="button ghost" href="${esc(CLOUD_RUNNER.workflow)}" target="_blank" rel="noopener">Actions</a><a class="button ghost" href="${esc(CLOUD_RUNNER.site)}" target="_blank" rel="noopener">Sito cloud</a></div>
     </div>`;
   }
   function healthList() {
@@ -1744,6 +1745,7 @@
         <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
         <div class="kv"><span>Finestra controllo</span><strong>${esc(CLOUD_RUNNER.check)}</strong></div>
         <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>
+        <div class="kv"><span>Run manuale</span><strong><a class="text-link" href="${esc(CLOUD_RUNNER.workflow)}" target="_blank" rel="noopener">Daily Refresh</a></strong></div>
         <div class="kv"><span>PC locale</span><strong>non necessario</strong></div>
       </div></section>
       <section class="panel full"><div class="panel-head"><div><h2>Runbook mattina</h2><p>Controllo rapido quando vuoi capire se OCTA e' pronto.</p></div></div><div class="grid-2">
