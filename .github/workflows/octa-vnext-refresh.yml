@@ -2,8 +2,14 @@ name: OCTA vNext Daily Refresh
 
 on:
   schedule:
+    # Europe/Rome 08:35/08:45/08:55 during daylight saving time.
     - cron: '35 6 * * 1-5'
+    - cron: '45 6 * * 1-5'
+    - cron: '55 6 * * 1-5'
+    # Europe/Rome 08:35/08:45/08:55 during standard time.
     - cron: '35 7 * * 1-5'
+    - cron: '45 7 * * 1-5'
+    - cron: '55 7 * * 1-5'
   workflow_dispatch:
     inputs:
       force_run:
@@ -41,7 +47,8 @@ jobs:
               now = datetime.now(ZoneInfo("Europe/Rome"))
               target = now.replace(hour=8, minute=35, second=0, microsecond=0)
               utc_hour = target.astimezone(ZoneInfo("UTC")).hour
-              should = schedule.startswith(f"35 {utc_hour} ")
+              parts = schedule.split()
+              should = len(parts) >= 2 and parts[0] in {"35", "45", "55"} and parts[1] == str(utc_hour)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
               f.write(f"should_run={'true' if should else 'false'}\n")
           print(f"Rome schedule gate: schedule={schedule!r}, should_run={should}")
@@ -112,8 +119,49 @@ jobs:
             echo "- Deploy Netlify saltato: manca NETLIFY_AUTH_TOKEN." >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Snapshot previous signals
+      - name: Check public freshness
+        id: freshguard
         if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        env:
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import time
+          import urllib.request
+
+          already = False
+          reason = "manual dispatch"
+          if os.environ.get("EVENT_NAME") == "schedule":
+              base = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
+              try:
+                  with urllib.request.urlopen(f"{base}/freshness.json?t={int(time.time())}", timeout=12) as response:
+                      data = json.load(response)
+                  fresh = bool(data.get("fresh"))
+                  signal_date = str(data.get("signal_date") or "")
+                  expected_date = str(data.get("expected_signal_date") or "")
+                  engine_error = bool(data.get("engine_error"))
+                  already = fresh and signal_date and signal_date == expected_date and not engine_error
+                  reason = (
+                      f"fresh={fresh}, signal_date={signal_date}, "
+                      f"expected_signal_date={expected_date}, engine_error={engine_error}"
+                  )
+              except Exception as exc:
+                  reason = f"freshness check failed: {exc!r}"
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"already_fresh={'true' if already else 'false'}\n")
+          print(f"Public freshness guard: already_fresh={already} ({reason})")
+          if already:
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+                  f.write("## OCTA vNext skipped\n")
+                  f.write(f"- Public dashboard already fresh: {reason}\n")
+          PY
+
+      - name: Snapshot previous signals
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         run: |
           if [ -f dashboard/data-octa.json ]; then
             cp dashboard/data-octa.json /tmp/data-octa-prev.json
@@ -122,7 +170,7 @@ jobs:
           fi
 
       - name: Cache prices
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         uses: actions/cache@v4
         with:
           path: data/backtest/prices_octa.csv
@@ -130,14 +178,14 @@ jobs:
           restore-keys: vnext-prices-octa-
 
       - name: Download prices
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         env:
           PYTHONUNBUFFERED: "1"
           PYTHONIOENCODING: "utf-8"
         run: python -u -m qfas.qfas_download_prices
 
       - name: Run decision cycle
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         env:
           PYTHONUNBUFFERED: "1"
           PYTHONIOENCODING: "utf-8"
@@ -147,7 +195,7 @@ jobs:
         run: python -u -m qfas.qfas_export_octa --mode decision
 
       - name: Validate data-octa.json
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         run: |
           python - <<'PY'
           import json
@@ -160,11 +208,11 @@ jobs:
           PY
 
       - name: Write freshness status
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         run: python scripts/write_freshness.py --strict
 
       - name: Commit generated dashboard data
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions OCTA vNext"
@@ -178,7 +226,7 @@ jobs:
           fi
 
       - name: Deploy Netlify vNext
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.secretcheck.outputs.deploy_ready == 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true' && steps.secretcheck.outputs.deploy_ready == 'true'
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -188,7 +236,7 @@ jobs:
           netlify deploy --prod --dir=dashboard --functions=netlify/functions --no-build
 
       - name: Notify signal diff
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
@@ -245,7 +293,7 @@ jobs:
             -d "La vNext non ha prodotto un segnale fresco. La produzione attuale resta intatta." || true
 
       - name: Job summary
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && success()
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true' && success()
         run: |
           echo "## OCTA vNext Daily Refresh" >> "$GITHUB_STEP_SUMMARY"
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
