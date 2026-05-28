@@ -10,9 +10,11 @@ Single entry point: run_decision_cycle(signal_date, current_holdings).
 Audit trail strutturato per ogni decisione (input scores, weights, reasons).
 """
 from __future__ import annotations
+import json
 import logging
 from dataclasses import dataclass, field, asdict
 from datetime import date, timedelta
+from pathlib import Path
 from typing import Dict, List, Optional
 
 import numpy as np
@@ -31,6 +33,7 @@ from qfas.tax_aware_optimizer import (
 
 log = logging.getLogger("qfas.runner")
 log.setLevel(logging.INFO)
+ROOT = Path(__file__).parent.parent.absolute()
 
 
 @dataclass
@@ -60,6 +63,144 @@ class DecisionCycleResult:
     audit_log: Dict
 
 
+def _load_json_cache(path: Path, default):
+    try:
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        log.warning("Cache non leggibile %s: %s", path, e)
+    return default
+
+
+def _clip_score(value: float) -> float:
+    return max(0.0, min(100.0, float(value)))
+
+
+def _cached_insider_score(ticker: str, insider_cache: Dict) -> Optional[float]:
+    row = insider_cache.get(ticker.upper()) if insider_cache else None
+    if not isinstance(row, dict):
+        return None
+    net_value = float(row.get("net_value_usd") or 0.0)
+    n_tx = int(row.get("n_transactions") or 0)
+    if n_tx == 0 and net_value == 0:
+        return 50.0
+    directional = max(-35.0, min(35.0, net_value / 2_000_000.0 * 35.0))
+    activity = 0.0
+    if n_tx >= 3:
+        activity = 5.0 if net_value > 0 else -5.0
+    return _clip_score(50.0 + directional + activity)
+
+
+def _cached_analyst_score(ticker: str, signal_date: date) -> Optional[float]:
+    path = ROOT / "qfas" / "cache" / f"finn_reco_{ticker.upper()}.json"
+    rows = _load_json_cache(path, [])
+    if not isinstance(rows, list):
+        return None
+    valid = []
+    for row in rows:
+        try:
+            period = pd.Timestamp(row.get("period")).date()
+        except Exception:
+            continue
+        if period <= signal_date:
+            valid.append(row)
+    if not valid:
+        return None
+    latest = sorted(valid, key=lambda r: str(r.get("period") or ""))[-1]
+    weights = {
+        "strongBuy": 100.0,
+        "buy": 75.0,
+        "hold": 50.0,
+        "sell": 25.0,
+        "strongSell": 0.0,
+    }
+    total = sum(float(latest.get(k) or 0.0) for k in weights)
+    if total <= 0:
+        return None
+    score = sum(float(latest.get(k) or 0.0) * v for k, v in weights.items()) / total
+    return _clip_score(score)
+
+
+def _cached_pead_boost(
+    ticker: str,
+    signal_date: date,
+    price_series: pd.Series,
+    earnings_cache: Dict,
+) -> float:
+    row = earnings_cache.get(ticker.upper()) if earnings_cache else None
+    if not isinstance(row, dict):
+        return 0.0
+    dates = []
+    for raw in row.get("earnings_dates", []) or []:
+        try:
+            d = date.fromisoformat(str(raw)[:10])
+        except Exception:
+            continue
+        if d <= signal_date:
+            dates.append(d)
+    if not dates:
+        return 0.0
+    last_earn = max(dates)
+    days_since = (signal_date - last_earn).days
+    if not (0 <= days_since <= config.PEAD_WINDOW_DAYS):
+        return 0.0
+    s = price_series[price_series.index <= pd.Timestamp(signal_date)].dropna()
+    before = price_series[price_series.index < pd.Timestamp(last_earn)].dropna()
+    if s.empty or before.empty:
+        return 0.0
+    prev_close = float(before.iloc[-1])
+    cur_close = float(s.iloc[-1])
+    if prev_close <= 0:
+        return 0.0
+    reaction_pct = (cur_close / prev_close - 1.0) * 100.0
+    return max(-10.0, min(config.PEAD_MAX_BOOST, reaction_pct * 0.8))
+
+
+def _cached_entry_score(
+    ticker: str,
+    signal_date: date,
+    momentum_pct: Optional[float],
+    price_series: pd.Series,
+    insider_cache: Dict,
+    earnings_cache: Dict,
+) -> EntryScoreResult:
+    mom = momentum_pct if momentum_pct is not None else 50.0
+    analyst_score = _cached_analyst_score(ticker, signal_date)
+    insider_score = _cached_insider_score(ticker, insider_cache)
+    analyst_used = analyst_score if analyst_score is not None else 50.0
+    insider_used = insider_score if insider_score is not None else 50.0
+
+    weights = renormalize_weights({
+        "momentum": config.ENTRY_WEIGHT_MOMENTUM,
+        "analyst_composite": config.ENTRY_WEIGHT_ANALYST,
+        "insider_flow": config.ENTRY_WEIGHT_INSIDER,
+        "congressional": 0.0,
+    }, signal_date)
+    entry_base = (
+        weights.get("momentum", 0.0) * mom +
+        weights.get("analyst_composite", 0.0) * analyst_used +
+        weights.get("insider_flow", 0.0) * insider_used
+    )
+    pead = _cached_pead_boost(ticker, signal_date, price_series, earnings_cache)
+    raw_delta = (entry_base + pead) - mom
+    bounded_delta = max(-12.0, min(12.0, raw_delta))
+    entry_final = _clip_score(mom + bounded_delta)
+
+    return EntryScoreResult(
+        ticker=ticker,
+        signal_date=signal_date,
+        entry_score_final=entry_final,
+        momentum_pct=momentum_pct,
+        analyst_score=analyst_score,
+        insider_score=insider_score,
+        congressional_score=None,
+        pead_boost=pead,
+        squeeze_applied=False,
+        weights_used=weights,
+        entry_status="NEUTRAL",
+    )
+
+
 def run_decision_cycle(
     signal_date: date,
     current_holdings: List[Dict],              # [{ticker, score, sector, status, days_held, pnl_pct}]
@@ -69,6 +210,7 @@ def run_decision_cycle(
     sectors_by_ticker: Dict[str, str],
     vix_value: Optional[float] = None,
     skip_external_signals: bool = False,        # se True, skip Form4/analyst/Capitol network calls
+    external_signal_mode: str = "full",         # off|cached|full
 ) -> DecisionCycleResult:
     """
     Esegue un ciclo completo di decisione QFAS per signal_date.
@@ -84,6 +226,11 @@ def run_decision_cycle(
       8. Chiama select_portfolio con anti-churn, TLH, sector cap
     """
     log.info(f"Decision cycle {signal_date}: universo {len(universe_tickers)} ticker")
+    external_signal_mode = (external_signal_mode or "full").lower()
+    if skip_external_signals:
+        external_signal_mode = "off"
+    if external_signal_mode not in {"off", "cached", "full"}:
+        raise ValueError(f"external_signal_mode non valido: {external_signal_mode}")
 
     # ── 1. Filtro universo: ticker con prezzo valido a signal_date
     cutoff_ts = pd.Timestamp(signal_date)
@@ -134,6 +281,11 @@ def run_decision_cycle(
     radar_sorted = sorted(radar_results.items(),
                           key=lambda kv: -kv[1].radar_score)
     top_candidates_for_entry = [t for t, _ in radar_sorted[:80]]
+    insider_cache = {}
+    earnings_cache = {}
+    if external_signal_mode == "cached":
+        insider_cache = _load_json_cache(ROOT / "data" / "backtest" / "insider_cache.json", {})
+        earnings_cache = _load_json_cache(ROOT / "data" / "backtest" / "earnings_cache.json", {})
 
     candidates: List[CandidateScore] = []
     for t in valid_universe:
@@ -151,7 +303,7 @@ def run_decision_cycle(
         }
 
         # Per ticker NON in top80 radar OPPURE skip_external_signals → quick path
-        if t in top_candidates_for_entry and not skip_external_signals:
+        if t in top_candidates_for_entry and external_signal_mode == "full":
             entry_res = compute_entry_score(
                 ticker=t, signal_date=signal_date,
                 momentum_pct=mom,
@@ -166,12 +318,44 @@ def run_decision_cycle(
                 "congressional": entry_res.congressional_score,
                 "pead": entry_res.pead_boost,
                 "squeeze": entry_res.squeeze_applied,
+                "external_signal_mode": "full",
+                "external_delta": float(entry_score - mom),
+            }
+        elif t in top_candidates_for_entry and external_signal_mode == "cached":
+            entry_res = _cached_entry_score(
+                ticker=t,
+                signal_date=signal_date,
+                momentum_pct=mom,
+                price_series=prices_by_ticker[t],
+                insider_cache=insider_cache,
+                earnings_cache=earnings_cache,
+            )
+            entry_score = entry_res.entry_score_final
+            audit = {
+                **radar_audit,
+                "weights": entry_res.weights_used,
+                "analyst": entry_res.analyst_score,
+                "analyst_cached": entry_res.analyst_score is not None,
+                "insider": entry_res.insider_score,
+                "insider_cached": entry_res.insider_score is not None,
+                "congressional": entry_res.congressional_score,
+                "pead": entry_res.pead_boost,
+                "pead_cached": entry_res.pead_boost != 0.0,
+                "squeeze": entry_res.squeeze_applied,
+                "external_signal_mode": "cached",
+                "external_delta": float(entry_score - mom),
             }
         else:
             # Quick path: solo momentum (segnali esterni a peso 0 implicito,
             # niente network calls)
             entry_score = mom
-            audit = {**radar_audit, "quick_path": True, "skip_external": skip_external_signals}
+            audit = {
+                **radar_audit,
+                "quick_path": True,
+                "skip_external": external_signal_mode == "off",
+                "external_signal_mode": "off" if external_signal_mode == "off" else "quick",
+                "external_delta": 0.0,
+            }
 
         opp_score = (config.OPPORTUNITY_WEIGHT_RADAR * radar +
                      config.OPPORTUNITY_WEIGHT_ENTRY * entry_score)
@@ -236,6 +420,11 @@ def run_decision_cycle(
         "n_radar_scored": len(radar_results),
         "n_top_entry_computed": len(top_candidates_for_entry),
         "n_candidates_total": len(candidates),
+        "external_signal_mode": external_signal_mode,
+        "external_cache": {
+            "insider_rows": len(insider_cache) if isinstance(insider_cache, dict) else 0,
+            "earnings_rows": len(earnings_cache) if isinstance(earnings_cache, dict) else 0,
+        },
         "top10_by_opp_score": [
             (c.ticker, round(c.opportunity_score, 1),
              c.entry_status, c.sector) for c in top10

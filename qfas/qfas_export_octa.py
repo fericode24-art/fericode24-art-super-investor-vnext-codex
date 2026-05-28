@@ -41,6 +41,7 @@ Schema output:
 """
 from __future__ import annotations
 import json
+import os
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -200,6 +201,9 @@ def fetch_portfolio_from_cloud():
     import os
     base = os.environ.get("DASHBOARD_URL") or "http://localhost:5177"
     url = f"{base.rstrip('/')}/.netlify/functions/octa-portfolio"
+    # Stato attuale: il default live usa external_mode="cached"; il blocco
+    # storico sopra descriveva il bug precedente, ora superato dal confronto
+    # off-vs-cached salvato in output/external_profile_compare.json.
     try:
         req = urllib.request.Request(url)
         with urllib.request.urlopen(req, timeout=15) as r:
@@ -228,6 +232,10 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
 
     if signal_date is None:
         signal_date = date.today()
+    external_mode = os.environ.get("OCTA_EXTERNAL_SIGNAL_MODE", "cached").strip().lower()
+    if external_mode not in {"off", "cached", "full"}:
+        raise ValueError(f"OCTA_EXTERNAL_SIGNAL_MODE non valido: {external_mode}")
+    print(f"[OCTA] external_signal_mode={external_mode}")
 
     # 1. Fetch portfolio dal cloud (cosa l'utente ha realmente in PF)
     user_portfolio, user_history = fetch_portfolio_from_cloud()
@@ -297,7 +305,8 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
             prices_by_ticker=prices_by_ticker,
             sectors_by_ticker=sectors,
             vix_value=vix_val,
-            skip_external_signals=True,   # FAST path live
+            skip_external_signals=(external_mode == "off"),
+            external_signal_mode=external_mode,
         )
         engine_error = False
         err_msg = None
@@ -382,16 +391,19 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
         crowding = comp.get("crowding")
         if crowding is not None and float(crowding) < 95:
             risks.append("Crowding fondi: score ridotto dal motore")
+        mode = comp.get("external_signal_mode") or external_mode
+        if mode == "cached":
+            external_state = "Segnali esterni cached pesati nello score: insider, analyst e PEAD dove disponibili"
+        elif mode == "full":
+            external_state = "Segnali esterni full pesati nello score quando disponibili"
+        else:
+            external_state = "Profilo fast path: segnali esterni in test, non ancora pesati"
 
         return {
             "main_signal": " · ".join(signal_bits),
             "main_risk": "; ".join(risks) if risks else "Nessun rischio entry rilevante",
             "exit_trigger": "Esce dal target OCTA o rompe il trend tecnico al ciclo successivo",
-            "external_signal_state": (
-                "Profilo live veloce: insider/PEAD/analyst/congressional/squeeze non usati"
-                if comp.get("skip_external")
-                else "Segnali esterni disponibili se presenti nel run"
-            ),
+            "external_signal_state": external_state,
         }
 
     # Lookup dettagli candidate per arricchimento UI (radar/entry/momentum/etc)
@@ -415,6 +427,8 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
             "opportunity_score": round(c.opportunity_score, 1),
             "momentum_pct": round(c.momentum_pct, 1) if c.momentum_pct is not None else None,
             "sector": c.sector,
+            "external_signal_mode": c.audit.get("external_signal_mode"),
+            "external_delta": round(float(c.audit.get("external_delta") or 0.0), 1),
             "components": c.audit,
         })
         return base
@@ -490,6 +504,8 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
             "main_risk": extra.get("main_risk"),
             "exit_trigger": extra.get("exit_trigger"),
             "external_signal_state": extra.get("external_signal_state"),
+            "external_signal_mode": c.audit.get("external_signal_mode"),
+            "external_delta": round(float(c.audit.get("external_delta") or 0.0), 1),
             "components": c.audit,
         })
 
@@ -509,7 +525,7 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
 
     out = {
         "updated": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
-        "version": "2.5.0",
+        "version": "2.6.0-cached",
         "signal_date": signal_date.isoformat(),
         "regime": {
             "status": regime_status,
@@ -522,6 +538,8 @@ def export_from_decision_cycle(signal_date: Optional[date] = None):
         "tlh_active": _is_in_tlh_window(signal_date),
         "engine_error": engine_error,
         "last_success_run": signal_date.isoformat(),
+        "external_signal_mode": external_mode,
+        "external_signal_status": "active" if external_mode != "off" else "testing",
         "weights_active": decision.weights_active,
         "n_active_funds": decision.n_active_funds,
         "n_candidates": decision.n_candidates,

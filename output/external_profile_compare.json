@@ -1,0 +1,502 @@
+{
+  "generated_at": "2026-05-28T11:12:25.239688+00:00",
+  "profile": "cached",
+  "passed": true,
+  "results": [
+    {
+      "date": "2026-05-28",
+      "checks": {
+        "same_candidate_count": true,
+        "cached_has_portfolio": true,
+        "external_delta_bounded": true,
+        "external_affects_ranking": true,
+        "top10_not_destroyed": true
+      },
+      "passed": true,
+      "off_top10": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "GLW",
+        "RKLB",
+        "SWKS",
+        "WDC",
+        "SNDK",
+        "TER"
+      ],
+      "cached_top10": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "GLW",
+        "LRCX",
+        "RKLB",
+        "SWKS",
+        "WDC"
+      ],
+      "off_portfolio": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "GLW",
+        "RKLB",
+        "CSX",
+        "MTZ"
+      ],
+      "cached_portfolio": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "RKLB",
+        "CSX",
+        "MTZ"
+      ],
+      "top10_overlap": 8,
+      "top8_overlap": 6,
+      "coverage": {
+        "with_external_delta": 34,
+        "insider_cached_top40": 8,
+        "analyst_cached_top40": 0,
+        "pead_active_top40": 0
+      },
+      "largest_rank_moves": [
+        {
+          "ticker": "AFRM",
+          "off_rank": 37,
+          "cached_rank": 65,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 64.04
+        },
+        {
+          "ticker": "CVS",
+          "off_rank": 38,
+          "cached_rank": 66,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 64.03
+        },
+        {
+          "ticker": "AVGO",
+          "off_rank": 42,
+          "cached_rank": 70,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 63.68
+        },
+        {
+          "ticker": "OLN",
+          "off_rank": 40,
+          "cached_rank": 67,
+          "rank_move": -27,
+          "external_delta": -12.0,
+          "score": 63.91
+        },
+        {
+          "ticker": "ELV",
+          "off_rank": 46,
+          "cached_rank": 73,
+          "rank_move": -27,
+          "external_delta": -12.0,
+          "score": 62.87
+        },
+        {
+          "ticker": "LIN",
+          "off_rank": 44,
+          "cached_rank": 69,
+          "rank_move": -25,
+          "external_delta": -11.08,
+          "score": 63.7
+        },
+        {
+          "ticker": "MTCH",
+          "off_rank": 53,
+          "cached_rank": 74,
+          "rank_move": -21,
+          "external_delta": -9.47,
+          "score": 62.71
+        },
+        {
+          "ticker": "MOH",
+          "off_rank": 28,
+          "cached_rank": 46,
+          "rank_move": -18,
+          "external_delta": -12.0,
+          "score": 67.02
+        },
+        {
+          "ticker": "ESI",
+          "off_rank": 24,
+          "cached_rank": 38,
+          "rank_move": -14,
+          "external_delta": -12.0,
+          "score": 68.71
+        },
+        {
+          "ticker": "INTC",
+          "off_rank": 16,
+          "cached_rank": 3,
+          "rank_move": 13,
+          "external_delta": 0.0,
+          "score": 78.98
+        },
+        {
+          "ticker": "LRCX",
+          "off_rank": 19,
+          "cached_rank": 7,
+          "rank_move": 12,
+          "external_delta": 0.0,
+          "score": 77.01
+        },
+        {
+          "ticker": "PRMB",
+          "off_rank": 22,
+          "cached_rank": 34,
+          "rank_move": -12,
+          "external_delta": -12.0,
+          "score": 69.85
+        }
+      ],
+      "external_cache": {
+        "insider_rows": 200,
+        "earnings_rows": 153
+      }
+    },
+    {
+      "date": "2026-05-27",
+      "checks": {
+        "same_candidate_count": true,
+        "cached_has_portfolio": true,
+        "external_delta_bounded": true,
+        "external_affects_ranking": true,
+        "top10_not_destroyed": true
+      },
+      "passed": true,
+      "off_top10": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "GLW",
+        "RKLB",
+        "SWKS",
+        "WDC",
+        "SNDK",
+        "TER"
+      ],
+      "cached_top10": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "GLW",
+        "LRCX",
+        "RKLB",
+        "SWKS",
+        "WDC"
+      ],
+      "off_portfolio": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "GLW",
+        "RKLB",
+        "CSX",
+        "MTZ"
+      ],
+      "cached_portfolio": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "RKLB",
+        "CSX",
+        "MTZ"
+      ],
+      "top10_overlap": 8,
+      "top8_overlap": 6,
+      "coverage": {
+        "with_external_delta": 34,
+        "insider_cached_top40": 8,
+        "analyst_cached_top40": 0,
+        "pead_active_top40": 0
+      },
+      "largest_rank_moves": [
+        {
+          "ticker": "AFRM",
+          "off_rank": 37,
+          "cached_rank": 65,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 64.04
+        },
+        {
+          "ticker": "CVS",
+          "off_rank": 38,
+          "cached_rank": 66,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 64.03
+        },
+        {
+          "ticker": "AVGO",
+          "off_rank": 42,
+          "cached_rank": 70,
+          "rank_move": -28,
+          "external_delta": -12.0,
+          "score": 63.68
+        },
+        {
+          "ticker": "OLN",
+          "off_rank": 40,
+          "cached_rank": 67,
+          "rank_move": -27,
+          "external_delta": -12.0,
+          "score": 63.91
+        },
+        {
+          "ticker": "ELV",
+          "off_rank": 46,
+          "cached_rank": 73,
+          "rank_move": -27,
+          "external_delta": -12.0,
+          "score": 62.87
+        },
+        {
+          "ticker": "LIN",
+          "off_rank": 44,
+          "cached_rank": 69,
+          "rank_move": -25,
+          "external_delta": -11.08,
+          "score": 63.7
+        },
+        {
+          "ticker": "MTCH",
+          "off_rank": 53,
+          "cached_rank": 74,
+          "rank_move": -21,
+          "external_delta": -9.47,
+          "score": 62.71
+        },
+        {
+          "ticker": "MOH",
+          "off_rank": 28,
+          "cached_rank": 46,
+          "rank_move": -18,
+          "external_delta": -12.0,
+          "score": 67.02
+        },
+        {
+          "ticker": "ESI",
+          "off_rank": 24,
+          "cached_rank": 38,
+          "rank_move": -14,
+          "external_delta": -12.0,
+          "score": 68.71
+        },
+        {
+          "ticker": "INTC",
+          "off_rank": 16,
+          "cached_rank": 3,
+          "rank_move": 13,
+          "external_delta": 0.0,
+          "score": 78.98
+        },
+        {
+          "ticker": "LRCX",
+          "off_rank": 19,
+          "cached_rank": 7,
+          "rank_move": 12,
+          "external_delta": 0.0,
+          "score": 77.01
+        },
+        {
+          "ticker": "PRMB",
+          "off_rank": 22,
+          "cached_rank": 34,
+          "rank_move": -12,
+          "external_delta": -12.0,
+          "score": 69.85
+        }
+      ],
+      "external_cache": {
+        "insider_rows": 200,
+        "earnings_rows": 153
+      }
+    },
+    {
+      "date": "2026-05-26",
+      "checks": {
+        "same_candidate_count": true,
+        "cached_has_portfolio": true,
+        "external_delta_bounded": true,
+        "external_affects_ranking": true,
+        "top10_not_destroyed": true
+      },
+      "passed": true,
+      "off_top10": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "SWKS",
+        "GLW",
+        "RKLB",
+        "WDC",
+        "SNDK",
+        "TER"
+      ],
+      "cached_top10": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "SWKS",
+        "GLW",
+        "LRCX",
+        "RKLB",
+        "CIEN"
+      ],
+      "off_portfolio": [
+        "MKSI",
+        "MRVL",
+        "AMD",
+        "MU",
+        "SWKS",
+        "RKLB",
+        "MTZ",
+        "HUM"
+      ],
+      "cached_portfolio": [
+        "MKSI",
+        "MRVL",
+        "INTC",
+        "AMD",
+        "MU",
+        "RKLB",
+        "MTZ",
+        "HUM"
+      ],
+      "top10_overlap": 7,
+      "top8_overlap": 6,
+      "coverage": {
+        "with_external_delta": 37,
+        "insider_cached_top40": 8,
+        "analyst_cached_top40": 0,
+        "pead_active_top40": 0
+      },
+      "largest_rank_moves": [
+        {
+          "ticker": "TFX",
+          "off_rank": 41,
+          "cached_rank": 76,
+          "rank_move": -35,
+          "external_delta": -12.0,
+          "score": 63.06
+        },
+        {
+          "ticker": "CVS",
+          "off_rank": 44,
+          "cached_rank": 77,
+          "rank_move": -33,
+          "external_delta": -12.0,
+          "score": 62.82
+        },
+        {
+          "ticker": "OLN",
+          "off_rank": 40,
+          "cached_rank": 71,
+          "rank_move": -31,
+          "external_delta": -12.0,
+          "score": 63.36
+        },
+        {
+          "ticker": "RRX",
+          "off_rank": 39,
+          "cached_rank": 68,
+          "rank_move": -29,
+          "external_delta": -12.0,
+          "score": 63.61
+        },
+        {
+          "ticker": "MTCH",
+          "off_rank": 47,
+          "cached_rank": 75,
+          "rank_move": -28,
+          "external_delta": -10.81,
+          "score": 63.14
+        },
+        {
+          "ticker": "AVGO",
+          "off_rank": 36,
+          "cached_rank": 61,
+          "rank_move": -25,
+          "external_delta": -12.0,
+          "score": 65.11
+        },
+        {
+          "ticker": "LIN",
+          "off_rank": 45,
+          "cached_rank": 70,
+          "rank_move": -25,
+          "external_delta": -10.41,
+          "score": 63.48
+        },
+        {
+          "ticker": "AFRM",
+          "off_rank": 35,
+          "cached_rank": 59,
+          "rank_move": -24,
+          "external_delta": -12.0,
+          "score": 65.25
+        },
+        {
+          "ticker": "MOH",
+          "off_rank": 30,
+          "cached_rank": 50,
+          "rank_move": -20,
+          "external_delta": -12.0,
+          "score": 66.47
+        },
+        {
+          "ticker": "COP",
+          "off_rank": 65,
+          "cached_rank": 51,
+          "rank_move": 14,
+          "external_delta": 0.0,
+          "score": 66.14
+        },
+        {
+          "ticker": "DAL",
+          "off_rank": 66,
+          "cached_rank": 52,
+          "rank_move": 14,
+          "external_delta": 0.0,
+          "score": 66.04
+        },
+        {
+          "ticker": "OXY",
+          "off_rank": 67,
+          "cached_rank": 53,
+          "rank_move": 14,
+          "external_delta": 0.0,
+          "score": 65.96
+        }
+      ],
+      "external_cache": {
+        "insider_rows": 200,
+        "earnings_rows": 153
+      }
+    }
+  ]
+}

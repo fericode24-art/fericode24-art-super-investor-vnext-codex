@@ -93,8 +93,8 @@
   const CLOUD_RUNNER = {
     name: "GitHub Actions",
     deploy: "Netlify vNext",
-    schedule: "08:35 Italia lun-ven",
-    check: "08:42 Italia",
+    schedule: "08:35/08:45/08:55 Italia lun-ven",
+    check: "08:57 Italia",
     site: "https://super-investor-vnext-codex.netlify.app",
     repo: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions",
     workflow: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions/workflows/octa-vnext-refresh.yml",
@@ -111,7 +111,7 @@
   };
   const SCORE_TIPS = {
     radar: "Quanto i fondi qualificati lo tengono o lo accumulano.",
-    entry: "Qualita del punto di ingresso: momentum e filtri tecnici nel profilo live.",
+    entry: "Qualita del punto di ingresso: momentum, filtri tecnici e segnali esterni cached se attivi.",
     opp: "Punteggio finale usato per ordinare i candidati.",
     momentum: "Percentile di forza relativa nel paniere.",
     insider: "Segnali esterni di supporto, solo quando il profilo li abilita.",
@@ -125,10 +125,10 @@
       ["VIX e optimizer", "Regime, 8 slot, settore, anti-churn"],
     ],
     inactive: [
-      ["Insider Form 4", "Cache pronta, non nel live"],
-      ["Earnings / PEAD", "Cache pronta, non nel live"],
-      ["Analyst", "Richiede provider, non nel live"],
-      ["Congressional / squeeze", "Codice presente, non nel live"],
+      ["Insider Form 4", "Cache/prefetch presente, peso zero nel live"],
+      ["Earnings / PEAD", "Cache/prefetch presente, peso zero nel live"],
+      ["Analyst", "Codice/provider previsto, non pesato nel live"],
+      ["Congressional / squeeze", "Codice presente, non pesato nel live"],
     ],
   };
   const chartStore = new Map();
@@ -164,7 +164,7 @@
   }
   function repairAndReload(view = state.view || "today") {
     repairLocalState();
-    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=21`;
+    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=22`;
   }
   function fxRate() {
     const x = Number(state.fx?.EURUSD);
@@ -287,6 +287,36 @@
       return { cls: "good", label: "Segnale fresco", detail: `Segnale ${dateIT(sig)}. Atteso ${dateIT(expected)}${run}` };
     }
     return { cls: "bad", label: "Segnale vecchio", detail: `Segnale ${dateIT(sig)}. Atteso ${dateIT(expected)}` };
+  }
+  function liveExternalProfile() {
+    const sample = (state.octaData?.candidates || []).find(c => c?.components) || (state.octaData?.signals || []).find(s => s?.components) || {};
+    const mode = state.octaData?.external_signal_mode || sample.components?.external_signal_mode || sample.external_signal_mode || "off";
+    if (mode === "cached") {
+      return {
+        cls: "good",
+        label: "Esterni pesati live",
+        detail: "Profilo cached validato: insider, analyst e PEAD entrano nello score quando la cache li copre.",
+      };
+    }
+    if (mode === "full") {
+      return {
+        cls: "good",
+        label: "Esterni full live",
+        detail: "Il motore puo usare provider esterni live oltre alla cache.",
+      };
+    }
+    if (sample.components?.skip_external === true || mode === "off") {
+      return {
+        cls: "warn",
+        label: "Esterni in test",
+        detail: "Il file corrente non li pesa ancora nel live; il profilo cached va attivato solo dopo test passati.",
+      };
+    }
+    return {
+      cls: "info",
+      label: "Esterni n/d",
+      detail: "Il dataset corrente non dichiara il profilo esterni.",
+    };
   }
 
   async function init() {
@@ -1048,6 +1078,11 @@
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
   }
+  function signedDelta(v, dec = 1) {
+    const n = scoreValue(v);
+    if (n == null) return "n.d.";
+    return `${n >= 0 ? "+" : ""}${n.toFixed(dec)}`;
+  }
   function scoreCell(label, val, tip) {
     const n = scoreValue(val);
     const w = n == null ? 0 : Math.max(0, Math.min(100, n));
@@ -1087,10 +1122,47 @@
   }
   function externalSignalState(item) {
     const comp = item.components || {};
-    const insider = scoreValue(comp.insider);
-    if (insider != null) return `${Math.round(insider)}/100`;
-    if (comp.skip_external || item.external_signal_state) return "live veloce: esterni spenti";
-    return "non attivi";
+    const mode = comp.external_signal_mode || item.external_signal_mode || state.octaData?.external_signal_mode || "off";
+    const delta = scoreValue(comp.external_delta ?? item.external_delta);
+    if (mode === "cached" || mode === "full") return `pesati nello score (${signedDelta(delta)} pt entry)`;
+    if (mode === "quick") return "fuori top80: quick path";
+    return "in test, non pesati";
+  }
+  function externalMetric(label, value, meta, opts = {}) {
+    const n = scoreValue(value);
+    const bar = opts.delta
+      ? Math.min(100, Math.abs(n || 0) / 12 * 100)
+      : Math.max(0, Math.min(100, n ?? 0));
+    const cls = opts.delta ? ((n || 0) >= 0 ? "pos" : "neg") : "";
+    const shown = opts.delta ? signedDelta(n) : (n == null ? "n.d." : `${Math.round(n)}/100`);
+    return `<div class="impact-row">
+      <div><strong>${esc(label)}</strong><span>${esc(meta)}</span></div>
+      <b class="${cls}">${esc(shown)}</b>
+      <i><em style="width:${bar}%"></em></i>
+    </div>`;
+  }
+  function externalImpactPanel(item) {
+    const comp = item.components || {};
+    const mode = comp.external_signal_mode || item.external_signal_mode || state.octaData?.external_signal_mode || "off";
+    const analystMeta = comp.analyst_cached ? "cache analyst disponibile" : "neutral 50 se cache assente";
+    const insiderMeta = comp.insider_cached ? "Form 4 cached" : "neutral 50 se cache assente";
+    const peadMeta = comp.pead_cached ? "earnings window attiva" : "nessun boost PEAD oggi";
+    const analystVal = scoreValue(comp.analyst) ?? (mode === "cached" ? 50 : null);
+    const insiderVal = scoreValue(comp.insider) ?? (mode === "cached" ? 50 : null);
+    const rows = [
+      externalMetric("Analyst", analystVal, analystMeta),
+      externalMetric("Insider", insiderVal, insiderMeta),
+      externalMetric("PEAD", comp.pead, peadMeta, { delta: true }),
+      externalMetric("Delta entry", comp.external_delta ?? item.external_delta, mode === "cached" ? "impatto finale cached" : "impatto finale", { delta: true }),
+    ].join("");
+    const text = mode === "cached"
+      ? "Questi valori modificano Entry e quindi Opportunity, classifica Radar 40 e portafoglio target."
+      : "Profilo non ancora pesato nel file corrente.";
+    return `<section class="detail-section">
+      <h3>Impatto esterni</h3>
+      <div class="notice ${mode === "cached" ? "good" : "warn"}">${esc(text)}</div>
+      <div class="impact-list">${rows}</div>
+    </section>`;
   }
   function tickerHistoryPoints(ticker, item = {}) {
     const t = tickerKey(ticker);
@@ -1196,6 +1268,7 @@
           <div class="kv"><span>Segnali esterni</span><strong>${esc(externalSignalState(item))}</strong></div>
           ${detailList(item.insider_detail)}
         </section>
+        ${externalImpactPanel(item)}
       </div>
       <section class="detail-section full-detail">${tickerChart(t, item)}</section>
       ${posHtml}
@@ -1378,22 +1451,38 @@
     return items.map(([name, desc]) => `<div class="signal-pill ${cls}"><strong>${esc(name)}</strong><span>${esc(desc)}</span></div>`).join("");
   }
   function liveSignalProfilePanel(compact = false) {
+    const mode = state.octaData?.external_signal_mode || "off";
+    const active = mode === "cached"
+      ? [
+          ...LIVE_SIGNAL_PROFILE.active,
+          ["Insider Form 4", "Cache pesata nello score"],
+          ["Earnings / PEAD", "Boost cached se in finestra"],
+          ["Analyst", "Consensus cached o neutral"],
+        ]
+      : LIVE_SIGNAL_PROFILE.active;
+    const inactive = mode === "cached"
+      ? [["Congressional / squeeze", "Non pesati nel profilo cached"]]
+      : LIVE_SIGNAL_PROFILE.inactive;
+    const badge = mode === "cached" ? "external_signal_mode=cached" : `external_signal_mode=${mode}`;
+    const desc = mode === "cached"
+      ? "Profilo cached attivo: radar, momentum, filtri tecnici e segnali esterni cached pesano nello score."
+      : "Profilo fast path attivo: score da radar 13F, momentum e filtri tecnici.";
     return `<div class="signal-profile ${compact ? "compact" : ""}">
       <div class="signal-profile-head">
         <div>
           <h2>Motore live</h2>
-          <p>Profilo fast path attivo: score da radar 13F, momentum e filtri tecnici.</p>
+          <p>${esc(desc)}</p>
         </div>
-        <span class="badge info">skip_external_signals=true</span>
+        <span class="badge ${mode === "cached" ? "good" : "info"}">${esc(badge)}</span>
       </div>
       <div class="signal-profile-grid">
         <section>
           <h3>Usati nello score</h3>
-          <div class="signal-pill-list">${signalPills(LIVE_SIGNAL_PROFILE.active, "on")}</div>
+          <div class="signal-pill-list">${signalPills(active, "on")}</div>
         </section>
         <section>
-          <h3>Presenti ma spenti</h3>
-          <div class="signal-pill-list">${signalPills(LIVE_SIGNAL_PROFILE.inactive, "off")}</div>
+          <h3>${mode === "cached" ? "Rimandati" : "Presenti ma spenti"}</h3>
+          <div class="signal-pill-list">${signalPills(inactive, "off")}</div>
         </section>
       </div>
     </div>`;
@@ -1434,9 +1523,10 @@
     const rows = cands.slice(0, 40).map(c => {
       const item = octaItem(c.ticker);
       const status = statusMeta(c.entry_status);
-      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button></td><td class="right">${esc(c.momentum_pct ?? "")}</td></tr>`;
+      const ext = scoreValue(c.external_delta ?? item.external_delta ?? item.components?.external_delta);
+      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button></td><td class="right"><span class="${(ext || 0) >= 0 ? "pos" : "neg"}">${esc(signedDelta(ext))}</span></td><td class="right">${esc(c.momentum_pct ?? "")}</td></tr>`;
     }).join("");
-    return rows ? `<table class="table"><thead><tr><th>Ticker</th><th class="right">Score</th><th>Status</th><th class="right">Mom</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
+    return rows ? `<table class="table"><thead><tr><th>Ticker</th><th class="right">Score</th><th>Status</th><th class="right">Ext</th><th class="right">Mom</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
   }
 
   const BENCH_PRESETS = [
@@ -1871,9 +1961,3 @@
 
   init();
 })();
-
-
-
-
-
-
