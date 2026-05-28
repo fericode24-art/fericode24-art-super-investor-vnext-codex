@@ -347,15 +347,17 @@
     saveJson(LS.octaPortfolio, state.octaPortfolio);
     saveJson(LS.octaHistory, state.octaHistory);
     try {
+      if (!tok) throw new Error("missing_octa_token");
       const r = await fetch(API.octa, { method: "POST", headers, body: JSON.stringify(payload) });
-      if (!r.ok) throw new Error("HTTP " + r.status);
+      if (!r.ok) throw new Error(r.status === 401 ? "bad_octa_token" : "HTTP " + r.status);
       const j = await r.json().catch(() => ({}));
       localStorage.setItem(LS.octaCloudTs, j.updated || updated);
       state.sync.octa = "cloud";
     } catch (e) {
       state.sync.octa = "local";
       state.sync.msg = String(e.message || e);
-      toast("OCTA salvato in locale. Cloud non disponibile.");
+      const tokenProblem = /octa_token/.test(state.sync.msg);
+      toast(tokenProblem ? "OCTA salvato in locale. Inserisci OCTA_SYNC_TOKEN in Setup per sync cloud." : "OCTA salvato in locale. Cloud non disponibile.");
     }
   }
 
@@ -447,12 +449,14 @@
     const tok = localStorage.getItem("tracker_sync_token") || "";
     if (tok) headers["X-Tracker-Token"] = tok;
     try {
+      if (!tok) throw new Error("missing_tracker_token");
       const r = await fetch(API.portfolios, { method: "POST", headers, body: JSON.stringify(data) });
-      if (!r.ok) throw new Error("HTTP " + r.status);
+      if (!r.ok) throw new Error(r.status === 401 ? "bad_tracker_token" : "HTTP " + r.status);
       state.sync.portfolios = "cloud";
     } catch (e) {
       state.sync.portfolios = "local";
-      toast("Portafogli salvati in locale. Cloud non disponibile.");
+      const msg = String(e.message || e);
+      toast(/tracker_token/.test(msg) ? "Portafogli salvati in locale. Inserisci TRACKER_SYNC_TOKEN in Setup per sync cloud." : "Portafogli salvati in locale. Cloud non disponibile.");
     }
   }
   function downloadJson(filename, data) {
@@ -1712,10 +1716,15 @@
   }
   function viewSettings() {
     const next = nextRefreshInfo();
+    const octaWrite = localStorage.getItem("octa_sync_token") ? `<span class="badge good">scrittura attiva</span>` : `<span class="badge warn">solo lettura</span>`;
+    const trackerWrite = localStorage.getItem("tracker_sync_token") ? `<span class="badge good">scrittura attiva</span>` : `<span class="badge warn">solo lettura</span>`;
     return `
       <section class="panel"><div class="panel-head"><div><h2>Token sync</h2><p>Restano nel browser locale di questa vNext.</p></div></div><div class="form-grid">
         <label>OCTA_SYNC_TOKEN<input id="set-octa-token" type="password" value="${esc(localStorage.getItem("octa_sync_token") || "")}"></label>
         <label>TRACKER_SYNC_TOKEN<input id="set-tracker-token" type="password" value="${esc(localStorage.getItem("tracker_sync_token") || "")}"></label>
+      </div><div style="height:12px"></div><div class="row-list">
+        <div class="kv"><span>Scrittura OCTA cloud</span><strong>${octaWrite}</strong></div>
+        <div class="kv"><span>Scrittura portafogli cloud</span><strong>${trackerWrite}</strong></div>
       </div><div style="height:12px"></div><div class="toolbar"><button class="button primary" id="save-settings">Salva token locali</button><button class="button ghost" data-action="repair-local">Ripara dati locali</button></div></section>
       <section class="panel"><div class="panel-head"><div><h2>Backup portafogli</h2><p>Esporta o ripristina gli archivi cifrati senza esporre i PIN.</p></div></div><div class="row-list">
         <div class="kv"><span>Portafogli nel tracker</span><strong>${esc((state.tracker.portfolios || []).length)}</strong></div>
