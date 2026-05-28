@@ -28,7 +28,7 @@ def previous_trading_day(d):
 def expected_signal_date(now=None):
     now = now or datetime.now(ZoneInfo("Europe/Rome"))
     d = now.date()
-    if is_trading_day(d) and (now.hour * 60 + now.minute) >= 9 * 60 + 15:
+    if is_trading_day(d) and (now.hour * 60 + now.minute) >= 8 * 60 + 35:
         return d
     return previous_trading_day(d)
 

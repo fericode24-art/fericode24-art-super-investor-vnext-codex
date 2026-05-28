@@ -90,6 +90,14 @@
     ["5Y", "5A", 366 * 5],
     ["MAX", "Max", null],
   ];
+  const CLOUD_RUNNER = {
+    name: "GitHub Actions",
+    deploy: "Netlify vNext",
+    schedule: "08:35 Italia lun-ven",
+    check: "08:42 Italia",
+    site: "https://super-investor-vnext-codex.netlify.app",
+    repo: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions",
+  };
   const STATUS_INFO = {
     FRESH_BREAKOUT: { label: "Compra: slancio", cls: "good", desc: "Nuovo massimo/forza relativa: ingresso ammesso se il titolo e in top score." },
     PULLBACK_IN_TREND: { label: "Compra: sconto sano", cls: "good", desc: "Trend ancora valido con ritracciamento gestibile." },
@@ -122,6 +130,16 @@
   function todayISO() { return new Date().toISOString().slice(0, 10); }
   function dateIT(s) { if (!s) return "n/d"; const [y,m,d] = String(s).slice(0,10).split("-"); return d && m && y ? `${d}/${m}/${y}` : String(s); }
   function timeIT(s) { if (!s) return "n/d"; try { return new Date(s).toLocaleString("it-IT", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" }); } catch { return s; } }
+  function localISO(d) {
+    const x = d instanceof Date ? d : new Date(d);
+    const y = x.getFullYear();
+    const m = String(x.getMonth() + 1).padStart(2, "0");
+    const day = String(x.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+  function hhmm(d) {
+    return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  }
   function toast(msg) { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3600); }
   function repairLocalState() {
     Object.values(LS).forEach(k => localStorage.removeItem(k));
@@ -131,7 +149,7 @@
   }
   function repairAndReload(view = state.view || "today") {
     repairLocalState();
-    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=18`;
+    location.href = `/?repair=1&view=${encodeURIComponent(view)}&v=19`;
   }
   function fxRate() {
     const x = Number(state.fx?.EURUSD);
@@ -213,6 +231,23 @@
     const iso = d.toISOString().slice(0, 10);
     return day !== 0 && day !== 6 && !HOLIDAYS.has(iso);
   }
+  function isScheduledRefreshDay(d) {
+    const day = d.getDay();
+    return day !== 0 && day !== 6 && !HOLIDAYS.has(localISO(d));
+  }
+  function nextRefreshInfo() {
+    const now = new Date();
+    const target = new Date(now);
+    target.setHours(8, 35, 0, 0);
+    while (now > target || !isScheduledRefreshDay(target)) {
+      target.setDate(target.getDate() + 1);
+      target.setHours(8, 35, 0, 0);
+    }
+    return {
+      label: `${localISO(target) === localISO(now) ? "oggi" : dateIT(localISO(target))} ${hhmm(target)}`,
+      iso: localISO(target),
+    };
+  }
   function previousTradingDay(d) {
     const x = new Date(d);
     do { x.setDate(x.getDate() - 1); } while (!isTradingDay(x));
@@ -221,7 +256,7 @@
   function expectedSignalDate() {
     const now = new Date();
     const minutes = now.getHours() * 60 + now.getMinutes();
-    if (isTradingDay(now) && minutes >= 9 * 60 + 15) return now.toISOString().slice(0, 10);
+    if (isTradingDay(now) && minutes >= 8 * 60 + 35) return now.toISOString().slice(0, 10);
     return previousTradingDay(now);
   }
   function freshness() {
@@ -885,7 +920,7 @@
     const buys = pending.filter(s => s.action === "BUY");
     const sells = pending.filter(s => s.action === "SELL");
     const top = pending.slice(0, 4).map(signalCard).join("") || `<div class="empty">Nessuna operazione pendente.</div>`;
-    const warning = f.cls === "good" ? "" : `<div class="notice bad">Il segnale non coincide con la data trading attesa. Prima di operare verifica la cron Codex locale o chiedi un controllo refresh mattina.</div>`;
+    const warning = f.cls === "good" ? "" : `<div class="notice bad">Il segnale non coincide con la data trading attesa. Prima di operare verifica la run GitHub Actions o chiedi un controllo refresh mattina.</div>`;
     return `
       <section class="panel full">${warning}<div class="metric-row">
         <div class="metric"><span>Ultimo segnale</span><strong>${dateIT(d.signal_date)}</strong></div>
@@ -903,26 +938,32 @@
     const wf = state.freshnessFile || {};
     const f = freshness();
     const cls = wf.fresh === false || f.cls === "bad" ? "bad" : "good";
+    const next = nextRefreshInfo();
     return `<div class="row-list">
       <div class="notice ${cls}"><strong>${esc(f.label)}</strong><br>${esc(f.detail)}</div>
-      <div class="kv"><span>Runner attuale</span><strong>Codex locale</strong></div>
-      <div class="kv"><span>Refresh vNext</span><strong>08:35 Italia lun-ven</strong></div>
-      <div class="kv"><span>Requisito</span><strong>PC acceso + internet</strong></div>
+      <div class="kv"><span>Runner attuale</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
+      <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>
+      <div class="kv"><span>Refresh vNext</span><strong>${esc(CLOUD_RUNNER.schedule)}</strong></div>
+      <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
+      <div class="kv"><span>Requisito</span><strong>PC non richiesto</strong></div>
       <div class="kv"><span>Check freshness</span><strong>${wf.generated_at ? timeIT(wf.generated_at) : "in app"}</strong></div>
       <div class="kv"><span>Expected trading date</span><strong>${dateIT(wf.expected_signal_date || expectedSignalDate())}</strong></div>
       <div class="kv"><span>Workflow message</span><strong>${esc(wf.message || "runtime check")}</strong></div>
-      <div class="toolbar"><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button></div>
+      <div class="toolbar"><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button><a class="button ghost" href="${esc(CLOUD_RUNNER.site)}" target="_blank" rel="noopener">Sito cloud</a></div>
     </div>`;
   }
   function healthList() {
     const d = state.octaData || {};
     const wf = state.freshnessFile || {};
+    const next = nextRefreshInfo();
     return `<div class="row-list">
       <div class="kv"><span>data-octa.json</span><strong>${d.signal_date ? "caricato" : "assente"}</strong></div>
       <div class="kv"><span>freshness.json</span><strong>${wf.generated_at ? esc(wf.message || "caricato") : "fallback UI"}</strong></div>
       <div class="kv"><span>updated</span><strong>${esc(d.updated || "n/d")}</strong></div>
       <div class="kv"><span>engine_error</span><strong>${d.engine_error ? "si" : "no"}</strong></div>
       <div class="kv"><span>expected_signal_date</span><strong>${dateIT(wf.expected_signal_date || expectedSignalDate())}</strong></div>
+      <div class="kv"><span>Runner motore</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
+      <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
       <div class="kv"><span>n_candidates</span><strong>${esc(d.n_candidates ?? "n/d")}</strong></div>
       <div class="kv"><span>n_active_funds</span><strong>${esc(d.n_active_funds ?? "n/d")}</strong></div>
       <div class="kv"><span>Valuta UI</span><strong>EUR</strong></div>
@@ -1637,37 +1678,40 @@
   function viewStrategy() {
     const f = freshness();
     const wf = state.freshnessFile || {};
+    const next = nextRefreshInfo();
     return `
       <section class="panel full"><div class="panel-head"><div><h2>Diagnosi strategia</h2><p>Questa vNext separa profilo validato e profilo da esplorare.</p></div><span class="badge ${f.cls}">${esc(f.label)}</span></div><div class="grid-2">
         <div class="notice good"><strong>Profilo attivo consigliato</strong><br>QFAS fast path: 13F radar, accumulation, crowding, momentum, entry status tecnico. E il profilo che l'attuale backtest veloce sta realmente validando.</div>
         <div class="notice warn"><strong>Profilo da testare</strong><br>Insider, PEAD/earnings, analyst, congressional e squeeze sono presenti nel codice ma non consumati nel live attuale. Vanno accesi solo dopo backtest dedicato.</div>
       </div></section>
       <section class="panel"><div class="panel-head"><div><h2>Freshness policy</h2><p>Regola proposta per il segnale del mattino.</p></div><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button></div><div class="row-list">
-        <div class="kv"><span>Orario atteso Italia</span><strong>09:15</strong></div>
+        <div class="kv"><span>Orario atteso Italia</span><strong>08:35</strong></div>
         <div class="kv"><span>Trading date attesa</span><strong>${dateIT(expectedSignalDate())}</strong></div>
         <div class="kv"><span>Segnale attuale</span><strong>${dateIT(state.octaData?.signal_date)}</strong></div>
         <div class="kv"><span>Ultimo check workflow</span><strong>${wf.generated_at ? timeIT(wf.generated_at) : "n/d"}</strong></div>
         <div class="kv"><span>Decisione UI</span><strong>${esc(f.label)}</strong></div>
       </div></section>
       <section class="panel"><div class="panel-head"><div><h2>Workflow vNext</h2><p>Separato dalla produzione attuale.</p></div></div><div class="row-list">
-        <div class="kv"><span>Runner attivo ora</span><strong>Codex locale</strong></div>
-        <div class="kv"><span>Orario refresh</span><strong>08:35 Italia lun-ven</strong></div>
-        <div class="kv"><span>Finestra controllo</span><strong>08:45-08:50</strong></div>
-        <div class="kv"><span>Deploy</span><strong>solo vNext, una volta se serve</strong></div>
-        <div class="kv"><span>Runner cloud</span><strong>da migrare su GitHub/Netlify</strong></div>
+        <div class="kv"><span>Runner attivo ora</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
+        <div class="kv"><span>Orario refresh</span><strong>${esc(CLOUD_RUNNER.schedule)}</strong></div>
+        <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
+        <div class="kv"><span>Finestra controllo</span><strong>${esc(CLOUD_RUNNER.check)}</strong></div>
+        <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>
+        <div class="kv"><span>PC locale</span><strong>non necessario</strong></div>
       </div></section>
       <section class="panel full"><div class="panel-head"><div><h2>Runbook mattina</h2><p>Controllo rapido quando vuoi capire se OCTA e' pronto.</p></div></div><div class="grid-2">
         <div class="notice good"><strong>OK operativo</strong><br>La barra mostra Segnale fresco, engine_error e' no, e la data segnale coincide con la trading date attesa dopo la finestra mattutina.</div>
-        <div class="notice warn"><strong>Se non e' fresco</strong><br>Premi Ricontrolla per ricaricare app, cloud e quotazioni. Se resta vecchio serve il runner Codex/cloud, non il client browser.</div>
+        <div class="notice warn"><strong>Se non e' fresco</strong><br>Premi Ricontrolla per ricaricare app, cloud e quotazioni. Se resta vecchio va controllata la run GitHub Actions, non il PC locale.</div>
       </div><div class="row-list">
-        <div class="kv"><span>Prima finestra locale</span><strong>08:35-08:50</strong></div>
+        <div class="kv"><span>Finestra cloud</span><strong>08:35-08:42</strong></div>
         <div class="kv"><span>Manuale da app</span><strong>check dati attivo</strong></div>
-        <div class="kv"><span>Refresh motore</span><strong>Codex/cloud</strong></div>
+        <div class="kv"><span>Refresh motore</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
         <div class="kv"><span>Produzione vecchia</span><strong>non va toccata</strong></div>
         <div class="kv"><span>Deploy manuale</span><strong>solo dopo un pacchetto aggregato</strong></div>
       </div></section>`;
   }
   function viewSettings() {
+    const next = nextRefreshInfo();
     return `
       <section class="panel"><div class="panel-head"><div><h2>Token sync</h2><p>Restano nel browser locale di questa vNext.</p></div></div><div class="form-grid">
         <label>OCTA_SYNC_TOKEN<input id="set-octa-token" type="password" value="${esc(localStorage.getItem("octa_sync_token") || "")}"></label>
@@ -1677,6 +1721,13 @@
         <div class="kv"><span>Portafogli nel tracker</span><strong>${esc((state.tracker.portfolios || []).length)}</strong></div>
         <div class="kv"><span>Ultimo sync</span><strong>${timeIT(state.tracker.updated)}</strong></div>
       </div><div style="height:12px"></div><div class="toolbar"><button class="button primary" data-action="export-tracker-backup">${icon("upload")}Esporta backup</button><button class="button ghost" data-action="import-tracker-backup">Importa backup</button></div></section>
+      <section class="panel"><div class="panel-head"><div><h2>Cloud runner</h2><p>Motore e pubblicazione della vNext.</p></div></div><div class="row-list">
+        <div class="kv"><span>Runner</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
+        <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>
+        <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
+        <div class="kv"><span>Sito</span><strong><a class="text-link" href="${esc(CLOUD_RUNNER.site)}" target="_blank" rel="noopener">vNext Netlify</a></strong></div>
+        <div class="kv"><span>Actions</span><strong><a class="text-link" href="${esc(CLOUD_RUNNER.repo)}" target="_blank" rel="noopener">GitHub</a></strong></div>
+      </div></section>
       <section class="panel"><div class="panel-head"><div><h2>Percorsi</h2><p>App parallela indipendente.</p></div></div><div class="row-list"><div class="kv"><span>Cartella</span><strong class="code">super-investor-vnext-codex</strong></div><div class="kv"><span>Publish</span><strong class="code">dashboard</strong></div><div class="kv"><span>Functions</span><strong class="code">netlify/functions</strong></div></div></section>`;
   }
 

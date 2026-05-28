@@ -75,7 +75,7 @@ h3 { font-size: 15px; margin-bottom: 8px; }
 .badge-button.bad { color: var(--red); border-color: rgba(255,107,107,.45); }
 .badge-button.warn { color: var(--amber); border-color: rgba(241,189,91,.45); }
 .badge-button.info { color: var(--cyan); border-color: rgba(103,214,232,.45); }
-.button { min-height: 40px; border-radius: 8px; padding: 0 13px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.button { min-height: 40px; border-radius: 8px; padding: 0 13px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
 .button svg { width: 18px; height: 18px; }
 .button.primary { background: var(--green); border-color: var(--green); color: #08100c; font-weight: 700; }
 .button.danger { background: rgba(255,107,107,.12); border-color: rgba(255,107,107,.5); color: var(--red); }
@@ -135,6 +135,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .pf-card.open { border-color: rgba(103,214,232,.5); }
 .kv { display: grid; grid-template-columns: 1fr auto; gap: 9px; color: var(--muted); font-size: 13px; }
 .kv strong { color: var(--text); }
+.text-link { color: var(--cyan); text-decoration: none; }
+.text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--cyan); }
 .loading { position: relative; overflow: hidden; }
 .loading::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); animation: sweep 1.4s infinite; }

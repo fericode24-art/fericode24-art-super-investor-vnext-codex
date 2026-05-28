@@ -16,23 +16,22 @@ Apri: http://localhost:5177
 - UI mobile-first nuova in `dashboard/`.
 - Motore QFAS/OCTA copiato in `qfas/`.
 - Funzioni Netlify in `netlify/functions/`.
-- Workflow separato in `.github/workflows/octa-vnext-refresh.yml` pronto per GitHub Actions.
+- Workflow separato in `.github/workflows/octa-vnext-refresh.yml` attivo su GitHub Actions.
 - Controllo freschezza in `scripts/write_freshness.py` e `dashboard/freshness.json`.
 
 ## Regola segnale fresco
 
-La vNext considera fresco il segnale se `dashboard/data-octa.json.signal_date` coincide con la trading date attesa dopo le 09:15 ora italiana, con weekend e holiday USA esclusi.
+La vNext considera fresco il segnale se `dashboard/data-octa.json.signal_date` coincide con la trading date attesa dopo le 08:35 ora italiana, con weekend e holiday USA esclusi.
 
 ## Stato attuale
 
-La vNext locale gira su `http://localhost:5177/?repair=1&view=today&v=18`.
+La vNext locale gira su `http://localhost:5177/?repair=1&view=today&v=19`.
 
-- `dashboard/data-octa.json` ha `signal_date=2026-05-27`.
-- `dashboard/freshness.json` risulta fresh per la trading date attesa.
+- `dashboard/data-octa.json` e `dashboard/freshness.json` vengono rigenerati dal workflow GitHub Actions.
 - I portafogli letti nel datastore locale vNext sono `Massimo Master` e `Fede Smart`.
 - Import file, benchmark, grafici touch e dettaglio strumenti sono disponibili anche in locale.
-- Il refresh automatico attivo adesso e' una cron Codex locale alle 08:35 Italia lun-ven: richiede PC acceso, internet attivo e niente sospensione. GitHub Actions e' il target per il runner cloud definitivo.
-- Il bottone Ricontrolla nell'app ricarica dati, cloud, freshness e quotazioni. Non esegue il motore OCTA: il refresh del motore resta sul runner Codex locale o sul futuro runner cloud.
+- Il refresh automatico attivo adesso e' GitHub Actions alle 08:35 Italia lun-ven, con deploy Netlify vNext. Non richiede PC acceso.
+- Il bottone Ricontrolla nell'app ricarica dati, cloud, freshness e quotazioni. Non esegue il motore OCTA: il refresh del motore resta sul runner GitHub Actions.
 - La UI mostra importi e grafici in EUR. Le quotazioni USD vengono convertite con EUR/USD, e il valore FX compare nei controlli rapidi.
 - Setup runner GitHub documentato in `docs/GITHUB_RUNNER_SETUP.md`.
 
@@ -45,7 +44,7 @@ La produzione attuale non viene toccata. Per pubblicare questa vNext serve un si
 - `NETLIFY_SITE_ID`
 - `DASHBOARD_URL`
 - `SEC_USER_AGENT`
-- `NETLIFY_AUTH_TOKEN` opzionale ma necessario per deploy automatico dal workflow
+- `NETLIFY_AUTH_TOKEN` necessario per deploy automatico dal workflow
 - `FINNHUB_API_KEY` opzionale
 - `NTFY_TOPIC` opzionale per notifiche
 
@@ -65,6 +64,6 @@ npm run check
 
 Nel browser:
 
-- apri `/?repair=1&view=octa&v=18`
-- apri `/?repair=1&view=portfolios&v=18`
+- apri `/?repair=1&view=octa&v=19`
+- apri `/?repair=1&view=portfolios&v=19`
 - verifica apertura portafoglio con PIN, dettaglio posizione, import, benchmark e grafici.

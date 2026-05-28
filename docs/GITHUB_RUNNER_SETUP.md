@@ -27,9 +27,12 @@ Configura questi secrets nel repo vNext:
 - `NETLIFY_SITE_ID`: site id Netlify vNext.
 - `SEC_USER_AGENT`: user agent SEC con email reale.
 
-Opzionali:
+Necessario per pubblicare:
 
 - `NETLIFY_AUTH_TOKEN`: abilita deploy Netlify diretto dal workflow. Senza questo secret il workflow genera e committa il segnale, ma salta il deploy.
+
+Opzionali:
+
 - `FINNHUB_API_KEY`: abilita segnali analyst/earnings quando usati dal motore.
 - `NTFY_TOPIC`: invia notifiche refresh/failure.
 
@@ -63,4 +66,4 @@ Prima prova manuale:
 4. Controlla che generi `dashboard/data-octa.json` e `dashboard/freshness.json`.
 5. Controlla il deploy sul sito vNext.
 
-La cron Codex locale puo' restare come backup fino a quando la run GitHub non produce un segnale fresco per almeno una mattina.
+Stato verificato: run manuale GitHub Actions + deploy Netlify completati con successo. Una eventuale automazione locale puo' restare solo come backup temporaneo.
