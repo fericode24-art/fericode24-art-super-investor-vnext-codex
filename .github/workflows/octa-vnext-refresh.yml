@@ -2,14 +2,20 @@ name: OCTA vNext Daily Refresh
 
 on:
   schedule:
-    # Europe/Rome 08:35/08:45/08:55 during daylight saving time.
+    # Europe/Rome 08:35/08:45/08:55 primary window during daylight saving time.
     - cron: '35 6 * * 1-5'
     - cron: '45 6 * * 1-5'
     - cron: '55 6 * * 1-5'
-    # Europe/Rome 08:35/08:45/08:55 during standard time.
+    # Europe/Rome 09:10/09:30 retry window during daylight saving time.
+    - cron: '10 7 * * 1-5'
+    - cron: '30 7 * * 1-5'
+    # Europe/Rome 08:35/08:45/08:55 primary window during standard time.
     - cron: '35 7 * * 1-5'
     - cron: '45 7 * * 1-5'
     - cron: '55 7 * * 1-5'
+    # Europe/Rome 09:10/09:30 retry window during standard time.
+    - cron: '10 8 * * 1-5'
+    - cron: '30 8 * * 1-5'
   workflow_dispatch:
     inputs:
       force_run:
@@ -37,18 +43,22 @@ jobs:
         run: |
           python - <<'PY'
           import os
-          from datetime import datetime
+          from datetime import datetime, timezone
           from zoneinfo import ZoneInfo
           event = os.environ.get("EVENT_NAME", "")
           schedule = os.environ.get("EVENT_SCHEDULE", "")
           if event != "schedule":
               should = True
           else:
-              now = datetime.now(ZoneInfo("Europe/Rome"))
-              target = now.replace(hour=8, minute=35, second=0, microsecond=0)
-              utc_hour = target.astimezone(ZoneInfo("UTC")).hour
+              allowed_local_times = {(8, 35), (8, 45), (8, 55), (9, 10), (9, 30)}
               parts = schedule.split()
-              should = len(parts) >= 2 and parts[0] in {"35", "45", "55"} and parts[1] == str(utc_hour)
+              should = False
+              if len(parts) >= 2:
+                  scheduled_utc = datetime.now(timezone.utc).replace(
+                      hour=int(parts[1]), minute=int(parts[0]), second=0, microsecond=0
+                  )
+                  scheduled_rome = scheduled_utc.astimezone(ZoneInfo("Europe/Rome"))
+                  should = (scheduled_rome.hour, scheduled_rome.minute) in allowed_local_times
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
               f.write(f"should_run={'true' if should else 'false'}\n")
           print(f"Rome schedule gate: schedule={schedule!r}, should_run={should}")
@@ -131,22 +141,27 @@ jobs:
           import os
           import time
           import urllib.request
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
 
           already = False
           reason = "manual dispatch"
           if os.environ.get("EVENT_NAME") == "schedule":
               base = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
+              current_expected = datetime.now(ZoneInfo("Europe/Rome")).date().isoformat()
               try:
                   with urllib.request.urlopen(f"{base}/freshness.json?t={int(time.time())}", timeout=12) as response:
                       data = json.load(response)
                   fresh = bool(data.get("fresh"))
                   signal_date = str(data.get("signal_date") or "")
-                  expected_date = str(data.get("expected_signal_date") or "")
+                  public_expected_date = str(data.get("expected_signal_date") or "")
                   engine_error = bool(data.get("engine_error"))
-                  already = fresh and signal_date and signal_date == expected_date and not engine_error
+                  already = fresh and signal_date == current_expected and not engine_error
                   reason = (
                       f"fresh={fresh}, signal_date={signal_date}, "
-                      f"expected_signal_date={expected_date}, engine_error={engine_error}"
+                      f"public_expected_signal_date={public_expected_date}, "
+                      f"current_expected_signal_date={current_expected}, "
+                      f"engine_error={engine_error}"
                   )
               except Exception as exc:
                   reason = f"freshness check failed: {exc!r}"
