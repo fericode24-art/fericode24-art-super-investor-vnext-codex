@@ -261,8 +261,12 @@ jobs:
           git add dashboard/data-octa.json dashboard/freshness.json dashboard/apex-data.json
           if ! git diff --cached --quiet; then
             git commit -m "[octa-vnext] refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git pull --rebase origin main
-            git push
+            if git pull --rebase origin main && git push; then
+              echo "Generated dashboard data committed and pushed."
+            else
+              echo "::warning::Generated dashboard data was created, but GitHub could not push it. Continuing to Netlify deploy with runner files."
+              echo "- Commit dati generati non pushato; deploy Netlify continua con i file generati nel runner." >> "$GITHUB_STEP_SUMMARY"
+            fi
           else
             echo "No generated changes"
           fi
