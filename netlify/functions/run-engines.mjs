@@ -5,8 +5,8 @@ const CORS = {
   "Content-Type": "application/json",
 };
 
-const OWNER = "fedezebi-ui";
-const REPO = "super-investor-vnext-codex";
+const OWNER = "fericode24-art";
+const REPO = "fericode24-art-super-investor-vnext-codex";
 const WORKFLOW = "octa-vnext-refresh.yml";
 
 export default async (req) => {

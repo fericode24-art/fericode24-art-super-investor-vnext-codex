@@ -105,8 +105,8 @@
     schedule: "08:35/08:45/08:55 Italia lun-ven",
     check: "08:57 Italia",
     site: "https://super-investor-vnext-codex.netlify.app",
-    repo: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions",
-    workflow: "https://github.com/fedezebi-ui/super-investor-vnext-codex/actions/workflows/octa-vnext-refresh.yml",
+    repo: "https://github.com/fericode24-art/fericode24-art-super-investor-vnext-codex/actions",
+    workflow: "https://github.com/fericode24-art/fericode24-art-super-investor-vnext-codex/actions/workflows/octa-vnext-refresh.yml",
   };
   const STATUS_INFO = {
     FRESH_BREAKOUT: { label: "Compra: slancio", cls: "good", desc: "Nuovo massimo/forza relativa: ingresso ammesso se il titolo e in top score." },
