@@ -1,0 +1,7648 @@
+{
+  "generated_at": "2026-05-29T16:35:48.904703+00:00",
+  "status": "ok",
+  "base_currency": "EUR",
+  "note": "Backtest su proxy Yahoo daily in EUR; operativita live APEX Legit fissata a martedi 15:30 Italia.",
+  "assets": {
+    "BTC": {
+      "code": "BTC",
+      "label": "Bitcoin",
+      "product": "WisdomTree Physical Bitcoin",
+      "isin": "GB00BJYDH287",
+      "fineco_hint": "WBTC su Borsa Italiana / WBIT su Xetra; Yahoo usa WBTC.PA come proxy EUR dello stesso ISIN",
+      "tax_bucket": "redditi_diversi_etp",
+      "ter": 0.0015
+    },
+    "GOLD": {
+      "code": "GOLD",
+      "label": "Oro",
+      "product": "iShares Physical Gold ETC",
+      "isin": "IE00B4ND3602",
+      "fineco_hint": "SGLN.MI su Borsa Italiana / PPFB.DE su Xetra",
+      "tax_bucket": "redditi_diversi_etc",
+      "ter": 0.0012
+    },
+    "SP500": {
+      "code": "SP500",
+      "label": "S&P 500",
+      "product": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+      "isin": "IE00B5BMR087",
+      "fineco_hint": "CSSPX.MI su Borsa Italiana / SXR8.DE su Xetra",
+      "tax_bucket": "redditi_capitale_ucits",
+      "ter": 0.0007
+    },
+    "CASH": {
+      "code": "CASH",
+      "label": "Cash",
+      "product": "Xtrackers II EUR Overnight Rate Swap UCITS ETF 1C",
+      "isin": "LU0290358497",
+      "fineco_hint": "XEON.MI su Borsa Italiana / XEON.DE su Xetra",
+      "tax_bucket": "redditi_capitale_ucits",
+      "ter": 0.001
+    }
+  },
+  "strategies": {
+    "legit": {
+      "key": "legit",
+      "name": "APEX Legit",
+      "label": "Buffer 3pp 6w + SMA30",
+      "primary": true,
+      "run_time": "Martedi 15:30 Italia",
+      "execution": "Martedi 15:35-17:20 su Fineco/Xetra",
+      "weekday": 1,
+      "lookback_weeks": 6,
+      "buffer_pp": 3.0,
+      "sma_weeks": 30,
+      "dual": false,
+      "apply_tax": true,
+      "cost_bps": 30.0,
+      "assets": {
+        "BTC": {
+          "code": "BTC",
+          "label": "Bitcoin",
+          "product": "WisdomTree Physical Bitcoin",
+          "isin": "GB00BJYDH287",
+          "fineco_hint": "WBTC su Borsa Italiana / WBIT su Xetra; Yahoo usa WBTC.PA come proxy EUR dello stesso ISIN",
+          "tax_bucket": "redditi_diversi_etp",
+          "ter": 0.0015
+        },
+        "GOLD": {
+          "code": "GOLD",
+          "label": "Oro",
+          "product": "iShares Physical Gold ETC",
+          "isin": "IE00B4ND3602",
+          "fineco_hint": "SGLN.MI su Borsa Italiana / PPFB.DE su Xetra",
+          "tax_bucket": "redditi_diversi_etc",
+          "ter": 0.0012
+        },
+        "SP500": {
+          "code": "SP500",
+          "label": "S&P 500",
+          "product": "iShares Core S&P 500 UCITS ETF USD (Acc)",
+          "isin": "IE00B5BMR087",
+          "fineco_hint": "CSSPX.MI su Borsa Italiana / SXR8.DE su Xetra",
+          "tax_bucket": "redditi_capitale_ucits",
+          "ter": 0.0007
+        },
+        "CASH": {
+          "code": "CASH",
+          "label": "Cash",
+          "product": "Xtrackers II EUR Overnight Rate Swap UCITS ETF 1C",
+          "isin": "LU0290358497",
+          "fineco_hint": "XEON.MI su Borsa Italiana / XEON.DE su Xetra",
+          "tax_bucket": "redditi_capitale_ucits",
+          "ter": 0.001
+        }
+      },
+      "universe": [
+        "BTC",
+        "GOLD",
+        "SP500",
+        "CASH"
+      ],
+      "chart_explainer": "Simulazione su capitale iniziale 10.000 EUR, costi inclusi; non e' il tuo saldo reale.",
+      "current": {
+        "date": "2026-05-26",
+        "asset": "SP500",
+        "raw_asset": "BTC",
+        "changed": false,
+        "previous_asset": "SP500",
+        "reason": "BTC non supera SP500 di almeno 3 punti",
+        "momentum": {
+          "BTC": 3.3712,
+          "GOLD": -5.6737,
+          "SP500": 9.1382
+        },
+        "sma30_btc": null,
+        "prices": {
+          "BTC": 65157.0554,
+          "GOLD": 3867.1937,
+          "SP500": 6461.1801,
+          "CASH": null
+        }
+      },
+      "history": [
+        {
+          "date": "2026-02-10",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -23.0625,
+            "GOLD": 13.2391,
+            "SP500": -0.4484
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 57790.3651,
+            "GOLD": 4203.4419,
+            "SP500": 5831.4674,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-02-17",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -28.81,
+            "GOLD": 7.6993,
+            "SP500": -2.585
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 56957.6994,
+            "GOLD": 4120.6306,
+            "SP500": 5774.9254,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-02-24",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -33.4982,
+            "GOLD": 11.1379,
+            "SP500": -2.1222
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 54333.4689,
+            "GOLD": 4371.6027,
+            "SP500": 5842.0903,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-03",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -23.0511,
+            "GOLD": 6.774,
+            "SP500": -0.2076
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 58384.2405,
+            "GOLD": 4366.3162,
+            "SP500": 5827.5369,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-10",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -19.7695,
+            "GOLD": 5.2463,
+            "SP500": -0.6561
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 60192.3971,
+            "GOLD": 4501.6738,
+            "SP500": 5837.4303,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-17",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": 0.2805,
+            "GOLD": 4.6375,
+            "SP500": -0.3902
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 64282.9879,
+            "GOLD": 4348.8698,
+            "SP500": 5840.3119,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-24",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 5.1282,
+            "GOLD": -9.8317,
+            "SP500": -3.1363
+          },
+          "sma30_btc": 79264.85,
+          "prices": {
+            "BTC": 60753.955,
+            "GOLD": 3790.1727,
+            "SP500": 5648.575,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-31",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 4.5344,
+            "GOLD": -1.5807,
+            "SP500": -1.3531
+          },
+          "sma30_btc": 78085.72,
+          "prices": {
+            "BTC": 59540.3923,
+            "GOLD": 4055.4961,
+            "SP500": 5696.7869,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-04-07",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.7244,
+            "GOLD": -7.6954,
+            "SP500": -1.8633
+          },
+          "sma30_btc": 77004.67,
+          "prices": {
+            "BTC": 62333.7464,
+            "GOLD": 4035.1913,
+            "SP500": 5733.2364,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-04-14",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.9608,
+            "GOLD": -6.1039,
+            "SP500": 1.5898
+          },
+          "sma30_btc": 75794.91,
+          "prices": {
+            "BTC": 63032.1133,
+            "GOLD": 4099.8025,
+            "SP500": 5920.1827,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-04-21",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.6406,
+            "GOLD": -11.4336,
+            "SP500": 2.6886
+          },
+          "sma30_btc": 74790.66,
+          "prices": {
+            "BTC": 64791.4373,
+            "GOLD": 3986.9682,
+            "SP500": 5994.3775,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-04-28",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "BTC non supera SP500 di almeno 3 punti",
+          "momentum": {
+            "BTC": 1.312,
+            "GOLD": -9.942,
+            "SP500": 4.2637
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 65126.3582,
+            "GOLD": 3916.5035,
+            "SP500": 6089.3247,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-05-05",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 13.9285,
+            "GOLD": 2.8061,
+            "SP500": 9.9169
+          },
+          "sma30_btc": 72570.88,
+          "prices": {
+            "BTC": 69216.099,
+            "GOLD": 3896.5299,
+            "SP500": 6208.7383,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-05-12",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.7412,
+            "GOLD": -2.0881,
+            "SP500": 10.2845
+          },
+          "sma30_btc": 71588.27,
+          "prices": {
+            "BTC": 68317.3481,
+            "GOLD": 3970.815,
+            "SP500": 6282.6754,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-05-19",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "BTC non supera SP500 di almeno 3 punti",
+          "momentum": {
+            "BTC": 5.6434,
+            "GOLD": -4.184,
+            "SP500": 10.0482
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 65851.5124,
+            "GOLD": 3866.3603,
+            "SP500": 6309.324,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-05-26",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "BTC non supera SP500 di almeno 3 punti",
+          "momentum": {
+            "BTC": 3.3712,
+            "GOLD": -5.6737,
+            "SP500": 9.1382
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 65157.0554,
+            "GOLD": 3867.1937,
+            "SP500": 6461.1801,
+            "CASH": null
+          }
+        }
+      ],
+      "changes": [
+        {
+          "date": "2014-11-04",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -22.0049,
+            "GOLD": -1.6694,
+            "SP500": 4.3667
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 264.4795,
+            "GOLD": 934.2236,
+            "SP500": 1610.2032,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2014-11-18",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 13.371,
+            "GOLD": 0.3258,
+            "SP500": 7.7095
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 301.389,
+            "GOLD": 961.2851,
+            "SP500": 1648.1699,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2014-11-25",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -4.1769,
+            "GOLD": -0.6894,
+            "SP500": 12.6576
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 301.8924,
+            "GOLD": 962.8275,
+            "SP500": 1662.5123,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2014-12-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -0.6211,
+            "GOLD": 2.7007,
+            "SP500": -1.5433
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 262.8368,
+            "GOLD": 959.4539,
+            "SP500": 1585.353,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-02-17",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -10.3342,
+            "GOLD": 4.3703,
+            "SP500": 10.4786
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 214.9371,
+            "GOLD": 1065.9067,
+            "SP500": 1853.1302,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-03-03",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 38.3045,
+            "GOLD": -3.4834,
+            "SP500": 8.1192
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 251.9909,
+            "GOLD": 1077.0141,
+            "SP500": 1885.4725,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-04-14",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -17.742,
+            "GOLD": 4.7491,
+            "SP500": 5.1337
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 207.2828,
+            "GOLD": 1128.1623,
+            "SP500": 1982.2667,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-04-28",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -23.1109,
+            "GOLD": 2.7571,
+            "SP500": -0.9071
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 207.6262,
+            "GOLD": 1116.0181,
+            "SP500": 1944.0778,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-05-19",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -11.5521,
+            "GOLD": -3.7505,
+            "SP500": -1.0608
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 204.7883,
+            "GOLD": 1065.5841,
+            "SP500": 1878.6824,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-06-30",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 14.4621,
+            "GOLD": -2.0404,
+            "SP500": -2.1499
+          },
+          "sma30_btc": 226.1,
+          "prices": {
+            "BTC": 234.405,
+            "GOLD": 1043.8416,
+            "SP500": 1838.293,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-08-18",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -20.9163,
+            "GOLD": -3.317,
+            "SP500": 0.4847
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 190.5389,
+            "GOLD": 1008.395,
+            "SP500": 1892.8687,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-08-25",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -26.853,
+            "GOLD": -6.3584,
+            "SP500": -15.9742
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 191.3217,
+            "GOLD": 982.6422,
+            "SP500": 1612.3637,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-10-06",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.8815,
+            "GOLD": 4.2463,
+            "SP500": 9.6864
+          },
+          "sma30_btc": 222.94,
+          "prices": {
+            "BTC": 219.7933,
+            "GOLD": 1024.3677,
+            "SP500": 1768.5438,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2015-10-20",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.0023,
+            "GOLD": 3.6092,
+            "SP500": 1.6134
+          },
+          "sma30_btc": 221.71,
+          "prices": {
+            "BTC": 237.8523,
+            "GOLD": 1039.8088,
+            "SP500": 1792.5403,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-01-19",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -9.0343,
+            "GOLD": 0.6964,
+            "SP500": -9.3428
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 348.9198,
+            "GOLD": 1000.3648,
+            "SP500": 1726.7788,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-03-22",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 10.7287,
+            "GOLD": 3.7018,
+            "SP500": 10.2133
+          },
+          "sma30_btc": 322.73,
+          "prices": {
+            "BTC": 372.0992,
+            "GOLD": 1110.898,
+            "SP500": 1824.3221,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-03-29",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": 1.954,
+            "GOLD": 2.0315,
+            "SP500": 8.1332
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 371.7989,
+            "GOLD": 1102.946,
+            "SP500": 1834.3842,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-04-26",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 10.1603,
+            "GOLD": -0.5373,
+            "SP500": 2.2207
+          },
+          "sma30_btc": 351.84,
+          "prices": {
+            "BTC": 413.6027,
+            "GOLD": 1102.3159,
+            "SP500": 1856.1537,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-07-26",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -2.3331,
+            "GOLD": 5.5326,
+            "SP500": 7.374
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 593.0061,
+            "GOLD": 1201.5993,
+            "SP500": 1973.5633,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-08-02",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -16.7394,
+            "GOLD": 8.8804,
+            "SP500": 4.6938
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 490.2056,
+            "GOLD": 1221.6974,
+            "SP500": 1931.4262,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-08-09",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -9.7123,
+            "GOLD": 1.1717,
+            "SP500": 6.4901
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 530.3317,
+            "GOLD": 1208.086,
+            "SP500": 1968.4313,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2016-09-13",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 10.5371,
+            "GOLD": -3.9763,
+            "SP500": -2.0531
+          },
+          "sma30_btc": 474.44,
+          "prices": {
+            "BTC": 541.859,
+            "GOLD": 1173.1186,
+            "SP500": 1891.7716,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-02-14",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -5.0213,
+            "GOLD": 4.0943,
+            "SP500": 2.1795
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 947.823,
+            "GOLD": 1154.7864,
+            "SP500": 2205.5769,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-02-21",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 22.6331,
+            "GOLD": 4.2962,
+            "SP500": 4.0481
+          },
+          "sma30_btc": 698.4,
+          "prices": {
+            "BTC": 1051.2372,
+            "GOLD": 1166.418,
+            "SP500": 2229.5125,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-04-18",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -1.5778,
+            "GOLD": 5.6517,
+            "SP500": -1.713
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 1138.3035,
+            "GOLD": 1213.4876,
+            "SP500": 2200.3705,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-05-02",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 27.6182,
+            "GOLD": -0.8589,
+            "SP500": 0.4101
+          },
+          "sma30_btc": 898.16,
+          "prices": {
+            "BTC": 1331.7709,
+            "GOLD": 1150.525,
+            "SP500": 2191.9376,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-07-18",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -20.5462,
+            "GOLD": -5.9353,
+            "SP500": -0.6325
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 2020.927,
+            "GOLD": 1081.631,
+            "SP500": 2144.4463,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-08-08",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 26.9768,
+            "GOLD": -4.4713,
+            "SP500": -3.0561
+          },
+          "sma30_btc": 1584.19,
+          "prices": {
+            "BTC": 2898.023,
+            "GOLD": 1064.6609,
+            "SP500": 2097.2225,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-09-26",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -7.5515,
+            "GOLD": 1.1434,
+            "SP500": 0.6253
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 3283.1193,
+            "GOLD": 1093.9935,
+            "SP500": 2106.0346,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2017-10-03",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 5.9925,
+            "GOLD": -0.3991,
+            "SP500": 4.0349
+          },
+          "sma30_btc": 2263.46,
+          "prices": {
+            "BTC": 3679.5293,
+            "GOLD": 1083.6232,
+            "SP500": 2160.0706,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-01-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -6.7257,
+            "GOLD": 2.3927,
+            "SP500": 2.1362
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 9365.9064,
+            "GOLD": 1088.4845,
+            "SP500": 2263.0598,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-03-20",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 15.2418,
+            "GOLD": -0.8829,
+            "SP500": 1.062
+          },
+          "sma30_btc": 7552.05,
+          "prices": {
+            "BTC": 7225.0802,
+            "GOLD": 1062.7514,
+            "SP500": 2202.2971,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-03-27",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -10.0245,
+            "GOLD": -0.2524,
+            "SP500": -3.1004
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 6287.8163,
+            "GOLD": 1076.7018,
+            "SP500": 2097.2286,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-04-24",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 6.595,
+            "GOLD": 1.4891,
+            "SP500": -3.709
+          },
+          "sma30_btc": 8041.94,
+          "prices": {
+            "BTC": 7942.9315,
+            "GOLD": 1090.5098,
+            "SP500": 2157.8892,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-05-08",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 23.0699,
+            "GOLD": 2.1084,
+            "SP500": 6.7581
+          },
+          "sma30_btc": 8293.09,
+          "prices": {
+            "BTC": 7738.41,
+            "GOLD": 1099.4035,
+            "SP500": 2238.962,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2018-10-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -10.1514,
+            "GOLD": 3.1855,
+            "SP500": -2.7283
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 5694.422,
+            "GOLD": 1059.5282,
+            "SP500": 2425.804,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-02-05",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -9.4074,
+            "GOLD": 3.3912,
+            "SP500": 16.114
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 3031.0174,
+            "GOLD": 1149.1495,
+            "SP500": 2393.872,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-04-02",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 24.8041,
+            "GOLD": -2.826,
+            "SP500": 4.1248
+          },
+          "sma30_btc": 4138.79,
+          "prices": {
+            "BTC": 4354.803,
+            "GOLD": 1151.196,
+            "SP500": 2558.7249,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-08-06",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -1.2974,
+            "GOLD": 5.5124,
+            "SP500": 0.1544
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 10208.4537,
+            "GOLD": 1309.5231,
+            "SP500": 2562.9886,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-10-08",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -18.242,
+            "GOLD": -1.6772,
+            "SP500": 2.0422
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 7499.7133,
+            "GOLD": 1364.5481,
+            "SP500": 2636.7351,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-11-05",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 7.0619,
+            "GOLD": -4.5193,
+            "SP500": 2.3856
+          },
+          "sma30_btc": 8069.03,
+          "prices": {
+            "BTC": 8395.1015,
+            "GOLD": 1330.6321,
+            "SP500": 2762.8228,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2019-11-12",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 4.3616,
+            "GOLD": -3.2233,
+            "SP500": 3.8617
+          },
+          "sma30_btc": 8180.94,
+          "prices": {
+            "BTC": 7988.4887,
+            "GOLD": 1315.8495,
+            "SP500": 2801.7328,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-01-07",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 11.2421,
+            "GOLD": 5.9072,
+            "SP500": 1.3881
+          },
+          "sma30_btc": 8267.35,
+          "prices": {
+            "BTC": 7290.3162,
+            "GOLD": 1403.6442,
+            "SP500": 2890.8568,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-01-14",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 19.9822,
+            "GOLD": 3.8125,
+            "SP500": 5.6011
+          },
+          "sma30_btc": 8261.9,
+          "prices": {
+            "BTC": 7927.4212,
+            "GOLD": 1385.0907,
+            "SP500": 2948.3015,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-01-21",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 19.8211,
+            "GOLD": 6.107,
+            "SP500": 5.7051
+          },
+          "sma30_btc": 8179.86,
+          "prices": {
+            "BTC": 7881.3629,
+            "GOLD": 1402.5499,
+            "SP500": 2992.5299,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-01-28",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 42.4306,
+            "GOLD": 7.5471,
+            "SP500": 3.7139
+          },
+          "sma30_btc": 8143.95,
+          "prices": {
+            "BTC": 8492.5456,
+            "GOLD": 1423.9861,
+            "SP500": 2973.0566,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-03-03",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": 0.0542,
+            "GOLD": 5.0602,
+            "SP500": -9.9409
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 7885.632,
+            "GOLD": 1473.522,
+            "SP500": 2695.0441,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-04-28",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 54.0692,
+            "GOLD": 15.6774,
+            "SP500": 16.7524
+          },
+          "sma30_btc": 7281.92,
+          "prices": {
+            "BTC": 7212.1604,
+            "GOLD": 1580.1598,
+            "SP500": 2645.1995,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-05-05",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 31.9674,
+            "GOLD": 1.3472,
+            "SP500": 15.7055
+          },
+          "sma30_btc": 7307.15,
+          "prices": {
+            "BTC": 8256.4457,
+            "GOLD": 1563.0541,
+            "SP500": 2630.5602,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-06-30",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -8.8482,
+            "GOLD": -0.2373,
+            "SP500": 2.9358
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8124.6812,
+            "GOLD": 1594.1742,
+            "SP500": 2756.4989,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-07-21",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -5.5748,
+            "GOLD": 6.0115,
+            "SP500": 0.2055
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8181.4645,
+            "GOLD": 1607.8625,
+            "SP500": 2842.6458,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-08-04",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 11.5841,
+            "GOLD": 8.2852,
+            "SP500": 1.2543
+          },
+          "sma30_btc": 7900.0,
+          "prices": {
+            "BTC": 9526.129,
+            "GOLD": 1701.22,
+            "SP500": 2810.8641,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-09-08",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -7.5715,
+            "GOLD": -1.0427,
+            "SP500": 3.0641
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8570.2503,
+            "GOLD": 1635.1248,
+            "SP500": 2818.4037,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2020-10-20",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 18.1449,
+            "GOLD": -0.7252,
+            "SP500": 3.8041
+          },
+          "sma30_btc": 8516.42,
+          "prices": {
+            "BTC": 10125.3098,
+            "GOLD": 1623.2669,
+            "SP500": 2925.6192,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-04-20",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": 1.3522,
+            "GOLD": 1.8721,
+            "SP500": 4.9813
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 46883.9098,
+            "GOLD": 1475.5145,
+            "SP500": 3432.8271,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-05-11",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -6.6888,
+            "GOLD": 5.7047,
+            "SP500": 1.6935
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 46705.289,
+            "GOLD": 1512.1574,
+            "SP500": 3419.9187,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-06-22",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -41.5765,
+            "GOLD": -1.3915,
+            "SP500": 4.2327
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 27286.8767,
+            "GOLD": 1491.1151,
+            "SP500": 3564.6741,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-08-10",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 29.1537,
+            "GOLD": -0.3377,
+            "SP500": 5.0545
+          },
+          "sma30_btc": 37403.16,
+          "prices": {
+            "BTC": 38833.8873,
+            "GOLD": 1472.7647,
+            "SP500": 3779.6672,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-09-21",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -10.6673,
+            "GOLD": 2.8026,
+            "SP500": -1.7917
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 34691.36,
+            "GOLD": 1514.0401,
+            "SP500": 3711.9471,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-10-05",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.1555,
+            "GOLD": -1.4901,
+            "SP500": -2.0808
+          },
+          "sma30_btc": 38076.24,
+          "prices": {
+            "BTC": 44338.8007,
+            "GOLD": 1514.4878,
+            "SP500": 3740.3615,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2021-11-30",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -8.7753,
+            "GOLD": 3.0639,
+            "SP500": 3.9151
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 50476.5939,
+            "GOLD": 1570.4696,
+            "SP500": 4043.9415,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-01-18",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -17.3265,
+            "GOLD": 0.5622,
+            "SP500": -3.3997
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 37137.1584,
+            "GOLD": 1588.2636,
+            "SP500": 4011.2877,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-03-29",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.5114,
+            "GOLD": 6.014,
+            "SP500": 6.5349
+          },
+          "sma30_btc": 42497.97,
+          "prices": {
+            "BTC": 43174.8299,
+            "GOLD": 1739.1553,
+            "SP500": 4212.9036,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-04-05",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 22.6072,
+            "GOLD": 3.9494,
+            "SP500": 8.3158
+          },
+          "sma30_btc": 42567.5,
+          "prices": {
+            "BTC": 41505.6095,
+            "GOLD": 1751.935,
+            "SP500": 4122.7917,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-05-03",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -6.5699,
+            "GOLD": 2.0027,
+            "SP500": -2.9751
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 35921.8231,
+            "GOLD": 1778.2755,
+            "SP500": 3973.2199,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-05-24",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -24.7406,
+            "GOLD": -3.6912,
+            "SP500": -8.7251
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 27762.0768,
+            "GOLD": 1746.0133,
+            "SP500": 3689.8165,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-07-26",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -2.5756,
+            "GOLD": -3.3075,
+            "SP500": 6.9203
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 20772.4788,
+            "GOLD": 1679.9105,
+            "SP500": 3834.7869,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-09-20",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -17.0824,
+            "GOLD": -5.936,
+            "SP500": -4.8984
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 18835.0604,
+            "GOLD": 1654.8038,
+            "SP500": 3844.5548,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-11-01",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 10.0121,
+            "GOLD": 0.5507,
+            "SP500": 1.4538
+          },
+          "sma30_btc": 24102.39,
+          "prices": {
+            "BTC": 20720.8536,
+            "GOLD": 1663.9175,
+            "SP500": 3900.4451,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2022-12-06",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -19.9053,
+            "GOLD": 0.8235,
+            "SP500": -3.8103
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 16280.4875,
+            "GOLD": 1685.5415,
+            "SP500": 3754.6809,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-01-17",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 20.0178,
+            "GOLD": 4.4776,
+            "SP500": -1.8542
+          },
+          "sma30_btc": 19101.07,
+          "prices": {
+            "BTC": 19539.4891,
+            "GOLD": 1761.0131,
+            "SP500": 3685.0621,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-05-16",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -3.6763,
+            "GOLD": -1.3227,
+            "SP500": 0.5823
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 24864.2564,
+            "GOLD": 1828.6321,
+            "SP500": 3779.6696,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-06-27",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 13.1232,
+            "GOLD": -4.0662,
+            "SP500": 6.1741
+          },
+          "sma30_btc": 22621.18,
+          "prices": {
+            "BTC": 28127.2355,
+            "GOLD": 1754.2766,
+            "SP500": 4013.0316,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-08-08",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -3.8236,
+            "GOLD": -0.319,
+            "SP500": 1.8973
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 27051.7718,
+            "GOLD": 1748.6798,
+            "SP500": 4089.1713,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-09-26",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -7.4232,
+            "GOLD": 2.8909,
+            "SP500": -0.8096
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 24752.7561,
+            "GOLD": 1794.2438,
+            "SP500": 4034.8107,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-10-03",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.5701,
+            "GOLD": 0.0475,
+            "SP500": 0.2375
+          },
+          "sma30_btc": 25866.5,
+          "prices": {
+            "BTC": 26171.7657,
+            "GOLD": 1740.9056,
+            "SP500": 4035.4454,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-10-10",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 1.0904,
+            "GOLD": -1.6579,
+            "SP500": -0.8396
+          },
+          "sma30_btc": 25960.47,
+          "prices": {
+            "BTC": 25892.1843,
+            "GOLD": 1759.1662,
+            "SP500": 4119.7575,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2023-10-17",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 12.7322,
+            "GOLD": 2.0896,
+            "SP500": -0.5364
+          },
+          "sma30_btc": 25981.73,
+          "prices": {
+            "BTC": 26923.353,
+            "GOLD": 1821.7198,
+            "SP500": 4143.5197,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-01-16",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -3.0655,
+            "GOLD": -0.6183,
+            "SP500": 3.3236
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 39426.3599,
+            "GOLD": 1850.9537,
+            "SP500": 4354.1995,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-02-13",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 13.3791,
+            "GOLD": -1.0754,
+            "SP500": 7.0184
+          },
+          "sma30_btc": 32433.95,
+          "prices": {
+            "BTC": 46176.4039,
+            "GOLD": 1850.0289,
+            "SP500": 4598.077,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-04-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": 2.1762,
+            "GOLD": 14.4795,
+            "SP500": 1.6112
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 60053.9861,
+            "GOLD": 2250.006,
+            "SP500": 4753.9329,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-05-28",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 4.7006,
+            "GOLD": -3.6307,
+            "SP500": 2.7571
+          },
+          "sma30_btc": 48918.13,
+          "prices": {
+            "BTC": 62876.9112,
+            "GOLD": 2168.3147,
+            "SP500": 4885.0056,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-07-02",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -10.5405,
+            "GOLD": -2.9703,
+            "SP500": 4.7183
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 57770.7238,
+            "GOLD": 2163.5261,
+            "SP500": 5130.8163,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-07-30",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": 0.8876,
+            "GOLD": 2.4496,
+            "SP500": -1.6435
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 61186.9522,
+            "GOLD": 2222.8454,
+            "SP500": 5024.6841,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2024-10-15",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 18.427,
+            "GOLD": 8.4387,
+            "SP500": 6.7048
+          },
+          "sma30_btc": 58358.42,
+          "prices": {
+            "BTC": 61453.9052,
+            "GOLD": 2439.5989,
+            "SP500": 5330.6162,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-01-28",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -3.8693,
+            "GOLD": 5.3527,
+            "SP500": 0.9764
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 97014.6986,
+            "GOLD": 2648.9067,
+            "SP500": 5809.1554,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-05-13",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 19.2592,
+            "GOLD": 1.3016,
+            "SP500": 1.8939
+          },
+          "sma30_btc": 85046.84,
+          "prices": {
+            "BTC": 93884.0837,
+            "GOLD": 2920.3528,
+            "SP500": 5305.3118,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-07-01",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Nessun asset con momentum sufficiente",
+          "momentum": {
+            "BTC": -5.6731,
+            "GOLD": -3.0592,
+            "SP500": -0.566
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 89672.313,
+            "GOLD": 2830.7897,
+            "SP500": 5258.2678,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-07-15",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.6705,
+            "GOLD": -2.4223,
+            "SP500": 2.671
+          },
+          "sma30_btc": 88707.54,
+          "prices": {
+            "BTC": 100955.0659,
+            "GOLD": 2854.2045,
+            "SP500": 5351.9632,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-08-26",
+          "asset": "SP500",
+          "raw_asset": "SP500",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "S&P 500 positivo e migliore di Oro",
+          "momentum": {
+            "BTC": -4.6818,
+            "GOLD": 2.185,
+            "SP500": 3.9849
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 96228.5496,
+            "GOLD": 2916.5682,
+            "SP500": 5565.2347,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2025-09-09",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "SP500",
+          "reason": "Oro positivo e migliore di S&P 500",
+          "momentum": {
+            "BTC": -6.8055,
+            "GOLD": 8.02,
+            "SP500": 0.7277
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 94765.2785,
+            "GOLD": 3095.6393,
+            "SP500": 5533.6345,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-03-24",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 5.1282,
+            "GOLD": -9.8317,
+            "SP500": -3.1363
+          },
+          "sma30_btc": 79264.85,
+          "prices": {
+            "BTC": 60753.955,
+            "GOLD": 3790.1727,
+            "SP500": 5648.575,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-04-14",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.9608,
+            "GOLD": -6.1039,
+            "SP500": 1.5898
+          },
+          "sma30_btc": 75794.91,
+          "prices": {
+            "BTC": 63032.1133,
+            "GOLD": 4099.8025,
+            "SP500": 5920.1827,
+            "CASH": null
+          }
+        },
+        {
+          "date": "2026-05-26",
+          "asset": "SP500",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "SP500",
+          "reason": "BTC non supera SP500 di almeno 3 punti",
+          "momentum": {
+            "BTC": 3.3712,
+            "GOLD": -5.6737,
+            "SP500": 9.1382
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 65157.0554,
+            "GOLD": 3867.1937,
+            "SP500": 6461.1801,
+            "CASH": null
+          },
+          "current_marker": true
+        }
+      ],
+      "backtest": {
+        "initial": 10000.0,
+        "final": 157261.78,
+        "cagr": 38.8522,
+        "max_drawdown": -37.8698,
+        "calmar": 1.026,
+        "ulcer": 21.3431,
+        "switches": 63,
+        "switches_per_year": 7.51,
+        "taxes_paid": 74491.96,
+        "equity": [
+          {
+            "d": "2018-01-02",
+            "v": 10000.0,
+            "asset": "START"
+          },
+          {
+            "d": "2018-01-09",
+            "v": 9745.75,
+            "asset": "BTC"
+          },
+          {
+            "d": "2018-01-16",
+            "v": 7485.89,
+            "asset": "BTC"
+          },
+          {
+            "d": "2018-01-23",
+            "v": 7472.35,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-01-30",
+            "v": 7395.15,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-02-06",
+            "v": 7351.39,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-02-13",
+            "v": 7400.64,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-02-20",
+            "v": 7347.71,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-02-27",
+            "v": 7323.06,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-03-06",
+            "v": 7411.03,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-03-13",
+            "v": 7366.25,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-03-20",
+            "v": 7285.47,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-03-27",
+            "v": 6919.35,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-04-03",
+            "v": 6898.59,
+            "asset": "CASH"
+          },
+          {
+            "d": "2018-04-10",
+            "v": 6898.59,
+            "asset": "CASH"
+          },
+          {
+            "d": "2018-04-17",
+            "v": 6898.59,
+            "asset": "CASH"
+          },
+          {
+            "d": "2018-04-24",
+            "v": 6898.59,
+            "asset": "CASH"
+          },
+          {
+            "d": "2018-05-01",
+            "v": 6806.37,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-05-08",
+            "v": 6933.67,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-05-15",
+            "v": 7004.13,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-05-22",
+            "v": 7122.67,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-05-29",
+            "v": 7134.58,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-06-05",
+            "v": 7247.28,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-06-12",
+            "v": 7303.96,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-06-19",
+            "v": 7331.91,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-06-26",
+            "v": 7184.82,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-07-03",
+            "v": 7198.39,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-07-10",
+            "v": 7342.12,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-07-17",
+            "v": 7415.65,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-07-24",
+            "v": 7456.37,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-07-31",
+            "v": 7439.39,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-08-07",
+            "v": 7650.67,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-08-14",
+            "v": 7707.24,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-08-21",
+            "v": 7712.0,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-08-28",
+            "v": 7679.07,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-09-04",
+            "v": 7724.37,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-09-11",
+            "v": 7716.21,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-09-18",
+            "v": 7713.81,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-09-25",
+            "v": 7690.89,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-10-02",
+            "v": 7830.88,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-10-09",
+            "v": 7773.91,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-10-16",
+            "v": 7527.79,
+            "asset": "SP500"
+          },
+          {
+            "d": "2018-10-23",
+            "v": 7452.74,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-10-30",
+            "v": 7446.87,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-11-06",
+            "v": 7430.01,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-11-13",
+            "v": 7396.81,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-11-20",
+            "v": 7373.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-11-27",
+            "v": 7404.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-12-04",
+            "v": 7572.87,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-12-11",
+            "v": 7576.46,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-12-18",
+            "v": 7625.32,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2018-12-25",
+            "v": 7700.15,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-01-01",
+            "v": 7705.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-01-08",
+            "v": 7743.7,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-01-15",
+            "v": 7766.26,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-01-22",
+            "v": 7814.28,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-01-29",
+            "v": 7928.37,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-02-05",
+            "v": 7960.18,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-02-12",
+            "v": 7907.15,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-02-19",
+            "v": 7987.23,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-02-26",
+            "v": 7991.13,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-03-05",
+            "v": 8002.69,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-03-12",
+            "v": 8066.12,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-03-19",
+            "v": 8131.68,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-03-26",
+            "v": 8108.3,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-04-02",
+            "v": 8332.19,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-04-09",
+            "v": 8667.37,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-04-16",
+            "v": 8680.69,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-04-23",
+            "v": 9276.57,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-04-30",
+            "v": 8966.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-05-07",
+            "v": 9753.59,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-05-14",
+            "v": 13338.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-05-21",
+            "v": 13362.83,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-05-28",
+            "v": 14599.1,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-06-04",
+            "v": 12843.82,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-06-11",
+            "v": 13126.16,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-06-18",
+            "v": 15161.83,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-06-25",
+            "v": 19380.91,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-07-02",
+            "v": 17931.84,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-07-09",
+            "v": 21006.12,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-07-16",
+            "v": 15768.69,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-07-23",
+            "v": 16554.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-07-30",
+            "v": 16154.0,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-08-06",
+            "v": 19126.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-08-13",
+            "v": 16592.53,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-08-20",
+            "v": 16821.31,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-08-27",
+            "v": 17195.99,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-09-03",
+            "v": 17462.89,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-09-10",
+            "v": 16712.73,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-09-17",
+            "v": 16943.4,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-09-24",
+            "v": 17266.13,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-10-01",
+            "v": 16845.26,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-10-08",
+            "v": 16905.24,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-10-15",
+            "v": 17186.44,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-10-22",
+            "v": 17004.4,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-10-29",
+            "v": 17323.54,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-11-05",
+            "v": 17497.85,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-11-12",
+            "v": 16397.84,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-11-19",
+            "v": 16448.62,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-11-26",
+            "v": 16648.06,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-12-03",
+            "v": 16306.69,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-12-10",
+            "v": 16540.13,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-12-17",
+            "v": 16753.16,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-12-24",
+            "v": 16986.08,
+            "asset": "SP500"
+          },
+          {
+            "d": "2019-12-31",
+            "v": 16865.57,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-01-07",
+            "v": 16910.74,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-01-14",
+            "v": 16492.99,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-01-21",
+            "v": 16695.32,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-01-28",
+            "v": 16832.98,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-02-04",
+            "v": 16335.15,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-11",
+            "v": 18411.21,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-18",
+            "v": 18414.98,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-25",
+            "v": 16947.14,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-03-03",
+            "v": 15519.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-03-10",
+            "v": 15284.97,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-03-17",
+            "v": 14343.69,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-03-24",
+            "v": 16194.28,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-03-31",
+            "v": 15072.51,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-07",
+            "v": 16179.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-14",
+            "v": 16885.97,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-21",
+            "v": 16217.35,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-28",
+            "v": 16590.17,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-05-05",
+            "v": 16166.05,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-05-12",
+            "v": 15899.92,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-05-19",
+            "v": 17398.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-05-26",
+            "v": 15817.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-02",
+            "v": 16718.74,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-09",
+            "v": 16911.7,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-16",
+            "v": 16419.62,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-23",
+            "v": 16662.23,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-30",
+            "v": 15856.68,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-07-07",
+            "v": 15950.58,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-07-14",
+            "v": 16173.63,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-07-21",
+            "v": 16318.3,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-07-28",
+            "v": 16583.51,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-08-04",
+            "v": 17073.58,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-08-11",
+            "v": 17122.78,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-08-18",
+            "v": 17783.56,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-08-25",
+            "v": 16973.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-01",
+            "v": 17658.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-08",
+            "v": 15093.73,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-15",
+            "v": 15303.94,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-09-22",
+            "v": 15052.73,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-09-29",
+            "v": 15263.4,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-10-06",
+            "v": 15236.67,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-10-13",
+            "v": 15893.88,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-10-20",
+            "v": 15650.03,
+            "asset": "SP500"
+          },
+          {
+            "d": "2020-10-27",
+            "v": 17638.69,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-03",
+            "v": 18278.6,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-10",
+            "v": 19722.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-17",
+            "v": 22696.65,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-24",
+            "v": 24611.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-01",
+            "v": 24024.79,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-08",
+            "v": 23070.29,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-15",
+            "v": 24377.67,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-22",
+            "v": 29643.57,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-29",
+            "v": 34141.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-05",
+            "v": 42315.89,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-12",
+            "v": 42543.84,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-19",
+            "v": 45547.45,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-26",
+            "v": 40893.09,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-02",
+            "v": 44870.26,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-09",
+            "v": 58805.09,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-16",
+            "v": 61839.76,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-23",
+            "v": 61191.56,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-02",
+            "v": 61213.67,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-09",
+            "v": 70533.9,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-16",
+            "v": 72626.39,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-23",
+            "v": 69940.36,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-30",
+            "v": 76313.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-06",
+            "v": 75066.42,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-13",
+            "v": 81257.07,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-20",
+            "v": 71475.33,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-27",
+            "v": 57292.51,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-05-04",
+            "v": 57104.92,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-05-11",
+            "v": 56576.99,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-05-18",
+            "v": 57310.83,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-05-25",
+            "v": 57963.8,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-01",
+            "v": 58022.45,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-08",
+            "v": 57880.48,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-15",
+            "v": 57060.05,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-22",
+            "v": 55614.63,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-29",
+            "v": 55980.62,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-07-06",
+            "v": 56983.88,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-07-13",
+            "v": 57331.65,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-07-20",
+            "v": 57087.25,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-07-27",
+            "v": 58071.83,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-08-03",
+            "v": 58047.46,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-08-10",
+            "v": 58919.58,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-08-17",
+            "v": 56512.58,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-08-24",
+            "v": 60499.64,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-08-31",
+            "v": 59548.26,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-07",
+            "v": 58708.63,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-14",
+            "v": 59375.42,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-21",
+            "v": 51663.49,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-28",
+            "v": 50485.21,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-10-05",
+            "v": 51521.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-10-12",
+            "v": 56187.85,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-10-19",
+            "v": 64095.2,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-10-26",
+            "v": 60216.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-02",
+            "v": 63136.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-09",
+            "v": 66921.08,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-16",
+            "v": 61303.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-23",
+            "v": 59309.54,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-30",
+            "v": 58460.41,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-12-07",
+            "v": 57977.7,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-12-14",
+            "v": 57350.85,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-12-21",
+            "v": 57596.4,
+            "asset": "SP500"
+          },
+          {
+            "d": "2021-12-28",
+            "v": 59038.25,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-01-04",
+            "v": 59290.75,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-01-11",
+            "v": 58168.99,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-01-18",
+            "v": 56112.3,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-01-25",
+            "v": 57626.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-01",
+            "v": 56466.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-08",
+            "v": 56221.95,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-15",
+            "v": 57778.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-22",
+            "v": 59357.75,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-01",
+            "v": 60992.35,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-08",
+            "v": 66125.89,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-15",
+            "v": 62062.21,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-22",
+            "v": 61394.45,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-29",
+            "v": 61244.9,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-04-05",
+            "v": 57377.73,
+            "asset": "BTC"
+          },
+          {
+            "d": "2022-04-12",
+            "v": 56109.83,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-04-19",
+            "v": 57461.53,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-04-26",
+            "v": 54122.67,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-05-03",
+            "v": 55199.82,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-05-10",
+            "v": 53890.91,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-05-17",
+            "v": 53901.15,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-05-24",
+            "v": 54032.02,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-05-31",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-07",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-14",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-21",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-28",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-05",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-12",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-19",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-26",
+            "v": 53869.92,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-08-02",
+            "v": 55856.74,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-08-09",
+            "v": 56652.98,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-08-16",
+            "v": 59389.39,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-08-23",
+            "v": 58248.62,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-08-30",
+            "v": 55836.75,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-09-06",
+            "v": 55101.91,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-09-13",
+            "v": 54493.89,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-09-20",
+            "v": 53979.84,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-09-27",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-04",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-11",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-18",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-25",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-11-01",
+            "v": 53747.51,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-11-08",
+            "v": 52511.41,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-11-15",
+            "v": 53176.98,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-11-22",
+            "v": 53734.52,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-11-29",
+            "v": 52621.91,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-12-06",
+            "v": 51664.94,
+            "asset": "SP500"
+          },
+          {
+            "d": "2022-12-13",
+            "v": 52582.7,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-20",
+            "v": 52278.21,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-27",
+            "v": 52119.46,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-03",
+            "v": 52647.84,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-10",
+            "v": 53282.73,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-17",
+            "v": 53808.97,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-24",
+            "v": 56517.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-01-31",
+            "v": 57896.68,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-07",
+            "v": 58858.36,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-14",
+            "v": 56218.47,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-21",
+            "v": 62098.81,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-28",
+            "v": 59217.25,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-07",
+            "v": 56432.36,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-14",
+            "v": 62631.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-21",
+            "v": 71349.76,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-28",
+            "v": 68487.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-04",
+            "v": 70063.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-11",
+            "v": 75500.1,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-18",
+            "v": 75514.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-25",
+            "v": 69467.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-02",
+            "v": 70959.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-09",
+            "v": 68262.3,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-16",
+            "v": 67476.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-23",
+            "v": 64477.52,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-05-30",
+            "v": 66061.42,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-06-06",
+            "v": 67286.54,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-06-13",
+            "v": 68318.78,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-06-20",
+            "v": 67634.78,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-06-27",
+            "v": 67582.68,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-07-04",
+            "v": 66506.01,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-11",
+            "v": 65607.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-18",
+            "v": 62649.14,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-25",
+            "v": 62294.06,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-01",
+            "v": 63625.01,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-08",
+            "v": 63783.34,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-15",
+            "v": 63278.61,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-08-22",
+            "v": 62647.21,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-08-29",
+            "v": 64670.38,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-09-05",
+            "v": 64865.28,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-09-12",
+            "v": 64645.69,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-09-19",
+            "v": 64753.28,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-09-26",
+            "v": 62884.23,
+            "asset": "SP500"
+          },
+          {
+            "d": "2023-10-03",
+            "v": 60830.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-10-10",
+            "v": 59998.25,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-10-17",
+            "v": 59818.25,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-10-24",
+            "v": 70380.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-10-31",
+            "v": 72340.52,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-07",
+            "v": 73222.41,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-14",
+            "v": 73550.05,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-21",
+            "v": 72466.41,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-28",
+            "v": 76458.97,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-05",
+            "v": 90079.43,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-12",
+            "v": 85261.52,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-19",
+            "v": 85694.78,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-26",
+            "v": 85444.62,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-02",
+            "v": 90189.12,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-09",
+            "v": 93292.89,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-16",
+            "v": 87302.86,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-23",
+            "v": 82038.3,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-01-30",
+            "v": 83432.66,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-02-06",
+            "v": 84678.22,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-02-13",
+            "v": 84447.38,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-02-20",
+            "v": 87222.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-02-27",
+            "v": 94565.22,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-05",
+            "v": 105646.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-12",
+            "v": 117535.68,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-19",
+            "v": 102336.42,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-26",
+            "v": 116062.02,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-02",
+            "v": 109549.51,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-09",
+            "v": 114379.35,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-16",
+            "v": 107926.79,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-23",
+            "v": 98210.03,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-04-30",
+            "v": 96120.0,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-07",
+            "v": 96648.89,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-14",
+            "v": 98004.38,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-21",
+            "v": 100221.59,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-28",
+            "v": 97457.66,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-06-04",
+            "v": 99975.49,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-11",
+            "v": 96656.78,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-18",
+            "v": 93713.7,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-25",
+            "v": 88977.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-07-02",
+            "v": 89261.51,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-07-09",
+            "v": 89338.9,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-07-16",
+            "v": 90224.06,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-07-23",
+            "v": 88573.23,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-07-30",
+            "v": 87262.4,
+            "asset": "SP500"
+          },
+          {
+            "d": "2024-08-06",
+            "v": 85385.51,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-13",
+            "v": 88275.68,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-20",
+            "v": 88651.98,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-27",
+            "v": 88193.54,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-03",
+            "v": 88043.51,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-10",
+            "v": 89074.44,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-17",
+            "v": 90164.44,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-24",
+            "v": 93367.29,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-01",
+            "v": 93722.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-08",
+            "v": 93229.13,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-15",
+            "v": 95460.25,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-22",
+            "v": 94211.36,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-10-29",
+            "v": 101713.76,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-05",
+            "v": 96498.87,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-12",
+            "v": 124774.64,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-19",
+            "v": 131855.02,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-26",
+            "v": 133233.32,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-03",
+            "v": 138293.81,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-10",
+            "v": 138547.49,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-17",
+            "v": 152655.74,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-24",
+            "v": 143436.58,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-31",
+            "v": 135801.28,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-07",
+            "v": 141143.53,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-14",
+            "v": 142232.16,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-21",
+            "v": 154057.91,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-28",
+            "v": 146723.57,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-02-04",
+            "v": 138042.37,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-11",
+            "v": 141256.91,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-18",
+            "v": 139687.09,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-25",
+            "v": 138710.4,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-04",
+            "v": 138636.78,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-11",
+            "v": 134253.31,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-18",
+            "v": 138860.37,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-25",
+            "v": 139815.94,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-01",
+            "v": 144010.67,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-08",
+            "v": 135846.75,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-15",
+            "v": 141786.72,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-22",
+            "v": 147552.56,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-29",
+            "v": 145299.37,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-06",
+            "v": 150614.47,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-13",
+            "v": 145864.98,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-20",
+            "v": 143706.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-05-27",
+            "v": 144670.58,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-03",
+            "v": 139144.6,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-10",
+            "v": 145831.43,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-17",
+            "v": 136869.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-24",
+            "v": 138185.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-01",
+            "v": 135530.2,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-08",
+            "v": 135123.61,
+            "asset": "CASH"
+          },
+          {
+            "d": "2025-07-15",
+            "v": 135123.61,
+            "asset": "CASH"
+          },
+          {
+            "d": "2025-07-22",
+            "v": 136920.21,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-29",
+            "v": 135685.12,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-05",
+            "v": 131474.19,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-12",
+            "v": 138008.88,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-19",
+            "v": 129019.51,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-26",
+            "v": 128388.66,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-09-02",
+            "v": 125989.19,
+            "asset": "SP500"
+          },
+          {
+            "d": "2025-09-09",
+            "v": 127356.44,
+            "asset": "SP500"
+          },
+          {
+            "d": "2025-09-16",
+            "v": 128619.68,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-23",
+            "v": 131396.88,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-30",
+            "v": 134278.52,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-07",
+            "v": 139274.32,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-14",
+            "v": 146745.99,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-21",
+            "v": 143968.66,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-28",
+            "v": 139598.29,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-04",
+            "v": 140543.48,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-11",
+            "v": 145722.73,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-18",
+            "v": 143690.21,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-25",
+            "v": 147339.26,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-02",
+            "v": 147898.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-09",
+            "v": 148174.04,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-16",
+            "v": 150155.76,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-23",
+            "v": 156221.3,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-30",
+            "v": 152200.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-06",
+            "v": 156873.19,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-13",
+            "v": 161274.93,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-20",
+            "v": 167659.53,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-27",
+            "v": 175362.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-03",
+            "v": 170391.55,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-10",
+            "v": 172327.27,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-17",
+            "v": 168928.32,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-24",
+            "v": 179213.22,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-03",
+            "v": 178992.38,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-10",
+            "v": 184537.1,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-17",
+            "v": 178268.96,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-24",
+            "v": 155362.74,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-31",
+            "v": 147537.82,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-07",
+            "v": 147537.82,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-14",
+            "v": 147537.82,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-21",
+            "v": 148984.63,
+            "asset": "SP500"
+          },
+          {
+            "d": "2026-04-28",
+            "v": 151390.99,
+            "asset": "SP500"
+          },
+          {
+            "d": "2026-05-05",
+            "v": 154407.11,
+            "asset": "SP500"
+          },
+          {
+            "d": "2026-05-12",
+            "v": 156294.11,
+            "asset": "SP500"
+          },
+          {
+            "d": "2026-05-19",
+            "v": 157005.87,
+            "asset": "SP500"
+          },
+          {
+            "d": "2026-05-26",
+            "v": 157261.78,
+            "asset": "SP500"
+          }
+        ]
+      }
+    },
+    "dex": {
+      "key": "dex",
+      "name": "APEX Dex",
+      "label": "Dual BTC spot/PAXG 6w + buffer 3pp + SMA30",
+      "primary": false,
+      "run_time": "Martedi 15:30 Italia, insieme ad APEX Legit",
+      "execution": "DEX 24/7: esegui quando confermi, senza deploy separato",
+      "weekday": 1,
+      "lookback_weeks": 6,
+      "buffer_pp": 3.0,
+      "sma_weeks": 30,
+      "dual": true,
+      "apply_tax": false,
+      "cost_bps": 30.0,
+      "assets": {
+        "BTC": {
+          "code": "BTC",
+          "label": "Bitcoin spot",
+          "product": "BTC spot",
+          "isin": "",
+          "fineco_hint": "Non Fineco: asset spot/on-chain",
+          "tax_bucket": "crypto",
+          "ter": null
+        },
+        "GOLD": {
+          "code": "GOLD",
+          "label": "PAX Gold",
+          "product": "PAXG token",
+          "isin": "",
+          "fineco_hint": "Non Fineco: token PAXG, oro tokenizzato",
+          "tax_bucket": "crypto",
+          "ter": null
+        },
+        "CASH": {
+          "code": "CASH",
+          "label": "Stablecoin",
+          "product": "Stablecoin USD/EUR",
+          "isin": "",
+          "fineco_hint": "Non Fineco: stablecoin su wallet/exchange",
+          "tax_bucket": "crypto",
+          "ter": null
+        }
+      },
+      "universe": [
+        "BTC",
+        "GOLD",
+        "CASH"
+      ],
+      "chart_explainer": "Simulazione su capitale iniziale 10.000 EUR, costi inclusi; non e' il tuo saldo reale.",
+      "current": {
+        "date": "2026-05-26",
+        "asset": "CASH",
+        "raw_asset": "BTC",
+        "changed": false,
+        "previous_asset": "CASH",
+        "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+        "momentum": {
+          "BTC": 3.3712,
+          "GOLD": -5.4183,
+          "SP500": 0.0
+        },
+        "sma30_btc": 69618.51,
+        "prices": {
+          "BTC": 65157.0554,
+          "GOLD": 3880.4135,
+          "SP500": 1.0,
+          "CASH": 1.0
+        }
+      },
+      "history": [
+        {
+          "date": "2026-02-10",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -23.0625,
+            "GOLD": 14.4757,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 57790.3651,
+            "GOLD": 4235.0553,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-02-17",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -28.81,
+            "GOLD": 6.6404,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 56957.6994,
+            "GOLD": 4105.249,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-02-24",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -33.4982,
+            "GOLD": 11.128,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 54333.4689,
+            "GOLD": 4382.5405,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-03",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -23.0511,
+            "GOLD": 6.595,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 58384.2405,
+            "GOLD": 4398.2998,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-10",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -19.7695,
+            "GOLD": 2.3947,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 60192.3971,
+            "GOLD": 4472.3569,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-17",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": false,
+          "previous_asset": "GOLD",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": 0.2805,
+            "GOLD": 3.3704,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 64282.9879,
+            "GOLD": 4342.8938,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-24",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 5.1282,
+            "GOLD": -7.4776,
+            "SP500": 0.0
+          },
+          "sma30_btc": 79264.85,
+          "prices": {
+            "BTC": 60753.955,
+            "GOLD": 3918.3747,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-31",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 4.5344,
+            "GOLD": -0.453,
+            "SP500": 0.0
+          },
+          "sma30_btc": 78085.72,
+          "prices": {
+            "BTC": 59540.3923,
+            "GOLD": 4086.6532,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-04-07",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.7244,
+            "GOLD": -5.2005,
+            "SP500": 0.0
+          },
+          "sma30_btc": 77004.67,
+          "prices": {
+            "BTC": 62333.7464,
+            "GOLD": 4154.6269,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-04-14",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.9608,
+            "GOLD": -6.7205,
+            "SP500": 0.0
+          },
+          "sma30_btc": 75794.91,
+          "prices": {
+            "BTC": 63032.1133,
+            "GOLD": 4102.7109,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-04-21",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.6406,
+            "GOLD": -10.2674,
+            "SP500": 0.0
+          },
+          "sma30_btc": 74790.66,
+          "prices": {
+            "BTC": 64791.4373,
+            "GOLD": 4013.1607,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-04-28",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "BTC non supera CASH di almeno 3 punti",
+          "momentum": {
+            "BTC": 1.312,
+            "GOLD": -9.9179,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 65126.3582,
+            "GOLD": 3912.1702,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-05",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 13.9285,
+            "GOLD": 0.0412,
+            "SP500": 0.0
+          },
+          "sma30_btc": 72570.88,
+          "prices": {
+            "BTC": 69216.099,
+            "GOLD": 3919.9907,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-12",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.7412,
+            "GOLD": -2.1407,
+            "SP500": 0.0
+          },
+          "sma30_btc": 71588.27,
+          "prices": {
+            "BTC": 68317.3481,
+            "GOLD": 3999.169,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-19",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 5.6434,
+            "GOLD": -7.2479,
+            "SP500": 0.0
+          },
+          "sma30_btc": 70678.06,
+          "prices": {
+            "BTC": 65851.5124,
+            "GOLD": 3853.5034,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-26",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 3.3712,
+            "GOLD": -5.4183,
+            "SP500": 0.0
+          },
+          "sma30_btc": 69618.51,
+          "prices": {
+            "BTC": 65157.0554,
+            "GOLD": 3880.4135,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        }
+      ],
+      "changes": [
+        {
+          "date": "2019-11-26",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -11.9123,
+            "GOLD": 0.3357,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 6553.5589,
+            "GOLD": 1394.5945,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2019-12-10",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -22.5623,
+            "GOLD": -3.0752,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 6577.6081,
+            "GOLD": 1345.7567,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-01-07",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 11.2421,
+            "GOLD": -1.4976,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 7290.3162,
+            "GOLD": 1373.709,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-03-03",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": 0.0542,
+            "GOLD": 3.359,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 7885.632,
+            "GOLD": 1475.2231,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-03-17",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -43.5932,
+            "GOLD": -4.1622,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 4681.1188,
+            "GOLD": 1382.2841,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-03-24",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -33.1135,
+            "GOLD": 5.9709,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 6256.4303,
+            "GOLD": 1537.257,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-05-05",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 31.9674,
+            "GOLD": 1.2123,
+            "SP500": 0.0
+          },
+          "sma30_btc": 7307.15,
+          "prices": {
+            "BTC": 8256.4457,
+            "GOLD": 1555.8925,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-06-30",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -8.8482,
+            "GOLD": -1.5718,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8124.6812,
+            "GOLD": 1591.5491,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-07-14",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -4.8842,
+            "GOLD": 3.081,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8147.0336,
+            "GOLD": 1599.6525,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-07-28",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 10.2187,
+            "GOLD": 5.5753,
+            "SP500": 0.0
+          },
+          "sma30_btc": 7825.48,
+          "prices": {
+            "BTC": 9272.2981,
+            "GOLD": 1670.5007,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-09-08",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -7.5715,
+            "GOLD": -2.3785,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 8570.2503,
+            "GOLD": 1630.7674,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2020-10-20",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 18.1449,
+            "GOLD": -0.9007,
+            "SP500": 0.0
+          },
+          "sma30_btc": 8516.42,
+          "prices": {
+            "BTC": 10125.3098,
+            "GOLD": 1616.0785,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-04-27",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -4.3692,
+            "GOLD": 1.4324,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 45550.9117,
+            "GOLD": 1482.7557,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-06-29",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -14.813,
+            "GOLD": -4.1215,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 30067.9569,
+            "GOLD": 1481.7562,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-08-03",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 17.7481,
+            "GOLD": 2.0911,
+            "SP500": 0.0
+          },
+          "sma30_btc": 37038.55,
+          "prices": {
+            "BTC": 32129.7707,
+            "GOLD": 1526.9447,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-08-10",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 29.1537,
+            "GOLD": -0.0498,
+            "SP500": 0.0
+          },
+          "sma30_btc": 37403.16,
+          "prices": {
+            "BTC": 38833.8873,
+            "GOLD": 1481.0182,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-09-21",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -10.6673,
+            "GOLD": 2.6367,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 34691.36,
+            "GOLD": 1520.0689,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-10-05",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.1555,
+            "GOLD": -1.0798,
+            "SP500": 0.0
+          },
+          "sma30_btc": 38076.24,
+          "prices": {
+            "BTC": 44338.8007,
+            "GOLD": 1518.9948,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2021-11-30",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -8.7753,
+            "GOLD": 2.866,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 50476.5939,
+            "GOLD": 1573.2359,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-03-29",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.5114,
+            "GOLD": 6.1746,
+            "SP500": 0.0
+          },
+          "sma30_btc": 42497.97,
+          "prices": {
+            "BTC": 43174.8299,
+            "GOLD": 1745.6193,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-04-05",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 22.6072,
+            "GOLD": 3.6568,
+            "SP500": 0.0
+          },
+          "sma30_btc": 42567.5,
+          "prices": {
+            "BTC": 41505.6095,
+            "GOLD": 1749.879,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-04-19",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 7.9691,
+            "GOLD": -4.1651,
+            "SP500": 0.0
+          },
+          "sma30_btc": 42594.9,
+          "prices": {
+            "BTC": 38493.3848,
+            "GOLD": 1813.3576,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-08-09",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 18.5116,
+            "GOLD": 1.918,
+            "SP500": 0.0
+          },
+          "sma30_btc": 30995.77,
+          "prices": {
+            "BTC": 22715.3942,
+            "GOLD": 1755.853,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-09-20",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -17.0824,
+            "GOLD": -5.9013,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 18835.0604,
+            "GOLD": 1652.2342,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2022-11-01",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 10.0121,
+            "GOLD": 0.4441,
+            "SP500": 0.0
+          },
+          "sma30_btc": 24102.39,
+          "prices": {
+            "BTC": 20720.8536,
+            "GOLD": 1659.5715,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-01-17",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 20.0178,
+            "GOLD": 3.1554,
+            "SP500": 0.0
+          },
+          "sma30_btc": 19101.07,
+          "prices": {
+            "BTC": 19539.4891,
+            "GOLD": 1744.3046,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-05-16",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -3.6763,
+            "GOLD": -0.9798,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 24864.2564,
+            "GOLD": 1836.9804,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-06-20",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 3.0912,
+            "GOLD": -5.0123,
+            "SP500": 0.0
+          },
+          "sma30_btc": 22213.46,
+          "prices": {
+            "BTC": 25930.7013,
+            "GOLD": 1761.9796,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-08-08",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -3.8236,
+            "GOLD": 0.4902,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 27051.7718,
+            "GOLD": 1754.1236,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-10-03",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.5701,
+            "GOLD": 0.7955,
+            "SP500": 0.0
+          },
+          "sma30_btc": 25866.5,
+          "prices": {
+            "BTC": 26171.7657,
+            "GOLD": 1747.6356,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-10-10",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 1.0904,
+            "GOLD": -0.2898,
+            "SP500": 0.0
+          },
+          "sma30_btc": 25960.47,
+          "prices": {
+            "BTC": 25892.1843,
+            "GOLD": 1761.378,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2023-10-17",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 12.7322,
+            "GOLD": 2.6829,
+            "SP500": 0.0
+          },
+          "sma30_btc": 25981.73,
+          "prices": {
+            "BTC": 26923.353,
+            "GOLD": 1818.5276,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-01-16",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -3.0655,
+            "GOLD": -0.7789,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 39426.3599,
+            "GOLD": 1842.9185,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-02-06",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 3.9534,
+            "GOLD": 1.6112,
+            "SP500": 0.0
+          },
+          "sma30_btc": 31780.35,
+          "prices": {
+            "BTC": 40109.2436,
+            "GOLD": 1877.4015,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-04-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": 2.1762,
+            "GOLD": 17.2429,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 60053.9861,
+            "GOLD": 2260.7851,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-05-28",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 4.7006,
+            "GOLD": -4.3808,
+            "SP500": 0.0
+          },
+          "sma30_btc": 48918.13,
+          "prices": {
+            "BTC": 62876.9112,
+            "GOLD": 2161.745,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-07-02",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -10.5405,
+            "GOLD": -2.5278,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 57770.7238,
+            "GOLD": 2159.7306,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-07-16",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -7.703,
+            "GOLD": 4.8753,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 59713.6106,
+            "GOLD": 2245.7093,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2024-10-15",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 18.427,
+            "GOLD": 8.7431,
+            "SP500": 0.0
+          },
+          "sma30_btc": 58358.42,
+          "prices": {
+            "BTC": 61453.9052,
+            "GOLD": 2447.8283,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2025-01-28",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -3.8693,
+            "GOLD": 4.7142,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 97014.6986,
+            "GOLD": 2643.8701,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2025-05-13",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 19.2592,
+            "GOLD": 1.5657,
+            "SP500": 0.0
+          },
+          "sma30_btc": 85046.84,
+          "prices": {
+            "BTC": 93884.0837,
+            "GOLD": 2940.353,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2025-07-01",
+          "asset": "CASH",
+          "raw_asset": "CASH",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "BTC e Oro non qualificano",
+          "momentum": {
+            "BTC": -5.6731,
+            "GOLD": -3.4436,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 89672.313,
+            "GOLD": 2840.0576,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2025-07-15",
+          "asset": "BTC",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "BTC positivo e almeno forte quanto Oro",
+          "momentum": {
+            "BTC": 9.6705,
+            "GOLD": -2.7652,
+            "SP500": 0.0
+          },
+          "sma30_btc": 88707.54,
+          "prices": {
+            "BTC": 100955.0659,
+            "GOLD": 2862.1731,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2025-08-26",
+          "asset": "GOLD",
+          "raw_asset": "GOLD",
+          "changed": true,
+          "previous_asset": "BTC",
+          "reason": "Oro positivo e BTC non qualifica",
+          "momentum": {
+            "BTC": -4.6818,
+            "GOLD": 1.6065,
+            "SP500": 0.0
+          },
+          "sma30_btc": null,
+          "prices": {
+            "BTC": 96228.5496,
+            "GOLD": 2908.1535,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-03-24",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 5.1282,
+            "GOLD": -7.4776,
+            "SP500": 0.0
+          },
+          "sma30_btc": 79264.85,
+          "prices": {
+            "BTC": 60753.955,
+            "GOLD": 3918.3747,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-05",
+          "asset": "GOLD",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 13.9285,
+            "GOLD": 0.0412,
+            "SP500": 0.0
+          },
+          "sma30_btc": 72570.88,
+          "prices": {
+            "BTC": 69216.099,
+            "GOLD": 3919.9907,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-12",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": true,
+          "previous_asset": "GOLD",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 14.7412,
+            "GOLD": -2.1407,
+            "SP500": 0.0
+          },
+          "sma30_btc": 71588.27,
+          "prices": {
+            "BTC": 68317.3481,
+            "GOLD": 3999.169,
+            "SP500": 1.0,
+            "CASH": 1.0
+          }
+        },
+        {
+          "date": "2026-05-26",
+          "asset": "CASH",
+          "raw_asset": "BTC",
+          "changed": false,
+          "previous_asset": "CASH",
+          "reason": "Filtro anti-crash: BTC sotto media 30 settimane, rivalutato piano B",
+          "momentum": {
+            "BTC": 3.3712,
+            "GOLD": -5.4183,
+            "SP500": 0.0
+          },
+          "sma30_btc": 69618.51,
+          "prices": {
+            "BTC": 65157.0554,
+            "GOLD": 3880.4135,
+            "SP500": 1.0,
+            "CASH": 1.0
+          },
+          "current_marker": true
+        }
+      ],
+      "backtest": {
+        "initial": 10000.0,
+        "final": 185813.6,
+        "cagr": 56.1787,
+        "max_drawdown": -29.203,
+        "calmar": 1.924,
+        "ulcer": 13.0209,
+        "switches": 47,
+        "switches_per_year": 7.17,
+        "taxes_paid": 0.0,
+        "equity": [
+          {
+            "d": "2019-11-05",
+            "v": 10000.0,
+            "asset": "START"
+          },
+          {
+            "d": "2019-11-12",
+            "v": 9487.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-11-19",
+            "v": 8801.74,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-11-26",
+            "v": 7782.99,
+            "asset": "BTC"
+          },
+          {
+            "d": "2019-12-03",
+            "v": 7381.53,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-12-10",
+            "v": 7487.9,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2019-12-17",
+            "v": 7465.44,
+            "asset": "CASH"
+          },
+          {
+            "d": "2019-12-24",
+            "v": 7465.44,
+            "asset": "CASH"
+          },
+          {
+            "d": "2019-12-31",
+            "v": 7465.44,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-01-07",
+            "v": 7465.44,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-01-14",
+            "v": 8093.49,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-01-21",
+            "v": 8046.47,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-01-28",
+            "v": 8670.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-04",
+            "v": 8472.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-11",
+            "v": 9549.76,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-18",
+            "v": 9551.99,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-02-25",
+            "v": 8790.88,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-03-03",
+            "v": 8050.83,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-03-10",
+            "v": 7808.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-03-17",
+            "v": 7521.0,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-03-24",
+            "v": 7498.43,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-03-31",
+            "v": 7249.76,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-07",
+            "v": 7370.39,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-14",
+            "v": 7920.82,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-21",
+            "v": 7704.22,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-04-28",
+            "v": 7756.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-05-05",
+            "v": 7566.57,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-05-12",
+            "v": 7442.22,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-05-19",
+            "v": 8144.08,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-05-26",
+            "v": 7403.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-02",
+            "v": 7826.14,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-09",
+            "v": 7916.7,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-16",
+            "v": 7686.57,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-23",
+            "v": 7800.37,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-06-30",
+            "v": 7423.47,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-07-07",
+            "v": 7401.2,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-07-14",
+            "v": 7401.2,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-07-21",
+            "v": 7430.54,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-07-28",
+            "v": 7705.81,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2020-08-04",
+            "v": 7893.01,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-08-11",
+            "v": 8054.64,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-08-18",
+            "v": 8365.7,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-08-25",
+            "v": 7984.69,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-01",
+            "v": 8307.48,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-08",
+            "v": 7101.0,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-09-15",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-09-22",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-09-29",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-10-06",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-10-13",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-10-20",
+            "v": 7079.7,
+            "asset": "CASH"
+          },
+          {
+            "d": "2020-10-27",
+            "v": 8060.08,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-03",
+            "v": 8352.72,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-10",
+            "v": 9012.57,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-17",
+            "v": 10372.16,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-11-24",
+            "v": 11247.42,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-01",
+            "v": 10979.72,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-08",
+            "v": 10543.82,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-15",
+            "v": 11141.63,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-22",
+            "v": 13548.69,
+            "asset": "BTC"
+          },
+          {
+            "d": "2020-12-29",
+            "v": 15604.97,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-05",
+            "v": 19341.55,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-12",
+            "v": 19446.3,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-19",
+            "v": 20819.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-01-26",
+            "v": 18692.86,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-02",
+            "v": 20511.42,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-09",
+            "v": 26882.0,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-16",
+            "v": 28270.03,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-02-23",
+            "v": 27974.52,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-02",
+            "v": 27985.43,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-09",
+            "v": 32247.23,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-16",
+            "v": 33204.81,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-23",
+            "v": 31977.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-03-30",
+            "v": 34892.65,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-06",
+            "v": 34323.33,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-13",
+            "v": 37154.92,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-20",
+            "v": 32683.28,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-04-27",
+            "v": 31754.03,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-05-04",
+            "v": 31612.51,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-05-11",
+            "v": 32741.58,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-05-18",
+            "v": 32997.42,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-05-25",
+            "v": 33274.05,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-01",
+            "v": 33336.76,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-08",
+            "v": 33184.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-15",
+            "v": 33187.32,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-22",
+            "v": 31934.49,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-06-29",
+            "v": 31637.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-07-06",
+            "v": 31542.52,
+            "asset": "CASH"
+          },
+          {
+            "d": "2021-07-13",
+            "v": 31542.52,
+            "asset": "CASH"
+          },
+          {
+            "d": "2021-07-20",
+            "v": 31542.52,
+            "asset": "CASH"
+          },
+          {
+            "d": "2021-07-27",
+            "v": 31542.52,
+            "asset": "CASH"
+          },
+          {
+            "d": "2021-08-03",
+            "v": 31542.52,
+            "asset": "CASH"
+          },
+          {
+            "d": "2021-08-10",
+            "v": 30502.02,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-08-17",
+            "v": 29712.0,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-08-24",
+            "v": 31809.08,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-08-31",
+            "v": 31309.79,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-07",
+            "v": 30869.22,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-14",
+            "v": 31220.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-21",
+            "v": 27166.53,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-09-28",
+            "v": 26577.24,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-10-05",
+            "v": 27065.89,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-10-12",
+            "v": 29520.05,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-10-19",
+            "v": 33675.27,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-10-26",
+            "v": 31638.37,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-02",
+            "v": 33173.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-09",
+            "v": 35162.97,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-16",
+            "v": 32212.5,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-23",
+            "v": 31165.47,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-11-30",
+            "v": 30720.17,
+            "asset": "BTC"
+          },
+          {
+            "d": "2021-12-07",
+            "v": 30855.12,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-12-14",
+            "v": 30637.94,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-12-21",
+            "v": 30972.87,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2021-12-28",
+            "v": 31174.74,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-01-04",
+            "v": 31283.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-01-11",
+            "v": 31334.16,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-01-18",
+            "v": 31053.28,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-01-25",
+            "v": 31981.48,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-01",
+            "v": 31351.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-08",
+            "v": 31146.95,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-15",
+            "v": 32007.66,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-02-22",
+            "v": 32865.12,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-01",
+            "v": 33553.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-08",
+            "v": 36837.05,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-15",
+            "v": 34267.75,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-22",
+            "v": 33926.08,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-03-29",
+            "v": 33984.0,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-04-05",
+            "v": 32572.1,
+            "asset": "BTC"
+          },
+          {
+            "d": "2022-04-12",
+            "v": 33588.93,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-04-19",
+            "v": 33652.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-04-26",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-05-03",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-05-10",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-05-17",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-05-24",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-05-31",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-07",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-14",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-21",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-06-28",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-05",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-12",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-19",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-07-26",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-08-02",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-08-09",
+            "v": 33551.47,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-08-16",
+            "v": 33217.48,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-08-23",
+            "v": 33459.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-08-30",
+            "v": 32632.74,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-09-06",
+            "v": 32420.77,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-09-13",
+            "v": 31872.16,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-09-20",
+            "v": 31476.77,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-09-27",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-04",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-11",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-18",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-10-25",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-11-01",
+            "v": 31382.34,
+            "asset": "CASH"
+          },
+          {
+            "d": "2022-11-08",
+            "v": 32000.52,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-11-15",
+            "v": 32398.06,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-11-22",
+            "v": 31917.63,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-11-29",
+            "v": 31698.47,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-06",
+            "v": 31879.75,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-13",
+            "v": 32363.94,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-20",
+            "v": 32185.18,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2022-12-27",
+            "v": 32161.06,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-03",
+            "v": 32514.76,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-10",
+            "v": 32744.93,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-17",
+            "v": 32885.68,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-01-24",
+            "v": 34929.83,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-01-31",
+            "v": 35783.36,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-07",
+            "v": 36378.76,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-14",
+            "v": 34748.16,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-21",
+            "v": 38383.75,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-02-28",
+            "v": 36603.74,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-07",
+            "v": 34883.38,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-14",
+            "v": 38716.61,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-21",
+            "v": 44106.75,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-03-28",
+            "v": 42338.56,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-04",
+            "v": 43314.29,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-11",
+            "v": 46676.35,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-18",
+            "v": 46686.45,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-04-25",
+            "v": 42949.32,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-02",
+            "v": 43873.21,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-09",
+            "v": 42206.71,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-16",
+            "v": 41721.92,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-05-23",
+            "v": 41596.75,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-05-30",
+            "v": 41596.75,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-06-06",
+            "v": 41596.75,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-06-13",
+            "v": 41596.75,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-06-20",
+            "v": 41596.75,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-06-27",
+            "v": 44984.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-04",
+            "v": 45105.21,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-11",
+            "v": 44497.1,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-18",
+            "v": 42491.95,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-07-25",
+            "v": 42252.34,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-01",
+            "v": 43156.3,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-08",
+            "v": 43264.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-08-15",
+            "v": 42805.17,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-08-22",
+            "v": 42636.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-08-29",
+            "v": 43439.41,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-09-05",
+            "v": 43550.46,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-09-12",
+            "v": 43301.42,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-09-19",
+            "v": 44172.27,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-09-26",
+            "v": 44113.84,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-10-03",
+            "v": 42975.59,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2023-10-10",
+            "v": 42388.95,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-10-17",
+            "v": 42261.79,
+            "asset": "CASH"
+          },
+          {
+            "d": "2023-10-24",
+            "v": 49724.99,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-10-31",
+            "v": 51111.48,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-07",
+            "v": 51736.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-14",
+            "v": 51969.03,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-21",
+            "v": 51204.84,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-11-28",
+            "v": 54027.46,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-05",
+            "v": 63653.51,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-12",
+            "v": 60250.82,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-19",
+            "v": 60558.72,
+            "asset": "BTC"
+          },
+          {
+            "d": "2023-12-26",
+            "v": 60383.68,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-02",
+            "v": 63738.35,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-09",
+            "v": 65933.67,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-16",
+            "v": 61702.19,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-01-23",
+            "v": 61517.08,
+            "asset": "CASH"
+          },
+          {
+            "d": "2024-01-30",
+            "v": 61517.08,
+            "asset": "CASH"
+          },
+          {
+            "d": "2024-02-06",
+            "v": 61517.08,
+            "asset": "CASH"
+          },
+          {
+            "d": "2024-02-13",
+            "v": 70610.05,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-02-20",
+            "v": 74197.49,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-02-27",
+            "v": 80445.96,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-05",
+            "v": 89874.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-12",
+            "v": 99991.92,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-19",
+            "v": 87064.23,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-03-26",
+            "v": 98743.99,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-02",
+            "v": 93206.07,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-09",
+            "v": 97318.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-16",
+            "v": 91830.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-04-23",
+            "v": 87783.23,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-04-30",
+            "v": 86914.99,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-07",
+            "v": 86110.42,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-14",
+            "v": 87778.07,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-21",
+            "v": 89731.07,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-05-28",
+            "v": 87544.44,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-06-04",
+            "v": 89808.67,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-11",
+            "v": 86830.03,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-18",
+            "v": 84188.66,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-06-25",
+            "v": 79936.23,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-07-02",
+            "v": 80193.72,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-07-09",
+            "v": 79953.14,
+            "asset": "CASH"
+          },
+          {
+            "d": "2024-07-16",
+            "v": 79953.14,
+            "asset": "CASH"
+          },
+          {
+            "d": "2024-07-23",
+            "v": 78147.04,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-07-30",
+            "v": 78757.58,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-06",
+            "v": 77369.6,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-13",
+            "v": 79671.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-20",
+            "v": 80282.54,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-08-27",
+            "v": 79786.02,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-03",
+            "v": 79901.8,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-10",
+            "v": 80969.04,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-17",
+            "v": 82322.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-09-24",
+            "v": 84741.22,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-01",
+            "v": 85447.61,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-08",
+            "v": 85124.02,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-15",
+            "v": 86887.65,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2024-10-22",
+            "v": 87775.8,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-10-29",
+            "v": 94768.23,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-05",
+            "v": 89912.17,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-12",
+            "v": 116260.51,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-19",
+            "v": 122861.1,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-11-26",
+            "v": 124148.91,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-03",
+            "v": 128867.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-10",
+            "v": 129108.02,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-17",
+            "v": 142258.77,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-24",
+            "v": 133671.59,
+            "asset": "BTC"
+          },
+          {
+            "d": "2024-12-31",
+            "v": 126559.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-07",
+            "v": 131542.28,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-14",
+            "v": 132560.63,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-21",
+            "v": 143586.07,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-01-28",
+            "v": 136754.39,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-02-04",
+            "v": 142489.0,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-11",
+            "v": 145943.81,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-18",
+            "v": 144965.23,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-02-25",
+            "v": 144771.0,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-04",
+            "v": 144045.72,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-11",
+            "v": 139067.43,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-18",
+            "v": 144739.87,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-03-25",
+            "v": 144538.66,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-01",
+            "v": 149296.19,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-08",
+            "v": 141688.22,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-15",
+            "v": 148334.85,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-22",
+            "v": 150032.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-04-29",
+            "v": 149916.33,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-06",
+            "v": 155391.79,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-13",
+            "v": 151633.72,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-05-20",
+            "v": 153081.11,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-05-27",
+            "v": 154112.62,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-03",
+            "v": 148230.41,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-10",
+            "v": 155358.14,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-17",
+            "v": 145815.18,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-06-24",
+            "v": 147220.93,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-01",
+            "v": 144396.73,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-08",
+            "v": 143963.54,
+            "asset": "CASH"
+          },
+          {
+            "d": "2025-07-15",
+            "v": 143963.54,
+            "asset": "CASH"
+          },
+          {
+            "d": "2025-07-22",
+            "v": 145881.8,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-07-29",
+            "v": 144570.07,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-05",
+            "v": 140087.55,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-12",
+            "v": 147054.37,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-19",
+            "v": 137480.04,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-08-26",
+            "v": 136811.78,
+            "asset": "BTC"
+          },
+          {
+            "d": "2025-09-02",
+            "v": 142088.1,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-09",
+            "v": 145211.8,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-16",
+            "v": 147787.47,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-23",
+            "v": 150004.39,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-09-30",
+            "v": 154930.68,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-07",
+            "v": 160340.53,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-14",
+            "v": 169522.87,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-21",
+            "v": 165397.59,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-10-28",
+            "v": 159698.55,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-04",
+            "v": 160010.7,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-11",
+            "v": 167512.04,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-18",
+            "v": 164532.23,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-11-25",
+            "v": 167935.01,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-02",
+            "v": 170349.36,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-09",
+            "v": 169852.97,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-16",
+            "v": 172473.59,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-23",
+            "v": 180604.86,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2025-12-30",
+            "v": 173519.03,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-06",
+            "v": 180559.03,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-13",
+            "v": 184971.02,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-20",
+            "v": 193530.5,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-01-27",
+            "v": 204861.52,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-03",
+            "v": 197053.62,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-10",
+            "v": 198637.13,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-17",
+            "v": 192548.81,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-02-24",
+            "v": 205554.64,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-03",
+            "v": 206293.8,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-10",
+            "v": 209767.3,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-17",
+            "v": 203695.08,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-24",
+            "v": 183783.83,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-03-31",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-07",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-14",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-21",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-04-28",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-05-05",
+            "v": 183232.48,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-05-12",
+            "v": 186372.72,
+            "asset": "GOLD"
+          },
+          {
+            "d": "2026-05-19",
+            "v": 185813.6,
+            "asset": "CASH"
+          },
+          {
+            "d": "2026-05-26",
+            "v": 185813.6,
+            "asset": "CASH"
+          }
+        ]
+      }
+    }
+  },
+  "intraday": {
+    "WBTC.PA": {
+      "price": 15.015999794006348,
+      "as_of": "2026-05-29T17:20:00",
+      "currency": "EUR",
+      "regular_market_price": 15.062
+    },
+    "SGLN.MI": {
+      "price": 76.08999633789062,
+      "as_of": "2026-05-29T17:25:00",
+      "currency": "EUR",
+      "regular_market_price": 76.09
+    },
+    "CSSPX.MI": {
+      "price": 698.72998046875,
+      "as_of": "2026-05-29T17:30:00",
+      "currency": "EUR",
+      "regular_market_price": 698.73
+    },
+    "XEON.MI": {
+      "price": 149.24899291992188,
+      "as_of": "2026-05-29T17:30:00",
+      "currency": "EUR",
+      "regular_market_price": 149.249
+    }
+  }
+}

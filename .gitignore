@@ -1,4 +1,5 @@
 .local/
+_cache/
 node_modules/
 netlify/functions/node_modules/
 __pycache__/
@@ -10,5 +11,9 @@ __pycache__/
 !netlify/functions/package-lock.json
 data/backtest/prices*.csv
 data/backtest/scored_v25.json
+data/apex/
+dashboard/*.backup_*.json
+output/apex_backtest*.json
+output/apex_deep_*
 data/xbrl_cache/
 qfas/cache/

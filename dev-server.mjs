@@ -146,6 +146,9 @@ async function routeFunction(req, res, url) {
     return json(res, 500, { error: "vix_unavailable" });
   }
   if (url.pathname.endsWith("/ai")) return json(res, 503, { error: "AI locale non configurata. In deploy usa GROQ_API_KEY." });
+  if (url.pathname.endsWith("/run-engines") && req.method === "POST") {
+    return json(res, 501, { ok: false, error: "Run GitHub disponibile solo in deploy con GITHUB_ACTIONS_TOKEN." });
+  }
   return json(res, 404, { error: "not_found" });
 }
 function mime(file) {

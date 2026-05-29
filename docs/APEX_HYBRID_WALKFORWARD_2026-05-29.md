@@ -1,0 +1,91 @@
+# APEX hybrid + walk-forward - 2026-05-29
+
+Stato: test locale, nessun deploy.
+
+## Cosa stiamo testando
+
+La critica a `Buffer 5pp 5w` e' corretta: potrebbe essere un parametro fortunato sul passato. Qui quindi non guardo solo il full-period 2018-2026, ma anche finestre rolling / out-of-sample. Ho aggiunto il filtro anti-crash SMA30 di APEX R alla nostra vincitrice e ad alcune varianti vicine.
+
+## Full Period Netto Fiscale
+
+| Strategia | Timing | CAGR | Finale 10k | MaxDD | Calmar | R2 | Ulcer | Sw/anno |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Buffer 3pp 6w + SMA30 | martedi close | 41.74% | 185.710 | -40.32% | 1.035 | 0.928 | 19.31% | 8.1 |
+| Buffer 5pp 5w | venerdi open | 40.46% | 171.931 | -44.46% | 0.91 | 0.878 | 23.14% | 7.3 |
+| Buffer 5pp 5w + SMA30 | venerdi open | 35.11% | 124.228 | -39.60% | 0.887 | 0.883 | 21.89% | 7.6 |
+| APEX R 8w + SMA30 | mercoledi close | 32.31% | 104.289 | -42.28% | 0.764 | 0.916 | 25.77% | 9.7 |
+| Buffer 5pp 6w + SMA30 | venerdi open | 25.34% | 66.254 | -63.02% | 0.402 | 0.862 | 25.76% | 7.8 |
+| Buffer 5pp 8w + SMA30 | venerdi open | 23.47% | 58.426 | -59.61% | 0.394 | 0.878 | 26.23% | 6.2 |
+
+## Rolling / Walk-Forward Aggregato
+
+Questa e' la tabella piu importante per il dubbio overfitting. `CAGR min` e `DD peggiore` contano piu del CAGR massimo.
+
+| Strategia | CAGR medio | CAGR min | DD peggiore | Calmar medio | R2 medio | Periodi >0 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Buffer 5pp 5w + SMA30 | 39.20% | 22.32% | -38.57% | 1.164 | 0.568 | 8/8 |
+| Buffer 3pp 6w + SMA30 | 46.48% | 22.21% | -40.36% | 1.419 | 0.685 | 8/8 |
+| Buffer 5pp 5w | 46.61% | 16.65% | -44.46% | 1.294 | 0.584 | 8/8 |
+| Buffer 5pp 6w + SMA30 | 28.60% | 13.91% | -64.45% | 0.762 | 0.431 | 8/8 |
+| Buffer 5pp 8w + SMA30 | 28.25% | 6.42% | -62.68% | 0.728 | 0.475 | 8/8 |
+| APEX R 8w + SMA30 | 34.84% | 6.13% | -42.28% | 0.993 | 0.613 | 8/8 |
+
+## Dettaglio Finestre
+
+| Periodo | Strategia | CAGR | MaxDD | Calmar | R2 | Sw/anno |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2018-2020 | Buffer 3pp 6w + SMA30 | 46.71% | -29.06% | 1.607 | 0.812 | 8.8 |
+| 2018-2020 | Buffer 5pp 5w | 45.36% | -34.85% | 1.302 | 0.733 | 7.5 |
+| 2018-2020 | Buffer 5pp 5w + SMA30 | 39.30% | -28.13% | 1.397 | 0.769 | 7.8 |
+| 2018-2020 | APEX R 8w + SMA30 | 29.54% | -41.24% | 0.716 | 0.702 | 11.1 |
+| 2018-2020 | Buffer 5pp 6w + SMA30 | 13.91% | -63.02% | 0.221 | 0.127 | 7.8 |
+| 2018-2020 | Buffer 5pp 8w + SMA30 | 6.42% | -59.61% | 0.108 | 0.227 | 6.8 |
+| 2019-2021 | Buffer 5pp 5w | 121.67% | -37.44% | 3.25 | 0.852 | 7.1 |
+| 2019-2021 | Buffer 3pp 6w + SMA30 | 98.13% | -40.32% | 2.434 | 0.819 | 8.4 |
+| 2019-2021 | Buffer 5pp 5w + SMA30 | 90.68% | -37.92% | 2.392 | 0.799 | 8.1 |
+| 2019-2021 | APEX R 8w + SMA30 | 71.10% | -42.16% | 1.687 | 0.733 | 8.4 |
+| 2019-2021 | Buffer 5pp 6w + SMA30 | 55.00% | -64.45% | 0.853 | 0.428 | 8.8 |
+| 2019-2021 | Buffer 5pp 8w + SMA30 | 49.95% | -62.68% | 0.797 | 0.44 | 7.1 |
+| 2020-2022 | Buffer 5pp 5w | 57.95% | -44.46% | 1.303 | 0.583 | 7.7 |
+| 2020-2022 | Buffer 3pp 6w + SMA30 | 52.38% | -40.36% | 1.298 | 0.669 | 8.8 |
+| 2020-2022 | Buffer 5pp 5w + SMA30 | 50.63% | -38.57% | 1.313 | 0.625 | 7.1 |
+| 2020-2022 | APEX R 8w + SMA30 | 30.99% | -42.28% | 0.733 | 0.523 | 11.1 |
+| 2020-2022 | Buffer 5pp 6w + SMA30 | 22.68% | -56.34% | 0.403 | 0.582 | 7.7 |
+| 2020-2022 | Buffer 5pp 8w + SMA30 | 16.98% | -57.77% | 0.294 | 0.492 | 6.7 |
+| 2021-2022 | Buffer 5pp 5w + SMA30 | 23.10% | -32.20% | 0.717 | 0.012 | 6.1 |
+| 2021-2022 | Buffer 5pp 6w + SMA30 | 22.38% | -32.62% | 0.686 | 0.002 | 7.1 |
+| 2021-2022 | Buffer 3pp 6w + SMA30 | 22.21% | -33.55% | 0.662 | 0.066 | 9.2 |
+| 2021-2022 | Buffer 5pp 8w + SMA30 | 21.00% | -35.94% | 0.584 | 0.159 | 5.6 |
+| 2021-2022 | Buffer 5pp 5w | 16.65% | -38.70% | 0.43 | 0.139 | 7.6 |
+| 2021-2022 | APEX R 8w + SMA30 | 6.13% | -36.09% | 0.17 | 0.236 | 10.7 |
+| 2021-2023 | Buffer 3pp 6w + SMA30 | 33.11% | -33.55% | 0.987 | 0.525 | 8.8 |
+| 2021-2023 | Buffer 5pp 8w + SMA30 | 30.33% | -35.94% | 0.844 | 0.06 | 5.7 |
+| 2021-2023 | Buffer 5pp 5w | 28.87% | -38.70% | 0.746 | 0.001 | 7.4 |
+| 2021-2023 | Buffer 5pp 6w + SMA30 | 25.70% | -33.45% | 0.768 | 0.006 | 8.1 |
+| 2021-2023 | Buffer 5pp 5w + SMA30 | 25.44% | -33.33% | 0.763 | 0.018 | 7.4 |
+| 2021-2023 | APEX R 8w + SMA30 | 25.34% | -36.09% | 0.702 | 0.123 | 9.8 |
+| 2022-2024 | Buffer 3pp 6w + SMA30 | 35.54% | -27.35% | 1.299 | 0.826 | 8.4 |
+| 2022-2024 | APEX R 8w + SMA30 | 34.22% | -29.37% | 1.165 | 0.8 | 10.8 |
+| 2022-2024 | Buffer 5pp 8w + SMA30 | 28.07% | -31.71% | 0.885 | 0.714 | 5.8 |
+| 2022-2024 | Buffer 5pp 5w | 22.52% | -30.80% | 0.731 | 0.6 | 7.8 |
+| 2022-2024 | Buffer 5pp 5w + SMA30 | 22.32% | -30.99% | 0.72 | 0.588 | 7.5 |
+| 2022-2024 | Buffer 5pp 6w + SMA30 | 22.30% | -28.13% | 0.793 | 0.536 | 7.8 |
+| 2023-2025 | Buffer 3pp 6w + SMA30 | 44.56% | -27.35% | 1.629 | 0.873 | 7.1 |
+| 2023-2025 | APEX R 8w + SMA30 | 42.58% | -29.37% | 1.449 | 0.888 | 8.8 |
+| 2023-2025 | Buffer 5pp 5w | 40.08% | -30.80% | 1.301 | 0.864 | 7.5 |
+| 2023-2025 | Buffer 5pp 8w + SMA30 | 39.72% | -31.71% | 1.252 | 0.84 | 6.1 |
+| 2023-2025 | Buffer 5pp 6w + SMA30 | 36.19% | -28.13% | 1.287 | 0.871 | 8.5 |
+| 2023-2025 | Buffer 5pp 5w + SMA30 | 32.57% | -30.99% | 1.051 | 0.849 | 8.5 |
+| 2023-2026 | Buffer 5pp 5w | 39.77% | -30.80% | 1.291 | 0.898 | 7.1 |
+| 2023-2026 | Buffer 3pp 6w + SMA30 | 39.19% | -27.35% | 1.433 | 0.887 | 7.1 |
+| 2023-2026 | APEX R 8w + SMA30 | 38.83% | -29.37% | 1.322 | 0.901 | 8.0 |
+| 2023-2026 | Buffer 5pp 8w + SMA30 | 33.49% | -31.71% | 1.056 | 0.868 | 6.2 |
+| 2023-2026 | Buffer 5pp 6w + SMA30 | 30.60% | -28.13% | 1.088 | 0.895 | 8.3 |
+| 2023-2026 | Buffer 5pp 5w + SMA30 | 29.59% | -30.99% | 0.955 | 0.88 | 8.6 |
+
+## Lettura
+
+- APEX R e' piu difensiva: il filtro SMA30 abbassa il drawdown e rende la logica piu facile da giustificare.
+- Buffer 5pp 5w puro resta fortissimo sul full-period, ma la critica dell'overfitting non e' assurda: il parametro 5w era gia' risultato fragile nel plateau.
+- L'ibrido `Buffer 5pp 5w + SMA30` e' il test chiave: se mantiene rendimento accettabile e migliora le finestre peggiori, diventa candidato serio.
+- Se l'ibrido sacrifica troppo CAGR o non migliora le finestre rolling, allora APEX R resta la scelta conservativa e Buffer 5pp 5w resta la scelta aggressiva ma sospetta.

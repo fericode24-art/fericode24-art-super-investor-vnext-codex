@@ -2,6 +2,8 @@
 
 Stato audit: 2026-05-28.
 
+Nota 2026-05-28 pomeriggio: questa nota e' storica e descrive lo stato precedente al profilo `2.6.0-cached`. Il live attuale non e' piu il fast path puro con `skip_external_signals=True`: ora il refresh usa `external_mode=cached`. Per la revisione aggiornata vedere `docs/DEEP_REVIEW_2026-05-28.md`.
+
 Questa nota separa i segnali realmente usati dal motore live vNext dai segnali presenti nel codice ma non agganciati al profilo attivo.
 
 ## Profilo live attivo

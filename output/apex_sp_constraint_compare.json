@@ -1,0 +1,5038 @@
+{
+  "full": [
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2018-01-01",
+      "end": "2026-05-29",
+      "final": 144246.39,
+      "cagr": 37.43,
+      "maxdd": -40.82,
+      "calmar": 0.917,
+      "ulcer": 21.26,
+      "switches": 68,
+      "switches_per_year": 8.1,
+      "taxes": 69983.99,
+      "alloc_weeks": {
+        "BTC": 159,
+        "GOLD": 153,
+        "SP500": 85,
+        "CASH": 41
+      },
+      "alloc_pct": {
+        "BTC": 36.3,
+        "GOLD": 34.9,
+        "SP500": 19.4,
+        "CASH": 9.4
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2018-01-09",
+          "end": "2018-01-16",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-01-23",
+          "end": "2018-03-20",
+          "weeks": 9
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-03-27",
+          "end": "2018-04-24",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-01",
+          "end": "2018-05-15",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-05-22",
+          "end": "2018-05-22",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-29",
+          "end": "2018-05-29",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-06-05",
+          "end": "2018-07-24",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-07-31",
+          "end": "2018-08-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-08-21",
+          "end": "2018-10-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-10-23",
+          "end": "2019-02-05",
+          "weeks": 16
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-03-12",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-03-19",
+          "end": "2019-04-02",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2019-11-19",
+          "end": "2019-11-19",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-26",
+          "end": "2020-01-07",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-28",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-05-05",
+          "weeks": 9
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-05-05",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2026-05-12",
+          "end": "2026-05-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-05-19",
+          "end": "2026-05-26",
+          "weeks": 2
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-05-05",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2026-05-12",
+          "end": "2026-05-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-05-19",
+          "end": "2026-05-26",
+          "weeks": 2
+        }
+      ],
+      "filter_to_cash": 17,
+      "filter_to_sp500": 0
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2018-01-01",
+      "end": "2026-05-29",
+      "final": 157261.78,
+      "cagr": 38.85,
+      "maxdd": -37.87,
+      "calmar": 1.026,
+      "ulcer": 21.04,
+      "switches": 63,
+      "switches_per_year": 7.51,
+      "taxes": 74491.96,
+      "alloc_weeks": {
+        "BTC": 159,
+        "GOLD": 136,
+        "SP500": 118,
+        "CASH": 25
+      },
+      "alloc_pct": {
+        "BTC": 36.3,
+        "GOLD": 31.1,
+        "SP500": 26.9,
+        "CASH": 5.7
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2018-01-09",
+          "end": "2018-01-16",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-01-23",
+          "end": "2018-03-20",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-03-27",
+          "end": "2018-03-27",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-04-03",
+          "end": "2018-04-24",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-01",
+          "end": "2018-05-08",
+          "weeks": 2
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-05-15",
+          "end": "2018-10-16",
+          "weeks": 23
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-10-23",
+          "end": "2019-02-05",
+          "weeks": 16
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-04-02",
+          "weeks": 8
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-19",
+          "end": "2020-01-07",
+          "weeks": 8
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-14",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-01-21",
+          "end": "2020-01-21",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-28",
+          "end": "2020-01-28",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-04-28",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-05-05",
+          "end": "2020-05-05",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-04-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2026-04-21",
+          "end": "2026-05-26",
+          "weeks": 6
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-04-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2026-04-21",
+          "end": "2026-05-26",
+          "weeks": 6
+        }
+      ],
+      "filter_to_cash": 5,
+      "filter_to_sp500": 23
+    }
+  ],
+  "rolling": [
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2018-01-01",
+      "end": "2020-12-31",
+      "final": 27989.83,
+      "cagr": 41.1,
+      "maxdd": -31.72,
+      "calmar": 1.295,
+      "ulcer": 20.99,
+      "switches": 26,
+      "switches_per_year": 8.7,
+      "taxes": 9011.3,
+      "alloc_weeks": {
+        "BTC": 49,
+        "GOLD": 55,
+        "SP500": 42,
+        "CASH": 10
+      },
+      "alloc_pct": {
+        "BTC": 31.4,
+        "GOLD": 35.3,
+        "SP500": 26.9,
+        "CASH": 6.4
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2018-01-09",
+          "end": "2018-01-16",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-01-23",
+          "end": "2018-03-20",
+          "weeks": 9
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-03-27",
+          "end": "2018-04-24",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-01",
+          "end": "2018-05-15",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-05-22",
+          "end": "2018-05-22",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-29",
+          "end": "2018-05-29",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-06-05",
+          "end": "2018-07-24",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-07-31",
+          "end": "2018-08-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-08-21",
+          "end": "2018-10-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-10-23",
+          "end": "2019-02-05",
+          "weeks": 16
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-03-12",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-03-19",
+          "end": "2019-04-02",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2019-11-19",
+          "end": "2019-11-19",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-26",
+          "end": "2020-01-07",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-28",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-05-05",
+          "weeks": 9
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2020-12-29",
+          "weeks": 10
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2019-11-19",
+          "end": "2019-11-19",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-26",
+          "end": "2020-01-07",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-28",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-05-05",
+          "weeks": 9
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2020-12-29",
+          "weeks": 10
+        }
+      ],
+      "filter_to_cash": 6,
+      "filter_to_sp500": 0,
+      "window": "2018-2020"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2018-01-01",
+      "end": "2020-12-31",
+      "final": 29281.12,
+      "cagr": 43.24,
+      "maxdd": -31.72,
+      "calmar": 1.363,
+      "ulcer": 20.72,
+      "switches": 24,
+      "switches_per_year": 8.03,
+      "taxes": 9683.77,
+      "alloc_weeks": {
+        "BTC": 49,
+        "GOLD": 48,
+        "SP500": 55,
+        "CASH": 4
+      },
+      "alloc_pct": {
+        "BTC": 31.4,
+        "GOLD": 30.8,
+        "SP500": 35.3,
+        "CASH": 2.6
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2018-01-09",
+          "end": "2018-01-16",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-01-23",
+          "end": "2018-03-20",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-03-27",
+          "end": "2018-03-27",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2018-04-03",
+          "end": "2018-04-24",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-05-01",
+          "end": "2018-05-08",
+          "weeks": 2
+        },
+        {
+          "asset": "SP500",
+          "start": "2018-05-15",
+          "end": "2018-10-16",
+          "weeks": 23
+        },
+        {
+          "asset": "GOLD",
+          "start": "2018-10-23",
+          "end": "2019-02-05",
+          "weeks": 16
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-04-02",
+          "weeks": 8
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-19",
+          "end": "2020-01-07",
+          "weeks": 8
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-14",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-01-21",
+          "end": "2020-01-21",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-28",
+          "end": "2020-01-28",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-04-28",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-05-05",
+          "end": "2020-05-05",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2020-12-29",
+          "weeks": 10
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-14",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-01-21",
+          "end": "2020-01-21",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-28",
+          "end": "2020-01-28",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-04-28",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-05-05",
+          "end": "2020-05-05",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2020-12-29",
+          "weeks": 10
+        }
+      ],
+      "filter_to_cash": 0,
+      "filter_to_sp500": 13,
+      "window": "2018-2020"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2021-01-01",
+      "end": "2022-12-31",
+      "final": 13946.88,
+      "cagr": 18.36,
+      "maxdd": -33.55,
+      "calmar": 0.547,
+      "ulcer": 21.3,
+      "switches": 18,
+      "switches_per_year": 9.12,
+      "taxes": 3235.21,
+      "alloc_weeks": {
+        "BTC": 30,
+        "GOLD": 33,
+        "SP500": 20,
+        "CASH": 20
+      },
+      "alloc_pct": {
+        "BTC": 29.1,
+        "GOLD": 32.0,
+        "SP500": 19.4,
+        "CASH": 19.4
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-01-12",
+          "end": "2021-04-20",
+          "weeks": 15
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "filter_to_cash": 2,
+      "filter_to_sp500": 0,
+      "window": "2021-2022"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2021-01-01",
+      "end": "2022-12-31",
+      "final": 13745.32,
+      "cagr": 17.49,
+      "maxdd": -30.24,
+      "calmar": 0.578,
+      "ulcer": 20.64,
+      "switches": 16,
+      "switches_per_year": 8.11,
+      "taxes": 2939.23,
+      "alloc_weeks": {
+        "BTC": 30,
+        "GOLD": 24,
+        "SP500": 34,
+        "CASH": 15
+      },
+      "alloc_pct": {
+        "BTC": 29.1,
+        "GOLD": 23.3,
+        "SP500": 33.0,
+        "CASH": 14.6
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-01-12",
+          "end": "2021-04-20",
+          "weeks": 15
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "filter_to_cash": 1,
+      "filter_to_sp500": 6,
+      "window": "2021-2022"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2023-01-01",
+      "end": "2026-05-29",
+      "final": 28319.98,
+      "cagr": 35.92,
+      "maxdd": -27.35,
+      "calmar": 1.313,
+      "ulcer": 12.7,
+      "switches": 24,
+      "switches_per_year": 7.08,
+      "taxes": 9094.68,
+      "alloc_weeks": {
+        "BTC": 79,
+        "GOLD": 64,
+        "SP500": 23,
+        "CASH": 11
+      },
+      "alloc_pct": {
+        "BTC": 44.6,
+        "GOLD": 36.2,
+        "SP500": 13.0,
+        "CASH": 6.2
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2023-01-10",
+          "end": "2023-01-17",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-05-05",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2026-05-12",
+          "end": "2026-05-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-05-19",
+          "end": "2026-05-26",
+          "weeks": 2
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-05-05",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2026-05-12",
+          "end": "2026-05-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-05-19",
+          "end": "2026-05-26",
+          "weeks": 2
+        }
+      ],
+      "filter_to_cash": 9,
+      "filter_to_sp500": 0,
+      "window": "2023-2026"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2023-01-01",
+      "end": "2026-05-29",
+      "final": 29946.48,
+      "cagr": 38.17,
+      "maxdd": -27.35,
+      "calmar": 1.396,
+      "ulcer": 12.55,
+      "switches": 23,
+      "switches_per_year": 6.78,
+      "taxes": 9636.21,
+      "alloc_weeks": {
+        "BTC": 79,
+        "GOLD": 63,
+        "SP500": 29,
+        "CASH": 6
+      },
+      "alloc_pct": {
+        "BTC": 44.6,
+        "GOLD": 35.6,
+        "SP500": 16.4,
+        "CASH": 3.4
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2023-01-10",
+          "end": "2023-01-17",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-04-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2026-04-21",
+          "end": "2026-05-26",
+          "weeks": 6
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2026-03-24",
+          "weeks": 28
+        },
+        {
+          "asset": "CASH",
+          "start": "2026-03-31",
+          "end": "2026-04-14",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2026-04-21",
+          "end": "2026-05-26",
+          "weeks": 6
+        }
+      ],
+      "filter_to_cash": 4,
+      "filter_to_sp500": 4,
+      "window": "2023-2026"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2019-01-01",
+      "end": "2021-12-31",
+      "final": 70823.15,
+      "cagr": 92.47,
+      "maxdd": -40.82,
+      "calmar": 2.265,
+      "ulcer": 20.72,
+      "switches": 25,
+      "switches_per_year": 8.36,
+      "taxes": 28011.54,
+      "alloc_weeks": {
+        "BTC": 77,
+        "GOLD": 40,
+        "SP500": 38,
+        "CASH": 1
+      },
+      "alloc_pct": {
+        "BTC": 49.4,
+        "GOLD": 25.6,
+        "SP500": 24.4,
+        "CASH": 0.6
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2019-01-08",
+          "end": "2019-02-05",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-03-12",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-03-19",
+          "end": "2019-04-02",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2019-11-19",
+          "end": "2019-11-19",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-26",
+          "end": "2020-01-07",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-28",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-05-05",
+          "weeks": 9
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2021-12-28",
+          "weeks": 4
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2021-12-28",
+          "weeks": 4
+        }
+      ],
+      "filter_to_cash": 1,
+      "filter_to_sp500": 0,
+      "window": "2019-2021"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2019-01-01",
+      "end": "2021-12-31",
+      "final": 76432.16,
+      "cagr": 97.44,
+      "maxdd": -37.87,
+      "calmar": 2.573,
+      "ulcer": 20.01,
+      "switches": 25,
+      "switches_per_year": 8.36,
+      "taxes": 29521.08,
+      "alloc_weeks": {
+        "BTC": 77,
+        "GOLD": 34,
+        "SP500": 45,
+        "CASH": 0
+      },
+      "alloc_pct": {
+        "BTC": 49.4,
+        "GOLD": 21.8,
+        "SP500": 28.8,
+        "CASH": 0.0
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2019-01-08",
+          "end": "2019-02-05",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-02-12",
+          "end": "2019-04-02",
+          "weeks": 8
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-04-09",
+          "end": "2019-08-06",
+          "weeks": 18
+        },
+        {
+          "asset": "GOLD",
+          "start": "2019-08-13",
+          "end": "2019-10-08",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-10-15",
+          "end": "2019-11-05",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2019-11-12",
+          "end": "2019-11-12",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2019-11-19",
+          "end": "2020-01-07",
+          "weeks": 8
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-14",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-01-21",
+          "end": "2020-01-21",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-28",
+          "end": "2020-01-28",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-04-28",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-05-05",
+          "end": "2020-05-05",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2021-12-28",
+          "weeks": 4
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2021-12-28",
+          "weeks": 4
+        }
+      ],
+      "filter_to_cash": 0,
+      "filter_to_sp500": 7,
+      "window": "2019-2021"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2020-01-01",
+      "end": "2022-12-31",
+      "final": 31685.47,
+      "cagr": 47.44,
+      "maxdd": -40.82,
+      "calmar": 1.162,
+      "ulcer": 24.43,
+      "switches": 26,
+      "switches_per_year": 8.75,
+      "taxes": 12550.13,
+      "alloc_weeks": {
+        "BTC": 59,
+        "GOLD": 47,
+        "SP500": 29,
+        "CASH": 20
+      },
+      "alloc_pct": {
+        "BTC": 38.1,
+        "GOLD": 30.3,
+        "SP500": 18.7,
+        "CASH": 12.9
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-28",
+          "weeks": 3
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-05-05",
+          "weeks": 9
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "filter_to_cash": 2,
+      "filter_to_sp500": 0,
+      "window": "2020-2022"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2020-01-01",
+      "end": "2022-12-31",
+      "final": 30994.47,
+      "cagr": 46.35,
+      "maxdd": -37.87,
+      "calmar": 1.224,
+      "ulcer": 23.92,
+      "switches": 27,
+      "switches_per_year": 9.09,
+      "taxes": 11858.14,
+      "alloc_weeks": {
+        "BTC": 59,
+        "GOLD": 36,
+        "SP500": 45,
+        "CASH": 15
+      },
+      "alloc_pct": {
+        "BTC": 38.1,
+        "GOLD": 23.2,
+        "SP500": 29.0,
+        "CASH": 9.7
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2020-01-14",
+          "end": "2020-01-14",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-01-21",
+          "end": "2020-01-21",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-01-28",
+          "end": "2020-01-28",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-02-04",
+          "end": "2020-03-03",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-03-10",
+          "end": "2020-04-28",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-05-05",
+          "end": "2020-05-05",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-05-12",
+          "end": "2020-06-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-07-07",
+          "end": "2020-07-21",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2020-07-28",
+          "end": "2020-08-04",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-08-11",
+          "end": "2020-09-08",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2020-09-15",
+          "end": "2020-10-20",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2020-10-27",
+          "end": "2021-04-20",
+          "weeks": 26
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2022-12-27",
+          "weeks": 3
+        }
+      ],
+      "filter_to_cash": 1,
+      "filter_to_sp500": 8,
+      "window": "2020-2022"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2021-01-01",
+      "end": "2023-12-31",
+      "final": 21133.33,
+      "cagr": 28.65,
+      "maxdd": -33.55,
+      "calmar": 0.854,
+      "ulcer": 19.17,
+      "switches": 26,
+      "switches_per_year": 8.75,
+      "taxes": 6443.17,
+      "alloc_weeks": {
+        "BTC": 64,
+        "GOLD": 37,
+        "SP500": 33,
+        "CASH": 21
+      },
+      "alloc_pct": {
+        "BTC": 41.3,
+        "GOLD": 23.9,
+        "SP500": 21.3,
+        "CASH": 13.5
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-01-12",
+          "end": "2021-04-20",
+          "weeks": 15
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-03",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-08-10",
+          "end": "2021-08-10",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2023-12-26",
+          "weeks": 10
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2023-12-26",
+          "weeks": 10
+        }
+      ],
+      "filter_to_cash": 3,
+      "filter_to_sp500": 0,
+      "window": "2021-2023"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2021-01-01",
+      "end": "2023-12-31",
+      "final": 20827.93,
+      "cagr": 28.02,
+      "maxdd": -30.24,
+      "calmar": 0.926,
+      "ulcer": 18.77,
+      "switches": 24,
+      "switches_per_year": 8.08,
+      "taxes": 6100.83,
+      "alloc_weeks": {
+        "BTC": 64,
+        "GOLD": 28,
+        "SP500": 47,
+        "CASH": 16
+      },
+      "alloc_pct": {
+        "BTC": 41.3,
+        "GOLD": 18.1,
+        "SP500": 30.3,
+        "CASH": 10.3
+      },
+      "blocks": [
+        {
+          "asset": "BTC",
+          "start": "2021-01-12",
+          "end": "2021-04-20",
+          "weeks": 15
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-04-27",
+          "end": "2021-05-11",
+          "weeks": 3
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-05-18",
+          "end": "2021-06-22",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-06-29",
+          "end": "2021-08-10",
+          "weeks": 7
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-08-17",
+          "end": "2021-09-21",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2021-09-28",
+          "end": "2021-10-05",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2021-10-12",
+          "end": "2021-11-30",
+          "weeks": 8
+        },
+        {
+          "asset": "SP500",
+          "start": "2021-12-07",
+          "end": "2022-01-18",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2023-12-26",
+          "weeks": 10
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2023-12-26",
+          "weeks": 10
+        }
+      ],
+      "filter_to_cash": 2,
+      "filter_to_sp500": 6,
+      "window": "2021-2023"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2022-01-01",
+      "end": "2024-12-31",
+      "final": 22330.93,
+      "cagr": 30.83,
+      "maxdd": -27.35,
+      "calmar": 1.127,
+      "ulcer": 13.15,
+      "switches": 25,
+      "switches_per_year": 8.36,
+      "taxes": 6526.1,
+      "alloc_weeks": {
+        "BTC": 63,
+        "GOLD": 45,
+        "SP500": 27,
+        "CASH": 21
+      },
+      "alloc_pct": {
+        "BTC": 40.4,
+        "GOLD": 28.8,
+        "SP500": 17.3,
+        "CASH": 13.5
+      },
+      "blocks": [
+        {
+          "asset": "SP500",
+          "start": "2022-01-11",
+          "end": "2022-01-18",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-04-12",
+          "end": "2022-04-19",
+          "weeks": 2
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-04-26",
+          "end": "2022-07-26",
+          "weeks": 14
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-08-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-08-16",
+          "end": "2022-09-20",
+          "weeks": 6
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-11-08",
+          "end": "2022-11-22",
+          "weeks": 3
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-29",
+          "end": "2022-12-06",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2024-12-31",
+          "weeks": 11
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2024-12-31",
+          "weeks": 11
+        }
+      ],
+      "filter_to_cash": 3,
+      "filter_to_sp500": 0,
+      "window": "2022-2024"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2022-01-01",
+      "end": "2024-12-31",
+      "final": 20963.47,
+      "cagr": 28.09,
+      "maxdd": -27.35,
+      "calmar": 1.027,
+      "ulcer": 14.95,
+      "switches": 24,
+      "switches_per_year": 8.03,
+      "taxes": 5892.82,
+      "alloc_weeks": {
+        "BTC": 63,
+        "GOLD": 37,
+        "SP500": 40,
+        "CASH": 16
+      },
+      "alloc_pct": {
+        "BTC": 40.4,
+        "GOLD": 23.7,
+        "SP500": 25.6,
+        "CASH": 10.3
+      },
+      "blocks": [
+        {
+          "asset": "SP500",
+          "start": "2022-01-11",
+          "end": "2022-01-18",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-01-25",
+          "end": "2022-03-29",
+          "weeks": 10
+        },
+        {
+          "asset": "BTC",
+          "start": "2022-04-05",
+          "end": "2022-04-05",
+          "weeks": 1
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-04-12",
+          "end": "2022-05-03",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-05-10",
+          "end": "2022-05-24",
+          "weeks": 3
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-05-31",
+          "end": "2022-07-26",
+          "weeks": 9
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-08-02",
+          "end": "2022-09-20",
+          "weeks": 8
+        },
+        {
+          "asset": "CASH",
+          "start": "2022-09-27",
+          "end": "2022-11-01",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2022-11-08",
+          "end": "2022-12-06",
+          "weeks": 5
+        },
+        {
+          "asset": "GOLD",
+          "start": "2022-12-13",
+          "end": "2023-01-17",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2024-12-31",
+          "weeks": 11
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2024-12-31",
+          "weeks": 11
+        }
+      ],
+      "filter_to_cash": 2,
+      "filter_to_sp500": 5,
+      "window": "2022-2024"
+    },
+    {
+      "key": "current",
+      "label": "APEX Legit attuale: filtro BTC -> Oro/Cash",
+      "start": "2023-01-01",
+      "end": "2025-12-31",
+      "final": 27733.75,
+      "cagr": 40.66,
+      "maxdd": -27.35,
+      "calmar": 1.487,
+      "ulcer": 12.61,
+      "switches": 21,
+      "switches_per_year": 7.02,
+      "taxes": 8799.45,
+      "alloc_weeks": {
+        "BTC": 79,
+        "GOLD": 51,
+        "SP500": 23,
+        "CASH": 3
+      },
+      "alloc_pct": {
+        "BTC": 50.6,
+        "GOLD": 32.7,
+        "SP500": 14.7,
+        "CASH": 1.9
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2023-01-10",
+          "end": "2023-01-17",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2025-12-30",
+          "weeks": 16
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2025-12-30",
+          "weeks": 16
+        }
+      ],
+      "filter_to_cash": 1,
+      "filter_to_sp500": 0,
+      "window": "2023-2025"
+    },
+    {
+      "key": "sp_free",
+      "label": "APEX Legit senza vincolo SP: filtro BTC -> rivaluta Oro/SP/Cash",
+      "start": "2023-01-01",
+      "end": "2025-12-31",
+      "final": 27733.75,
+      "cagr": 40.66,
+      "maxdd": -27.35,
+      "calmar": 1.487,
+      "ulcer": 12.61,
+      "switches": 21,
+      "switches_per_year": 7.02,
+      "taxes": 8799.45,
+      "alloc_weeks": {
+        "BTC": 79,
+        "GOLD": 51,
+        "SP500": 23,
+        "CASH": 3
+      },
+      "alloc_pct": {
+        "BTC": 50.6,
+        "GOLD": 32.7,
+        "SP500": 14.7,
+        "CASH": 1.9
+      },
+      "blocks": [
+        {
+          "asset": "GOLD",
+          "start": "2023-01-10",
+          "end": "2023-01-17",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-01-24",
+          "end": "2023-05-16",
+          "weeks": 17
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-05-23",
+          "end": "2023-06-27",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-07-04",
+          "end": "2023-08-08",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2023-08-15",
+          "end": "2023-09-26",
+          "weeks": 7
+        },
+        {
+          "asset": "GOLD",
+          "start": "2023-10-03",
+          "end": "2023-10-03",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-10",
+          "end": "2023-10-10",
+          "weeks": 1
+        },
+        {
+          "asset": "CASH",
+          "start": "2023-10-17",
+          "end": "2023-10-17",
+          "weeks": 1
+        },
+        {
+          "asset": "BTC",
+          "start": "2023-10-24",
+          "end": "2024-01-16",
+          "weeks": 13
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-01-23",
+          "end": "2024-02-13",
+          "weeks": 4
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2025-12-30",
+          "weeks": 16
+        }
+      ],
+      "recent_blocks": [
+        {
+          "asset": "BTC",
+          "start": "2024-02-20",
+          "end": "2024-04-16",
+          "weeks": 9
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-04-23",
+          "end": "2024-05-28",
+          "weeks": 6
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-06-04",
+          "end": "2024-07-02",
+          "weeks": 5
+        },
+        {
+          "asset": "SP500",
+          "start": "2024-07-09",
+          "end": "2024-07-30",
+          "weeks": 4
+        },
+        {
+          "asset": "GOLD",
+          "start": "2024-08-06",
+          "end": "2024-10-15",
+          "weeks": 11
+        },
+        {
+          "asset": "BTC",
+          "start": "2024-10-22",
+          "end": "2025-01-28",
+          "weeks": 15
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-02-04",
+          "end": "2025-05-13",
+          "weeks": 15
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-05-20",
+          "end": "2025-07-01",
+          "weeks": 7
+        },
+        {
+          "asset": "CASH",
+          "start": "2025-07-08",
+          "end": "2025-07-15",
+          "weeks": 2
+        },
+        {
+          "asset": "BTC",
+          "start": "2025-07-22",
+          "end": "2025-08-26",
+          "weeks": 6
+        },
+        {
+          "asset": "SP500",
+          "start": "2025-09-02",
+          "end": "2025-09-09",
+          "weeks": 2
+        },
+        {
+          "asset": "GOLD",
+          "start": "2025-09-16",
+          "end": "2025-12-30",
+          "weeks": 16
+        }
+      ],
+      "filter_to_cash": 1,
+      "filter_to_sp500": 0,
+      "window": "2023-2025"
+    }
+  ]
+}

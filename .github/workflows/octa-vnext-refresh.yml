@@ -9,6 +9,8 @@ on:
     # Europe/Rome 09:10/09:30 retry window during daylight saving time.
     - cron: '10 7 * * 1-5'
     - cron: '30 7 * * 1-5'
+    # Europe/Rome 15:30 APEX Legit window during daylight saving time.
+    - cron: '30 13 * * 2'
     # Europe/Rome 08:35/08:45/08:55 primary window during standard time.
     - cron: '35 7 * * 1-5'
     - cron: '45 7 * * 1-5'
@@ -16,12 +18,18 @@ on:
     # Europe/Rome 09:10/09:30 retry window during standard time.
     - cron: '10 8 * * 1-5'
     - cron: '30 8 * * 1-5'
+    # Europe/Rome 15:30 APEX Legit window during standard time.
+    - cron: '30 14 * * 2'
   workflow_dispatch:
     inputs:
       force_run:
         description: "Forza esecuzione anche se US market holiday"
         type: boolean
         default: false
+      run_apex:
+        description: "Genera anche segnale APEX"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -50,7 +58,7 @@ jobs:
           if event != "schedule":
               should = True
           else:
-              allowed_local_times = {(8, 35), (8, 45), (8, 55), (9, 10), (9, 30)}
+              allowed_local_times = {(8, 35), (8, 45), (8, 55), (9, 10), (9, 30), (15, 30)}
               parts = schedule.split()
               should = False
               if len(parts) >= 2:
@@ -59,9 +67,15 @@ jobs:
                   )
                   scheduled_rome = scheduled_utc.astimezone(ZoneInfo("Europe/Rome"))
                   should = (scheduled_rome.hour, scheduled_rome.minute) in allowed_local_times
+                  is_apex_slot = (scheduled_rome.weekday() == 1 and (scheduled_rome.hour, scheduled_rome.minute) == (15, 30))
+              else:
+                  is_apex_slot = False
+          if event != "schedule":
+              is_apex_slot = True
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
               f.write(f"should_run={'true' if should else 'false'}\n")
-          print(f"Rome schedule gate: schedule={schedule!r}, should_run={should}")
+              f.write(f"is_apex_slot={'true' if is_apex_slot else 'false'}\n")
+          print(f"Rome schedule gate: schedule={schedule!r}, should_run={should}, is_apex_slot={is_apex_slot}")
           PY
 
       - uses: actions/checkout@v4
@@ -85,14 +99,16 @@ jobs:
       - name: Date and holiday gate
         id: date
         if: steps.rome.outputs.should_run == 'true'
+        env:
+          IS_APEX_SLOT: ${{ steps.rome.outputs.is_apex_slot }}
         run: |
           today=$(date -u +%Y-%m-%d)
           echo "today=$today" >> "$GITHUB_OUTPUT"
           HOLIDAYS="2026-01-01 2026-01-19 2026-02-16 2026-04-03 2026-05-25 2026-06-19 2026-07-03 2026-09-07 2026-11-26 2026-12-25 2027-01-01 2027-01-18 2027-02-15 2027-03-26 2027-05-31 2027-06-18 2027-07-05 2027-09-06 2027-11-25 2027-12-24 2028-01-17 2028-02-21 2028-04-14 2028-05-29 2028-06-19 2028-07-04 2028-09-04 2028-11-23 2028-12-25 2029-01-01 2029-01-15 2029-02-19 2029-03-30 2029-05-28 2029-06-19 2029-07-04 2029-09-03 2029-11-22 2029-12-25 2030-01-01 2030-01-21 2030-02-18 2030-04-19 2030-05-27 2030-06-19 2030-07-04 2030-09-02 2030-11-28 2030-12-25"
           force="${{ github.event.inputs.force_run }}"
-          if [ "$force" = "true" ]; then
+          if [ "$force" = "true" ] || [ "$IS_APEX_SLOT" = "true" ]; then
             echo "is_holiday=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Force run requested"
+            echo "::notice::Force/APEX run requested"
           elif echo "$HOLIDAYS" | grep -qw "$today"; then
             echo "is_holiday=true" >> "$GITHUB_OUTPUT"
             echo "::notice::US market holiday ($today), skipped"
@@ -135,6 +151,7 @@ jobs:
         env:
           DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
           EVENT_NAME: ${{ github.event_name }}
+          IS_APEX_SLOT: ${{ steps.rome.outputs.is_apex_slot }}
         run: |
           python - <<'PY'
           import json
@@ -146,7 +163,10 @@ jobs:
 
           already = False
           reason = "manual dispatch"
-          if os.environ.get("EVENT_NAME") == "schedule":
+          if os.environ.get("IS_APEX_SLOT") == "true":
+              already = False
+              reason = "APEX slot: run anyway"
+          elif os.environ.get("EVENT_NAME") == "schedule":
               base = (os.environ.get("DASHBOARD_URL") or "").rstrip("/")
               current_expected = datetime.now(ZoneInfo("Europe/Rome")).date().isoformat()
               try:
@@ -226,12 +246,19 @@ jobs:
         if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
         run: python scripts/write_freshness.py --strict
 
+      - name: Run APEX signal export
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && (steps.freshguard.outputs.already_fresh != 'true' || steps.rome.outputs.is_apex_slot == 'true' || github.event.inputs.run_apex == 'true')
+        env:
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: "utf-8"
+        run: python scripts/export_apex_signal.py
+
       - name: Commit generated dashboard data
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && (steps.freshguard.outputs.already_fresh != 'true' || steps.rome.outputs.is_apex_slot == 'true' || github.event.inputs.run_apex == 'true')
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions OCTA vNext"
-          git add dashboard/data-octa.json dashboard/freshness.json
+          git add dashboard/data-octa.json dashboard/freshness.json dashboard/apex-data.json
           if ! git diff --cached --quiet; then
             git commit -m "[octa-vnext] refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
             git pull --rebase origin main
@@ -241,7 +268,7 @@ jobs:
           fi
 
       - name: Deploy Netlify vNext
-        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true' && steps.secretcheck.outputs.deploy_ready == 'true'
+        if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && (steps.freshguard.outputs.already_fresh != 'true' || steps.rome.outputs.is_apex_slot == 'true' || github.event.inputs.run_apex == 'true') && steps.secretcheck.outputs.deploy_ready == 'true'
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

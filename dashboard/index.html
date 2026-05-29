@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101316" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
-  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="styles.css?v=28" />
   <title>Super Investor vNext</title>
 </head>
 <body>
@@ -25,11 +25,11 @@
         <button class="nav-btn" data-view="octa" title="OCTA" aria-label="OCTA">
           <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 8v8"/><path d="M8 10l4-2 4 2"/></svg><span>OCTA</span>
         </button>
+        <button class="nav-btn" data-view="strategy" title="APEX" aria-label="APEX">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l4-5 3 3 5-7"/></svg><span>APEX</span>
+        </button>
         <button class="nav-btn" data-view="portfolios" title="Portafogli" aria-label="Portafogli">
           <svg viewBox="0 0 24 24"><path d="M4 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4z"/><path d="M4 7V5h12"/><path d="M16 13h4"/></svg><span>Portafogli</span>
-        </button>
-        <button class="nav-btn" data-view="strategy" title="Strategia" aria-label="Strategia">
-          <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l4-5 3 3 5-7"/></svg><span>Strategia</span>
         </button>
         <button class="nav-btn" data-view="settings" title="Setup" aria-label="Setup">
           <svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19 12a7.8 7.8 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a8 8 0 0 0-1.7-1L14.5 3h-5l-.3 3.1a8 8 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.5a7.8 7.8 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a8 8 0 0 0 1.7 1l.3 3.1h5l.3-3.1a8 8 0 0 0 1.7-1l2.4 1 2-3.4-2-1.5c.1-.3.1-.7.1-1z"/></svg><span>Setup</span>
@@ -74,6 +74,28 @@
       <menu class="dialog-actions">
         <button class="button ghost" value="cancel">Annulla</button>
         <button class="button primary" id="trade-save" value="default">Salva</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="apex-exec-dialog" class="dialog">
+    <form method="dialog" id="apex-exec-form">
+      <header class="dialog-head">
+        <div><p class="eyebrow" id="apex-exec-eyebrow">APEX</p><h2 id="apex-exec-title">Registra cambio</h2></div>
+        <button class="icon-action" value="cancel" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+      </header>
+      <div class="form-grid">
+        <label>Asset precedente<input id="apex-prev-asset" type="text" maxlength="32" /></label>
+        <label>Asset nuovo<input id="apex-new-asset" type="text" maxlength="32" required /></label>
+        <label>Capitale spostato (€)<input id="apex-capital" type="number" step="0.01" min="0" /></label>
+        <label>Prezzo eseguito<input id="apex-price" type="number" step="0.0001" min="0" /></label>
+        <label>Commissioni / slippage (€)<input id="apex-fee" type="number" step="0.01" min="0" value="0" /></label>
+        <label>Data esecuzione<input id="apex-exec-date" type="date" required /></label>
+      </div>
+      <label style="margin-top:12px">Note<textarea id="apex-note" class="textarea-input" rows="4"></textarea></label>
+      <menu class="dialog-actions">
+        <button class="button ghost" value="cancel">Annulla</button>
+        <button class="button primary" id="apex-exec-save" value="default">Salva</button>
       </menu>
     </form>
   </dialog>
@@ -146,6 +168,6 @@
     <div id="info-body" class="detail-body"></div>
   </dialog>
 
-  <script src="app.js?v=25"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>

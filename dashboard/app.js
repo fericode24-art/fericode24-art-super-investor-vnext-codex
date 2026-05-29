@@ -8,10 +8,13 @@
     octaPortfolio: "si_vnext_octa_portfolio",
     octaHistory: "si_vnext_octa_history",
     octaExecuted: "si_vnext_octa_executed",
+    apexExecuted: "si_vnext_apex_executed",
+    apexHistory: "si_vnext_apex_history",
     octaCloudTs: "si_vnext_octa_cloud_ts",
     trackerCache: "si_vnext_tracker_cache",
     trackerOpen: "si_vnext_tracker_open",
     chartRanges: "si_vnext_chart_ranges",
+    apexHistoryOpen: "si_vnext_apex_history_open",
   };
   const params = new URLSearchParams(location.search);
   if (params.get("repair") === "1") {
@@ -27,6 +30,7 @@
     ai: "/.netlify/functions/ai",
     vix: "/.netlify/functions/vix-live",
     importFile: "/.netlify/functions/import-file",
+    runEngines: "/.netlify/functions/run-engines",
   };
   const HOLIDAYS = new Set([
     "2026-01-01","2026-01-19","2026-02-16","2026-04-03","2026-05-25","2026-06-19","2026-07-03","2026-09-07","2026-11-26","2026-12-25",
@@ -63,6 +67,9 @@
     octaPortfolio: loadJson(LS.octaPortfolio, {}),
     octaHistory: loadJson(LS.octaHistory, []),
     octaExecuted: loadJson(LS.octaExecuted, {}),
+    apexData: null,
+    apexExecuted: loadJson(LS.apexExecuted, {}),
+    apexHistory: loadJson(LS.apexHistory, []),
     tracker: { portfolios: [], updated: null },
     openPf: null,
     quotes: {},
@@ -73,9 +80,11 @@
     info: {},
     sync: { octa: "local", portfolios: "local", msg: "" },
     pendingTrade: null,
+    pendingApexExec: null,
     pendingOpenPf: null,
     pendingImportRows: [],
     radarOpen: false,
+    apexHistoryOpen: loadJson(LS.apexHistoryOpen, {}),
     allocView: "symbol",
     detailTicker: null,
     detailHolding: null,
@@ -148,6 +157,7 @@
     return eur(x, 0);
   }
   function pct(n, dec = 1) { const x = Number(n || 0); return (x >= 0 ? "+" : "") + x.toFixed(dec) + "%"; }
+  function pctWeight(n, dec = 1) { return Number(n || 0).toFixed(dec) + "%"; }
   function todayISO() { return new Date().toISOString().slice(0, 10); }
   function dateIT(s) { if (!s) return "n/d"; const [y,m,d] = String(s).slice(0,10).split("-"); return d && m && y ? `${d}/${m}/${y}` : String(s); }
   function timeIT(s) { if (!s) return "n/d"; try { return new Date(s).toLocaleString("it-IT", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" }); } catch { return s; } }
@@ -327,7 +337,7 @@
 
   async function init() {
     wireShell();
-    await Promise.all([loadOctaData(), loadLegacyData(), loadTrackerCloud()]);
+    await Promise.all([loadOctaData(), loadApexData(), loadLegacyData(), loadTrackerCloud()]);
     await pullOctaCloud();
     render();
     refreshQuotes().then(render).catch(() => {});
@@ -349,6 +359,15 @@
       state.freshnessFile = r.ok ? await r.json() : null;
     } catch {
       state.freshnessFile = null;
+    }
+  }
+  async function loadApexData() {
+    try {
+      const r = await fetch("apex-data.json?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      state.apexData = await r.json();
+    } catch (e) {
+      state.apexData = { status: "error", error: String(e.message || e), strategies: {} };
     }
   }
   async function loadLegacyData() {
@@ -693,7 +712,7 @@
   }
 
   async function refreshAll(message = "Dati aggiornati.") {
-    await Promise.all([loadOctaData(), loadFreshnessStatus(), loadLegacyData(), loadTrackerCloud(), pullOctaCloud()]);
+    await Promise.all([loadOctaData(), loadApexData(), loadFreshnessStatus(), loadLegacyData(), loadTrackerCloud(), pullOctaCloud()]);
     await refreshQuotes();
     render();
     toast(message);
@@ -716,6 +735,7 @@
     });
     $("#info-close").addEventListener("click", () => $("#info-dialog").close());
     $("#trade-form").addEventListener("submit", e => { e.preventDefault(); completeTrade(); });
+    $("#apex-exec-form").addEventListener("submit", e => { e.preventDefault(); completeApexExecution(); });
     $("#portfolio-form").addEventListener("submit", async e => {
       e.preventDefault();
       await createPortfolio($("#pf-name").value.trim(), $("#pf-pin").value);
@@ -787,6 +807,14 @@
       if (act === "export-tracker-backup") exportTrackerBackup();
       if (act === "import-tracker-backup") await importTrackerBackup();
       if (act === "refresh-all") await refreshAll("Controllo completato.");
+      if (act === "run-engines") await runEngines(b.dataset.mode || "all");
+      if (act === "apex-done") markApexDone(b.dataset.strategy || "legit");
+      if (act === "toggle-apex-history") {
+        const key = b.dataset.strategy || "legit";
+        state.apexHistoryOpen[key] = !state.apexHistoryOpen[key];
+        saveJson(LS.apexHistoryOpen, state.apexHistoryOpen);
+        render();
+      }
       if (act === "octa-detail") await openOctaDetail(b.dataset.ticker);
       if (act === "octa-legend") openOctaLegend();
       if (act === "toggle-radar") { state.radarOpen = !state.radarOpen; render(); }
@@ -908,6 +936,80 @@
     await saveOpenPortfolio();
     render();
   }
+  function openApexExecution(key = "legit") {
+    const st = state.apexData?.strategies?.[key];
+    const cur = st?.current;
+    if (!cur) return;
+    state.pendingApexExec = { key, st, cur };
+    $("#apex-exec-eyebrow").textContent = st.name;
+    $("#apex-exec-title").textContent = `Registra ${cur.asset}`;
+    $("#apex-prev-asset").value = state.apexExecuted?.[key]?.asset || cur.previous_asset || "";
+    $("#apex-new-asset").value = cur.asset || "";
+    $("#apex-capital").value = "";
+    $("#apex-price").value = "";
+    $("#apex-fee").value = key === "legit" ? "5" : "0";
+    $("#apex-exec-date").value = todayISO();
+    $("#apex-note").value = cur.reason || "";
+    $("#apex-exec-dialog").showModal();
+  }
+  function markApexDone(key = "legit") {
+    openApexExecution(key);
+  }
+  function completeApexExecution() {
+    const pending = state.pendingApexExec;
+    if (!pending?.cur || !pending?.st) return;
+    const key = pending.key;
+    const st = pending.st;
+    const cur = pending.cur;
+    const prev = $("#apex-prev-asset").value.trim().toUpperCase();
+    const next = $("#apex-new-asset").value.trim().toUpperCase() || cur.asset;
+    const date = $("#apex-exec-date").value || todayISO();
+    const rec = {
+      id: "apex_" + Date.now().toString(36),
+      strategy_key: key,
+      strategy: st.name,
+      signal_date: cur.date,
+      executed_date: date,
+      previous_asset: prev || null,
+      asset: next,
+      target_asset: cur.asset,
+      capital_eur: Number($("#apex-capital").value || 0) || null,
+      execution_price: Number($("#apex-price").value || 0) || null,
+      fee_eur: Number($("#apex-fee").value || 0) || 0,
+      note: $("#apex-note").value.trim(),
+      saved_at: new Date().toISOString(),
+    };
+    state.apexHistory.unshift(rec);
+    state.apexHistory = state.apexHistory.slice(0, 300);
+    saveJson(LS.apexHistory, state.apexHistory);
+    state.apexExecuted[key] = {
+      asset: next,
+      date: cur.date,
+      done_at: new Date().toISOString(),
+      strategy: st.name,
+      execution_id: rec.id,
+    };
+    saveJson(LS.apexExecuted, state.apexExecuted);
+    $("#apex-exec-dialog").close();
+    render();
+    toast(`${st.name}: esecuzione salvata nello storico.`);
+  }
+  async function runEngines(mode = "all") {
+    toast("Richiedo run motori su GitHub Actions...");
+    try {
+      const r = await fetch(API.runEngines, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok) throw new Error(j.error || "run_not_configured");
+      toast("Run richiesta. Il deploy arrivera a fine workflow.");
+    } catch (e) {
+      toast("Run da app non configurata: apro GitHub Actions.");
+      window.open(CLOUD_RUNNER.workflow, "_blank", "noopener");
+    }
+  }
   function hideChartMarker(card) {
     $(".chart-marker", card)?.setAttribute("hidden", "");
     $(".chart-tip", card)?.setAttribute("hidden", "");
@@ -939,7 +1041,7 @@
       today: ["Cockpit operativo", "Oggi"],
       octa: ["Strategia QFAS", "OCTA"],
       portfolios: ["Tracker cifrato", "Portafogli"],
-      strategy: ["Motore e automazioni", "Strategia"],
+      strategy: ["Strategia BTC", "APEX"],
       settings: ["Configurazione locale", "Setup"]
     };
     const [ey, title] = titles[state.view] || titles.today;
@@ -971,6 +1073,19 @@
       return;
     }
     strip.hidden = false;
+    if (state.view === "strategy") {
+      const st = apexStrategy("legit");
+      const cur = st?.current || {};
+      const bt = st?.backtest || {};
+      const done = state.apexExecuted?.legit;
+      const doneOk = done && done.date === cur.date && done.asset === cur.asset;
+      strip.innerHTML = `
+        <div class="status-item ${cur.asset ? "good" : "warn"}"><b>APEX Legit</b><span>${cur.asset ? `${apexAssetLabel("legit", cur.asset)} · segnale ${dateIT(cur.date)}` : "Segnale non caricato"}</span></div>
+        <div class="status-item ${doneOk ? "good" : "warn"}"><b>${doneOk ? "Fatto" : "Da confermare"}</b><span>${doneOk ? `Ultima conferma ${timeIT(done.done_at)}` : "Premi Fatto dopo esecuzione broker"}</span></div>
+        <div class="status-item good"><b>${pct(Number(bt.cagr || 0), 1)} CAGR</b><span>Backtest APEX Legit · DD ${pct(Number(bt.max_drawdown || 0), 1)}</span></div>
+        <div class="status-item info"><b>Run unico</b><span>Il bottone lancia APEX + OCTA nello stesso workflow</span></div>`;
+      return;
+    }
     const f = freshness();
     const signals = state.octaData?.signals || [];
     const pending = signals.filter(s => !isSignalDone(s)).length;
@@ -1561,7 +1676,7 @@
     const signals = d.signals || [];
     const cands = d.candidates || [];
     return `
-      <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button primary" data-action="ai-octa">${icon("brain")}AI OCTA</button><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
+      <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button" data-action="ai-octa">${icon("brain")}AI OCTA</button><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
       <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div><button class="button ghost" data-action="ai-octa">${icon("brain")}Controllo AI</button></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
       <section class="panel full">${liveSignalProfilePanel(true)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Radar 40</h2><p>Secondario: aprilo quando vuoi esplorare tutti i candidati.</p></div><button class="button ghost" data-action="toggle-radar">${state.radarOpen ? "Chiudi" : "Apri"} Radar</button></div>${state.radarOpen ? candidateTable(cands) : radarSummary(cands)}</section>
@@ -1749,7 +1864,7 @@
     const total = list.reduce((a,h) => a + h.value, 0) || 1;
     const segs = list.map((h,i) => `<span class="alloc-seg" style="width:${Math.max(1, h.value / total * 100)}%;background:${COLORS[i % COLORS.length]}"></span>`).join("");
     const tabs = [["symbol","Strumenti"],["type","Tipo"],["sector","Settore"]].map(([id,label]) => `<button class="${view === id ? "active" : ""}" data-action="alloc-view" data-alloc="${id}">${label}</button>`).join("");
-    const rows = list.map((h,i) => `<div class="legend-row"><span><i class="dot" style="background:${COLORS[i % COLORS.length]}"></i>${esc(h.label)}</span><strong>${pct(h.value / total * 100)}</strong></div>`).join("");
+    const rows = list.map((h,i) => `<div class="legend-row"><span><i class="dot" style="background:${COLORS[i % COLORS.length]}"></i>${esc(h.label)}</span><strong>${pctWeight(h.value / total * 100)}</strong></div>`).join("");
     return `<section class="detail-section"><div class="panel-head"><div><h3>Allocazione</h3><p>Leggibile per strumento, tipo o settore.</p></div><div class="segmented">${tabs}</div></div><div class="alloc-bar">${segs}</div><div>${rows}</div></section>`;
   }
   function targetWeightsView(st) {
@@ -1888,26 +2003,140 @@
     render();
     toast(`${parsed.txs.length} strumenti importati.`);
   }
+  function apexAssetLabel(key, code) {
+    const st = apexStrategy(key);
+    return st?.assets?.[code]?.label || ({ BTC: "Bitcoin", GOLD: "Oro", SP500: "S&P 500", CASH: "Liquidita" })[code] || code || "n/d";
+  }
+  function apexAssetClass(code) {
+    return ({ BTC: "apex-btc", GOLD: "apex-gold", SP500: "apex-sp", CASH: "apex-cash" })[code] || "apex-cash";
+  }
+  function apexAssetIcon(code) {
+    return ({ BTC: "B", GOLD: "Au", SP500: "S&P", CASH: "€" })[code] || "?";
+  }
+  function apexStrategy(key = "legit") {
+    return state.apexData?.strategies?.[key] || null;
+  }
+  function apexDoneBadge(key, st) {
+    const done = state.apexExecuted?.[key];
+    const cur = st?.current;
+    if (done && cur && done.date === cur.date && done.asset === cur.asset) return `<span class="badge good">fatto ${timeIT(done.done_at)}</span>`;
+    return `<span class="badge warn">da confermare</span>`;
+  }
+  function apexMomentumBars(cur) {
+    const key = cur?.strategy_key || "legit";
+    const st = apexStrategy(key);
+    const m = cur?.momentum || {};
+    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== "CASH" && (st?.dual ? k !== "SP500" : true));
+    return universe.map(k => {
+      const v = Number(m[k]);
+      const w = Math.max(4, Math.min(100, Math.abs(v) * 3));
+      return `<div class="apex-momentum-row"><span>${esc(apexAssetLabel(key, k))}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
+    }).join("");
+  }
+  function apexCurrentPanel(key = "legit", primary = false) {
+    const st = apexStrategy(key);
+    if (!st?.current) return `<section class="panel ${primary ? "full" : ""}"><div class="empty">APEX non ancora generata. Premi run motori o attendi il prossimo export.</div></section>`;
+    const cur = st.current;
+    cur.strategy_key = key;
+    const asset = state.apexData?.assets?.[cur.asset] || {};
+    const strategyAsset = st.assets?.[cur.asset] || asset;
+    const bt = st.backtest || {};
+    const cls = apexAssetClass(cur.asset);
+    const changed = cur.changed ? `<span class="badge warn">cambio asset</span>` : `<span class="badge good">confermato</span>`;
+    return `<section class="panel ${primary ? "full apex-hero" : "apex-secondary"}">
+      <div class="apex-signal ${cls}">
+        <div class="apex-token">${esc(apexAssetIcon(cur.asset))}</div>
+        <div class="apex-main">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">${esc(st.name)} · ${esc(st.label)}</p>
+              <h2>${esc(apexAssetLabel(key, cur.asset))}</h2>
+              <p>${esc(strategyAsset.product || "Strumento non disponibile")} ${strategyAsset.isin ? "· " + esc(strategyAsset.isin) : ""}</p>
+            </div>
+            <div class="detail-badges">${changed}${apexDoneBadge(key, st)}</div>
+          </div>
+          <div class="grid-3">
+            <div class="metric compact"><span>Segnale</span><strong>${dateIT(cur.date)}</strong></div>
+            <div class="metric compact"><span>Runner</span><strong>${esc(st.run_time)}</strong></div>
+            <div class="metric compact"><span>Esecuzione</span><strong>${esc(st.execution)}</strong></div>
+          </div>
+          <div class="apex-reason">${esc(cur.reason || "Regola applicata dal motore.")}</div>
+          <div class="toolbar"><button class="button primary" data-action="apex-done" data-strategy="${esc(key)}">${icon("check")}Registra esecuzione</button><button class="button" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Ricarica dati</button></div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="apex-dashboard">
+        <section class="detail-section"><h3>Perche ora</h3>${apexMomentumBars(cur)}</section>
+        <section class="detail-section"><h3>Numeri testati</h3><div class="row-list">
+          <div class="kv"><span>${st.apply_tax ? "CAGR netto" : "CAGR lordo"}</span><strong>${pct(Number(bt.cagr || 0), 1)}</strong></div>
+          <div class="kv"><span>Max drawdown</span><strong class="neg">${pct(Number(bt.max_drawdown || 0), 1)}</strong></div>
+          <div class="kv"><span>Swap/anno</span><strong>${esc(bt.switches_per_year ?? "n/d")}</strong></div>
+          <div class="kv"><span>Ulcer</span><strong>${pct(Number(bt.ulcer || 0), 1)}</strong></div>
+        </div></section>
+      </div>
+    </section>`;
+  }
+  function apexChart(key = "legit") {
+    const st = apexStrategy(key);
+    const pts = st?.backtest?.equity || [];
+    if (pts.length < 2) return `<div class="empty">Grafico APEX disponibile dopo il primo export del motore.</div>`;
+    return `<div class="notice info apex-chart-note"><strong>Come leggere il grafico</strong><br>${esc(st.chart_explainer || "Simulazione con capitale iniziale 10.000 EUR.")} Valore finale: ${eur(Number(st.backtest?.final || 0), 0)}.</div>${lineChart(pts, `${st.name}: simulazione 10.000 EUR`, v => eur(v, 0), `apex-${key}`, { height: 190, changeLabel: `${pct(Number(st.backtest?.cagr || 0), 1)} CAGR`, axisFmt: v => compactEur(v) })}`;
+  }
+  function apexHistoryTable(key = "legit") {
+    const st = apexStrategy(key);
+    const all = st?.changes || [];
+    const open = !!state.apexHistoryOpen?.[key];
+    const list = (open ? all : all.slice(-6)).slice().reverse();
+    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== "CASH" && (st?.dual ? k !== "SP500" : true));
+    const head = universe.map(k => `<th class="right">${esc(apexAssetLabel(key, k))}</th>`).join("");
+    const rows = list.map(r => `<tr><td><strong>${dateIT(r.date)}</strong><div class="muted">${esc(r.current_marker ? "stato attuale" : r.reason || "")}</div></td><td><span class="badge ${r.changed ? "warn" : "good"}">${esc(apexAssetLabel(key, r.asset))}</span></td>${universe.map(k => `<td class="right">${pct(Number(r.momentum?.[k] || 0), 1)}</td>`).join("")}</tr>`).join("");
+    const toggle = all.length > 6 ? `<div class="toolbar apex-history-actions"><button class="button ghost" data-action="toggle-apex-history" data-strategy="${esc(key)}">${open ? "Mostra meno" : `Mostra tutti i ${all.length} cambi`}</button></div>` : "";
+    return rows ? `${toggle}<table class="table"><thead><tr><th>Quando cambia</th><th>Asset</th>${head}</tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Nessun cambio segnale disponibile.</div>`;
+  }
+  function apexExecutionHistory(key = "legit") {
+    const rows = (state.apexHistory || []).filter(r => r.strategy_key === key).slice(0, 20).map(r => {
+      const moved = r.previous_asset ? `${r.previous_asset} → ${r.asset}` : r.asset;
+      const cap = r.capital_eur ? eur(r.capital_eur, 0) : "n/d";
+      const px = r.execution_price ? String(r.execution_price) : "n/d";
+      return `<tr><td><strong>${dateIT(r.executed_date)}</strong><div class="muted">Segnale ${dateIT(r.signal_date)}</div></td><td>${esc(moved)}</td><td class="right">${cap}</td><td class="right">${esc(px)}</td><td>${esc(r.note || "")}</td></tr>`;
+    }).join("");
+    return rows ? `<table class="table"><thead><tr><th>Data</th><th>Cambio fatto</th><th class="right">Capitale</th><th class="right">Prezzo</th><th>Note</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Premi Registra esecuzione quando operi: da qui nasce lo storico reale misurabile.</div>`;
+  }
+  function apexRunbookPanel() {
+    return `<section class="panel">
+      <div class="panel-head"><div><h2>Operativita</h2><p>Regola salvata come versione finale APEX per Fineco/Xetra.</p></div></div>
+      <div class="row-list">
+        <div class="kv"><span>Run APEX Legit + Dex</span><strong>martedi 15:30 Italia</strong></div>
+        <div class="kv"><span>Finestra azione</span><strong>martedi 15:35-17:20</strong></div>
+        <div class="kv"><span>Universo</span><strong>BTC, Oro, S&P 500, XEON</strong></div>
+        <div class="kv"><span>Regola</span><strong>6w, buffer 3pp, SMA30 BTC</strong></div>
+        <div class="kv"><span>Deploy</span><strong>unico workflow: APEX Legit, APEX Dex e OCTA</strong></div>
+      </div>
+    </section>`;
+  }
   function viewStrategy() {
     const f = freshness();
     const wf = state.freshnessFile || {};
     const next = nextRefreshInfo();
+    const apex = state.apexData || {};
     return `
-      <section class="panel full"><div class="panel-head"><div><h2>Diagnosi strategia</h2><p>Questa vNext separa profilo validato e profilo da esplorare.</p></div><span class="badge ${f.cls}">${esc(f.label)}</span></div>${liveSignalProfilePanel()}</section>
-      <section class="panel"><div class="panel-head"><div><h2>Freshness policy</h2><p>Regola proposta per il segnale del mattino.</p></div><button class="button primary" data-action="refresh-all">${icon("refresh")}Ricontrolla</button></div><div class="row-list">
-        <div class="kv"><span>Orario atteso Italia</span><strong>08:35</strong></div>
-        <div class="kv"><span>Trading date attesa</span><strong>${dateIT(expectedSignalDate())}</strong></div>
-        <div class="kv"><span>Segnale attuale</span><strong>${dateIT(state.octaData?.signal_date)}</strong></div>
-        <div class="kv"><span>Ultimo check workflow</span><strong>${wf.generated_at ? timeIT(wf.generated_at) : "n/d"}</strong></div>
-        <div class="kv"><span>Decisione UI</span><strong>${esc(f.label)}</strong></div>
-      </div></section>
+      ${apexCurrentPanel("legit", true)}
+      <section class="panel full"><div class="panel-head"><div><h2>Rendimento APEX Legit</h2><p>Grafico compatto: appoggia il dito per leggere data e valore.</p></div><span class="badge info">${esc(apex.generated_at ? "aggiornato " + timeIT(apex.generated_at) : "n/d")}</span></div>${apexChart("legit")}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale APEX Legit</h2><p>Mostro solo le settimane in cui cambia asset. Tutto lo storico si apre a richiesta.</p></div></div>${apexHistoryTable("legit")}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Storico reale APEX Legit</h2><p>Operazioni che registri tu con il pulsante: serve per misurare il risultato reale.</p></div></div>${apexExecutionHistory("legit")}</section>
+      ${apexCurrentPanel("dex", false)}
+      <section class="panel"><div class="panel-head"><div><h2>Rendimento APEX Dex</h2><p>BTC spot, PAXG e stablecoin. Motore separato, lordo imposte, per studio futuro.</p></div></div>${apexChart("dex")}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale APEX Dex</h2><p>Solo switch tra BTC spot, PAXG e stablecoin.</p></div></div>${apexHistoryTable("dex")}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Storico reale APEX Dex</h2><p>Registra swap e capitale spostato per avere il tracciamento reale separato.</p></div></div>${apexExecutionHistory("dex")}</section>
+      ${apexRunbookPanel()}
       <section class="panel"><div class="panel-head"><div><h2>Workflow vNext</h2><p>Separato dalla produzione attuale.</p></div></div><div class="row-list">
         <div class="kv"><span>Runner attivo ora</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
-        <div class="kv"><span>Orario refresh</span><strong>${esc(CLOUD_RUNNER.schedule)}</strong></div>
+        <div class="kv"><span>OCTA refresh</span><strong>${esc(CLOUD_RUNNER.schedule)}</strong></div>
+        <div class="kv"><span>APEX refresh</span><strong>martedi 15:30 Italia, Legit + Dex insieme</strong></div>
         <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
         <div class="kv"><span>Finestra controllo</span><strong>${esc(CLOUD_RUNNER.check)}</strong></div>
         <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>
-        <div class="kv"><span>Run manuale</span><strong><a class="text-link" href="${esc(CLOUD_RUNNER.workflow)}" target="_blank" rel="noopener">Daily Refresh</a></strong></div>
+        <div class="kv"><span>Run manuale</span><strong><button class="inline-link" data-action="run-engines" data-mode="all">lancia APEX + OCTA</button></strong></div>
         <div class="kv"><span>PC locale</span><strong>non necessario</strong></div>
       </div></section>
       <section class="panel full"><div class="panel-head"><div><h2>Runbook mattina</h2><p>Controllo rapido quando vuoi capire se OCTA e' pronto.</p></div></div><div class="grid-2">
