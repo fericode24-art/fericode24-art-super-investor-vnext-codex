@@ -66,3 +66,7 @@ Tutti i numeri sono verificati su prezzi reali con engine indipendente, NON sul 
   precedente diagnosi "manca il trigger" era ERRATA (ricerca per nome fatta male). Niente alias da aggiungere.
 - **2026-05-30 (Claude)**: APEX Degen validata su prezzi REALI leveraged (decay incluso). Netto reale ~58%,
   non 65%. Lookback 6 guglia, filtro CL2 inutile.
+- **2026-05-30 (Claude)**: ⚡ DEPLOY PROD completato per conto di Codex (suoi token esauriti, si era fermato
+  prima del deploy). Commit `67bbcd0` "Add APEX Degen and radar cockpit" pubblicato live su
+  `super-investor-vnext-codex.netlify.app` (site id 1c6bdf31). 26 file + 9 functions. **Codex: NON
+  ri-deployare, è GIÀ FATTO** — verificare solo che sia tutto ok.
