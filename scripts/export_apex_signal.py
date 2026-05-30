@@ -275,15 +275,17 @@ def risky_assets(st: Strategy) -> Tuple[str, ...]:
     return tuple(k for k in st.universe if k != safe_asset(st))
 
 
-def filter_status(rows: List[Dict[str, float]], i: int, st: Strategy) -> Dict[str, Dict]:
+def filter_status(rows: List[Dict[str, float]], i: int, st: Strategy, periods_per_week: int = 1) -> Dict[str, Dict]:
     status: Dict[str, Dict] = {}
     for asset, weeks in st.filters.items():
-        if i < weeks or asset not in rows[i]:
+        periods = max(1, int(weeks * periods_per_week))
+        if i < periods or asset not in rows[i]:
             continue
-        sma = sum(rows[k][asset] for k in range(i - weeks + 1, i + 1)) / weeks
+        sma = sum(rows[k][asset] for k in range(i - periods + 1, i + 1)) / periods
         price = rows[i][asset]
         status[asset] = {
             "weeks": weeks,
+            "periods": periods,
             "price": clean_number(price, 4),
             "sma": clean_number(sma, 4),
             "distance_pct": _pct(price / sma - 1.0) if sma else None,
@@ -292,8 +294,8 @@ def filter_status(rows: List[Dict[str, float]], i: int, st: Strategy) -> Dict[st
     return status
 
 
-def apply_filters(target: str, momentum: Dict[str, float], rows: List[Dict[str, float]], i: int, st: Strategy) -> Tuple[str, str, Dict[str, Dict]]:
-    status = filter_status(rows, i, st)
+def apply_filters(target: str, momentum: Dict[str, float], rows: List[Dict[str, float]], i: int, st: Strategy, periods_per_week: int = 1) -> Tuple[str, str, Dict[str, Dict]]:
+    status = filter_status(rows, i, st, periods_per_week=periods_per_week)
     if target in status and not status[target]["passes"]:
         alternatives = []
         for asset in risky_assets(st):
@@ -352,6 +354,28 @@ def build_signals(dates: List[str], rows: List[Dict[str, float]], st: Strategy) 
           "prices": {k: clean_number(cur.get(k), 4) for k in st.universe},
       })
     return out
+
+
+def daily_observations(prices: pd.DataFrame, st: Strategy) -> Tuple[List[str], List[Dict[str, float]]]:
+    sub = prices[list(st.universe)].dropna(subset=[a for a in risky_assets(st) if a in prices.columns]).copy()
+    dates = [ix.date().isoformat() for ix in sub.index]
+    rows = []
+    for ix in sub.index:
+        row = {}
+        for c in st.universe:
+            val = sub.loc[ix, c] if c in sub.columns else None
+            if pd.notna(val):
+                row[c] = float(val)
+        rows.append(row)
+    return dates, rows
+
+
+def raw_for_momentum(momentum: Dict[str, float], st: Strategy) -> Tuple[str, str]:
+    if st.engine == "dual":
+        return dual_raw(momentum.get("BTC", 0.0), momentum.get("GOLD", 0.0))
+    if st.engine == "pure":
+        return pure_raw(momentum, risky_assets(st))
+    return apex_raw(momentum.get("BTC", 0.0), momentum.get("GOLD", 0.0), momentum.get("SP500", 0.0))
 
 
 def backtest(dates: List[str], rows: List[Dict[str, float]], signals: List[Dict], st: Strategy) -> Dict:
@@ -502,25 +526,24 @@ def strategy_assets(st: Strategy) -> Dict[str, Dict]:
     return {k: asset_payload(k) for k in ("BTC", "GOLD", "SP500", "CASH")}
 
 
-def daily_radar(dates: List[str], rows: List[Dict[str, float]], signals: List[Dict], st: Strategy) -> Dict:
-    if not signals:
-        return {"level": "warn", "title": "Radar non disponibile", "body": "Mancano dati sufficienti."}
-    cur_signal = signals[-1]
-    i = len(rows) - 1
-    if i < st.lookback_weeks:
+def radar_snapshot(
+    dates: List[str],
+    rows: List[Dict[str, float]],
+    i: int,
+    st: Strategy,
+    official_asset: Optional[str],
+    lookback_periods: int,
+    periods_per_week: int,
+) -> Dict:
+    if i < lookback_periods:
         return {"level": "warn", "title": "Radar non disponibile", "body": "Mancano dati sufficienti."}
     row = rows[i]
-    prev = rows[i - st.lookback_weeks]
+    prev = rows[i - lookback_periods]
     moms = {asset: (row[asset] / prev[asset] - 1.0) for asset in st.universe if asset in row and asset in prev}
     moms[safe_asset(st)] = 0.0
-    if st.engine == "dual":
-        raw, reason = dual_raw(moms.get("BTC", 0.0), moms.get("GOLD", 0.0))
-    elif st.engine == "pure":
-        raw, reason = pure_raw(moms, risky_assets(st))
-    else:
-        raw, reason = apex_raw(moms.get("BTC", 0.0), moms.get("GOLD", 0.0), moms.get("SP500", 0.0))
-    candidate, filter_reason, filters = apply_filters(raw, moms, rows, i, st)
-    official = cur_signal.get("asset")
+    raw, reason = raw_for_momentum(moms, st)
+    candidate, filter_reason, filters = apply_filters(raw, moms, rows, i, st, periods_per_week=periods_per_week)
+    official = official_asset
     edge = moms.get(candidate, 0.0) - moms.get(official, 0.0)
     threshold = st.buffer_pp / 100.0
     losing_filter = official in filters and not filters[official]["passes"]
@@ -548,6 +571,38 @@ def daily_radar(dates: List[str], rows: List[Dict[str, float]], signals: List[Di
         "filters": filters,
         "is_operational": False,
     }
+
+
+def daily_radar(prices: pd.DataFrame, signals: List[Dict], st: Strategy) -> Dict:
+    if not signals:
+        return {"level": "warn", "title": "Radar non disponibile", "body": "Mancano dati sufficienti."}
+    dates, rows = daily_observations(prices, st)
+    lookback_periods = max(st.lookback_weeks * 5, st.lookback_weeks)
+    return radar_snapshot(dates, rows, len(rows) - 1, st, signals[-1].get("asset"), lookback_periods, periods_per_week=5)
+
+
+def daily_radar_history(prices: pd.DataFrame, signals: List[Dict], st: Strategy, max_days: int = 45) -> List[Dict]:
+    if not signals:
+        return []
+    dates, rows = daily_observations(prices, st)
+    if not dates:
+        return []
+    official_by_date = {}
+    cur_asset = None
+    sig_i = 0
+    ordered = sorted(signals, key=lambda s: s.get("date", ""))
+    lookback_periods = max(st.lookback_weeks * 5, st.lookback_weeks)
+    start_i = max(lookback_periods, len(rows) - max_days)
+    out = []
+    for i in range(start_i, len(rows)):
+        while sig_i < len(ordered) and ordered[sig_i].get("date", "") <= dates[i]:
+            cur_asset = ordered[sig_i].get("asset")
+            sig_i += 1
+        if cur_asset is None:
+            cur_asset = ordered[-1].get("asset")
+        snap = radar_snapshot(dates, rows, i, st, cur_asset, lookback_periods, periods_per_week=5)
+        out.append(snap)
+    return out
 
 
 def main() -> int:
@@ -603,7 +658,8 @@ def main() -> int:
             "current": current,
             "history": signals[-16:],
             "changes": changes,
-            "radar": daily_radar(dates, rows, signals, st),
+            "radar": daily_radar(prices, signals, st),
+            "radar_history": daily_radar_history(prices, signals, st),
             "backtest": bt,
         }
 

@@ -2163,6 +2163,16 @@
       <tr><td><strong>${esc(y.year)}</strong></td><td class="right ${Number(y.return) >= 0 ? "pos" : "neg"}">${pct(Number(y.return), 1)}</td><td class="right neg">${pct(Number(y.drawdown), 1)}</td><td class="right">${eur(Number(y.ending || 0), 0)}</td></tr>`).join("");
     return rows ? `<table class="table"><thead><tr><th>Anno</th><th class="right">Rendimento</th><th class="right">DD anno</th><th class="right">Finale</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Anno per anno non disponibile.</div>`;
   }
+  function apexRadarHistoryTable(key) {
+    const st = apexStrategy(key);
+    const list = (st?.radar_history || []).slice(-14).reverse();
+    const rows = list.map(r => {
+      const cls = r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+      const delta = Number(r.edge_pp || 0);
+      return `<tr><td><strong>${dateIT(r.as_of)}</strong><div class="muted">${esc(r.body || "")}</div></td><td><span class="badge ${cls}">${esc(r.level || "ok")}</span></td><td>${esc(apexAssetLabel(key, r.official_asset))}</td><td>${esc(apexAssetLabel(key, r.radar_asset))}</td><td class="right ${delta >= 0 ? "pos" : "neg"}">${pct(delta, 1)}</td></tr>`;
+    }).join("");
+    return rows ? `<table class="table"><thead><tr><th>Giorno</th><th>Radar</th><th>Ufficiale</th><th>Oggi vincerebbe</th><th class="right">Vantaggio</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Storico radar non ancora disponibile.</div>`;
+  }
   function apexHomeView() {
     const apex = state.apexData || {};
     const keys = apexStrategyKeys();
@@ -2189,6 +2199,7 @@
       <section class="panel full"><div class="toolbar"><button class="button ghost" data-action="back-apex-home">${icon("minus")}Torna ai 3 APEX</button><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run forzato tutto</button></div></section>
       ${apexCurrentPanel(key, true)}
       <section class="panel full"><div class="panel-head"><div><h2>Radar ${esc(st.name)}</h2><p>Serve per capire se il segnale sta cambiando prima del prossimo martedi.</p></div></div>${apexRadarPanel(key, false)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Storico radar</h2><p>Ultimi giorni: utile per vedere se un alert e' episodico o sta insistendo.</p></div></div>${apexRadarHistoryTable(key)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Rendimento ${esc(st.name)}</h2><p>Grafico compatto: appoggia il dito per leggere data e valore.</p></div></div>${apexChart(key)}</section>
       <section class="panel"><div class="panel-head"><div><h2>Metriche</h2><p>Backtest coerente con il motore dell'app.</p></div></div><div class="row-list">
         <div class="kv"><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(st.backtest?.cagr || 0), 1)}</strong></div>

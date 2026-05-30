@@ -203,6 +203,11 @@ jobs:
           else
             echo '{"signals":[]}' > /tmp/data-octa-prev.json
           fi
+          if [ -f dashboard/apex-data.json ]; then
+            cp dashboard/apex-data.json /tmp/apex-prev.json
+          else
+            echo '{"strategies":{}}' > /tmp/apex-prev.json
+          fi
 
       - name: Cache prices
         if: steps.rome.outputs.should_run == 'true' && steps.date.outputs.is_holiday != 'true' && steps.freshguard.outputs.already_fresh != 'true'
@@ -295,27 +300,48 @@ jobs:
               raise SystemExit(0)
           prev = json.load(open("/tmp/data-octa-prev.json", encoding="utf-8"))
           cur = json.load(open("dashboard/data-octa.json", encoding="utf-8"))
+          prev_apex = json.load(open("/tmp/apex-prev.json", encoding="utf-8"))
+          cur_apex = json.load(open("dashboard/apex-data.json", encoding="utf-8")) if os.path.exists("dashboard/apex-data.json") else {"strategies": {}}
           prev_pairs = {(s.get("action"), s.get("ticker")) for s in prev.get("signals", [])}
           new = [s for s in cur.get("signals", []) if (s.get("action"), s.get("ticker")) not in prev_pairs]
           freshness = json.load(open("dashboard/freshness.json", encoding="utf-8"))
           url = os.environ.get("DASHBOARD_URL") or "https://app.netlify.com"
-          if not new:
-              title = f"OCTA vNext fresh {cur.get('signal_date')} - 0 nuovi segnali"
-              body = f"Refresh completato. Fresh={freshness.get('fresh')}. Candidates={cur.get('n_candidates', 'n/d')}."
+          apex_lines = []
+          apex_alerts = []
+          prev_strats = prev_apex.get("strategies", {})
+          for key, st in (cur_apex.get("strategies") or {}).items():
+              cur_sig = st.get("current") or {}
+              prev_sig = (prev_strats.get(key, {}).get("current") or {})
+              name = st.get("name") or key
+              asset = cur_sig.get("asset")
+              prev_asset = prev_sig.get("asset")
+              if asset and prev_asset and asset != prev_asset:
+                  apex_lines.append(f"{name}: cambio {prev_asset} -> {asset} ({cur_sig.get('date')})")
+              radar = st.get("radar") or {}
+              if radar.get("level") in {"alert", "watch"}:
+                  apex_alerts.append(
+                      f"{name}: radar {radar.get('level')} verso {radar.get('radar_asset')} "
+                      f"(edge {float(radar.get('edge_pp') or 0):+.1f}pp)"
+                  )
+          if not new and not apex_lines and not apex_alerts:
+              title = f"Super Investor fresh {cur.get('signal_date')} - nessun nuovo segnale"
+              body = f"OCTA completato. Fresh={freshness.get('fresh')}. Candidates={cur.get('n_candidates', 'n/d')}. APEX radar ok."
               priority = "default"
               tags = "white_check_mark"
           else:
               buys = [s for s in new if s.get("action") == "BUY"]
               sells = [s for s in new if s.get("action") == "SELL"]
-              title = f"OCTA vNext - {len(buys)} BUY - {len(sells)} SELL"
+              title = f"Super Investor - {len(buys)} BUY - {len(sells)} SELL - APEX {len(apex_lines) + len(apex_alerts)}"
               lines = []
               for s in buys[:8]:
                   lines.append(f"BUY {s.get('ticker')} - score {float(s.get('score') or 0):.0f} - {s.get('entry_status', '?')}")
               for s in sells[:8]:
                   lines.append(f"SELL {s.get('ticker')} - {s.get('reason') or s.get('entry_status', '?')}")
-              body = "\n".join(lines)
-              priority = "high"
-              tags = "chart_with_upwards_trend"
+              lines.extend(apex_lines[:6])
+              lines.extend(apex_alerts[:6])
+              body = "\n".join(lines) or "Refresh completato."
+              priority = "high" if new or apex_lines or any("alert" in x for x in apex_alerts) else "default"
+              tags = "chart_with_upwards_trend,warning" if priority == "high" else "white_check_mark"
           req = urllib.request.Request(
               f"https://ntfy.sh/{topic}",
               data=body.encode("utf-8"),

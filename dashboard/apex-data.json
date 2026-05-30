@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-30T18:36:44.751049+00:00",
+  "generated_at": "2026-05-30T22:00:57.785635+00:00",
   "status": "ok",
   "base_currency": "EUR",
   "note": "Backtest su proxy Yahoo daily in EUR; run APEX unico martedi 15:30 Italia per Legit, Dex e Degen.",
@@ -149,6 +149,7 @@
         "filters": {
           "BTC": {
             "weeks": 30,
+            "periods": 30,
             "price": 65157.0554,
             "sma": 69618.5145,
             "distance_pct": -6.4084,
@@ -179,6 +180,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 57790.3651,
               "sma": 87407.5577,
               "distance_pct": -33.884,
@@ -208,6 +210,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 56957.6994,
               "sma": 85885.8784,
               "distance_pct": -33.6821,
@@ -237,6 +240,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 54333.4689,
               "sma": 84307.479,
               "distance_pct": -35.5532,
@@ -266,6 +270,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 58384.2405,
               "sma": 82969.2001,
               "distance_pct": -29.6314,
@@ -295,6 +300,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60192.3971,
               "sma": 81527.8526,
               "distance_pct": -26.1695,
@@ -324,6 +330,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64282.9879,
               "sma": 80447.3328,
               "distance_pct": -20.0931,
@@ -353,6 +360,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -382,6 +390,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 59540.3923,
               "sma": 78085.7212,
               "distance_pct": -23.75,
@@ -411,6 +420,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62333.7464,
               "sma": 77004.6701,
               "distance_pct": -19.052,
@@ -440,6 +450,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63032.1133,
               "sma": 75794.911,
               "distance_pct": -16.8386,
@@ -469,6 +480,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64791.4373,
               "sma": 74790.6639,
               "distance_pct": -13.3696,
@@ -498,6 +510,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65126.3582,
               "sma": 73720.7908,
               "distance_pct": -11.6581,
@@ -527,6 +540,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 69216.099,
               "sma": 72570.8805,
               "distance_pct": -4.6228,
@@ -556,6 +570,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 68317.3481,
               "sma": 71588.2718,
               "distance_pct": -4.5691,
@@ -585,6 +600,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65851.5124,
               "sma": 70678.0627,
               "distance_pct": -6.8289,
@@ -614,6 +630,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -645,6 +662,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9365.9064,
               "sma": 5934.2183,
               "distance_pct": 57.8288,
@@ -674,6 +692,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7225.0802,
               "sma": 7552.0476,
               "distance_pct": -4.3295,
@@ -703,6 +722,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 6287.8163,
               "sma": 7634.0623,
               "distance_pct": -17.6347,
@@ -732,6 +752,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7942.9315,
               "sma": 8041.9442,
               "distance_pct": -1.2312,
@@ -761,6 +782,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7738.41,
               "sma": 8293.0869,
               "distance_pct": -6.6884,
@@ -790,6 +812,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 5694.422,
               "sma": 6166.5491,
               "distance_pct": -7.6563,
@@ -819,6 +842,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 3031.0174,
               "sma": 4836.9335,
               "distance_pct": -37.336,
@@ -848,6 +872,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 4354.803,
               "sma": 4138.7939,
               "distance_pct": 5.2191,
@@ -877,6 +902,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 10208.4537,
               "sma": 5875.3717,
               "distance_pct": 73.7499,
@@ -906,6 +932,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7499.7133,
               "sma": 7552.9962,
               "distance_pct": -0.7055,
@@ -935,6 +962,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8395.1015,
               "sma": 8069.0315,
               "distance_pct": 4.041,
@@ -964,6 +992,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7988.4887,
               "sma": 8180.9405,
               "distance_pct": -2.3524,
@@ -993,6 +1022,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7290.3162,
               "sma": 8267.3493,
               "distance_pct": -11.818,
@@ -1022,6 +1052,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7927.4212,
               "sma": 8261.8985,
               "distance_pct": -4.0484,
@@ -1051,6 +1082,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7881.3629,
               "sma": 8179.856,
               "distance_pct": -3.6491,
@@ -1080,6 +1112,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8492.5456,
               "sma": 8143.9529,
               "distance_pct": 4.2804,
@@ -1109,6 +1142,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7885.632,
               "sma": 8017.7184,
               "distance_pct": -1.6474,
@@ -1138,6 +1172,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7212.1604,
               "sma": 7281.9233,
               "distance_pct": -0.958,
@@ -1167,6 +1202,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8256.4457,
               "sma": 7307.1477,
               "distance_pct": 12.9914,
@@ -1196,6 +1232,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8124.6812,
               "sma": 7551.5742,
               "distance_pct": 7.5892,
@@ -1225,6 +1262,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8181.4645,
               "sma": 7730.4517,
               "distance_pct": 5.8342,
@@ -1254,6 +1292,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9526.129,
               "sma": 7900.0041,
               "distance_pct": 20.5838,
@@ -1283,6 +1322,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8570.2503,
               "sma": 8103.2443,
               "distance_pct": 5.7632,
@@ -1312,6 +1352,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 10125.3098,
               "sma": 8516.4181,
               "distance_pct": 18.8916,
@@ -1341,6 +1382,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 46883.9098,
               "sma": 27820.204,
               "distance_pct": 68.5247,
@@ -1370,6 +1412,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 46705.289,
               "sma": 31437.7719,
               "distance_pct": 48.5642,
@@ -1399,6 +1442,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27286.8767,
               "sma": 35010.5706,
               "distance_pct": -22.061,
@@ -1428,6 +1472,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 38833.8873,
               "sma": 37403.1578,
               "distance_pct": 3.8252,
@@ -1457,6 +1502,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 34691.36,
               "sma": 38308.9939,
               "distance_pct": -9.4433,
@@ -1486,6 +1532,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 44338.8007,
               "sma": 38076.2401,
               "distance_pct": 16.4474,
@@ -1515,6 +1562,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 50476.5939,
               "sma": 39408.7056,
               "distance_pct": 28.0849,
@@ -1544,6 +1592,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 37137.1584,
               "sma": 41261.4808,
               "distance_pct": -9.9956,
@@ -1573,6 +1622,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 43174.8299,
               "sma": 42497.9658,
               "distance_pct": 1.5927,
@@ -1602,6 +1652,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 41505.6095,
               "sma": 42567.4977,
               "distance_pct": -2.4946,
@@ -1631,6 +1682,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 35921.8231,
               "sma": 42330.8226,
               "distance_pct": -15.1403,
@@ -1660,6 +1712,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27762.0768,
               "sma": 40012.4245,
               "distance_pct": -30.6164,
@@ -1689,6 +1742,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 20772.4788,
               "sma": 32103.0678,
               "distance_pct": -35.2944,
@@ -1718,6 +1772,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 18835.0604,
               "sma": 27883.3585,
               "distance_pct": -32.4505,
@@ -1747,6 +1802,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 20720.8536,
               "sma": 24102.3879,
               "distance_pct": -14.0299,
@@ -1776,6 +1832,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 16280.4875,
               "sma": 20989.2154,
               "distance_pct": -22.434,
@@ -1805,6 +1862,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 19539.4891,
               "sma": 19101.0696,
               "distance_pct": 2.2953,
@@ -1834,6 +1892,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 24864.2564,
               "sma": 21054.207,
               "distance_pct": 18.0964,
@@ -1863,6 +1922,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 28127.2355,
               "sma": 22621.1787,
               "distance_pct": 24.3403,
@@ -1892,6 +1952,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27051.7718,
               "sma": 24834.0071,
               "distance_pct": 8.9304,
@@ -1921,6 +1982,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 24752.7561,
               "sma": 25687.07,
               "distance_pct": -3.6373,
@@ -1950,6 +2012,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26171.7657,
               "sma": 25866.5016,
               "distance_pct": 1.1802,
@@ -1979,6 +2042,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 25892.1843,
               "sma": 25960.4664,
               "distance_pct": -0.263,
@@ -2008,6 +2072,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26923.353,
               "sma": 25981.7282,
               "distance_pct": 3.6242,
@@ -2037,6 +2102,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 39426.3599,
               "sma": 30706.2193,
               "distance_pct": 28.3986,
@@ -2066,6 +2132,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 46176.4039,
               "sma": 32433.9454,
               "distance_pct": 42.3706,
@@ -2095,6 +2162,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60053.9861,
               "sma": 42480.8507,
               "distance_pct": 41.3672,
@@ -2124,6 +2192,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62876.9112,
               "sma": 48918.1344,
               "distance_pct": 28.535,
@@ -2153,6 +2222,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 57770.7238,
               "sma": 53220.5883,
               "distance_pct": 8.5496,
@@ -2182,6 +2252,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 61186.9522,
               "sma": 55837.0576,
               "distance_pct": 9.5813,
@@ -2211,6 +2282,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 61453.9052,
               "sma": 58358.4187,
               "distance_pct": 5.3043,
@@ -2240,6 +2312,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 97014.6986,
               "sma": 71424.8746,
               "distance_pct": 35.8276,
@@ -2269,6 +2342,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 93884.0837,
               "sma": 85046.8385,
               "distance_pct": 10.391,
@@ -2298,6 +2372,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 89672.313,
               "sma": 88665.0357,
               "distance_pct": 1.136,
@@ -2327,6 +2402,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 100955.0659,
               "sma": 88707.5426,
               "distance_pct": 13.8066,
@@ -2356,6 +2432,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 96228.5496,
               "sma": 89652.3113,
               "distance_pct": 7.3353,
@@ -2385,6 +2462,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 94765.2785,
               "sma": 89717.8194,
               "distance_pct": 5.6259,
@@ -2414,6 +2492,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -2443,6 +2522,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63032.1133,
               "sma": 75794.911,
               "distance_pct": -16.8386,
@@ -2472,6 +2552,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -2488,32 +2569,1295 @@
         }
       ],
       "radar": {
-        "as_of": "2026-05-26",
+        "as_of": "2026-05-30",
         "official_asset": "SP500",
         "radar_asset": "SP500",
-        "raw_asset": "BTC",
+        "raw_asset": "SP500",
         "level": "ok",
         "title": "Radar coerente col segnale",
-        "body": "Filtro trend: BTC bocciato, passa a SP500",
+        "body": "S&P 500 positivo e migliore di Oro",
         "edge_pp": 0.0,
         "buffer_pp": 3.0,
         "momentum": {
-          "BTC": 3.3712,
-          "GOLD": -5.6737,
-          "SP500": 9.1382,
+          "BTC": -3.4458,
+          "GOLD": -0.9574,
+          "SP500": 5.378,
           "CASH": 0.0
         },
         "filters": {
           "BTC": {
             "weeks": 30,
-            "price": 65157.0554,
-            "sma": 69618.5145,
-            "distance_pct": -6.4084,
+            "periods": 150,
+            "price": 63052.5631,
+            "sma": 65201.589,
+            "distance_pct": -3.296,
             "passes": false
           }
         },
         "is_operational": false
       },
+      "radar_history": [
+        {
+          "as_of": "2026-04-16",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -1.0021,
+            "GOLD": -6.82,
+            "SP500": 2.0931,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63638.8305,
+              "sma": 68081.7845,
+              "distance_pct": -6.5259,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-17",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 6.0201,
+            "GOLD": -2.7113,
+            "SP500": 5.3474,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65457.5748,
+              "sma": 67983.5449,
+              "distance_pct": -3.7156,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-18",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.3896,
+            "GOLD": 2.7321,
+            "SP500": 4.9511,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64268.8313,
+              "sma": 67885.4828,
+              "distance_pct": -5.3276,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-19",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 2.9036,
+            "GOLD": 4.4332,
+            "SP500": 7.6154,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62681.8817,
+              "sma": 67802.9185,
+              "distance_pct": -7.5528,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-20",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 8.8826,
+            "GOLD": 3.7021,
+            "SP500": 7.7394,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64620.6288,
+              "sma": 67741.9212,
+              "distance_pct": -4.6076,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-21",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 10.5644,
+            "GOLD": 0.9963,
+            "SP500": 6.6633,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64791.4373,
+              "sma": 67684.6191,
+              "distance_pct": -4.2745,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-22",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 8.5488,
+            "GOLD": 5.7722,
+            "SP500": 6.762,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66588.376,
+              "sma": 67626.8318,
+              "distance_pct": -1.5356,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-23",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 10.0538,
+            "GOLD": 6.0474,
+            "SP500": 7.5036,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66862.0385,
+              "sma": 67561.2039,
+              "distance_pct": -1.0349,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-24",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 7.9745,
+            "GOLD": 3.1766,
+            "SP500": 8.0514,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66292.4576,
+              "sma": 67497.706,
+              "distance_pct": -1.7856,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-25",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.6401,
+            "GOLD": 6.7955,
+            "SP500": 9.462,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66426.5766,
+              "sma": 67418.7477,
+              "distance_pct": -1.4717,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-26",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 17.0602,
+            "GOLD": 3.7881,
+            "SP500": 11.0693,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67321.4193,
+              "sma": 67343.0253,
+              "distance_pct": -0.0321,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-27",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 14.9495,
+            "GOLD": 2.5593,
+            "SP500": 10.9918,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66088.8937,
+              "sma": 67261.0867,
+              "distance_pct": -1.7428,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-28",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 13.9018,
+            "GOLD": 0.5726,
+            "SP500": 10.2882,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65126.3582,
+              "sma": 67173.1192,
+              "distance_pct": -3.047,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-29",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.4322,
+            "GOLD": -1.5112,
+            "SP500": 10.3205,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64667.3521,
+              "sma": 67084.7207,
+              "distance_pct": -3.6035,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-30",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.6781,
+            "GOLD": -2.6173,
+            "SP500": 8.2999,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65302.7623,
+              "sma": 67024.0342,
+              "distance_pct": -2.5681,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-01",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 13.3199,
+            "GOLD": -4.4833,
+            "SP500": 8.5063,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66653.8523,
+              "sma": 66943.7386,
+              "distance_pct": -0.433,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-02",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 7.6675,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.2056,
+            "GOLD": -1.64,
+            "SP500": 8.5381,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67061.5987,
+              "sma": 66854.5898,
+              "distance_pct": 0.3096,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-03",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 7.3866,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 15.4675,
+            "GOLD": -2.0543,
+            "SP500": 8.0809,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66960.1217,
+              "sma": 66774.4749,
+              "distance_pct": 0.278,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-04",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 9.0968,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.7614,
+            "GOLD": -4.3697,
+            "SP500": 7.6645,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68074.047,
+              "sma": 66716.4676,
+              "distance_pct": 2.0348,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-05",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 6.9485,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 15.8093,
+            "GOLD": -3.3156,
+            "SP500": 8.8608,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69216.099,
+              "sma": 66666.7347,
+              "distance_pct": 3.824,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-06",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 6.7376,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.1742,
+            "GOLD": -1.2269,
+            "SP500": 9.4365,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69502.4738,
+              "sma": 66612.4218,
+              "distance_pct": 4.3386,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-07",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 0.3255,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.2643,
+            "GOLD": -0.8547,
+            "SP500": 8.9387,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68108.504,
+              "sma": 66547.3579,
+              "distance_pct": 2.3459,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-08",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.6456,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.3111,
+            "GOLD": -0.9937,
+            "SP500": 8.6654,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68351.1974,
+              "sma": 66472.218,
+              "distance_pct": 2.8267,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-09",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.9571,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.7043,
+            "GOLD": -2.1047,
+            "SP500": 7.7472,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68758.305,
+              "sma": 66403.0384,
+              "distance_pct": 3.5469,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-10",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.9994,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.1645,
+            "GOLD": -1.2122,
+            "SP500": 8.1651,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 70015.222,
+              "sma": 66342.7324,
+              "distance_pct": 5.5356,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-11",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.1105,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.1357,
+            "GOLD": -1.5606,
+            "SP500": 8.0252,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69444.5337,
+              "sma": 66293.0623,
+              "distance_pct": 4.7538,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-12",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 5.1367,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.8872,
+            "GOLD": -2.5099,
+            "SP500": 7.7506,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68317.3481,
+              "sma": 66235.717,
+              "distance_pct": 3.1428,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-13",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -1.6605,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.8874,
+            "GOLD": -1.4514,
+            "SP500": 7.5479,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67553.6137,
+              "sma": 66185.3393,
+              "distance_pct": 2.0673,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-14",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 1.6055,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.7531,
+            "GOLD": -2.6075,
+            "SP500": 8.1476,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69179.6729,
+              "sma": 66155.6958,
+              "distance_pct": 4.571,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-15",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 0.2082,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 6.9402,
+            "GOLD": -3.9698,
+            "SP500": 6.7321,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67797.2349,
+              "sma": 66109.4673,
+              "distance_pct": 2.553,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-16",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -1.2667,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.2756,
+            "GOLD": -3.5972,
+            "SP500": 6.5422,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66996.141,
+              "sma": 66067.3285,
+              "distance_pct": 1.4059,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-17",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -3.6082,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 1.4308,
+            "GOLD": -5.2427,
+            "SP500": 5.039,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66394.1164,
+              "sma": 66024.7454,
+              "distance_pct": 0.5594,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-18",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -2.2982,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 3.0944,
+            "GOLD": -4.9226,
+            "SP500": 5.3926,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66257.5449,
+              "sma": 65965.5476,
+              "distance_pct": 0.4427,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-19",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, passa a SP500",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.0567,
+            "GOLD": -6.2165,
+            "SP500": 4.3228,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65851.5124,
+              "sma": 65902.275,
+              "distance_pct": -0.077,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-20",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -2.4943,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 3.2688,
+            "GOLD": -4.6384,
+            "SP500": 5.7631,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66732.9685,
+              "sma": 65843.2995,
+              "distance_pct": 1.3512,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-21",
+          "official_asset": "SP500",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": -3.9024,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 2.9433,
+            "GOLD": -2.0536,
+            "SP500": 6.8457,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66698.4191,
+              "sma": 65784.0876,
+              "distance_pct": 1.3899,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-22",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.449,
+            "GOLD": -3.4571,
+            "SP500": 5.8104,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64957.6297,
+              "sma": 65721.8449,
+              "distance_pct": -1.1628,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-23",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -1.323,
+            "GOLD": -3.2109,
+            "SP500": 5.9037,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65977.4298,
+              "sma": 65666.5233,
+              "distance_pct": 0.4735,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-24",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -0.0757,
+            "GOLD": -3.746,
+            "SP500": 4.8671,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66242.2553,
+              "sma": 65615.0993,
+              "distance_pct": 0.9558,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-25",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -0.0719,
+            "GOLD": -3.9205,
+            "SP500": 4.677,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66378.8214,
+              "sma": 65563.7838,
+              "distance_pct": 1.2431,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-26",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.215,
+            "GOLD": -4.3182,
+            "SP500": 5.3605,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65157.0554,
+              "sma": 65501.4907,
+              "distance_pct": -0.5258,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-27",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.3311,
+            "GOLD": -4.3054,
+            "SP500": 5.4564,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63887.3764,
+              "sma": 65430.5427,
+              "distance_pct": -2.3585,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-28",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.8107,
+            "GOLD": -1.1177,
+            "SP500": 6.9136,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63295.8568,
+              "sma": 65359.0692,
+              "distance_pct": -3.1567,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-29",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.6841,
+            "GOLD": 0.8422,
+            "SP500": 6.7588,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62931.614,
+              "sma": 65277.857,
+              "distance_pct": -3.5942,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-30",
+          "official_asset": "SP500",
+          "radar_asset": "SP500",
+          "raw_asset": "SP500",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "S&P 500 positivo e migliore di Oro",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.4458,
+            "GOLD": -0.9574,
+            "SP500": 5.378,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63052.5631,
+              "sma": 65201.589,
+              "distance_pct": -3.296,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        }
+      ],
       "backtest": {
         "initial": 10000.0,
         "final": 157386.78,
@@ -4854,6 +6198,7 @@
         "filters": {
           "BTC": {
             "weeks": 30,
+            "periods": 30,
             "price": 65157.0554,
             "sma": 69618.5145,
             "distance_pct": -6.4084,
@@ -4882,6 +6227,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 57790.3651,
               "sma": 87407.5577,
               "distance_pct": -33.884,
@@ -4909,6 +6255,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 56957.6994,
               "sma": 85885.8784,
               "distance_pct": -33.6821,
@@ -4936,6 +6283,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 54333.4689,
               "sma": 84307.479,
               "distance_pct": -35.5532,
@@ -4963,6 +6311,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 58384.2405,
               "sma": 82969.2001,
               "distance_pct": -29.6314,
@@ -4990,6 +6339,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60192.3971,
               "sma": 81527.8526,
               "distance_pct": -26.1695,
@@ -5017,6 +6367,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64282.9879,
               "sma": 80447.3328,
               "distance_pct": -20.0931,
@@ -5044,6 +6395,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -5071,6 +6423,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 59540.3923,
               "sma": 78085.7212,
               "distance_pct": -23.75,
@@ -5098,6 +6451,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62333.7464,
               "sma": 77004.6701,
               "distance_pct": -19.052,
@@ -5125,6 +6479,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63032.1133,
               "sma": 75794.911,
               "distance_pct": -16.8386,
@@ -5152,6 +6507,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64791.4373,
               "sma": 74790.6639,
               "distance_pct": -13.3696,
@@ -5179,6 +6535,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65126.3582,
               "sma": 73720.7908,
               "distance_pct": -11.6581,
@@ -5206,6 +6563,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 69216.099,
               "sma": 72570.8805,
               "distance_pct": -4.6228,
@@ -5233,6 +6591,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 68317.3481,
               "sma": 71588.2718,
               "distance_pct": -4.5691,
@@ -5260,6 +6619,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65851.5124,
               "sma": 70678.0627,
               "distance_pct": -6.8289,
@@ -5287,6 +6647,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -5430,6 +6791,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8256.4457,
               "sma": 7307.1477,
               "distance_pct": 12.9914,
@@ -5457,6 +6819,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8124.6812,
               "sma": 7551.5742,
               "distance_pct": 7.5892,
@@ -5484,6 +6847,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8147.0336,
               "sma": 7677.7539,
               "distance_pct": 6.1122,
@@ -5511,6 +6875,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9272.2981,
               "sma": 7825.477,
               "distance_pct": 18.4886,
@@ -5538,6 +6903,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8570.2503,
               "sma": 8103.2443,
               "distance_pct": 5.7632,
@@ -5565,6 +6931,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 10125.3098,
               "sma": 8516.4181,
               "distance_pct": 18.8916,
@@ -5592,6 +6959,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 45550.9117,
               "sma": 29029.0436,
               "distance_pct": 56.915,
@@ -5619,6 +6987,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 30067.9569,
               "sma": 35487.8248,
               "distance_pct": -15.2725,
@@ -5646,6 +7015,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 32129.7707,
               "sma": 37038.547,
               "distance_pct": -13.2532,
@@ -5673,6 +7043,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 38833.8873,
               "sma": 37403.1578,
               "distance_pct": 3.8252,
@@ -5700,6 +7071,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 34691.36,
               "sma": 38308.9939,
               "distance_pct": -9.4433,
@@ -5727,6 +7099,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 44338.8007,
               "sma": 38076.2401,
               "distance_pct": 16.4474,
@@ -5754,6 +7127,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 50476.5939,
               "sma": 39408.7056,
               "distance_pct": 28.0849,
@@ -5781,6 +7155,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 43174.8299,
               "sma": 42497.9658,
               "distance_pct": 1.5927,
@@ -5808,6 +7183,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 41505.6095,
               "sma": 42567.4977,
               "distance_pct": -2.4946,
@@ -5835,6 +7211,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 38493.3848,
               "sma": 42594.8991,
               "distance_pct": -9.6291,
@@ -5862,6 +7239,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 22715.3942,
               "sma": 30995.7742,
               "distance_pct": -26.7145,
@@ -5889,6 +7267,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 18835.0604,
               "sma": 27883.3585,
               "distance_pct": -32.4505,
@@ -5916,6 +7295,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 20720.8536,
               "sma": 24102.3879,
               "distance_pct": -14.0299,
@@ -5943,6 +7323,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 19539.4891,
               "sma": 19101.0696,
               "distance_pct": 2.2953,
@@ -5970,6 +7351,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 24864.2564,
               "sma": 21054.207,
               "distance_pct": 18.0964,
@@ -5997,6 +7379,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 25930.7013,
               "sma": 22213.4615,
               "distance_pct": 16.7342,
@@ -6024,6 +7407,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27051.7718,
               "sma": 24834.0071,
               "distance_pct": 8.9304,
@@ -6051,6 +7435,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26171.7657,
               "sma": 25866.5016,
               "distance_pct": 1.1802,
@@ -6078,6 +7463,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 25892.1843,
               "sma": 25960.4664,
               "distance_pct": -0.263,
@@ -6105,6 +7491,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26923.353,
               "sma": 25981.7282,
               "distance_pct": 3.6242,
@@ -6132,6 +7519,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 39426.3599,
               "sma": 30706.2193,
               "distance_pct": 28.3986,
@@ -6159,6 +7547,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 40109.2436,
               "sma": 31780.3472,
               "distance_pct": 26.2077,
@@ -6186,6 +7575,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60053.9861,
               "sma": 42480.8507,
               "distance_pct": 41.3672,
@@ -6213,6 +7603,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62876.9112,
               "sma": 48918.1344,
               "distance_pct": 28.535,
@@ -6240,6 +7631,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 57770.7238,
               "sma": 53220.5883,
               "distance_pct": 8.5496,
@@ -6267,6 +7659,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 59713.6106,
               "sma": 54423.178,
               "distance_pct": 9.7209,
@@ -6294,6 +7687,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 61453.9052,
               "sma": 58358.4187,
               "distance_pct": 5.3043,
@@ -6321,6 +7715,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 97014.6986,
               "sma": 71424.8746,
               "distance_pct": 35.8276,
@@ -6348,6 +7743,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 93884.0837,
               "sma": 85046.8385,
               "distance_pct": 10.391,
@@ -6375,6 +7771,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 89672.313,
               "sma": 88665.0357,
               "distance_pct": 1.136,
@@ -6402,6 +7799,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 100955.0659,
               "sma": 88707.5426,
               "distance_pct": 13.8066,
@@ -6429,6 +7827,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 96228.5496,
               "sma": 89652.3113,
               "distance_pct": 7.3353,
@@ -6456,6 +7855,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -6483,6 +7883,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 69216.099,
               "sma": 72570.8805,
               "distance_pct": -4.6228,
@@ -6510,6 +7911,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 68317.3481,
               "sma": 71588.2718,
               "distance_pct": -4.5691,
@@ -6537,6 +7939,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -6552,31 +7955,1249 @@
         }
       ],
       "radar": {
-        "as_of": "2026-05-26",
+        "as_of": "2026-05-30",
         "official_asset": "CASH",
         "radar_asset": "CASH",
-        "raw_asset": "BTC",
+        "raw_asset": "CASH",
         "level": "ok",
         "title": "Radar coerente col segnale",
-        "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+        "body": "BTC e Oro non qualificano",
         "edge_pp": 0.0,
         "buffer_pp": 3.0,
         "momentum": {
-          "BTC": 3.3712,
-          "GOLD": -5.4183,
+          "BTC": -3.4458,
+          "GOLD": -1.917,
           "CASH": 0.0
         },
         "filters": {
           "BTC": {
             "weeks": 30,
-            "price": 65157.0554,
-            "sma": 69618.5145,
-            "distance_pct": -6.4084,
+            "periods": 150,
+            "price": 63052.5631,
+            "sma": 65201.589,
+            "distance_pct": -3.296,
             "passes": false
           }
         },
         "is_operational": false
       },
+      "radar_history": [
+        {
+          "as_of": "2026-04-16",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -1.0021,
+            "GOLD": -6.8469,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63638.8305,
+              "sma": 68081.7845,
+              "distance_pct": -6.5259,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-17",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 6.0201,
+            "GOLD": -2.1811,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65457.5748,
+              "sma": 67983.5449,
+              "distance_pct": -3.7156,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-18",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.3896,
+            "GOLD": -0.1401,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64268.8313,
+              "sma": 67885.4828,
+              "distance_pct": -5.3276,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-19",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "GOLD",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Oro positivo e BTC non qualifica",
+          "edge_pp": 3.2588,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 2.9036,
+            "GOLD": 3.2588,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62681.8817,
+              "sma": 67802.9185,
+              "distance_pct": -7.5528,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-20",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 5.25,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 8.8826,
+            "GOLD": 5.25,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64620.6288,
+              "sma": 67741.9212,
+              "distance_pct": -4.6076,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-21",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 3.9139,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 10.5644,
+            "GOLD": 3.9139,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64791.4373,
+              "sma": 67684.6191,
+              "distance_pct": -4.2745,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-22",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 4.4283,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 8.5488,
+            "GOLD": 4.4283,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66588.376,
+              "sma": 67626.8318,
+              "distance_pct": -1.5356,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-23",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 2.203,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 10.0538,
+            "GOLD": 2.203,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66862.0385,
+              "sma": 67561.2039,
+              "distance_pct": -1.0349,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-24",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 3.7692,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 7.9745,
+            "GOLD": 3.7692,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66292.4576,
+              "sma": 67497.706,
+              "distance_pct": -1.7856,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-25",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 5.3627,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.6401,
+            "GOLD": 5.3627,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66426.5766,
+              "sma": 67418.7477,
+              "distance_pct": -1.4717,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-26",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 2.5863,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 17.0602,
+            "GOLD": 2.5863,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67321.4193,
+              "sma": 67343.0253,
+              "distance_pct": -0.0321,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-27",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 2.6289,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 14.9495,
+            "GOLD": 2.6289,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66088.8937,
+              "sma": 67261.0867,
+              "distance_pct": -1.7428,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-28",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "Filtro trend: BTC bocciato, passa a GOLD",
+          "edge_pp": 1.3478,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 13.9018,
+            "GOLD": 1.3478,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65126.3582,
+              "sma": 67173.1192,
+              "distance_pct": -3.047,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-29",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.4322,
+            "GOLD": -0.9818,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64667.3521,
+              "sma": 67084.7207,
+              "distance_pct": -3.6035,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-30",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.6781,
+            "GOLD": -3.2745,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65302.7623,
+              "sma": 67024.0342,
+              "distance_pct": -2.5681,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-01",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 13.3199,
+            "GOLD": -4.7013,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66653.8523,
+              "sma": 66943.7386,
+              "distance_pct": -0.433,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-02",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 16.2056,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.2056,
+            "GOLD": -2.6781,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67061.5987,
+              "sma": 66854.5898,
+              "distance_pct": 0.3096,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-03",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 15.4675,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 15.4675,
+            "GOLD": -2.4593,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66960.1217,
+              "sma": 66774.4749,
+              "distance_pct": 0.278,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-04",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 16.7614,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.7614,
+            "GOLD": -4.4005,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68074.047,
+              "sma": 66716.4676,
+              "distance_pct": 2.0348,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-05",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 17.486,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 15.8093,
+            "GOLD": -1.6766,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69216.099,
+              "sma": 66666.7347,
+              "distance_pct": 3.824,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-06",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 17.0477,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 16.1742,
+            "GOLD": -0.8735,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69502.4738,
+              "sma": 66612.4218,
+              "distance_pct": 4.3386,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-07",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 13.0475,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.2643,
+            "GOLD": -3.7832,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68108.504,
+              "sma": 66547.3579,
+              "distance_pct": 2.3459,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-08",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 12.5741,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.3111,
+            "GOLD": -0.2631,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68351.1974,
+              "sma": 66472.218,
+              "distance_pct": 2.8267,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-09",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 13.077,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.7043,
+            "GOLD": -1.3727,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68758.305,
+              "sma": 66403.0384,
+              "distance_pct": 3.5469,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-10",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 13.4812,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.1645,
+            "GOLD": -1.3167,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 70015.222,
+              "sma": 66342.7324,
+              "distance_pct": 5.5356,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-11",
+          "official_asset": "GOLD",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 11.3524,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 11.1357,
+            "GOLD": -0.2167,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69444.5337,
+              "sma": 66293.0623,
+              "distance_pct": 4.7538,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-12",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 12.8872,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 12.8872,
+            "GOLD": 0.4887,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68317.3481,
+              "sma": 66235.717,
+              "distance_pct": 3.1428,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-13",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 5.8874,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.8874,
+            "GOLD": -1.7008,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67553.6137,
+              "sma": 66185.3393,
+              "distance_pct": 2.0673,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-14",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 9.7531,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 9.7531,
+            "GOLD": -3.3073,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69179.6729,
+              "sma": 66155.6958,
+              "distance_pct": 4.571,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-15",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 6.9402,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 6.9402,
+            "GOLD": -4.5474,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67797.2349,
+              "sma": 66109.4673,
+              "distance_pct": 2.553,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-16",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 5.2756,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.2756,
+            "GOLD": -3.8672,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66996.141,
+              "sma": 66067.3285,
+              "distance_pct": 1.4059,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-17",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 1.4308,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 1.4308,
+            "GOLD": -4.9725,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66394.1164,
+              "sma": 66024.7454,
+              "distance_pct": 0.5594,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-18",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.0944,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 3.0944,
+            "GOLD": -2.8496,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66257.5449,
+              "sma": 65965.5476,
+              "distance_pct": 0.4427,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-19",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "BTC",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "Filtro trend: BTC bocciato, nessun piano B valido",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 5.0567,
+            "GOLD": -4.185,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65851.5124,
+              "sma": 65902.275,
+              "distance_pct": -0.077,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-20",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "alert",
+          "title": "Radar: possibile cambio in formazione",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 3.2688,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 3.2688,
+            "GOLD": -4.5628,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66732.9685,
+              "sma": 65843.2995,
+              "distance_pct": 1.3512,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-21",
+          "official_asset": "CASH",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC positivo e almeno forte quanto Oro",
+          "edge_pp": 2.9433,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": 2.9433,
+            "GOLD": -3.0192,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66698.4191,
+              "sma": 65784.0876,
+              "distance_pct": 1.3899,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-22",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.449,
+            "GOLD": -3.6553,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64957.6297,
+              "sma": 65721.8449,
+              "distance_pct": -1.1628,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-23",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -1.323,
+            "GOLD": -2.8272,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65977.4298,
+              "sma": 65666.5233,
+              "distance_pct": 0.4735,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-24",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -0.0757,
+            "GOLD": -2.3552,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66242.2553,
+              "sma": 65615.0993,
+              "distance_pct": 0.9558,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-25",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -0.0719,
+            "GOLD": -2.7212,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66378.8214,
+              "sma": 65563.7838,
+              "distance_pct": 1.2431,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-26",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.215,
+            "GOLD": -3.0212,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65157.0554,
+              "sma": 65501.4907,
+              "distance_pct": -0.5258,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-27",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.3311,
+            "GOLD": -4.5913,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63887.3764,
+              "sma": 65430.5427,
+              "distance_pct": -2.3585,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-28",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.8107,
+            "GOLD": -1.4283,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63295.8568,
+              "sma": 65359.0692,
+              "distance_pct": -3.1567,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-29",
+          "official_asset": "CASH",
+          "radar_asset": "GOLD",
+          "raw_asset": "GOLD",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "Oro positivo e BTC non qualifica",
+          "edge_pp": 0.0224,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -2.6841,
+            "GOLD": 0.0224,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62931.614,
+              "sma": 65277.857,
+              "distance_pct": -3.5942,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-30",
+          "official_asset": "CASH",
+          "radar_asset": "CASH",
+          "raw_asset": "CASH",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "BTC e Oro non qualificano",
+          "edge_pp": 0.0,
+          "buffer_pp": 3.0,
+          "momentum": {
+            "BTC": -3.4458,
+            "GOLD": -1.917,
+            "CASH": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63052.5631,
+              "sma": 65201.589,
+              "distance_pct": -3.296,
+              "passes": false
+            }
+          },
+          "is_operational": false
+        }
+      ],
       "backtest": {
         "initial": 10000.0,
         "final": 185813.6,
@@ -8442,6 +11063,7 @@
         "filters": {
           "BTC": {
             "weeks": 30,
+            "periods": 30,
             "price": 65157.0554,
             "sma": 69618.5145,
             "distance_pct": -6.4084,
@@ -8449,6 +11071,7 @@
           },
           "CL2": {
             "weeks": 10,
+            "periods": 10,
             "price": 30.015,
             "sma": 26.111,
             "distance_pct": 14.9516,
@@ -8479,6 +11102,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 57790.3651,
               "sma": 87407.5577,
               "distance_pct": -33.884,
@@ -8486,6 +11110,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.8,
               "sma": 25.0615,
               "distance_pct": -1.0434,
@@ -8515,6 +11140,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 56957.6994,
               "sma": 85885.8784,
               "distance_pct": -33.6821,
@@ -8522,6 +11148,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.105,
               "sma": 24.9325,
               "distance_pct": -3.319,
@@ -8551,6 +11178,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 54333.4689,
               "sma": 84307.479,
               "distance_pct": -35.5532,
@@ -8558,6 +11186,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.545,
               "sma": 24.967,
               "distance_pct": -1.6902,
@@ -8587,6 +11216,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 58384.2405,
               "sma": 82969.2001,
               "distance_pct": -29.6314,
@@ -8594,6 +11224,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.67,
               "sma": 24.934,
               "distance_pct": -1.0588,
@@ -8623,6 +11254,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60192.3971,
               "sma": 81527.8526,
               "distance_pct": -26.1695,
@@ -8630,6 +11262,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.745,
               "sma": 24.8925,
               "distance_pct": -0.5925,
@@ -8659,6 +11292,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64282.9879,
               "sma": 80447.3328,
               "distance_pct": -20.0931,
@@ -8666,6 +11300,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.52,
               "sma": 24.792,
               "distance_pct": -1.0971,
@@ -8695,6 +11330,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -8702,6 +11338,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 23.285,
               "sma": 24.518,
               "distance_pct": -5.029,
@@ -8731,6 +11368,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 59540.3923,
               "sma": 78085.7212,
               "distance_pct": -23.75,
@@ -8738,6 +11376,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 22.445,
               "sma": 24.2745,
               "distance_pct": -7.5367,
@@ -8767,6 +11406,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62333.7464,
               "sma": 77004.6701,
               "distance_pct": -19.052,
@@ -8774,6 +11414,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 23.095,
               "sma": 24.111,
               "distance_pct": -4.2138,
@@ -8803,6 +11444,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63032.1133,
               "sma": 75794.911,
               "distance_pct": -16.8386,
@@ -8810,6 +11452,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.97,
               "sma": 24.118,
               "distance_pct": 3.5326,
@@ -8839,6 +11482,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 64791.4373,
               "sma": 74790.6639,
               "distance_pct": -13.3696,
@@ -8846,6 +11490,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 26.245,
               "sma": 24.2625,
               "distance_pct": 8.171,
@@ -8875,6 +11520,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65126.3582,
               "sma": 73720.7908,
               "distance_pct": -11.6581,
@@ -8882,6 +11528,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 26.585,
               "sma": 24.5105,
               "distance_pct": 8.4637,
@@ -8911,6 +11558,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 69216.099,
               "sma": 72570.8805,
               "distance_pct": -4.6228,
@@ -8918,6 +11566,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 27.61,
               "sma": 24.817,
               "distance_pct": 11.2544,
@@ -8947,6 +11596,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 68317.3481,
               "sma": 71588.2718,
               "distance_pct": -4.5691,
@@ -8954,6 +11604,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 28.125,
               "sma": 25.1625,
               "distance_pct": 11.7735,
@@ -8983,6 +11634,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65851.5124,
               "sma": 70678.0627,
               "distance_pct": -6.8289,
@@ -8990,6 +11642,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 28.735,
               "sma": 25.5615,
               "distance_pct": 12.4152,
@@ -9019,6 +11672,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -9026,6 +11680,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 30.015,
               "sma": 26.111,
               "distance_pct": 14.9516,
@@ -9057,6 +11712,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9365.9064,
               "sma": 5934.2183,
               "distance_pct": 57.8288,
@@ -9064,6 +11720,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1477.6,
               "sma": 1425.353,
               "distance_pct": 3.6655,
@@ -9093,6 +11750,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7225.0802,
               "sma": 7552.0476,
               "distance_pct": -4.3295,
@@ -9100,6 +11758,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1393.6,
               "sma": 1403.76,
               "distance_pct": -0.7238,
@@ -9129,6 +11788,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7942.9315,
               "sma": 8041.9442,
               "distance_pct": -1.2312,
@@ -9136,6 +11796,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1348.6,
               "sma": 1349.2,
               "distance_pct": -0.0445,
@@ -9165,6 +11826,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7738.41,
               "sma": 8293.0869,
               "distance_pct": -6.6884,
@@ -9172,6 +11834,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1425.8,
               "sma": 1347.04,
               "distance_pct": 5.8469,
@@ -9201,6 +11864,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 5694.422,
               "sma": 6166.5491,
               "distance_pct": -7.6563,
@@ -9208,6 +11872,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1642.3199,
               "sma": 1758.178,
               "distance_pct": -6.5897,
@@ -9237,6 +11902,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 3031.0174,
               "sma": 4836.9335,
               "distance_pct": -37.336,
@@ -9244,6 +11910,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1617.83,
               "sma": 1480.818,
               "distance_pct": 9.2525,
@@ -9273,6 +11940,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 4354.803,
               "sma": 4138.7939,
               "distance_pct": 5.2191,
@@ -9280,6 +11948,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1858.1,
               "sma": 1707.027,
               "distance_pct": 8.8501,
@@ -9309,6 +11978,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8621.894,
               "sma": 5652.1323,
               "distance_pct": 52.5423,
@@ -9316,6 +11986,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2083.8601,
               "sma": 1935.225,
               "distance_pct": 7.6805,
@@ -9345,6 +12016,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9305.2195,
               "sma": 7129.7863,
               "distance_pct": 30.5119,
@@ -9352,6 +12024,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2088.5901,
               "sma": 1992.732,
               "distance_pct": 4.8104,
@@ -9381,6 +12054,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7499.7133,
               "sma": 7552.9962,
               "distance_pct": -0.7055,
@@ -9388,6 +12062,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1994.4,
               "sma": 1996.376,
               "distance_pct": -0.099,
@@ -9417,6 +12092,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7439.8082,
               "sma": 7681.2791,
               "distance_pct": -3.1436,
@@ -9424,6 +12100,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2097.97,
               "sma": 2021.083,
               "distance_pct": 3.8042,
@@ -9453,6 +12130,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7290.3162,
               "sma": 8267.3493,
               "distance_pct": -11.818,
@@ -9460,6 +12138,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2425.99,
               "sma": 2305.085,
               "distance_pct": 5.2451,
@@ -9489,6 +12168,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7927.4212,
               "sma": 8261.8985,
               "distance_pct": -4.0484,
@@ -9496,6 +12176,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2501.99,
               "sma": 2335.927,
               "distance_pct": 7.1091,
@@ -9525,6 +12206,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8492.5456,
               "sma": 8143.9529,
               "distance_pct": 4.2804,
@@ -9532,6 +12214,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2542.1001,
               "sma": 2396.117,
               "distance_pct": 6.0925,
@@ -9561,6 +12244,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8610.5019,
               "sma": 8095.1458,
               "distance_pct": 6.3662,
@@ -9568,6 +12252,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2471.1499,
               "sma": 2537.42,
               "distance_pct": -2.6117,
@@ -9597,6 +12282,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 7212.1604,
               "sma": 7281.9233,
               "distance_pct": -0.958,
@@ -9604,6 +12290,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1853.74,
               "sma": 1738.942,
               "distance_pct": 6.6016,
@@ -9633,6 +12320,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8145.1983,
               "sma": 7330.6607,
               "distance_pct": 11.1114,
@@ -9640,6 +12328,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 1919.8101,
               "sma": 1659.13,
               "distance_pct": 15.7119,
@@ -9669,6 +12358,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8412.6326,
               "sma": 7434.8698,
               "distance_pct": 13.151,
@@ -9676,6 +12366,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2027.13,
               "sma": 1906.602,
               "distance_pct": 6.3216,
@@ -9705,6 +12396,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8181.4645,
               "sma": 7730.4517,
               "distance_pct": 5.8342,
@@ -9712,6 +12404,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2154.3201,
               "sma": 2034.961,
               "distance_pct": 5.8654,
@@ -9741,6 +12434,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 9721.197,
               "sma": 7959.7966,
               "distance_pct": 22.1287,
@@ -9748,6 +12442,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2176.1101,
               "sma": 2074.425,
               "distance_pct": 4.9018,
@@ -9777,6 +12472,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8570.2503,
               "sma": 8103.2443,
               "distance_pct": 5.7632,
@@ -9784,6 +12480,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2156.9099,
               "sma": 2145.042,
               "distance_pct": 0.5533,
@@ -9813,6 +12510,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 8955.1834,
               "sma": 8106.0672,
               "distance_pct": 10.4751,
@@ -9820,6 +12518,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2097.54,
               "sma": 2161.621,
               "distance_pct": -2.9645,
@@ -9849,6 +12548,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 10125.3098,
               "sma": 8516.4181,
               "distance_pct": 18.8916,
@@ -9856,6 +12556,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 2274.8301,
               "sma": 2225.437,
               "distance_pct": 2.2195,
@@ -9885,6 +12586,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 46883.9098,
               "sma": 27820.204,
               "distance_pct": 68.5247,
@@ -9892,6 +12594,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3153.02,
               "sma": 2980.878,
               "distance_pct": 5.7749,
@@ -9921,6 +12624,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 46705.289,
               "sma": 31437.7719,
               "distance_pct": 48.5642,
@@ -9928,6 +12632,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3087.76,
               "sma": 3088.177,
               "distance_pct": -0.0135,
@@ -9957,6 +12662,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27286.8767,
               "sma": 35010.5706,
               "distance_pct": -22.061,
@@ -9964,6 +12670,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3416.3601,
               "sma": 3190.509,
               "distance_pct": 7.0788,
@@ -9993,6 +12700,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 38833.8873,
               "sma": 37403.1578,
               "distance_pct": 3.8252,
@@ -10000,6 +12708,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3866.3,
               "sma": 3563.045,
               "distance_pct": 8.5111,
@@ -10029,6 +12738,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 34691.36,
               "sma": 38308.9939,
               "distance_pct": -9.4433,
@@ -10036,6 +12746,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3743.55,
               "sma": 3818.734,
               "distance_pct": -1.9688,
@@ -10065,6 +12776,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 35081.8683,
               "sma": 38140.2266,
               "distance_pct": -8.0187,
@@ -10072,6 +12784,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3752.55,
               "sma": 3831.498,
               "distance_pct": -2.0605,
@@ -10101,6 +12814,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 44338.8007,
               "sma": 38076.2401,
               "distance_pct": 16.4474,
@@ -10108,6 +12822,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3788.1599,
               "sma": 3840.434,
               "distance_pct": -1.3612,
@@ -10137,6 +12852,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 51208.2638,
               "sma": 39200.1137,
               "distance_pct": 30.6329,
@@ -10144,6 +12860,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4602.5498,
               "sma": 4137.068,
               "distance_pct": 11.2515,
@@ -10173,6 +12890,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 37717.8121,
               "sma": 40933.1381,
               "distance_pct": -7.8551,
@@ -10180,6 +12898,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4461.8999,
               "sma": 4552.3889,
               "distance_pct": -1.9877,
@@ -10209,6 +12928,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 41505.6095,
               "sma": 42567.4977,
               "distance_pct": -2.4946,
@@ -10216,6 +12936,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4519.0,
               "sma": 4102.618,
               "distance_pct": 10.1492,
@@ -10245,6 +12966,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 35576.5513,
               "sma": 42611.3885,
               "distance_pct": -16.5093,
@@ -10252,6 +12974,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4032.9299,
               "sma": 4150.568,
               "distance_pct": -2.8343,
@@ -10281,6 +13004,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 20772.4788,
               "sma": 32103.0678,
               "distance_pct": -35.2944,
@@ -10288,6 +13012,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3782.0701,
               "sma": 3523.623,
               "distance_pct": 7.3347,
@@ -10317,6 +13042,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 18928.0877,
               "sma": 29030.2023,
               "distance_pct": -34.7986,
@@ -10324,6 +13050,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3951.5601,
               "sma": 3952.882,
               "distance_pct": -0.0334,
@@ -10353,6 +13080,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 15801.5391,
               "sma": 22092.7903,
               "distance_pct": -28.4765,
@@ -10360,6 +13088,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3707.8401,
               "sma": 3696.121,
               "distance_pct": 0.3171,
@@ -10389,6 +13118,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 16280.4875,
               "sma": 20989.2154,
               "distance_pct": -22.434,
@@ -10396,6 +13126,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3488.8401,
               "sma": 3634.931,
               "distance_pct": -4.0191,
@@ -10425,6 +13156,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 19539.4891,
               "sma": 19101.0696,
               "distance_pct": 2.2953,
@@ -10432,6 +13164,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3359.5701,
               "sma": 3444.683,
               "distance_pct": -2.4708,
@@ -10461,6 +13194,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 25153.1672,
               "sma": 20879.9329,
               "distance_pct": 20.4657,
@@ -10468,6 +13202,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3438.9299,
               "sma": 3399.344,
               "distance_pct": 1.1645,
@@ -10497,6 +13232,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26418.639,
               "sma": 24095.3439,
               "distance_pct": 9.6421,
@@ -10504,6 +13240,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4149.02,
               "sma": 3918.83,
               "distance_pct": 5.8739,
@@ -10533,6 +13270,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 27051.7718,
               "sma": 24834.0071,
               "distance_pct": 8.9304,
@@ -10540,6 +13278,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 4047.4199,
               "sma": 4006.565,
               "distance_pct": 1.0197,
@@ -10569,6 +13308,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 23885.8655,
               "sma": 25176.2545,
               "distance_pct": -5.1254,
@@ -10576,6 +13316,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3983.1899,
               "sma": 4023.904,
               "distance_pct": -1.0118,
@@ -10605,6 +13346,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26171.7657,
               "sma": 25866.5016,
               "distance_pct": 1.1802,
@@ -10612,6 +13354,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 3955.73,
               "sma": 4104.958,
               "distance_pct": -3.6353,
@@ -10641,6 +13384,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 25892.1843,
               "sma": 25960.4664,
               "distance_pct": -0.263,
@@ -10648,6 +13392,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 13.79,
               "sma": 3682.2519,
               "distance_pct": -99.6255,
@@ -10677,6 +13422,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 26923.353,
               "sma": 25981.7282,
               "distance_pct": 3.6242,
@@ -10684,6 +13430,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 13.768,
               "sma": 3278.8868,
               "distance_pct": -99.5801,
@@ -10713,6 +13460,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 39426.3599,
               "sma": 30706.2193,
               "distance_pct": 28.3986,
@@ -10720,6 +13468,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 15.39,
               "sma": 14.6348,
               "distance_pct": 5.1603,
@@ -10749,6 +13498,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 52608.7349,
               "sma": 34024.9023,
               "distance_pct": 54.6183,
@@ -10756,6 +13506,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 17.368,
               "sma": 16.1376,
               "distance_pct": 7.6244,
@@ -10785,6 +13536,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63642.4597,
               "sma": 41327.3305,
               "distance_pct": 53.9961,
@@ -10792,6 +13544,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 18.034,
               "sma": 17.6452,
               "distance_pct": 2.2034,
@@ -10821,6 +13574,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 62876.9112,
               "sma": 48918.1344,
               "distance_pct": 28.535,
@@ -10828,6 +13582,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 18.736,
               "sma": 18.2872,
               "distance_pct": 2.4542,
@@ -10857,6 +13612,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60648.6401,
               "sma": 51881.9095,
               "distance_pct": 16.8975,
@@ -10864,6 +13620,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 20.34,
               "sma": 18.603,
               "distance_pct": 9.3372,
@@ -10893,6 +13650,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 61186.9522,
               "sma": 55837.0576,
               "distance_pct": 9.5813,
@@ -10900,6 +13658,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 19.766,
               "sma": 20.0002,
               "distance_pct": -1.171,
@@ -10929,6 +13688,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 67229.3696,
               "sma": 58490.7484,
               "distance_pct": 14.9402,
@@ -10936,6 +13696,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 22.505,
               "sma": 20.7601,
               "distance_pct": 8.4051,
@@ -10965,6 +13726,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 97014.6986,
               "sma": 71424.8746,
               "distance_pct": 35.8276,
@@ -10972,6 +13734,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 25.78,
               "sma": 25.4255,
               "distance_pct": 1.3943,
@@ -11001,6 +13764,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 93884.0837,
               "sma": 85046.8385,
               "distance_pct": 10.391,
@@ -11008,6 +13772,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 20.66,
               "sma": 18.7939,
               "distance_pct": 9.9293,
@@ -11037,6 +13802,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 92053.0819,
               "sma": 88031.5663,
               "distance_pct": 4.5683,
@@ -11044,6 +13810,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 20.34,
               "sma": 18.7627,
               "distance_pct": 8.4066,
@@ -11073,6 +13840,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 103432.8241,
               "sma": 89850.6018,
               "distance_pct": 15.1165,
@@ -11080,6 +13848,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 22.3,
               "sma": 21.2025,
               "distance_pct": 5.1763,
@@ -11109,6 +13878,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 96228.5496,
               "sma": 89652.3113,
               "distance_pct": 7.3353,
@@ -11116,6 +13886,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 22.51,
               "sma": 21.619,
               "distance_pct": 4.1214,
@@ -11145,6 +13916,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 94765.2785,
               "sma": 89717.8194,
               "distance_pct": 5.6259,
@@ -11152,6 +13924,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 22.665,
               "sma": 22.0145,
               "distance_pct": 2.9549,
@@ -11181,6 +13954,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 60753.955,
               "sma": 79264.8463,
               "distance_pct": -23.3532,
@@ -11188,6 +13962,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 23.285,
               "sma": 24.518,
               "distance_pct": -5.029,
@@ -11217,6 +13992,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 63032.1133,
               "sma": 75794.911,
               "distance_pct": -16.8386,
@@ -11224,6 +14000,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 24.97,
               "sma": 24.118,
               "distance_pct": 3.5326,
@@ -11253,6 +14030,7 @@
           "filters": {
             "BTC": {
               "weeks": 30,
+              "periods": 30,
               "price": 65157.0554,
               "sma": 69618.5145,
               "distance_pct": -6.4084,
@@ -11260,6 +14038,7 @@
             },
             "CL2": {
               "weeks": 10,
+              "periods": 10,
               "price": 30.015,
               "sma": 26.111,
               "distance_pct": 14.9516,
@@ -11276,7 +14055,7 @@
         }
       ],
       "radar": {
-        "as_of": "2026-05-26",
+        "as_of": "2026-05-30",
         "official_asset": "CL2",
         "radar_asset": "CL2",
         "raw_asset": "CL2",
@@ -11286,29 +14065,1653 @@
         "edge_pp": 0.0,
         "buffer_pp": 5.0,
         "momentum": {
-          "BTC": 3.3712,
-          "GOLD2": -11.799,
-          "CL2": 20.2042,
+          "BTC": -3.4458,
+          "GOLD2": -2.4441,
+          "CL2": 12.7466,
           "XEON": 0.0
         },
         "filters": {
           "BTC": {
             "weeks": 30,
-            "price": 65157.0554,
-            "sma": 69618.5145,
-            "distance_pct": -6.4084,
+            "periods": 150,
+            "price": 63052.5631,
+            "sma": 65201.589,
+            "distance_pct": -3.296,
             "passes": false
           },
           "CL2": {
             "weeks": 10,
-            "price": 30.015,
-            "sma": 26.111,
-            "distance_pct": 14.9516,
+            "periods": 50,
+            "price": 30.295,
+            "sma": 27.7428,
+            "distance_pct": 9.1995,
             "passes": true
           }
         },
         "is_operational": false
       },
+      "radar_history": [
+        {
+          "as_of": "2026-04-16",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -1.0021,
+            "GOLD2": -11.5453,
+            "CL2": 4.8328,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63638.8305,
+              "sma": 68081.7845,
+              "distance_pct": -6.5259,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 25.705,
+              "sma": 24.0056,
+              "distance_pct": 7.0792,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-17",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 6.0201,
+            "GOLD2": -4.7318,
+            "CL2": 8.2612,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65457.5748,
+              "sma": 67983.5449,
+              "distance_pct": -3.7156,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.275,
+              "sma": 24.0365,
+              "distance_pct": 9.3129,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-18",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 5.3896,
+            "GOLD2": 8.1379,
+            "CL2": 11.5238,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64268.8313,
+              "sma": 67885.4828,
+              "distance_pct": -5.3276,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.275,
+              "sma": 24.0747,
+              "distance_pct": 9.1395,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-19",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 2.9036,
+            "GOLD2": 8.7797,
+            "CL2": 13.1811,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62681.8817,
+              "sma": 67802.9185,
+              "distance_pct": -7.5528,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.275,
+              "sma": 24.1129,
+              "distance_pct": 8.9666,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-20",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 8.8826,
+            "GOLD2": 6.3546,
+            "CL2": 12.7934,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64620.6288,
+              "sma": 67741.9212,
+              "distance_pct": -4.6076,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.185,
+              "sma": 24.1493,
+              "distance_pct": 8.4296,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-21",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 10.5644,
+            "GOLD2": 3.6685,
+            "CL2": 13.0519,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64791.4373,
+              "sma": 67684.6191,
+              "distance_pct": -4.2745,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.245,
+              "sma": 24.1781,
+              "distance_pct": 8.5486,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-22",
+          "official_asset": "CL2",
+          "radar_asset": "GOLD2",
+          "raw_asset": "GOLD2",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "GOLD2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.5553,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 8.5488,
+            "GOLD2": 15.2041,
+            "CL2": 14.6489,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66588.376,
+              "sma": 67626.8318,
+              "distance_pct": -1.5356,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.61,
+              "sma": 24.2169,
+              "distance_pct": 9.8819,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-23",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 10.0538,
+            "GOLD2": 11.8545,
+            "CL2": 15.0526,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66862.0385,
+              "sma": 67561.2039,
+              "distance_pct": -1.0349,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.79,
+              "sma": 24.2498,
+              "distance_pct": 10.4751,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-24",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 7.9745,
+            "GOLD2": 4.9364,
+            "CL2": 14.0362,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66292.4576,
+              "sma": 67497.706,
+              "distance_pct": -1.7856,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.77,
+              "sma": 24.2846,
+              "distance_pct": 10.2345,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-25",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 11.6401,
+            "GOLD2": 12.4951,
+            "CL2": 16.0633,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66426.5766,
+              "sma": 67418.7477,
+              "distance_pct": -1.4717,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.77,
+              "sma": 24.3194,
+              "distance_pct": 10.0767,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-26",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 17.0602,
+            "GOLD2": 6.0419,
+            "CL2": 19.8836,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67321.4193,
+              "sma": 67343.0253,
+              "distance_pct": -0.0321,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.77,
+              "sma": 24.3542,
+              "distance_pct": 9.9194,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-27",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 14.9495,
+            "GOLD2": 3.8875,
+            "CL2": 19.6596,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66088.8937,
+              "sma": 67261.0867,
+              "distance_pct": -1.7428,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.72,
+              "sma": 24.388,
+              "distance_pct": 9.5621,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-28",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 13.9018,
+            "GOLD2": -0.7059,
+            "CL2": 19.0551,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65126.3582,
+              "sma": 67173.1192,
+              "distance_pct": -3.047,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.585,
+              "sma": 24.4345,
+              "distance_pct": 8.8011,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-29",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 11.4322,
+            "GOLD2": -2.6544,
+            "CL2": 19.1442,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64667.3521,
+              "sma": 67084.7207,
+              "distance_pct": -3.6035,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.73,
+              "sma": 24.4742,
+              "distance_pct": 9.2171,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-04-30",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 9.6781,
+            "GOLD2": -2.2518,
+            "CL2": 19.7149,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65302.7623,
+              "sma": 67024.0342,
+              "distance_pct": -2.5681,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.87,
+              "sma": 24.5192,
+              "distance_pct": 9.5876,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-01",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 13.3199,
+            "GOLD2": -7.8891,
+            "CL2": 15.6694,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66653.8523,
+              "sma": 66943.7386,
+              "distance_pct": -0.433,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.87,
+              "sma": 24.5686,
+              "distance_pct": 9.3672,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-02",
+          "official_asset": "CL2",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 1.2291,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 16.2056,
+            "GOLD2": -4.2664,
+            "CL2": 14.9765,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67061.5987,
+              "sma": 66854.5898,
+              "distance_pct": 0.3096,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.87,
+              "sma": 24.6181,
+              "distance_pct": 9.1473,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-03",
+          "official_asset": "CL2",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.491,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 15.4675,
+            "GOLD2": -4.2664,
+            "CL2": 14.9765,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66960.1217,
+              "sma": 66774.4749,
+              "distance_pct": 0.278,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 26.87,
+              "sma": 24.6676,
+              "distance_pct": 8.9283,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-04",
+          "official_asset": "CL2",
+          "radar_asset": "BTC",
+          "raw_asset": "BTC",
+          "level": "watch",
+          "title": "Radar: alternativa da osservare",
+          "body": "BTC ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0519,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 16.7614,
+            "GOLD2": -7.7563,
+            "CL2": 16.7095,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68074.047,
+              "sma": 66716.4676,
+              "distance_pct": 2.0348,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 27.275,
+              "sma": 24.7252,
+              "distance_pct": 10.3126,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-05",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 15.8093,
+            "GOLD2": -6.0786,
+            "CL2": 18.1429,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69216.099,
+              "sma": 66666.7347,
+              "distance_pct": 3.824,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 27.61,
+              "sma": 24.7883,
+              "distance_pct": 11.3832,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-06",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 16.1742,
+            "GOLD2": -1.6926,
+            "CL2": 20.0043,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69502.4738,
+              "sma": 66612.4218,
+              "distance_pct": 4.3386,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.045,
+              "sma": 24.8588,
+              "distance_pct": 12.8172,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-07",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 9.2643,
+            "GOLD2": 1.4645,
+            "CL2": 22.1044,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68108.504,
+              "sma": 66547.3579,
+              "distance_pct": 2.3459,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.2,
+              "sma": 24.9374,
+              "distance_pct": 13.0832,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-08",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 12.3111,
+            "GOLD2": -3.3164,
+            "CL2": 17.3037,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68351.1974,
+              "sma": 66472.218,
+              "distance_pct": 2.8267,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.235,
+              "sma": 25.0309,
+              "distance_pct": 12.8006,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-09",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 11.7043,
+            "GOLD2": -4.3935,
+            "CL2": 16.6013,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68758.305,
+              "sma": 66403.0384,
+              "distance_pct": 3.5469,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.235,
+              "sma": 25.1313,
+              "distance_pct": 12.3499,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-10",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 12.1645,
+            "GOLD2": -3.9395,
+            "CL2": 15.5988,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 70015.222,
+              "sma": 66342.7324,
+              "distance_pct": 5.5356,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.235,
+              "sma": 25.2317,
+              "distance_pct": 11.9029,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-11",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 11.1357,
+            "GOLD2": -3.0382,
+            "CL2": 16.4995,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69444.5337,
+              "sma": 66293.0623,
+              "distance_pct": 4.7538,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.455,
+              "sma": 25.3365,
+              "distance_pct": 12.3083,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-12",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 12.8872,
+            "GOLD2": -5.839,
+            "CL2": 15.1484,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 68317.3481,
+              "sma": 66235.717,
+              "distance_pct": 3.1428,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.125,
+              "sma": 25.4348,
+              "distance_pct": 10.5768,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-13",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 5.8874,
+            "GOLD2": -1.4769,
+            "CL2": 17.6663,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67553.6137,
+              "sma": 66185.3393,
+              "distance_pct": 2.0673,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.74,
+              "sma": 25.5439,
+              "distance_pct": 12.5122,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-14",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 9.7531,
+            "GOLD2": -4.7591,
+            "CL2": 18.7825,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 69179.6729,
+              "sma": 66155.6958,
+              "distance_pct": 4.571,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.66,
+              "sma": 25.6676,
+              "distance_pct": 15.5542,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-15",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 6.9402,
+            "GOLD2": -9.794,
+            "CL2": 15.7416,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 67797.2349,
+              "sma": 66109.4673,
+              "distance_pct": 2.553,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.3,
+              "sma": 25.7923,
+              "distance_pct": 13.5998,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-16",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 5.2756,
+            "GOLD2": -10.1373,
+            "CL2": 13.9856,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66996.141,
+              "sma": 66067.3285,
+              "distance_pct": 1.4059,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.3,
+              "sma": 25.9317,
+              "distance_pct": 12.9891,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-17",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 1.4308,
+            "GOLD2": -12.276,
+            "CL2": 11.5128,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66394.1164,
+              "sma": 66024.7454,
+              "distance_pct": 0.5594,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.3,
+              "sma": 26.0711,
+              "distance_pct": 12.385,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-18",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 3.0944,
+            "GOLD2": -12.8357,
+            "CL2": 9.4957,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66257.5449,
+              "sma": 65965.5476,
+              "distance_pct": 0.4427,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.77,
+              "sma": 26.1999,
+              "distance_pct": 9.8096,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-19",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 5.0567,
+            "GOLD2": -13.9316,
+            "CL2": 9.3625,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65851.5124,
+              "sma": 65902.275,
+              "distance_pct": -0.077,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 28.735,
+              "sma": 26.3259,
+              "distance_pct": 9.1511,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-20",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 3.2688,
+            "GOLD2": -10.9684,
+            "CL2": 11.3615,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66732.9685,
+              "sma": 65843.2995,
+              "distance_pct": 1.3512,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.16,
+              "sma": 26.4602,
+              "distance_pct": 10.2032,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-21",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": 2.9433,
+            "GOLD2": -9.4808,
+            "CL2": 11.7737,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66698.4191,
+              "sma": 65784.0876,
+              "distance_pct": 1.3899,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.335,
+              "sma": 26.5823,
+              "distance_pct": 10.3554,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-22",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -2.449,
+            "GOLD2": -8.8873,
+            "CL2": 12.5705,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 64957.6297,
+              "sma": 65721.8449,
+              "distance_pct": -1.1628,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.955,
+              "sma": 26.714,
+              "distance_pct": 12.1322,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-23",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -1.323,
+            "GOLD2": -8.8828,
+            "CL2": 11.8141,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65977.4298,
+              "sma": 65666.5233,
+              "distance_pct": 0.4735,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.955,
+              "sma": 26.8457,
+              "distance_pct": 11.5821,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-24",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -0.0757,
+            "GOLD2": -8.4348,
+            "CL2": 11.8976,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66242.2553,
+              "sma": 65615.0993,
+              "distance_pct": 0.9558,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.955,
+              "sma": 26.9774,
+              "distance_pct": 11.0374,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-25",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -0.0719,
+            "GOLD2": -6.5769,
+            "CL2": 12.458,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 66378.8214,
+              "sma": 65563.7838,
+              "distance_pct": 1.2431,
+              "passes": true
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 30.105,
+              "sma": 27.1121,
+              "distance_pct": 11.039,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-26",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -3.215,
+            "GOLD2": -9.1352,
+            "CL2": 12.1218,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 65157.0554,
+              "sma": 65501.4907,
+              "distance_pct": -0.5258,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 30.015,
+              "sma": 27.245,
+              "distance_pct": 10.167,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-27",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -3.3311,
+            "GOLD2": -10.2779,
+            "CL2": 11.9761,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63887.3764,
+              "sma": 65430.5427,
+              "distance_pct": -2.3585,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 29.92,
+              "sma": 27.3815,
+              "distance_pct": 9.2709,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-28",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -2.8107,
+            "GOLD2": -4.5783,
+            "CL2": 13.5415,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63295.8568,
+              "sma": 65359.0692,
+              "distance_pct": -3.1567,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 30.185,
+              "sma": 27.5038,
+              "distance_pct": 9.7485,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-29",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -2.6841,
+            "GOLD2": 0.6978,
+            "CL2": 13.3371,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 62931.614,
+              "sma": 65277.857,
+              "distance_pct": -3.5942,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 30.295,
+              "sma": 27.6254,
+              "distance_pct": 9.6636,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        },
+        {
+          "as_of": "2026-05-30",
+          "official_asset": "CL2",
+          "radar_asset": "CL2",
+          "raw_asset": "CL2",
+          "level": "ok",
+          "title": "Radar coerente col segnale",
+          "body": "CL2 ha il momentum relativo piu forte tra gli asset rischiosi",
+          "edge_pp": 0.0,
+          "buffer_pp": 5.0,
+          "momentum": {
+            "BTC": -3.4458,
+            "GOLD2": -2.4441,
+            "CL2": 12.7466,
+            "XEON": 0.0
+          },
+          "filters": {
+            "BTC": {
+              "weeks": 30,
+              "periods": 150,
+              "price": 63052.5631,
+              "sma": 65201.589,
+              "distance_pct": -3.296,
+              "passes": false
+            },
+            "CL2": {
+              "weeks": 10,
+              "periods": 50,
+              "price": 30.295,
+              "sma": 27.7428,
+              "distance_pct": 9.1995,
+              "passes": true
+            }
+          },
+          "is_operational": false
+        }
+      ],
       "backtest": {
         "initial": 10000.0,
         "final": 654338.49,

@@ -53,6 +53,8 @@ Tutti i numeri sono verificati su prezzi reali con engine indipendente, NON sul 
 3. **Crediti Netlify**: non bruciarli con deploy ripetuti.
 4. **Linguaggio semplice all'utente**, mai percorsi completi a catena di slash.
 5. **Aggiornare questo file** a fine sessione (sezione Log).
+6. **Esperimenti separati**: qualunque prova UI/quant/strategia non ancora approvata va in `prove/`.
+   Non promuoverla nell'app ufficiale senza decisione esplicita dell'utente.
 
 ## 6. In corso / prossimi passi
 
@@ -74,3 +76,8 @@ Tutti i numeri sono verificati su prezzi reali con engine indipendente, NON sul 
   vNext, trigger esterni Netlify gia presenti, niente alias `cron-octa-trigger.mjs`, niente redeploy dopo
   conferma Claude. Trovate modifiche locali non committate su `dashboard/index.html` e `dashboard/styles.css`;
   lasciate intatte e non incluse in questo log.
+- **2026-05-30 (Codex)**: preparati radar history giornalieri APEX e notifiche ntfy che includono cambi
+  APEX/radar watch-alert dentro il refresh unico. Nessun deploy eseguito. La prova grafica locale di Claude
+  su `dashboard/index.html` / `dashboard/styles.css` resta fuori dalla versione ufficiale finche non approvata.
+- **2026-05-30 (Codex)**: creata cartella `prove/` come area comune per esperimenti separati. Claude/Codex:
+  mettere qui prove e versioni alternative prima di qualunque promozione nell'app ufficiale.
