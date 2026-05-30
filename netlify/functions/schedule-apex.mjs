@@ -8,7 +8,7 @@ export default async () => {
     return jsonResponse({ ok: true, skipped: true, reason: "outside_apex_window", rome });
   }
 
-  const result = await dispatchWorkflow({ mode: "all", reason: "netlify_schedule_apex" });
+  const result = await dispatchWorkflow({ mode: "all", reason: "netlify_schedule_apex_all_engines" });
   return jsonResponse(result.body, result.status);
 };
 

@@ -70,6 +70,7 @@
     apexData: null,
     apexExecuted: loadJson(LS.apexExecuted, {}),
     apexHistory: loadJson(LS.apexHistory, []),
+    apexFocus: params.get("apex") || null,
     tracker: { portfolios: [], updated: null },
     openPf: null,
     quotes: {},
@@ -723,6 +724,7 @@
       const view = btn.dataset.view;
       if (!view) return;
       state.view = view;
+      if (view === "strategy") state.apexFocus = null;
       localStorage.setItem(LS.view, view);
       render();
     }));
@@ -808,6 +810,8 @@
       if (act === "import-tracker-backup") await importTrackerBackup();
       if (act === "refresh-all") await refreshAll("Controllo completato.");
       if (act === "run-engines") await runEngines(b.dataset.mode || "all");
+      if (act === "open-apex") { state.apexFocus = b.dataset.strategy || "legit"; render(); }
+      if (act === "back-apex-home") { state.apexFocus = null; render(); }
       if (act === "apex-done") markApexDone(b.dataset.strategy || "legit");
       if (act === "toggle-apex-history") {
         const key = b.dataset.strategy || "legit";
@@ -1074,16 +1078,18 @@
     }
     strip.hidden = false;
     if (state.view === "strategy") {
-      const st = apexStrategy("legit");
-      const cur = st?.current || {};
-      const bt = st?.backtest || {};
-      const done = state.apexExecuted?.legit;
+      const keys = apexStrategyKeys();
+      const alerts = keys.map(k => apexStrategy(k)?.radar).filter(r => r && r.level && r.level !== "ok");
+      const main = apexStrategy(state.apexFocus || "legit") || apexStrategy("legit") || {};
+      const cur = main.current || {};
+      const bt = main.backtest || {};
+      const done = state.apexExecuted?.[main.key || "legit"];
       const doneOk = done && done.date === cur.date && done.asset === cur.asset;
       strip.innerHTML = `
-        <div class="status-item ${cur.asset ? "good" : "warn"}"><b>APEX Legit</b><span>${cur.asset ? `${apexAssetLabel("legit", cur.asset)} · segnale ${dateIT(cur.date)}` : "Segnale non caricato"}</span></div>
-        <div class="status-item ${doneOk ? "good" : "warn"}"><b>${doneOk ? "Fatto" : "Da confermare"}</b><span>${doneOk ? `Ultima conferma ${timeIT(done.done_at)}` : "Premi Fatto dopo esecuzione broker"}</span></div>
-        <div class="status-item good"><b>${pct(Number(bt.cagr || 0), 1)} CAGR</b><span>Backtest APEX Legit · DD ${pct(Number(bt.max_drawdown || 0), 1)}</span></div>
-        <div class="status-item info"><b>Run unico</b><span>Il bottone lancia APEX + OCTA nello stesso workflow</span></div>`;
+        <div class="status-item ${cur.asset ? "good" : "warn"}"><b>${esc(main.name || "APEX")}</b><span>${cur.asset ? `${apexAssetLabel(main.key || "legit", cur.asset)} · segnale ${dateIT(cur.date)}` : "Segnale non caricato"}</span></div>
+        <div class="status-item ${alerts.length ? "warn" : "good"}"><b>${alerts.length ? `${alerts.length} radar` : "Radar ok"}</b><span>${alerts.length ? alerts.map(r => r.radar_asset || r.raw_asset).join(", ") : "Nessun alert operativo: il radar resta informativo"}</span></div>
+        <div class="status-item good"><b>${pct(Number(bt.cagr || 0), 1)} CAGR</b><span>${esc(apexTaxLabel(main))} · DD ${pct(Number(bt.max_drawdown || 0), 1)}</span></div>
+        <div class="status-item ${doneOk ? "good" : "info"}"><b>Run unico</b><span>Martedi 15:30: Legit, Dex, Degen + OCTA nello stesso workflow</span></div>`;
       return;
     }
     const f = freshness();
@@ -2003,15 +2009,29 @@
     render();
     toast(`${parsed.txs.length} strumenti importati.`);
   }
+  function apexStrategyKeys() {
+    const keys = ["legit", "dex", "degen"];
+    const strategies = state.apexData?.strategies || {};
+    return keys.filter(k => strategies[k]).concat(Object.keys(strategies).filter(k => !keys.includes(k)));
+  }
+  function apexTaxLabel(st) {
+    if (!st) return "Backtest";
+    if (st.tax_mode === "declared_annual") return "CAGR netto stimato dichiarativo";
+    if (st.tax_mode === "gross" || st.apply_tax === false) return "CAGR lordo";
+    return "CAGR netto";
+  }
+  function apexSafeAsset(key) {
+    return key === "degen" ? "XEON" : "CASH";
+  }
   function apexAssetLabel(key, code) {
     const st = apexStrategy(key);
-    return st?.assets?.[code]?.label || ({ BTC: "Bitcoin", GOLD: "Oro", SP500: "S&P 500", CASH: "Liquidita" })[code] || code || "n/d";
+    return st?.assets?.[code]?.label || ({ BTC: "Bitcoin", GOLD: "Oro", GOLD2: "Oro 2x", SP500: "S&P 500", CL2: "USA 2x", CASH: "Liquidita", XEON: "Cash attivo" })[code] || code || "n/d";
   }
   function apexAssetClass(code) {
-    return ({ BTC: "apex-btc", GOLD: "apex-gold", SP500: "apex-sp", CASH: "apex-cash" })[code] || "apex-cash";
+    return ({ BTC: "apex-btc", GOLD: "apex-gold", GOLD2: "apex-gold2", SP500: "apex-sp", CL2: "apex-cl2", CASH: "apex-cash", XEON: "apex-cash" })[code] || "apex-cash";
   }
   function apexAssetIcon(code) {
-    return ({ BTC: "B", GOLD: "Au", SP500: "S&P", CASH: "€" })[code] || "?";
+    return ({ BTC: "B", GOLD: "Au", GOLD2: "2x", SP500: "S&P", CL2: "CL2", CASH: "€", XEON: "€" })[code] || "?";
   }
   function apexStrategy(key = "legit") {
     return state.apexData?.strategies?.[key] || null;
@@ -2026,7 +2046,7 @@
     const key = cur?.strategy_key || "legit";
     const st = apexStrategy(key);
     const m = cur?.momentum || {};
-    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== "CASH" && (st?.dual ? k !== "SP500" : true));
+    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== apexSafeAsset(key) && k !== "CASH" && k !== "XEON" && (st?.dual ? k !== "SP500" : true));
     return universe.map(k => {
       const v = Number(m[k]);
       const w = Math.max(4, Math.min(100, Math.abs(v) * 3));
@@ -2068,13 +2088,121 @@
       <div class="apex-dashboard">
         <section class="detail-section"><h3>Perche ora</h3>${apexMomentumBars(cur)}</section>
         <section class="detail-section"><h3>Numeri testati</h3><div class="row-list">
-          <div class="kv"><span>${st.apply_tax ? "CAGR netto" : "CAGR lordo"}</span><strong>${pct(Number(bt.cagr || 0), 1)}</strong></div>
+          <div class="kv"><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(bt.cagr || 0), 1)}</strong></div>
           <div class="kv"><span>Max drawdown</span><strong class="neg">${pct(Number(bt.max_drawdown || 0), 1)}</strong></div>
           <div class="kv"><span>Swap/anno</span><strong>${esc(bt.switches_per_year ?? "n/d")}</strong></div>
           <div class="kv"><span>Ulcer</span><strong>${pct(Number(bt.ulcer || 0), 1)}</strong></div>
         </div></section>
       </div>
     </section>`;
+  }
+  function apexRadarPanel(key = "legit", compact = false) {
+    const st = apexStrategy(key);
+    const r = st?.radar || {};
+    if (!st || !r.level) return `<div class="empty">Radar non disponibile.</div>`;
+    const cls = r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+    const filters = Object.entries(r.filters || {}).map(([asset, f]) => `
+      <div class="filter-row ${f.passes ? "good" : "bad"}">
+        <span>${esc(apexAssetLabel(key, asset))} SMA${esc(f.weeks)}</span>
+        <strong>${f.passes ? "ok" : "sotto trend"} · ${pct(Number(f.distance_pct || 0), 1)}</strong>
+      </div>`).join("") || `<div class="muted">Nessun filtro trend attivo su questo asset oggi.</div>`;
+    const momentum = r.momentum || {};
+    const ranking = (st.universe || []).filter(a => a !== apexSafeAsset(key)).map(a => ({
+      asset: a,
+      v: Number(momentum[a] || 0),
+    })).sort((a,b) => b.v - a.v).map((x, i) => `
+      <div class="rank-row"><span>${i + 1}. ${esc(apexAssetLabel(key, x.asset))}</span><strong class="${x.v >= 0 ? "pos" : "neg"}">${pct(x.v, 1)}</strong></div>`).join("");
+    return `<section class="detail-section apex-radar-card ${compact ? "compact" : ""}">
+      <div class="radar-title">
+        <span class="badge ${cls}">${esc(r.level === "ok" ? "radar ok" : r.level === "watch" ? "watch" : "alert")}</span>
+        <strong>${esc(r.title || "Radar")}</strong>
+      </div>
+      <div class="radar-signal-line">
+        <div><span>Segnale ufficiale</span><strong>${esc(apexAssetLabel(key, r.official_asset))}</strong></div>
+        <div><span>Se leggessi oggi</span><strong>${esc(apexAssetLabel(key, r.radar_asset))}</strong></div>
+        <div><span>Vantaggio</span><strong class="${Number(r.edge_pp || 0) >= 0 ? "pos" : "neg"}">${pct(Number(r.edge_pp || 0), 1)}</strong></div>
+      </div>
+      <p class="detail-source">${esc(r.body || "Radar informativo, non e' un ordine operativo.")} · As of ${dateIT(r.as_of)}</p>
+      ${compact ? "" : `<div class="apex-radar-grid"><div>${ranking}</div><div>${filters}</div></div>`}
+    </section>`;
+  }
+  function apexOverviewCard(key) {
+    const st = apexStrategy(key);
+    if (!st) return "";
+    const cur = st.current || {};
+    const bt = st.backtest || {};
+    const r = st.radar || {};
+    const cls = apexAssetClass(cur.asset);
+    const alertCls = r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+    return `<article class="apex-card ${cls}" data-action="open-apex" data-strategy="${esc(key)}">
+      <div class="apex-card-top">
+        <div class="apex-token small">${esc(apexAssetIcon(cur.asset))}</div>
+        <span class="badge ${alertCls}">${esc(r.level === "ok" ? "radar ok" : r.level || "radar")}</span>
+      </div>
+      <p class="eyebrow">${esc(st.name)}</p>
+      <h2>${esc(apexAssetLabel(key, cur.asset))}</h2>
+      <p>${esc(st.label)}</p>
+      <div class="apex-card-metrics">
+        <div><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(bt.cagr || 0), 1)}</strong></div>
+        <div><span>Max DD</span><strong class="neg">${pct(Number(bt.max_drawdown || 0), 1)}</strong></div>
+        <div><span>Swap/anno</span><strong>${esc(bt.switches_per_year ?? "n/d")}</strong></div>
+      </div>
+      <div class="apex-card-foot"><span>Segnale ${dateIT(cur.date)}</span><strong>Apri</strong></div>
+    </article>`;
+  }
+  function apexAllocationPills(key) {
+    const st = apexStrategy(key);
+    const alloc = st?.backtest?.allocation || {};
+    const total = Object.values(alloc).reduce((a,b) => a + Number(b || 0), 0) || 1;
+    return Object.entries(alloc).sort((a,b) => Number(b[1]) - Number(a[1])).map(([asset, weeks]) => `
+      <div class="alloc-pill"><span>${esc(apexAssetLabel(key, asset))}</span><strong>${esc(weeks)} sett · ${pctWeight(Number(weeks) / total * 100, 0)}</strong></div>`).join("") || `<div class="empty">Allocazione non disponibile.</div>`;
+  }
+  function apexAnnualTable(key) {
+    const st = apexStrategy(key);
+    const rows = (st?.backtest?.annual || []).slice(-10).reverse().map(y => `
+      <tr><td><strong>${esc(y.year)}</strong></td><td class="right ${Number(y.return) >= 0 ? "pos" : "neg"}">${pct(Number(y.return), 1)}</td><td class="right neg">${pct(Number(y.drawdown), 1)}</td><td class="right">${eur(Number(y.ending || 0), 0)}</td></tr>`).join("");
+    return rows ? `<table class="table"><thead><tr><th>Anno</th><th class="right">Rendimento</th><th class="right">DD anno</th><th class="right">Finale</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Anno per anno non disponibile.</div>`;
+  }
+  function apexHomeView() {
+    const apex = state.apexData || {};
+    const keys = apexStrategyKeys();
+    const alerts = keys.map(k => ({ key: k, st: apexStrategy(k), r: apexStrategy(k)?.radar })).filter(x => x.r && x.r.level !== "ok");
+    const alertBox = alerts.length
+      ? `<div class="notice warn"><strong>Radar da guardare</strong><br>${alerts.map(x => `${esc(x.st.name)}: ${esc(x.r.title)} (${esc(apexAssetLabel(x.key, x.r.radar_asset))})`).join("<br>")}</div>`
+      : `<div class="notice good"><strong>Nessun alert radar</strong><br>I tre radar sono coerenti con il segnale ufficiale. Ricorda: il radar non cambia la posizione da solo.</div>`;
+    return `
+      <section class="panel full apex-home-hero">
+        <div class="panel-head">
+          <div><p class="eyebrow">APEX cockpit</p><h2>Tre strategie, un solo run</h2><p>Legit e' la principale. Dex e Degen sono motori separati con radar informativo dedicato.</p></div>
+          <div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run forzato tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Ricarica</button></div>
+        </div>
+        ${alertBox}
+        <div class="apex-card-grid">${keys.map(apexOverviewCard).join("")}</div>
+      </section>
+      <section class="panel full"><div class="panel-head"><div><h2>Radar live</h2><p>Controlla se oggi sta maturando un cambio. Non e' un ordine operativo.</p></div><span class="badge info">${esc(apex.generated_at ? "aggiornato " + timeIT(apex.generated_at) : "n/d")}</span></div><div class="apex-radar-list">${keys.map(k => apexRadarPanel(k, true)).join("")}</div></section>
+      ${apexRunbookPanel()}`;
+  }
+  function apexDetailView(key) {
+    const st = apexStrategy(key);
+    if (!st) return `<section class="panel full"><div class="empty">Strategia APEX non trovata.</div></section>`;
+    return `
+      <section class="panel full"><div class="toolbar"><button class="button ghost" data-action="back-apex-home">${icon("minus")}Torna ai 3 APEX</button><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run forzato tutto</button></div></section>
+      ${apexCurrentPanel(key, true)}
+      <section class="panel full"><div class="panel-head"><div><h2>Radar ${esc(st.name)}</h2><p>Serve per capire se il segnale sta cambiando prima del prossimo martedi.</p></div></div>${apexRadarPanel(key, false)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Rendimento ${esc(st.name)}</h2><p>Grafico compatto: appoggia il dito per leggere data e valore.</p></div></div>${apexChart(key)}</section>
+      <section class="panel"><div class="panel-head"><div><h2>Metriche</h2><p>Backtest coerente con il motore dell'app.</p></div></div><div class="row-list">
+        <div class="kv"><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(st.backtest?.cagr || 0), 1)}</strong></div>
+        <div class="kv"><span>Valore finale da 10k</span><strong>${eur(Number(st.backtest?.final || 0), 0)}</strong></div>
+        <div class="kv"><span>Max drawdown</span><strong class="neg">${pct(Number(st.backtest?.max_drawdown || 0), 1)}</strong></div>
+        <div class="kv"><span>Calmar</span><strong>${esc(st.backtest?.calmar ?? "n/d")}</strong></div>
+        <div class="kv"><span>Ulcer</span><strong>${pct(Number(st.backtest?.ulcer || 0), 1)}</strong></div>
+        <div class="kv"><span>Switch totali</span><strong>${esc(st.backtest?.switches ?? "n/d")}</strong></div>
+        <div class="kv"><span>Costi/tasse stimate</span><strong>${eur(Number(st.backtest?.taxes_paid || 0), 0)}</strong></div>
+      </div></section>
+      <section class="panel"><div class="panel-head"><div><h2>Tempo sugli asset</h2><p>Quante settimane il motore resta su ogni blocco.</p></div></div><div class="alloc-grid">${apexAllocationPills(key)}</div></section>
+      <section class="panel full"><div class="panel-head"><div><h2>Anno per anno</h2><p>Rendimento e drawdown annuale della simulazione.</p></div></div>${apexAnnualTable(key)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale</h2><p>Mostro solo le settimane in cui cambia asset. Tutto lo storico si apre a richiesta.</p></div></div>${apexHistoryTable(key)}</section>
+      <section class="panel full"><div class="panel-head"><div><h2>Storico reale</h2><p>Operazioni che registri tu con il pulsante: serve per misurare il risultato reale.</p></div></div>${apexExecutionHistory(key)}</section>`;
   }
   function apexChart(key = "legit") {
     const st = apexStrategy(key);
@@ -2087,7 +2215,7 @@
     const all = st?.changes || [];
     const open = !!state.apexHistoryOpen?.[key];
     const list = (open ? all : all.slice(-6)).slice().reverse();
-    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== "CASH" && (st?.dual ? k !== "SP500" : true));
+    const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== apexSafeAsset(key) && k !== "CASH" && k !== "XEON" && (st?.dual ? k !== "SP500" : true));
     const head = universe.map(k => `<th class="right">${esc(apexAssetLabel(key, k))}</th>`).join("");
     const rows = list.map(r => `<tr><td><strong>${dateIT(r.date)}</strong><div class="muted">${esc(r.current_marker ? "stato attuale" : r.reason || "")}</div></td><td><span class="badge ${r.changed ? "warn" : "good"}">${esc(apexAssetLabel(key, r.asset))}</span></td>${universe.map(k => `<td class="right">${pct(Number(r.momentum?.[k] || 0), 1)}</td>`).join("")}</tr>`).join("");
     const toggle = all.length > 6 ? `<div class="toolbar apex-history-actions"><button class="button ghost" data-action="toggle-apex-history" data-strategy="${esc(key)}">${open ? "Mostra meno" : `Mostra tutti i ${all.length} cambi`}</button></div>` : "";
@@ -2104,35 +2232,26 @@
   }
   function apexRunbookPanel() {
     return `<section class="panel">
-      <div class="panel-head"><div><h2>Operativita</h2><p>Regola salvata come versione finale APEX per Fineco/Xetra.</p></div></div>
+      <div class="panel-head"><div><h2>Operativita</h2><p>Un unico workflow aggiorna OCTA e tutti i motori APEX, cosi eviti deploy separati.</p></div></div>
       <div class="row-list">
-        <div class="kv"><span>Run APEX Legit + Dex</span><strong>martedi 15:30 Italia</strong></div>
+        <div class="kv"><span>Run APEX Legit + Dex + Degen</span><strong>martedi 15:30 Italia</strong></div>
         <div class="kv"><span>Finestra azione</span><strong>martedi 15:35-17:20</strong></div>
-        <div class="kv"><span>Universo</span><strong>BTC, Oro, S&P 500, XEON</strong></div>
-        <div class="kv"><span>Regola</span><strong>6w, buffer 3pp, SMA30 BTC</strong></div>
-        <div class="kv"><span>Deploy</span><strong>unico workflow: APEX Legit, APEX Dex e OCTA</strong></div>
+        <div class="kv"><span>APEX Legit</span><strong>BTC, Oro, S&P 500, cash</strong></div>
+        <div class="kv"><span>APEX Dex</span><strong>BTC spot, PAXG, stablecoin</strong></div>
+        <div class="kv"><span>APEX Degen</span><strong>BTC, Oro 2x, CL2, XEON</strong></div>
+        <div class="kv"><span>Deploy</span><strong>unico workflow: APEX + OCTA</strong></div>
       </div>
     </section>`;
   }
   function viewStrategy() {
-    const f = freshness();
-    const wf = state.freshnessFile || {};
+    if (state.apexFocus) return apexDetailView(state.apexFocus);
     const next = nextRefreshInfo();
-    const apex = state.apexData || {};
     return `
-      ${apexCurrentPanel("legit", true)}
-      <section class="panel full"><div class="panel-head"><div><h2>Rendimento APEX Legit</h2><p>Grafico compatto: appoggia il dito per leggere data e valore.</p></div><span class="badge info">${esc(apex.generated_at ? "aggiornato " + timeIT(apex.generated_at) : "n/d")}</span></div>${apexChart("legit")}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale APEX Legit</h2><p>Mostro solo le settimane in cui cambia asset. Tutto lo storico si apre a richiesta.</p></div></div>${apexHistoryTable("legit")}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Storico reale APEX Legit</h2><p>Operazioni che registri tu con il pulsante: serve per misurare il risultato reale.</p></div></div>${apexExecutionHistory("legit")}</section>
-      ${apexCurrentPanel("dex", false)}
-      <section class="panel"><div class="panel-head"><div><h2>Rendimento APEX Dex</h2><p>BTC spot, PAXG e stablecoin. Motore separato, lordo imposte, per studio futuro.</p></div></div>${apexChart("dex")}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale APEX Dex</h2><p>Solo switch tra BTC spot, PAXG e stablecoin.</p></div></div>${apexHistoryTable("dex")}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Storico reale APEX Dex</h2><p>Registra swap e capitale spostato per avere il tracciamento reale separato.</p></div></div>${apexExecutionHistory("dex")}</section>
-      ${apexRunbookPanel()}
+      ${apexHomeView()}
       <section class="panel"><div class="panel-head"><div><h2>Workflow vNext</h2><p>Separato dalla produzione attuale.</p></div></div><div class="row-list">
         <div class="kv"><span>Runner attivo ora</span><strong>${esc(CLOUD_RUNNER.name)}</strong></div>
         <div class="kv"><span>OCTA refresh</span><strong>${esc(CLOUD_RUNNER.schedule)}</strong></div>
-        <div class="kv"><span>APEX refresh</span><strong>martedi 15:30 Italia, Legit + Dex insieme</strong></div>
+        <div class="kv"><span>APEX refresh</span><strong>martedi 15:30 Italia, tre motori insieme</strong></div>
         <div class="kv"><span>Prossimo refresh</span><strong>${esc(next.label)}</strong></div>
         <div class="kv"><span>Finestra controllo</span><strong>${esc(CLOUD_RUNNER.check)}</strong></div>
         <div class="kv"><span>Deploy</span><strong>${esc(CLOUD_RUNNER.deploy)}</strong></div>

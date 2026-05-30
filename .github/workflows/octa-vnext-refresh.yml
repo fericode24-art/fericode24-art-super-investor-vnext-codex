@@ -9,7 +9,7 @@ on:
     # Europe/Rome 09:10/09:30 retry window during daylight saving time.
     - cron: '10 7 * * 1-5'
     - cron: '30 7 * * 1-5'
-    # Europe/Rome 15:30 APEX Legit window during daylight saving time.
+    # Europe/Rome 15:30 APEX all-engines window during daylight saving time.
     - cron: '30 13 * * 2'
     # Europe/Rome 08:35/08:45/08:55 primary window during standard time.
     - cron: '35 7 * * 1-5'
@@ -18,7 +18,7 @@ on:
     # Europe/Rome 09:10/09:30 retry window during standard time.
     - cron: '10 8 * * 1-5'
     - cron: '30 8 * * 1-5'
-    # Europe/Rome 15:30 APEX Legit window during standard time.
+    # Europe/Rome 15:30 APEX all-engines window during standard time.
     - cron: '30 14 * * 2'
   workflow_dispatch:
     inputs:

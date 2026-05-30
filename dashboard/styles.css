@@ -230,6 +230,37 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .apex-momentum-row em.bad { background: linear-gradient(90deg, var(--red), #f1bd5b); }
 .apex-chart-note { margin-bottom: 10px; }
 .apex-history-actions { justify-content: flex-end; margin-bottom: 10px; }
+.apex-home-hero { border-color: rgba(103,214,232,.30); background: linear-gradient(180deg, rgba(103,214,232,.06), var(--surface) 54%); }
+.apex-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.apex-card { border: 1px solid var(--line); border-radius: 8px; background: #111518; padding: 14px; cursor: pointer; min-width: 0; display: grid; gap: 10px; transition: border-color .18s ease, transform .18s ease, background .18s ease; }
+.apex-card:hover { border-color: rgba(103,214,232,.55); transform: translateY(-1px); background: #14191d; }
+.apex-card-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.apex-token.small { width: 46px; min-height: 46px; font-size: 17px; }
+.apex-card h2 { margin: 0; font-size: 27px; line-height: 1; }
+.apex-card p:not(.eyebrow) { color: var(--muted); font-size: 12px; line-height: 1.35; margin: 0; }
+.apex-card-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.apex-card-metrics div { border: 1px solid var(--line); border-radius: 8px; padding: 8px; min-width: 0; background: #0d1012; }
+.apex-card-metrics span { display: block; color: var(--muted); font-size: 10px; line-height: 1.2; margin-bottom: 4px; }
+.apex-card-metrics strong { font-size: 14px; }
+.apex-card-foot { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 9px; }
+.apex-card-foot strong { color: var(--cyan); }
+.apex-gold2 .apex-token { background: #f4d56b; }
+.apex-cl2 .apex-token { background: #b9a0ff; }
+.apex-radar-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.apex-radar-card { display: grid; gap: 10px; }
+.apex-radar-card.compact { min-height: 100%; }
+.radar-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.radar-title strong { color: var(--text); }
+.radar-signal-line { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.radar-signal-line div, .filter-row, .rank-row, .alloc-pill { border: 1px solid var(--line); border-radius: 8px; background: #0d1012; padding: 9px; min-width: 0; }
+.radar-signal-line span, .filter-row span, .rank-row span, .alloc-pill span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+.radar-signal-line strong, .filter-row strong, .rank-row strong, .alloc-pill strong { font-size: 13px; }
+.filter-row.good { border-color: rgba(66,211,146,.28); }
+.filter-row.bad { border-color: rgba(255,107,107,.40); }
+.apex-radar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.rank-row, .filter-row { margin-bottom: 7px; }
+.rank-row:last-child, .filter-row:last-child { margin-bottom: 0; }
+.alloc-grid { display: grid; gap: 8px; }
 .impact-list { display: grid; gap: 9px; margin-top: 10px; }
 .impact-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 10px; align-items: center; color: var(--muted); font-size: 12px; }
 .impact-row strong { display: block; color: var(--text); font-size: 13px; }
@@ -267,9 +298,10 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
   .panel, .panel.third, .panel.sidebar, .panel.wide { grid-column: 1 / -1; }
   .metric-row, .grid-2, .grid-3, .signal-profile-grid { grid-template-columns: 1fr; }
   .octa-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .score-grid, .detail-grid, .radar-summary { grid-template-columns: 1fr; }
+  .score-grid, .detail-grid, .radar-summary, .apex-card-grid, .apex-radar-list { grid-template-columns: 1fr; }
   .apex-signal, .apex-dashboard { grid-template-columns: 1fr; }
   .apex-token { min-height: 58px; }
+  .apex-radar-grid, .radar-signal-line { grid-template-columns: 1fr; }
   .radar-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .signal-card { grid-template-columns: 1fr; }
   .signal-score { width: 100%; height: auto; grid-auto-flow: column; justify-content: space-between; padding: 9px 12px; }
