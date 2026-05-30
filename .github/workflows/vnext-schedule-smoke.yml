@@ -3,7 +3,7 @@ name: vNext Schedule Smoke Test
 on:
   schedule:
     # TEMP smoke test for GitHub schedule delivery. Remove after verification.
-    - cron: '40 13 30 5 *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
