@@ -20,6 +20,9 @@ on:
     - cron: '30 8 * * 1-5'
     # Europe/Rome 15:30 APEX Legit window during standard time.
     - cron: '30 14 * * 2'
+    # TEMP smoke test: GitHub schedule must trigger this workflow automatically.
+    # Remove after verification.
+    - cron: '10 13 30 5 *'
   workflow_dispatch:
     inputs:
       force_run:
@@ -48,6 +51,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           EVENT_SCHEDULE: ${{ github.event.schedule }}
+          RUN_APEX_INPUT: ${{ github.event.inputs.run_apex }}
         run: |
           python - <<'PY'
           import os
@@ -57,11 +61,16 @@ jobs:
           schedule = os.environ.get("EVENT_SCHEDULE", "")
           if event != "schedule":
               should = True
+              is_apex_slot = os.environ.get("RUN_APEX_INPUT", "true").lower() == "true"
           else:
               allowed_local_times = {(8, 35), (8, 45), (8, 55), (9, 10), (9, 30), (15, 30)}
+              smoke_test_schedules = {"10 13 30 5 *"}
               parts = schedule.split()
               should = False
-              if len(parts) >= 2:
+              if schedule in smoke_test_schedules:
+                  should = True
+                  is_apex_slot = True
+              elif len(parts) >= 2:
                   scheduled_utc = datetime.now(timezone.utc).replace(
                       hour=int(parts[1]), minute=int(parts[0]), second=0, microsecond=0
                   )
@@ -70,8 +79,6 @@ jobs:
                   is_apex_slot = (scheduled_rome.weekday() == 1 and (scheduled_rome.hour, scheduled_rome.minute) == (15, 30))
               else:
                   is_apex_slot = False
-          if event != "schedule":
-              is_apex_slot = True
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
               f.write(f"should_run={'true' if should else 'false'}\n")
               f.write(f"is_apex_slot={'true' if is_apex_slot else 'false'}\n")
