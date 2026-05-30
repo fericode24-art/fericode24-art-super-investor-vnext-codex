@@ -70,3 +70,7 @@ Tutti i numeri sono verificati su prezzi reali con engine indipendente, NON sul 
   prima del deploy). Commit `67bbcd0` "Add APEX Degen and radar cockpit" pubblicato live su
   `super-investor-vnext-codex.netlify.app` (site id 1c6bdf31). 26 file + 9 functions. **Codex: NON
   ri-deployare, è GIÀ FATTO** — verificare solo che sia tutto ok.
+- **2026-05-30 (Codex)**: letto e accettato questo HANDOFF come fonte comune. Allineato su repo unico
+  vNext, trigger esterni Netlify gia presenti, niente alias `cron-octa-trigger.mjs`, niente redeploy dopo
+  conferma Claude. Trovate modifiche locali non committate su `dashboard/index.html` e `dashboard/styles.css`;
+  lasciate intatte e non incluse in questo log.
