@@ -1967,9 +1967,9 @@
       const item = octaItem(c.ticker);
       const status = statusMeta(c.entry_status);
       const ext = scoreValue(c.external_delta ?? item.external_delta ?? item.components?.external_delta);
-      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button></td><td class="right"><span class="${(ext || 0) >= 0 ? "pos" : "neg"}">${esc(pointsLabel(ext))}</span></td><td class="right hide-sm">${c.momentum_pct != null ? esc(Math.round(Number(c.momentum_pct))) + "/100" : "n.d."}</td></tr>`;
+      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td class="radar-reason-cell"><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button><small>${esc(status.desc)}</small></td><td class="right"><span class="${(ext || 0) >= 0 ? "pos" : "neg"}">${esc(pointsLabel(ext))}</span></td><td class="right hide-sm">${c.momentum_pct != null ? esc(Math.round(Number(c.momentum_pct))) + "/100" : "n.d."}</td></tr>`;
     }).join("");
-    return rows ? `<div class="table-note">Extra score = punti aggiunti o tolti dai segnali extra. Forza = momentum relativo del titolo.</div><table class="table"><thead><tr><th>Ticker</th><th class="right">Priorita</th><th>Motivo</th><th class="right">Extra score</th><th class="right hide-sm">Forza</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
+    return rows ? `<div class="table-note">Extra score = punti aggiunti o tolti dai segnali extra. Forza = momentum relativo del titolo.</div><table class="table octa-radar-table"><thead><tr><th>Ticker</th><th class="right">Priorita</th><th>Motivo</th><th class="right">Extra score</th><th class="right hide-sm">Forza</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
   }
 
   const BENCH_PRESETS = [
@@ -2390,7 +2390,14 @@
     const st = apexStrategy(key);
     const series = (st?.changes || st?.history || []).filter(r => r?.date && r?.prices).sort((a,b) => String(a.date).localeCompare(String(b.date)));
     const idx = series.findIndex(r => String(r.date).slice(0, 10) === String(cur?.date || "").slice(0, 10));
-    const prev = idx > 0 ? series[idx - 1] : null;
+    const currentAsset = cur?.asset;
+    let prev = null;
+    for (let i = idx - 1; i >= 0; i -= 1) {
+      if (series[i]?.asset !== currentAsset || series[i]?.changed) {
+        prev = series[i];
+        break;
+      }
+    }
     const now = idx >= 0 ? series[idx] : cur;
     const out = {};
     if (!prev?.prices || !now?.prices) return out;
@@ -2417,10 +2424,12 @@
     const rows = universe.map(k => {
       const v = Number(m[k]);
       const sinceVal = scoreValue(since[k]);
+      const showSince = sinceVal != null && Math.abs(sinceVal - v) > 0.15;
       const w = Math.max(4, Math.min(100, Math.abs(v) * 3));
-      return `<div class="apex-momentum-row"><span><b>${esc(apexAssetLabel(key, k))}</b>${sinceVal == null ? "" : `<small>dal segnale precedente ${pct(sinceVal, 1)}</small>`}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
+      return `<div class="apex-momentum-row"><span><b>${esc(apexAssetLabel(key, k))}</b>${showSince ? `<small>dal cambio asset ${pct(sinceVal, 1)}</small>` : ""}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
     }).join("");
-    const prevText = since._prevDate ? ` In piccolo trovi anche il movimento dal segnale precedente (${dateIT(since._prevDate)}).` : "";
+    const hasSince = Object.keys(since).some(k => k !== "_prevDate" && scoreValue(since[k]) != null && Math.abs(scoreValue(since[k]) - Number(m[k] || 0)) > 0.15);
+    const prevText = since._prevDate && hasSince ? ` In piccolo trovi anche il movimento dal cambio asset (${dateIT(since._prevDate)}).` : "";
     return `<p class="detail-source apex-momentum-note">La percentuale grande e il momentum usato per il segnale: rendimento degli asset nelle ${esc(apexLookbackLabel(st))}. Non e' il rendimento del tuo portafoglio.${esc(prevText)}</p>${rows}`;
   }
   function apexCurrentPanel(key = "legit", primary = false) {

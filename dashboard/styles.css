@@ -374,6 +374,13 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .radar-chip b { grid-column: 1 / -1; color: var(--green); font-size: 12px; }
 .radar-chip:hover { border-color: rgba(103,214,232,.55); }
 .table-note { color: var(--muted); font-size: 12px; line-height: 1.4; margin-bottom: 8px; }
+.octa-radar-table th:nth-child(1), .octa-radar-table td:nth-child(1) { width: 30%; }
+.octa-radar-table th:nth-child(2), .octa-radar-table td:nth-child(2) { width: 82px; }
+.octa-radar-table th:nth-child(3), .octa-radar-table td:nth-child(3) { width: 30%; }
+.octa-radar-table th:nth-child(4), .octa-radar-table td:nth-child(4) { width: 112px; }
+.radar-reason-cell { overflow: visible !important; text-overflow: clip !important; white-space: normal; }
+.radar-reason-cell .badge-button { min-height: 27px; height: auto; max-width: 100%; padding-top: 5px; padding-bottom: 5px; white-space: normal; line-height: 1.15; text-align: left; justify-content: flex-start; }
+.radar-reason-cell small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.25; }
 .pos { color: var(--green); }
 .neg { color: var(--red); }
 .today-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; border-color: rgba(103,214,232,.28); background: linear-gradient(180deg, rgba(103,214,232,.05), var(--surface) 58%); }
@@ -510,6 +517,11 @@ button.today-card:hover { border-color: rgba(103,214,232,.55); background: #151a
   .table { font-size: 11px; }
   .table th, .table td { padding: 8px 4px; }
   .table .muted { display: none; }
+  .octa-radar-table th:nth-child(1), .octa-radar-table td:nth-child(1) { width: 26%; }
+  .octa-radar-table th:nth-child(2), .octa-radar-table td:nth-child(2) { width: 54px; }
+  .octa-radar-table th:nth-child(3), .octa-radar-table td:nth-child(3) { width: 42%; }
+  .octa-radar-table th:nth-child(4), .octa-radar-table td:nth-child(4) { width: 78px; }
+  .radar-reason-cell small { display: none; }
   .pf-bank-value strong { font-size: 26px; }
   .pf-action-bar { grid-template-columns: 1fr 1fr; }
 }
