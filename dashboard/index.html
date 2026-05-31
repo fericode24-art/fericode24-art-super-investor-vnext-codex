@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101316" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
-  <link rel="stylesheet" href="styles.css?v=29" />
+  <link rel="stylesheet" href="styles.css?v=38" />
   <title>Super Investor vNext</title>
 </head>
 <body>
@@ -145,13 +145,19 @@
   <dialog id="import-dialog" class="dialog detail-dialog">
     <form method="dialog" id="import-form">
       <header class="dialog-head">
-        <div><p class="eyebrow">Import portafoglio</p><h2>Importa strumenti</h2></div>
+        <div><p class="eyebrow">Import portafoglio</p><h2>Importa o aggiorna in blocco</h2></div>
         <button class="icon-action" value="cancel" aria-label="Chiudi"><svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
       </header>
       <div class="import-box">
+        <label>Modalita
+          <select id="import-mode">
+            <option value="snapshot">Aggiorna composizione attuale</option>
+            <option value="append">Aggiungi come nuovi movimenti</option>
+          </select>
+        </label>
         <label>File Excel, CSV o PDF<input id="import-file" type="file" accept=".xls,.xlsx,.csv,.pdf" /></label>
         <label>Righe import<textarea id="import-text" class="textarea-input" rows="10"></textarea></label>
-        <p id="import-status" class="muted">Puoi caricare Excel/PDF oppure incollare righe: codice | quantita | prezzo EUR | tipo | settore | nome | prezzo manuale EUR.</p>
+        <p id="import-status" class="muted">Puoi caricare Excel/PDF oppure incollare righe: codice | quantita | prezzo carico EUR | tipo | settore | nome | prezzo live manuale.</p>
       </div>
       <menu class="dialog-actions">
         <button class="button ghost" value="cancel">Annulla</button>
@@ -168,6 +174,6 @@
     <div id="info-body" class="detail-body"></div>
   </dialog>
 
-  <script src="app.js?v=29"></script>
+  <script src="app.js?v=38"></script>
 </body>
 </html>

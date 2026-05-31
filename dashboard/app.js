@@ -68,6 +68,7 @@
     octaHistory: loadJson(LS.octaHistory, []),
     octaExecuted: loadJson(LS.octaExecuted, {}),
     apexData: null,
+    vixData: null,
     apexExecuted: loadJson(LS.apexExecuted, {}),
     apexHistory: loadJson(LS.apexHistory, []),
     apexFocus: params.get("apex") || null,
@@ -109,6 +110,11 @@
     repo: "https://github.com/fericode24-art/fericode24-art-super-investor-vnext-codex/actions",
     workflow: "https://github.com/fericode24-art/fericode24-art-super-investor-vnext-codex/actions/workflows/octa-vnext-refresh.yml",
   };
+  const MARKET_WATCH = [
+    { symbol: "^GSPC", label: "S&P 500" },
+    { symbol: "BTC-USD", label: "Bitcoin" },
+    { symbol: "GC=F", label: "Oro" },
+  ];
   const STATUS_INFO = {
     FRESH_BREAKOUT: { label: "Compra: slancio", cls: "good", desc: "Nuovo massimo/forza relativa: ingresso ammesso se il titolo e in top score." },
     PULLBACK_IN_TREND: { label: "Compra: sconto sano", cls: "good", desc: "Trend ancora valido con ritracciamento gestibile." },
@@ -338,7 +344,7 @@
 
   async function init() {
     wireShell();
-    await Promise.all([loadOctaData(), loadApexData(), loadLegacyData(), loadTrackerCloud()]);
+    await Promise.all([loadOctaData(), loadApexData(), loadVixData(), loadLegacyData(), loadTrackerCloud()]);
     await pullOctaCloud();
     render();
     refreshQuotes().then(render).catch(() => {});
@@ -369,6 +375,15 @@
       state.apexData = await r.json();
     } catch (e) {
       state.apexData = { status: "error", error: String(e.message || e), strategies: {} };
+    }
+  }
+  async function loadVixData() {
+    try {
+      const r = await fetch(API.vix + "?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      state.vixData = await r.json();
+    } catch {
+      state.vixData = null;
     }
   }
   async function loadLegacyData() {
@@ -640,6 +655,12 @@
       if (type === "CASH") { cash += price; continue; }
       if (!sym) continue;
       if (!map[sym]) map[sym] = { symbol: sym, name: tx.name || sym, qty: 0, invested: 0 };
+      if (type === "SNAP" || type === "SNAPSHOT" || type === "SYNC") {
+        map[sym].qty = qty;
+        map[sym].invested = qty * price;
+        map[sym].name = tx.name || map[sym].name;
+        continue;
+      }
       if (type === "BUY") { map[sym].qty += qty; map[sym].invested += qty * price; }
       if (type === "SELL") { map[sym].qty -= qty; map[sym].invested -= Math.min(map[sym].invested, qty * price); cash += qty * price; }
       map[sym].name = tx.name || map[sym].name;
@@ -679,6 +700,7 @@
   }
   async function refreshQuotes() {
     const set = new Set(Object.keys(state.octaPortfolio || {}));
+    MARKET_WATCH.forEach(x => set.add(x.symbol));
     (state.octaData?.signals || []).forEach(s => set.add(s.ticker));
     if (state.openPf) holdingsFromTransactions(state.openPf.data.transactions).holdings.forEach(h => set.add(h.symbol));
     const symbols = [...set].filter(Boolean).slice(0, 60);
@@ -713,7 +735,7 @@
   }
 
   async function refreshAll(message = "Dati aggiornati.") {
-    await Promise.all([loadOctaData(), loadApexData(), loadFreshnessStatus(), loadLegacyData(), loadTrackerCloud(), pullOctaCloud()]);
+    await Promise.all([loadOctaData(), loadApexData(), loadVixData(), loadFreshnessStatus(), loadLegacyData(), loadTrackerCloud(), pullOctaCloud()]);
     await refreshQuotes();
     render();
     toast(message);
@@ -778,6 +800,15 @@
       await applyPortfolioImport();
     });
     document.addEventListener("click", async e => {
+      const viewBtn = e.target.closest("[data-view]");
+      if (viewBtn && !e.target.closest("[data-action]")) {
+        const view = viewBtn.dataset.view;
+        state.view = view;
+        if (view === "strategy") state.apexFocus = null;
+        localStorage.setItem(LS.view, view);
+        render();
+        return;
+      }
       const b = e.target.closest("[data-action]");
       if (!b) return;
       const act = b.dataset.action;
@@ -806,6 +837,7 @@
       if (act === "ai-pf") await askPortfolioAI();
       if (act === "ai-octa") await askOctaAI();
       if (act === "ai-ticker") await askTickerAI(b.dataset.ticker);
+      if (act === "ai-apex") await askApexAI(b.dataset.strategy || state.apexFocus || "legit");
       if (act === "export-tracker-backup") exportTrackerBackup();
       if (act === "import-tracker-backup") await importTrackerBackup();
       if (act === "refresh-all") await refreshAll("Controllo completato.");
@@ -1070,7 +1102,7 @@
   function renderStatusStrip() {
     const strip = $("#status-strip");
     if (!strip) return;
-    const show = state.view === "today" || state.view === "strategy";
+    const show = false;
     if (!show) {
       strip.hidden = true;
       strip.innerHTML = "";
@@ -1110,20 +1142,165 @@
     const pending = signals.filter(s => !isSignalDone(s));
     const buys = pending.filter(s => s.action === "BUY");
     const sells = pending.filter(s => s.action === "SELL");
-    const top = pending.slice(0, 4).map(signalCard).join("") || `<div class="empty">Nessuna operazione pendente.</div>`;
-    const warning = f.cls === "good" ? "" : `<div class="notice bad">Il segnale non coincide con la data trading attesa. Prima di operare verifica la run GitHub Actions o chiedi un controllo refresh mattina.</div>`;
+    const stats = octaStats();
+    const apex = todayApexSummary();
+    const octaTone = f.cls === "bad" ? "bad" : pending.length ? "warn" : "good";
+    const apexTone = apex.needAction ? "warn" : apex.alerts ? "info" : "good";
+    const runTone = f.cls === "good" && !d.engine_error ? "good" : "warn";
+    const actionText = pending.length ? `${pending.length} azioni da valutare` : "Nessuna azione aperta";
+    const top = pending.slice(0, 3).map(signalCard).join("") || `<div class="notice good"><strong>OCTA senza azioni pendenti</strong><br>Il portafoglio registrato e' allineato ai segnali disponibili.</div>`;
     return `
-      <section class="panel full">${warning}<div class="metric-row">
-        <div class="metric"><span>Ultimo segnale</span><strong>${dateIT(d.signal_date)}</strong></div>
-        <div class="metric"><span>BUY pendenti</span><strong>${buys.length}</strong></div>
-        <div class="metric"><span>SELL pendenti</span><strong>${sells.length}</strong></div>
-        <div class="metric"><span>Regime</span><strong>${esc(d.regime?.status || "n/d")}</strong></div>
-      </div><div style="height:12px"></div>${octaPerformanceChart()}</section>
-      <section class="panel"><div class="panel-head"><div><h2>Azioni di oggi</h2><p>Mostra solo quello che richiede una decisione.</p></div><span class="badge ${f.cls}">${esc(f.label)}</span></div><div class="signal-list">${top}</div></section>
-      <section class="panel"><div class="panel-head"><div><h2>Controlli rapidi</h2><p>Stato operativo della nuova versione.</p></div></div>${healthList()}</section>
-      <section class="panel third"><div class="panel-head"><div><h2>Portfolio OCTA</h2><p>${Object.keys(state.octaPortfolio).length} posizioni registrate.</p></div></div>${octaHoldingsMini()}</section>
-      <section class="panel third"><div class="panel-head"><div><h2>Backtest</h2><p>Risultato importato dalla base attuale.</p></div></div>${backtestMini()}</section>
-      <section class="panel third"><div class="panel-head"><div><h2>Automazione</h2><p>Controllo del run notturno e segnale mattutino.</p></div></div>${automationPanel()}</section>`;
+      <section class="panel full today-hero">
+        <div>
+          <h2>Oggi</h2>
+          <p>Prima controlla se i dati sono freschi. Poi guarda se OCTA o APEX chiedono un intervento.</p>
+        </div>
+        <div class="today-hero-side">
+          <span class="badge ${runTone}">${esc(f.label)}</span>
+          <div class="toolbar">
+            <button class="button primary" data-action="refresh-all">${icon("refresh")}Aggiorna dati</button>
+            <button class="button" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button>
+          </div>
+        </div>
+      </section>
+      <section class="today-card-row">
+        ${todayDecisionCard("OCTA", octaTone, actionText, `${buys.length} buy · ${sells.length} sell`, `P/L ${eurMaybe(stats.pnl, 0)} · ${pct(stats.pnlPct)}`, "octa")}
+        ${todayDecisionCard("APEX", apexTone, apex.label, apex.sub, apex.radar, "strategy")}
+        ${todayDecisionCard("Mercato", todayVixTone(), todayMarketHeadline(), "VIX · S&P 500 · BTC · Oro", todayMarketShort(), "")}
+      </section>
+      <section class="panel wide today-focus">
+        <div class="panel-head"><div><h2>Notifiche segnali</h2><p>Solo quello che puo' richiedere una decisione oggi.</p></div><span class="badge ${f.cls}">${dateIT(d.signal_date)}</span></div>
+        <div class="signal-list">${top}</div>
+      </section>
+      <section class="panel sidebar">
+        <div class="panel-head"><div><h2>Run e stato</h2><p>Una lettura veloce: fresco, errore motore, cloud.</p></div></div>
+        ${todayRunOverview()}
+      </section>
+      <section class="panel full today-market-panel">
+        <div class="panel-head"><div><h2>Mercati da tenere d'occhio</h2><p>Piccolo radar live: non e' un segnale operativo, serve a leggere il contesto.</p></div><span class="badge ${todayVixTone()}">${esc(todayVixLabel())}</span></div>
+        ${todayMarketPanel()}
+      </section>
+      <section class="panel full today-shortcuts">
+        <button class="button ghost" data-view="octa">${icon("chart")}Apri OCTA completa</button>
+        <button class="button ghost" data-view="strategy">Apri APEX completa</button>
+        <button class="button ghost" data-view="portfolios">${icon("lock")}Apri Portafogli</button>
+      </section>`;
+  }
+  function todayDecisionCard(title, cls, main, sub, foot, view) {
+    const action = view ? ` data-view="${esc(view)}"` : "";
+    const tag = view ? "button" : "article";
+    return `<${tag} class="today-card ${cls}"${action}>
+      <span>${esc(title)}</span>
+      <strong>${esc(main)}</strong>
+      <em>${esc(sub)}</em>
+      <small>${esc(foot)}</small>
+    </${tag}>`;
+  }
+  function todayApexSummary() {
+    const keys = apexStrategyKeys();
+    const active = keys.map(k => ({ key: k, st: apexStrategy(k) })).filter(x => x.st?.current);
+    const needAction = active.filter(({ key, st }) => st.current.changed && !(state.apexExecuted?.[key]?.date === st.current.date && state.apexExecuted?.[key]?.asset === st.current.asset));
+    const alerts = active.filter(({ st }) => st.radar?.level && st.radar.level !== "ok");
+    const legit = apexStrategy("legit") || active[0]?.st;
+    const cur = legit?.current;
+    return {
+      needAction: needAction.length,
+      alerts: alerts.length,
+      label: needAction.length ? `${needAction.length} cambio da registrare` : "Nessun cambio richiesto",
+      sub: cur ? `Legit: ${apexAssetLabel("legit", cur.asset)}` : "Segnale non caricato",
+      radar: alerts.length ? `${alerts.length} radar da guardare` : "Radar allineati",
+    };
+  }
+  function todayApexMini() {
+    const keys = apexStrategyKeys();
+    const rows = keys.map(k => {
+      const st = apexStrategy(k);
+      if (!st?.current) return "";
+      const r = st.radar || {};
+      const cls = st.current.changed ? "warn" : r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+      const radar = r.level && r.level !== "ok" ? r.level : "ok";
+      return `<button class="today-apex-row ${cls}" data-action="open-apex" data-strategy="${esc(k)}">
+        <span>${esc(st.name)}</span>
+        <strong>${esc(apexAssetLabel(k, st.current.asset))}</strong>
+        <em>radar ${esc(radar)}</em>
+      </button>`;
+    }).join("");
+    return `<div class="today-apex-list">${rows || `<div class="empty">APEX non ancora caricato.</div>`}</div>`;
+  }
+  function todayRunOverview() {
+    const d = state.octaData || {};
+    const wf = state.freshnessFile || {};
+    const apex = state.apexData || {};
+    const f = freshness();
+    return `<div class="row-list today-run-list">
+      <div class="kv"><span>OCTA</span><strong class="${f.cls === "good" ? "pos" : "neg"}">${esc(f.label)}</strong></div>
+      <div class="kv"><span>Data segnale</span><strong>${dateIT(d.signal_date)}</strong></div>
+      <div class="kv"><span>Errore motore</span><strong class="${d.engine_error ? "neg" : "pos"}">${d.engine_error ? "si" : "no"}</strong></div>
+      <div class="kv"><span>APEX export</span><strong>${apex.generated_at ? timeIT(apex.generated_at) : "n/d"}</strong></div>
+      <div class="kv"><span>OCTA cloud</span><strong>${esc(state.sync.octa)}</strong></div>
+      <div class="kv"><span>Portafogli cloud</span><strong>${esc(state.sync.portfolios)}</strong></div>
+      <div class="kv"><span>Freshness</span><strong>${wf.generated_at ? timeIT(wf.generated_at) : "runtime"}</strong></div>
+    </div>`;
+  }
+  function todayMarketRows() {
+    return MARKET_WATCH.map(w => {
+      const q = state.quotes[w.symbol.toUpperCase()] || state.quotes[w.symbol];
+      const px = quoteUnitEur(w.symbol);
+      const prev = q?.prevClose != null ? toEur(q.prevClose, q.currency, fxRate()) : null;
+      const chg = px != null && prev ? (px / prev - 1) * 100 : null;
+      return { ...w, px, chg };
+    });
+  }
+  function todayMarketHeadline() {
+    const vix = Number(state.vixData?.vix);
+    if (Number.isFinite(vix)) return `VIX ${vix.toFixed(1)} · ${todayVixLabel()}`;
+    const rows = todayMarketRows();
+    const live = rows.filter(r => r.px != null);
+    if (!live.length) return "Dati live in caricamento";
+    const worst = live.slice().sort((a,b) => Number(a.chg || 0) - Number(b.chg || 0))[0];
+    const best = live.slice().sort((a,b) => Number(b.chg || 0) - Number(a.chg || 0))[0];
+    if (best?.chg != null && Math.abs(best.chg) >= Math.abs(worst?.chg || 0)) return `${best.label} ${pct(best.chg)}`;
+    if (worst?.chg != null) return `${worst.label} ${pct(worst.chg)}`;
+    return "Prezzi aggiornati";
+  }
+  function todayMarketShort() {
+    const rows = todayMarketRows().filter(r => r.px != null);
+    const vix = Number(state.vixData?.vix);
+    const vixText = Number.isFinite(vix) ? `VIX ${vix.toFixed(1)}` : null;
+    if (!rows.length) return vixText || "Premi Aggiorna dati";
+    return [vixText, ...rows.map(r => `${r.label} ${r.chg == null ? eurMaybe(r.px, 0) : pct(r.chg)}`)].filter(Boolean).join(" · ");
+  }
+  function todayVixTone() {
+    const v = Number(state.vixData?.vix);
+    if (!Number.isFinite(v)) return "info";
+    if (v >= 28) return "bad";
+    if (v >= 18) return "warn";
+    return "good";
+  }
+  function todayVixLabel() {
+    const v = Number(state.vixData?.vix);
+    if (!Number.isFinite(v)) return "VIX n/d";
+    if (v >= 40) return "panico";
+    if (v >= 28) return "risk-off";
+    if (v >= 18) return "attenzione";
+    return "mercato calmo";
+  }
+  function todayMarketPanel() {
+    const rows = todayMarketRows();
+    const v = Number(state.vixData?.vix);
+    const vixTile = `<div class="today-market-tile ${todayVixTone()}">
+      <span>VIX</span>
+      <strong>${Number.isFinite(v) ? v.toFixed(1) : "n/d"}</strong>
+      <em>${esc(todayVixLabel())}${state.vixData?.ts ? ` · ${timeIT(state.vixData.ts)}` : ""}</em>
+    </div>`;
+    return `<div class="today-market-grid">${vixTile}${rows.map(r => {
+      const cls = r.chg == null ? "info" : r.chg >= 0 ? "good" : "bad";
+      return `<div class="today-market-tile ${cls}">
+        <span>${esc(r.label)}</span>
+        <strong>${r.px == null ? "n/d" : eurMaybe(r.px, r.symbol === "BTC-USD" ? 0 : 2)}</strong>
+        <em>${r.chg == null ? "variazione n/d" : pct(r.chg)}</em>
+      </div>`;
+    }).join("")}</div>`;
   }
   function automationPanel() {
     const wf = state.freshnessFile || {};
@@ -1339,19 +1516,19 @@
   function tickerChart(ticker, item, context = "octa-detail") {
     const pts = tickerHistoryPoints(ticker, item);
     if (pts.length < 2) return `<div class="notice">Grafico non disponibile per ${esc(ticker)}. Aggiorna prezzi e riapri il dettaglio.</div>`;
-    return lineChart(pts, `Grafico ${tickerKey(ticker)}`, v => eur(v, 2), `ticker-${tickerKey(ticker)}`, { context });
+    return lineChart(pts, `Grafico ${tickerKey(ticker)}`, v => eur(v, 2), `ticker-${tickerKey(ticker)}`, { context, height: 190, axisFmt: v => eur(v, Math.abs(v) >= 100 ? 0 : 2) });
   }
-  async function ensureTickerData(ticker) {
+  async function ensureTickerData(ticker, range = "5y") {
     const t = tickerKey(ticker);
-    if (!t || (state.priceHistory[t]?.length && state.priceHistoryRange?.[t] === "max" && state.quotes[t])) return;
+    if (!t || (state.priceHistory[t]?.length && state.quotes[t])) return;
     try {
-      const r = await fetch(API.quotes, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ symbols: [t], enrich: [t], priceHistory: [t], historyRange: "max", fxHistory: true }) });
+      const r = await fetch(API.quotes, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ symbols: [t], enrich: [t], priceHistory: [t], historyRange: range, fxHistory: true }) });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const j = await r.json();
       state.quotes = { ...state.quotes, ...(j.quotes || {}) };
       state.info = { ...(state.info || {}), ...(j.info || {}) };
       state.priceHistory = { ...state.priceHistory, ...(j.priceHistory || {}) };
-      if (j.priceHistory?.[t]) state.priceHistoryRange[t] = "max";
+      if (j.priceHistory?.[t]) state.priceHistoryRange[t] = range;
       state.fx = { ...(state.fx || {}), ...(j.fx || {}) };
       state.fxHistory = { ...(state.fxHistory || {}), ...(j.fxHistory || {}) };
     } catch {
@@ -1364,10 +1541,12 @@
     state.detailTicker = t;
     $("#info-eyebrow").textContent = "Dettaglio OCTA";
     $("#info-title").textContent = `${t} - score e dati`;
-    $("#info-body").innerHTML = `<div class="notice">Carico grafico, fondi e score disponibili per ${esc(t)}...</div>`;
+    $("#info-body").innerHTML = `<div class="notice">Apro la scheda ${esc(t)}...</div>`;
     if (!$("#info-dialog").open) $("#info-dialog").showModal();
-    await ensureTickerData(t);
     renderOctaDetailBody(t);
+    ensureTickerData(t).then(() => {
+      if ($("#info-dialog").open && state.detailTicker === t) renderOctaDetailBody(t);
+    }).catch(() => {});
   }
   function renderOctaDetailBody(ticker) {
     const t = tickerKey(ticker);
@@ -1527,11 +1706,11 @@
     const grid = [0, .5, 1].map(f => {
       const val = min + (max - min) * (1 - f);
       const yy = padT + f * (H - padT - padB);
-      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line><text x="${padL - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end">${esc(axisFmt(val))}</text>`;
+      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line>${opts.cleanAxes ? "" : `<text x="${padL - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end">${esc(axisFmt(val))}</text>`}`;
     }).join("");
     const dates = [0, .5, 1].map(f => {
       const i = Math.min(clean.length - 1, Math.round((clean.length - 1) * f));
-      return `<text x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="${f === 0 ? "start" : f === 1 ? "end" : "middle"}">${dateIT(clean[i].d)}</text>`;
+      return opts.cleanAxes ? "" : `<text x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="${f === 0 ? "start" : f === 1 ? "end" : "middle"}">${dateIT(clean[i].d)}</text>`;
     }).join("");
     const context = opts.context ? ` data-context="${esc(opts.context)}"` : "";
     const rangeTitles = { "1D": "1 giorno", "1W": "1 settimana", "1M": "1 mese", "3M": "3 mesi", "1Y": "1 anno", "5Y": "5 anni", MAX: "Massimo disponibile" };
@@ -1542,7 +1721,7 @@
     const compareSvg = comparePath ? `<path d="${comparePath}" fill="none" stroke="${esc(opts.compareColor || "#83a8ff")}" stroke-width="2.2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"></path>` : "";
     const legend = comparePath ? `<div class="chart-legend"><span><i style="background:${col}"></i>${esc(opts.primaryLabel || "Portafoglio")}</span><span><i class="dash" style="background:${esc(opts.compareColor || "#83a8ff")}"></i>${esc(opts.compareLabel || "Confronto")}</span></div>` : "";
     chartStore.set(chartId, { points: clean, fmt });
-    return `<div class="chart-card" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${opts.changeLabel ? esc(opts.changeLabel) : pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${fmt(first)}</span><strong>${fmt(last)}</strong></div></div>`;
+    return `<div class="chart-card ${opts.cleanAxes ? "clean-chart" : ""}" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${opts.changeLabel ? esc(opts.changeLabel) : pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${dateIT(clean[0].d)} · ${fmt(first)}</span><strong>${dateIT(clean[clean.length - 1].d)} · ${fmt(last)}</strong></div></div>`;
   }
   function octaSeries() {
     const entries = Object.entries(state.octaPortfolio || {}).map(([ticker, pos]) => {
@@ -1601,10 +1780,10 @@
     const stats = octaStats();
     if (pts.length < 2) return `<div class="notice">Andamento OCTA pronto: servono quotazioni storiche, le carico appena disponibili.</div>`;
     return `<div class="octa-chart-block">
-      ${lineChart(pts, "Andamento OCTA", v => eur(v, 0), "octa", { changePct: stats.pnlPct, changeLabel: pct(stats.pnlPct) })}
+      ${lineChart(pts, "Valore portafoglio OCTA", v => eur(v, 0), "octa", { height: 198, changePct: stats.pnlPct, changeLabel: pct(stats.pnlPct), axisFmt: compactEur, cleanAxes: true })}
       <div class="octa-metrics">
         <div class="metric compact"><span>Valore stimato</span><strong>${eurMaybe(stats.value, 0)}</strong></div>
-        <div class="metric compact"><span>Costo iniziale</span><strong>${eurMaybe(stats.cost, 0)}</strong></div>
+        <div class="metric compact"><span>Investito</span><strong>${eurMaybe(stats.cost, 0)}</strong></div>
         <div class="metric compact"><span>P/L stimato</span><strong class="${stats.pnl >= 0 ? "pos" : "neg"}">${eurMaybe(stats.pnl, 0)} · ${pct(stats.pnlPct)}</strong></div>
         <div class="metric compact"><span>Posizioni</span><strong>${Object.keys(state.octaPortfolio || {}).length}</strong></div>
       </div>
@@ -1681,12 +1860,33 @@
     const d = state.octaData || {};
     const signals = d.signals || [];
     const cands = d.candidates || [];
+    const pending = signals.filter(s => !isSignalDone(s));
+    const buys = pending.filter(s => s.action === "BUY").length;
+    const sells = pending.filter(s => s.action === "SELL").length;
+    const stats = octaStats();
+    const f = freshness();
     return `
-      <section class="panel full"><div class="panel-head"><div><h2>Segnali OCTA</h2><p>Target 8 posizioni, azioni manuali sul broker, conferma qui dopo esecuzione.</p></div><div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button" data-action="ai-octa">${icon("brain")}AI OCTA</button><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
-      <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Stato letto da cloud o memoria locale, valori sempre in EUR.</p></div><button class="button ghost" data-action="ai-octa">${icon("brain")}Controllo AI</button></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
-      <section class="panel full">${liveSignalProfilePanel(true)}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Radar 40</h2><p>Secondario: aprilo quando vuoi esplorare tutti i candidati.</p></div><button class="button ghost" data-action="toggle-radar">${state.radarOpen ? "Chiudi" : "Apri"} Radar</button></div>${state.radarOpen ? candidateTable(cands) : radarSummary(cands)}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Storico OCTA</h2><p>Operazioni registrate da questa vNext o lette dal cloud.</p></div></div>${octaHistoryTable()}</section>`;
+      <section class="panel full octa-hero">
+        <div class="panel-head">
+          <div><h2>OCTA</h2><p>Prima segnali e portafoglio reale. Radar, storico e motore restano sotto, apribili quando servono.</p></div>
+          <div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Aggiorna dati</button><button class="button" data-action="ai-octa">${icon("brain")}AI OCTA</button></div>
+        </div>
+        <div class="metric-row octa-overview">
+          <div class="metric compact"><span>Segnale</span><strong>${dateIT(d.signal_date)}</strong></div>
+          <div class="metric compact"><span>Da fare</span><strong>${pending.length}</strong><small>${buys} buy · ${sells} sell</small></div>
+          <div class="metric compact"><span>Portafoglio</span><strong>${eurMaybe(stats.value, 0)}</strong></div>
+          <div class="metric compact"><span>Risultato</span><strong class="${stats.pnl >= 0 ? "pos" : "neg"}">${pct(stats.pnlPct)}</strong><small>${eurMaybe(stats.pnl, 0)}</small></div>
+        </div>
+        <div class="octa-status-line">
+          <span class="badge ${f.cls}">${esc(f.label)}</span>
+          <span class="muted">${esc(d.engine_error ? "engine_error: si" : "engine_error: no")} · ${esc(d.regime?.status || "regime n/d")} · ${esc(cands.length)} candidati radar</span>
+        </div>
+      </section>
+      <section class="panel full"><div class="panel-head"><div><h2>Segnali da gestire</h2><p>Conferma solo quello che hai davvero eseguito sul broker.</p></div><button class="button ghost" data-action="octa-legend">${icon("chart")}Legenda</button></div><div class="signal-list">${signals.map(signalCard).join("") || `<div class="empty">Nessun segnale nel file corrente.</div>`}</div></section>
+      <section class="panel full"><div class="panel-head"><div><h2>Portafoglio OCTA</h2><p>Valore, P/L e 8 posizioni registrate, sempre in euro.</p></div><button class="button ghost" data-action="ai-octa">${icon("brain")}Controllo AI</button></div>${octaPerformanceChart()}<div style="height:12px"></div>${octaPortfolioTable()}</section>
+      <section class="panel full octa-secondary"><details><summary>Radar 40 e classifica completa</summary><div class="octa-details-body">${radarSummary(cands)}<div style="height:12px"></div>${candidateTable(cands)}</div></details></section>
+      <section class="panel full octa-secondary"><details><summary>Come decide OCTA</summary><div class="octa-details-body">${liveSignalProfilePanel(true)}</div></details></section>
+      <section class="panel full octa-secondary"><details><summary>Storico operazioni</summary><div class="octa-details-body">${octaHistoryTable()}<div style="height:12px"></div><button class="button ghost" data-action="reset-octa-local">Reset locale</button></div></details></section>`;
   }
   function octaPortfolioTable() {
     const ranks = octaRankMap();
@@ -1803,23 +2003,95 @@
     </div></section>`;
   }
 
+  function portfolioArchiveCard(p) {
+    const open = state.openPf?.id === p.id;
+    return `<article class="pf-card ${open ? "open" : ""}">
+      <div>
+        <div class="pf-card-title"><h3>${esc(p.name)}</h3><span class="badge">${icon("lock")}PIN</span></div>
+        <p>Creato ${timeIT(p.created)}${p.updated ? ` · aggiornato ${timeIT(p.updated)}` : ""}</p>
+      </div>
+      <button class="button ${open ? "ghost" : "primary"}" data-action="open-pf" data-id="${esc(p.id)}">${open ? "Aperto" : "Apri"}</button>
+    </article>`;
+  }
   function viewPortfolios() {
-    const cards = (state.tracker.portfolios || []).map(p => `<article class="pf-card ${state.openPf?.id === p.id ? "open" : ""}"><div class="panel-head"><div><h3>${esc(p.name)}</h3><p>Creato ${timeIT(p.created)} · cifrato lato browser</p></div><span class="badge">${icon("lock")}PIN</span></div><button class="button primary" data-action="open-pf" data-id="${esc(p.id)}">Apri</button></article>`).join("");
-    const open = state.openPf ? openPortfolioView() : `<div class="empty">Apri un portafoglio o creane uno nuovo.</div>`;
+    const list = state.tracker.portfolios || [];
+    const cards = list.map(portfolioArchiveCard).join("");
+    if (!state.openPf) {
+      return `<section class="panel full pf-home">
+        <div class="pf-home-hero">
+          <div>
+            <p class="eyebrow">Area riservata</p>
+            <h2>Portafogli</h2>
+            <p>Archivi cifrati con PIN locale, movimenti, prezzi, grafici, benchmark, import Fineco e analisi AI.</p>
+          </div>
+          <div class="pf-home-actions">
+            <button class="button primary" data-action="new-pf">${icon("plus")}Nuovo portafoglio</button>
+            <button class="button ghost" data-action="import-tracker-backup">${icon("upload")}Importa backup</button>
+          </div>
+        </div>
+        <div class="pf-home-stats">
+          <div><span>Archivi</span><strong>${list.length}</strong></div>
+          <div><span>Sicurezza</span><strong>PIN + cifratura</strong></div>
+          <div><span>Cloud</span><strong>${localStorage.getItem("tracker_sync_token") ? "sync attivo" : "locale"}</strong></div>
+        </div>
+        <div class="pf-card-grid">${cards || `<div class="empty">Nessun portafoglio creato. Crea il primo archivio o importa un backup.</div>`}</div>
+      </section>`;
+    }
     return `
-      <section class="panel sidebar"><div class="panel-head"><div><h2>Archivi</h2><p>Portafogli cifrati nel browser prima del sync.</p></div><button class="button primary" data-action="new-pf">${icon("plus")}Nuovo</button></div><div class="row-list">${cards || `<div class="empty">Nessun portafoglio creato.</div>`}</div></section>
-      <section class="panel wide"><div class="panel-head"><div><h2>${state.openPf ? esc(state.openPf.name) : "Dettaglio"}</h2><p>Movimenti, valori, grafici e benchmark in EUR.</p></div>${state.openPf ? `<div class="toolbar"><button class="button primary" data-action="ai-pf">${icon("brain")}AI portafoglio</button><button class="button" data-action="refresh-pf">${icon("refresh")}Prezzi</button><button class="button" data-action="add-tx">${icon("plus")}Movimento</button><button class="button ghost" data-action="import-pf">${icon("upload")}Importa</button></div>` : ""}</div>${open}</section>`;
+      <section class="panel sidebar pf-archive-panel">
+        <div class="panel-head"><div><h2>Archivi</h2><p>Scegli un portafoglio o creane uno nuovo.</p></div><button class="button primary" data-action="new-pf">${icon("plus")}Nuovo</button></div>
+        <div class="row-list">${cards}</div>
+      </section>
+      <section class="panel wide pf-bank-panel">${openPortfolioView()}</section>`;
   }
   function openPortfolioView() {
     const st = portfolioStats(state.openPf);
-    const rows = st.holdings.map(h => `<tr><td><button class="table-link" data-action="holding-detail" data-symbol="${esc(h.symbol)}">${esc(h.name || h.ticker || h.symbol)}</button><div class="muted">${esc(instrumentSubline(h))}</div></td><td class="right">${h.qty.toFixed(4)}</td><td class="right">${eur(h.value)}</td><td class="right"><span class="badge ${h.pl >= 0 ? "good" : "bad"}">${pct(h.plPct)}</span>${h.dayPct != null ? `<div class="muted">oggi ${pct(h.dayPct)}</div>` : ""}</td></tr>`).join("");
+    const rows = st.holdings.map(h => `<tr>
+      <td><button class="table-link" data-action="holding-detail" data-symbol="${esc(h.symbol)}">${esc(h.name || h.ticker || h.symbol)}</button><div class="muted">${esc(instrumentSubline(h))} · qta ${h.qty.toFixed(4)}</div></td>
+      <td class="right hide-sm">${pctWeight(h.weight)}</td>
+      <td class="right">${eur(h.value)}</td>
+      <td class="right"><span class="badge ${h.pl >= 0 ? "good" : "bad"}">${pct(h.plPct)}</span>${h.dayPct != null ? `<div class="muted">oggi ${pct(h.dayPct)}</div>` : ""}</td>
+    </tr>`).join("");
     const bestWorst = st.holdings.length >= 2 ? (() => {
       const sorted = st.holdings.slice().sort((a,b) => b.plPct - a.plPct);
       const best = sorted[0], worst = sorted[sorted.length - 1];
       return `<div class="grid-2 compact-grid"><div class="notice good"><strong>Migliore</strong><br>${esc(best.name || best.symbol)} · ${pct(best.plPct)}</div><div class="notice bad"><strong>Peggiore</strong><br>${esc(worst.name || worst.symbol)} · ${pct(worst.plPct)}</div></div>`;
     })() : "";
-    const aiCallout = `<section class="detail-section ai-callout"><div><h3>${icon("brain")}AI portafoglio</h3><p>Analizza composizione, rischio e possibili riequilibri usando i dati aperti qui.</p></div><button class="button primary" data-action="ai-pf">Analizza</button></section>`;
-    return `<div class="metric-row"><div class="metric"><span>Valore</span><strong>${eur(st.value)}</strong></div><div class="metric"><span>Investito</span><strong>${eur(st.invested)}</strong></div><div class="metric"><span>Risultato</span><strong>${eur(st.gain)}</strong></div><div class="metric"><span>Rendimento</span><strong>${pct(st.gainPct)}</strong></div></div><div style="height:12px"></div>${aiCallout}<div style="height:12px"></div>${portfolioPerformanceChart(st)}<div style="height:12px"></div>${benchmarkView(st)}<div style="height:12px"></div>${allocationView(st.holdings)}<div style="height:12px"></div>${targetWeightsView(st)}<div style="height:12px"></div>${bestWorst}<div style="height:12px"></div>${rows ? `<table class="table"><thead><tr><th>Strumento</th><th class="right">Qta</th><th class="right">Valore</th><th class="right">Risultato</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Aggiungi il primo movimento.</div>`}<div style="height:12px"></div>${txTable(state.openPf.data.transactions)}<div style="height:12px"></div><div class="toolbar"><button class="button ghost" data-action="rename-pf">${icon("edit")}Rinomina</button><button class="button danger" data-action="delete-pf">${icon("trash")}Elimina</button></div>`;
+    const aiCallout = `<section class="detail-section ai-callout pf-ai-callout"><div><h3>${icon("brain")}Controllo AI</h3><p>Una lettura sintetica su rischio, concentrazione e riequilibri possibili.</p></div><button class="button primary" data-action="ai-pf">Analizza</button></section>`;
+    const secondary = `
+      <section class="pf-secondary">
+        <details><summary>Benchmark e confronto</summary><div class="pf-details-body">${benchmarkView(st) || `<div class="empty">Aggiungi posizioni per confrontare il portafoglio con un indice.</div>`}</div></details>
+        <details><summary>Allocazione e pesi</summary><div class="pf-details-body">${allocationView(st.holdings) || ""}${targetWeightsView(st) || ""}${bestWorst || ""}</div></details>
+        <details><summary>Movimenti registrati</summary><div class="pf-details-body">${txTable(state.openPf.data.transactions) || `<div class="empty">Nessun movimento registrato.</div>`}</div></details>
+        <details><summary>Impostazioni portafoglio</summary><div class="pf-details-body"><div class="toolbar"><button class="button ghost" data-action="rename-pf">${icon("edit")}Rinomina</button><button class="button danger" data-action="delete-pf">${icon("trash")}Elimina</button></div></div></details>
+      </section>`;
+    return `
+      <div class="pf-bank-hero">
+        <div>
+          <p class="eyebrow">Portafoglio aperto</p>
+          <h2>${esc(state.openPf.name)}</h2>
+          <p>${st.holdings.length} posizioni · ${state.openPf.data.transactions.length} movimenti · valori in euro</p>
+        </div>
+        <div class="pf-bank-value">
+          <span>Valore stimato</span>
+          <strong>${eur(st.value)}</strong>
+          <em class="${st.gain >= 0 ? "pos" : "neg"}">${eur(st.gain)} · ${pct(st.gainPct)}</em>
+        </div>
+      </div>
+      <div class="pf-action-bar">
+        <button class="button primary" data-action="add-tx">${icon("plus")}Movimento</button>
+        <button class="button" data-action="refresh-pf">${icon("refresh")}Prezzi</button>
+        <button class="button ghost" data-action="import-pf">${icon("upload")}Importa / aggiorna</button>
+        <button class="button ghost" data-action="ai-pf">${icon("brain")}AI</button>
+      </div>
+      <div class="metric-row pf-metrics"><div class="metric"><span>Investito</span><strong>${eur(st.invested)}</strong></div><div class="metric"><span>Rendimento</span><strong class="${st.gainPct >= 0 ? "pos" : "neg"}">${pct(st.gainPct)}</strong></div><div class="metric"><span>Liquidita</span><strong>${eur(st.cash)}</strong><small>dividendi registrati ${eur(st.dividends)}</small></div><div class="metric"><span>Posizioni</span><strong>${st.holdings.length}</strong></div></div>
+      ${portfolioPerformanceChart(st)}
+      ${aiCallout}
+      <section class="detail-section full-detail pf-positions">
+        <div class="panel-head"><div><h3>Posizioni</h3><p>Apri una riga per dettaglio, grafico, prezzo manuale e operazioni rapide.</p></div></div>
+        ${rows ? `<table class="table pf-table"><thead><tr><th>Strumento</th><th class="right hide-sm">Peso</th><th class="right">Valore</th><th class="right">Risultato</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Aggiungi il primo movimento.</div>`}
+      </section>
+      ${secondary}`;
   }
   function portfolioSeriesFromHistory(st) {
     const raw = state.openPf?.data?.valueHistory || [];
@@ -1838,7 +2110,7 @@
     const pts = portfolioSeriesFromHistory(st);
     if (pts.length < 2) return `<div class="empty">Grafico andamento disponibile dopo aver aggiunto movimenti o snapshot valore.</div>`;
     const compare = benchmarkSeriesForPortfolio(pts);
-    return lineChart(pts, "Andamento portafoglio", v => eur(v, 0), `portfolio-${state.openPf?.id || "open"}`, { comparePoints: compare, primaryLabel: "Portafoglio", compareLabel: benchName(state.openPf?.data?.benchmark) });
+    return lineChart(pts, "Andamento portafoglio", v => eur(v, 0), `portfolio-${state.openPf?.id || "open"}`, { comparePoints: compare, primaryLabel: "Portafoglio", compareLabel: benchName(state.openPf?.data?.benchmark), cleanAxes: true, axisFmt: compactEur, height: 198 });
   }
   function txTable(txs) {
     const info = state.openPf?.data?.instrumentInfo || {};
@@ -1850,10 +2122,11 @@
       const resolved = q?.resolved && tickerKey(q.resolved) !== sym ? q.resolved : "";
       const quoteInfo = state.info[sym] || state.info[resolved] || {};
       const meta = info[sym] || {};
-      const display = meta.name || quoteInfo.name || tx.name || resolved || sym || tx.type;
+      const typeLabel = ({ BUY: "Acquisto", SELL: "Vendita", DIV: "Dividendo", CASH: "Cassa", SNAP: "Fotografia" })[String(tx.type || "").toUpperCase()] || tx.type;
+      const display = meta.name || quoteInfo.name || tx.name || resolved || sym || typeLabel;
       const subBits = [resolved || (!isIsin(sym) ? sym : ""), dateIT(tx.date)].filter(Boolean);
       const sub = subBits.join(" · ");
-      return `<tr><td><strong>${esc(display)}</strong><div class="muted">${esc(sub)}</div></td><td>${esc(tx.type)}</td><td class="right">${qty.toFixed(4)}</td><td class="right">${px ? eur(px, 2) : "n/d"}</td><td class="right"><button class="mini-action" data-action="delete-tx" data-tx="${esc(tx.id)}" title="Elimina" aria-label="Elimina movimento">${icon("trash")}</button></td></tr>`;
+      return `<tr><td><strong>${esc(display)}</strong><div class="muted">${esc(sub)}</div></td><td>${esc(typeLabel)}</td><td class="right">${qty.toFixed(4)}</td><td class="right">${px ? eur(px, 2) : "n/d"}</td><td class="right"><button class="mini-action" data-action="delete-tx" data-tx="${esc(tx.id)}" title="Elimina" aria-label="Elimina movimento">${icon("trash")}</button></td></tr>`;
     }).join("");
     return rows ? `<div class="panel-head"><div><h3>Movimenti</h3><p>Ultime operazioni registrate.</p></div></div><table class="table"><thead><tr><th>Strumento</th><th>Tipo</th><th class="right">Qta</th><th class="right">Prezzo €</th><th class="right"></th></tr></thead><tbody>${rows}</tbody></table>` : "";
   }
@@ -1899,10 +2172,12 @@
     state.detailHolding = sym;
     $("#info-eyebrow").textContent = "Dettaglio posizione";
     $("#info-title").textContent = sym;
-    $("#info-body").innerHTML = `<div class="notice">Carico dettaglio, grafico e quotazioni per ${esc(sym)}...</div>`;
+    $("#info-body").innerHTML = `<div class="notice">Apro la scheda posizione. Se manca lo storico, lo aggiorno in background.</div>`;
     if (!$("#info-dialog").open) $("#info-dialog").showModal();
-    await ensureTickerData(sym);
     renderHoldingDetailBody(sym);
+    ensureTickerData(sym).then(() => {
+      if (state.detailHolding === sym && $("#info-dialog").open) renderHoldingDetailBody(sym);
+    }).catch(() => {});
   }
   function renderHoldingDetailBody(symbol) {
     if (!state.openPf) return;
@@ -1973,7 +2248,9 @@
     state.pendingImportRows = [];
     $("#import-file").value = "";
     $("#import-text").value = "";
-    $("#import-status").textContent = "Puoi caricare Excel/PDF oppure incollare righe: codice | quantita | prezzo EUR | tipo | settore | nome | prezzo manuale EUR.";
+    const mode = $("#import-mode");
+    if (mode) mode.value = "snapshot";
+    $("#import-status").textContent = "Per aggiornare tutto in blocco incolla una riga per strumento: codice | quantita | prezzo carico EUR | tipo | settore | nome | prezzo live manuale.";
     $("#import-dialog").showModal();
   }
   async function handleImportFile() {
@@ -2000,14 +2277,32 @@
     const parsed = parsePortfolioImport($("#import-text").value);
     if (parsed.error) { $("#import-status").textContent = parsed.error; return; }
     if (!parsed.txs.length) { $("#import-status").textContent = "Nessuna riga da importare."; return; }
-    state.openPf.data.transactions.push(...parsed.txs);
+    const mode = $("#import-mode")?.value || "snapshot";
+    if (mode === "snapshot") {
+      recordOpenPortfolioSnapshot();
+      const current = portfolioStats(state.openPf).holdings.map(h => h.symbol);
+      const imported = new Set(parsed.txs.map(tx => tickerKey(tx.symbol)));
+      const stamp = Date.now().toString(36);
+      const snap = parsed.txs.map((tx, i) => ({
+        ...tx,
+        id: `tx_snap_${stamp}_${i}`,
+        type: "SNAP",
+        date: todayISO(),
+      }));
+      current.filter(sym => !imported.has(sym)).forEach((sym, i) => {
+        snap.push({ id: `tx_snap_zero_${stamp}_${i}`, type: "SNAP", symbol: sym, name: state.openPf.data.instrumentInfo?.[sym]?.name || sym, qty: 0, price: 0, date: todayISO() });
+      });
+      state.openPf.data.transactions.push(...snap);
+    } else {
+      state.openPf.data.transactions.push(...parsed.txs);
+    }
     Object.assign(state.openPf.data.instrumentInfo, parsed.info);
     Object.assign(state.openPf.data.manualPrices, parsed.manual);
     await saveOpenPortfolio();
     $("#import-dialog").close();
     await refreshQuotes();
     render();
-    toast(`${parsed.txs.length} strumenti importati.`);
+    toast(mode === "snapshot" ? `${parsed.txs.length} strumenti aggiornati in blocco.` : `${parsed.txs.length} movimenti importati.`);
   }
   function apexStrategyKeys() {
     const keys = ["legit", "dex", "degen"];
@@ -2114,14 +2409,15 @@
       <div class="rank-row"><span>${i + 1}. ${esc(apexAssetLabel(key, x.asset))}</span><strong class="${x.v >= 0 ? "pos" : "neg"}">${pct(x.v, 1)}</strong></div>`).join("");
     return `<section class="detail-section apex-radar-card ${compact ? "compact" : ""}">
       <div class="radar-title">
-        <span class="badge ${cls}">${esc(r.level === "ok" ? "radar ok" : r.level === "watch" ? "watch" : "alert")}</span>
+        <span class="badge ${cls}">${esc(apexRadarLabel(r))}</span>
         <strong>${esc(r.title || "Radar")}</strong>
       </div>
       <div class="radar-signal-line">
         <div><span>Segnale ufficiale</span><strong>${esc(apexAssetLabel(key, r.official_asset))}</strong></div>
         <div><span>Se leggessi oggi</span><strong>${esc(apexAssetLabel(key, r.radar_asset))}</strong></div>
-        <div><span>Vantaggio</span><strong class="${Number(r.edge_pp || 0) >= 0 ? "pos" : "neg"}">${pct(Number(r.edge_pp || 0), 1)}</strong></div>
+        <div><span>Divergenza radar</span><strong class="${Number(r.edge_pp || 0) >= 0 ? "pos" : "neg"}">${esc(apexRadarEdgeLabel(r))}</strong></div>
       </div>
+      ${apexRadarPressureBar(key, r)}
       <p class="detail-source">${esc(r.body || "Radar informativo, non e' un ordine operativo.")} · As of ${dateIT(r.as_of)}</p>
       ${compact ? "" : `<div class="apex-radar-grid"><div>${ranking}</div><div>${filters}</div></div>`}
     </section>`;
@@ -2137,17 +2433,22 @@
     return `<article class="apex-card ${cls}" data-action="open-apex" data-strategy="${esc(key)}">
       <div class="apex-card-top">
         <div class="apex-token small">${esc(apexAssetIcon(cur.asset))}</div>
-        <span class="badge ${alertCls}">${esc(r.level === "ok" ? "radar ok" : r.level || "radar")}</span>
+        <span class="badge ${alertCls}">${esc(apexRadarLabel(r))}</span>
       </div>
       <p class="eyebrow">${esc(st.name)}</p>
       <h2>${esc(apexAssetLabel(key, cur.asset))}</h2>
       <p>${esc(st.label)}</p>
+      <div class="apex-card-signal">
+        <div><span>Asset ora</span><strong>${esc(apexAssetLabel(key, cur.asset))}</strong></div>
+        <div><span>Azione</span><strong>${cur.changed ? "cambio da valutare" : "confermato"}</strong></div>
+        <div><span>Radar</span><strong>${esc(apexRadarEdgeLabel(r))}</strong></div>
+      </div>
       <div class="apex-card-metrics">
         <div><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(bt.cagr || 0), 1)}</strong></div>
         <div><span>Max DD</span><strong class="neg">${pct(Number(bt.max_drawdown || 0), 1)}</strong></div>
         <div><span>Swap/anno</span><strong>${esc(bt.switches_per_year ?? "n/d")}</strong></div>
       </div>
-      <div class="apex-card-foot"><span>Segnale ${dateIT(cur.date)}</span><strong>Apri</strong></div>
+      <div class="apex-card-foot"><span>Segnale ${dateIT(cur.date)}</span><strong>Apri dettaglio</strong></div>
     </article>`;
   }
   function apexAllocationPills(key) {
@@ -2173,35 +2474,103 @@
     }).join("");
     return rows ? `<table class="table"><thead><tr><th>Giorno</th><th>Radar</th><th>Ufficiale</th><th>Oggi vincerebbe</th><th class="right">Vantaggio</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Storico radar non ancora disponibile.</div>`;
   }
+  function apexRadarLabel(r = {}) {
+    if (r.level === "alert") return "alert";
+    if (r.level === "watch") return "in osservazione";
+    return "allineato";
+  }
+  function apexRadarEdgeLabel(r = {}) {
+    const n = Number(r.edge_pp || 0);
+    if (!Number.isFinite(n) || Math.abs(n) < 0.05) return "nessuna divergenza";
+    return `${n >= 0 ? "+" : ""}${n.toFixed(1)} pt`;
+  }
+  function apexRadarPressure(r = {}) {
+    const n = Math.abs(Number(r.edge_pp || 0));
+    if (!Number.isFinite(n) || n < 0.05) return 0;
+    return Math.max(6, Math.min(100, n / 8 * 100));
+  }
+  function apexRadarPressureBar(key, r = {}) {
+    const pressure = apexRadarPressure(r);
+    const official = apexAssetLabel(key, r.official_asset);
+    const radar = apexAssetLabel(key, r.radar_asset);
+    const label = pressure ? `${apexRadarEdgeLabel(r)} verso ${radar}` : "segnale e radar allineati";
+    return `<div class="apex-pressure">
+      <div class="apex-pressure-head"><span>${esc(official)}</span><strong>${esc(label)}</strong><span>${esc(radar)}</span></div>
+      <div class="apex-pressure-track"><i style="width:${pressure}%"></i></div>
+    </div>`;
+  }
+  function apexRadarTone(r = {}) {
+    return r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+  }
+  function apexRadarMeaning(key, st, r = {}) {
+    if (!r.level) return "Radar non disponibile.";
+    const official = apexAssetLabel(key, r.official_asset);
+    const radar = apexAssetLabel(key, r.radar_asset);
+    if (r.level === "ok") return `Il radar legge ancora ${official}: nessuna divergenza utile oggi.`;
+    if (r.level === "watch") return `Il radar vede ${radar}, mentre il segnale ufficiale resta ${official}: tienilo d'occhio, ma non cambia posizione da solo.`;
+    return `Il radar spinge verso ${radar}, diverso dal segnale ufficiale ${official}: alert da valutare prima del prossimo run.`;
+  }
+  function apexRadarStatusCard(key) {
+    const st = apexStrategy(key);
+    const r = st?.radar || {};
+    if (!st) return "";
+    const cur = st.current || {};
+    const tone = apexRadarTone(r);
+    return `<article class="apex-radar-status ${tone}" data-action="open-apex" data-strategy="${esc(key)}">
+      <div class="apex-radar-status-head">
+        <span>${esc(st.name)}</span>
+        <b class="badge ${tone}">${esc(apexRadarLabel(r))}</b>
+      </div>
+      <strong>${esc(apexAssetLabel(key, cur.asset))}</strong>
+      <p>${esc(apexRadarMeaning(key, st, r))}</p>
+      ${apexRadarPressureBar(key, r)}
+      <div class="apex-radar-status-foot">
+        <span>Radar ${dateIT(r.as_of || cur.date)}</span>
+        <span>${esc(apexRadarEdgeLabel(r))}</span>
+      </div>
+    </article>`;
+  }
+  function apexUpdateExplainer() {
+    const apex = state.apexData || {};
+    return `<div class="apex-update-box">
+      <div><span>Ultimo export</span><strong>${apex.generated_at ? timeIT(apex.generated_at) : "n/d"}</strong></div>
+      <div><span>Run automatico</span><strong>martedi 15:30 Italia</strong></div>
+      <div><span>Aggiorna dati</span><strong>rilegge il segnale pubblicato</strong></div>
+      <div><span>Run tutto</span><strong>rigenera OCTA + APEX</strong></div>
+    </div>`;
+  }
   function apexHomeView() {
     const apex = state.apexData || {};
     const keys = apexStrategyKeys();
     const alerts = keys.map(k => ({ key: k, st: apexStrategy(k), r: apexStrategy(k)?.radar })).filter(x => x.r && x.r.level !== "ok");
     const alertBox = alerts.length
-      ? `<div class="notice warn"><strong>Radar da guardare</strong><br>${alerts.map(x => `${esc(x.st.name)}: ${esc(x.r.title)} (${esc(apexAssetLabel(x.key, x.r.radar_asset))})`).join("<br>")}</div>`
-      : `<div class="notice good"><strong>Nessun alert radar</strong><br>I tre radar sono coerenti con il segnale ufficiale. Ricorda: il radar non cambia la posizione da solo.</div>`;
+      ? `<div class="apex-alert-strip warn"><strong>${alerts.length} radar da guardare</strong><span>${alerts.map(x => `${esc(x.st.name)}: ${esc(apexAssetLabel(x.key, x.r.radar_asset))}`).join(" · ")}</span></div>`
+      : `<div class="apex-alert-strip good"><strong>Radar allineati</strong><span>Nessun motore sta mostrando una divergenza utile dal segnale ufficiale.</span></div>`;
     return `
       <section class="panel full apex-home-hero">
         <div class="panel-head">
-          <div><p class="eyebrow">APEX cockpit</p><h2>Tre strategie, un solo run</h2><p>Legit e' la principale. Dex e Degen sono motori separati con radar informativo dedicato.</p></div>
-          <div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run forzato tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Ricarica</button></div>
+          <div><h2>APEX</h2><p>Tre motori separati. Guarda prima cosa devi detenere, poi il radar per capire se sta maturando un cambio.</p></div>
+          <div class="toolbar"><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Aggiorna dati</button></div>
         </div>
         ${alertBox}
         <div class="apex-card-grid">${keys.map(apexOverviewCard).join("")}</div>
       </section>
-      <section class="panel full"><div class="panel-head"><div><h2>Radar live</h2><p>Controlla se oggi sta maturando un cambio. Non e' un ordine operativo.</p></div><span class="badge info">${esc(apex.generated_at ? "aggiornato " + timeIT(apex.generated_at) : "n/d")}</span></div><div class="apex-radar-list">${keys.map(k => apexRadarPanel(k, true)).join("")}</div></section>
-      ${apexRunbookPanel()}`;
+      <section class="panel full apex-radar-home">
+        <div class="panel-head"><div><h2>Radar alert</h2><p>Dice cosa leggerebbe il motore se lo interrogassi ora. E' informativo: il segnale ufficiale cambia solo al run previsto o al run forzato.</p></div><span class="badge info">${esc(apex.generated_at ? "export " + timeIT(apex.generated_at) : "n/d")}</span></div>
+        ${apexUpdateExplainer()}
+        <div class="apex-radar-status-grid">${keys.map(apexRadarStatusCard).join("")}</div>
+      </section>
+      <section class="panel full apex-secondary"><details><summary>Operativita e workflow</summary><div class="octa-details-body">${apexRunbookPanel()}</div></details></section>`;
   }
   function apexDetailView(key) {
     const st = apexStrategy(key);
     if (!st) return `<section class="panel full"><div class="empty">Strategia APEX non trovata.</div></section>`;
     return `
-      <section class="panel full"><div class="toolbar"><button class="button ghost" data-action="back-apex-home">${icon("minus")}Torna ai 3 APEX</button><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run forzato tutto</button></div></section>
+      <section class="panel full apex-detail-nav"><div class="toolbar"><button class="button ghost" data-action="back-apex-home">${icon("minus")}Torna ai 3 APEX</button><button class="button primary" data-action="run-engines" data-mode="all">${icon("play")}Run tutto</button><button class="button ghost" data-action="refresh-all">${icon("refresh")}Aggiorna dati</button><button class="button ghost" data-action="ai-apex" data-strategy="${esc(key)}">${icon("brain")}AI</button></div></section>
       ${apexCurrentPanel(key, true)}
-      <section class="panel full"><div class="panel-head"><div><h2>Radar ${esc(st.name)}</h2><p>Serve per capire se il segnale sta cambiando prima del prossimo martedi.</p></div></div>${apexRadarPanel(key, false)}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Storico radar</h2><p>Ultimi giorni: utile per vedere se un alert e' episodico o sta insistendo.</p></div></div>${apexRadarHistoryTable(key)}</section>
+      <section class="panel full apex-radar-home"><div class="panel-head"><div><h2>Radar ${esc(st.name)}</h2><p>Confronta il segnale ufficiale con la lettura aggiornata. Se diverge, e' un avviso da guardare, non un ordine automatico.</p></div><span class="badge ${apexRadarTone(st.radar)}">${esc(apexRadarLabel(st.radar))}</span></div>${apexUpdateExplainer()}${apexRadarPanel(key, false)}</section>
       <section class="panel full"><div class="panel-head"><div><h2>Rendimento ${esc(st.name)}</h2><p>Grafico compatto: appoggia il dito per leggere data e valore.</p></div></div>${apexChart(key)}</section>
-      <section class="panel"><div class="panel-head"><div><h2>Metriche</h2><p>Backtest coerente con il motore dell'app.</p></div></div><div class="row-list">
+      <section class="panel full apex-secondary"><details><summary>Metriche complete e tempo sugli asset</summary><div class="grid-2 octa-details-body"><div class="row-list">
         <div class="kv"><span>${esc(apexTaxLabel(st))}</span><strong>${pct(Number(st.backtest?.cagr || 0), 1)}</strong></div>
         <div class="kv"><span>Valore finale da 10k</span><strong>${eur(Number(st.backtest?.final || 0), 0)}</strong></div>
         <div class="kv"><span>Max drawdown</span><strong class="neg">${pct(Number(st.backtest?.max_drawdown || 0), 1)}</strong></div>
@@ -2209,17 +2578,17 @@
         <div class="kv"><span>Ulcer</span><strong>${pct(Number(st.backtest?.ulcer || 0), 1)}</strong></div>
         <div class="kv"><span>Switch totali</span><strong>${esc(st.backtest?.switches ?? "n/d")}</strong></div>
         <div class="kv"><span>Costi/tasse stimate</span><strong>${eur(Number(st.backtest?.taxes_paid || 0), 0)}</strong></div>
-      </div></section>
-      <section class="panel"><div class="panel-head"><div><h2>Tempo sugli asset</h2><p>Quante settimane il motore resta su ogni blocco.</p></div></div><div class="alloc-grid">${apexAllocationPills(key)}</div></section>
-      <section class="panel full"><div class="panel-head"><div><h2>Anno per anno</h2><p>Rendimento e drawdown annuale della simulazione.</p></div></div>${apexAnnualTable(key)}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Cambi segnale</h2><p>Mostro solo le settimane in cui cambia asset. Tutto lo storico si apre a richiesta.</p></div></div>${apexHistoryTable(key)}</section>
-      <section class="panel full"><div class="panel-head"><div><h2>Storico reale</h2><p>Operazioni che registri tu con il pulsante: serve per misurare il risultato reale.</p></div></div>${apexExecutionHistory(key)}</section>`;
+      </div><div class="alloc-grid">${apexAllocationPills(key)}</div></div></details></section>
+      <section class="panel full apex-secondary"><details><summary>Storico radar</summary><div class="octa-details-body">${apexRadarHistoryTable(key)}</div></details></section>
+      <section class="panel full apex-secondary"><details><summary>Anno per anno</summary><div class="octa-details-body">${apexAnnualTable(key)}</div></details></section>
+      <section class="panel full apex-secondary"><details><summary>Cambi segnale</summary><div class="octa-details-body">${apexHistoryTable(key)}</div></details></section>
+      <section class="panel full apex-secondary"><details><summary>Storico reale registrato</summary><div class="octa-details-body">${apexExecutionHistory(key)}</div></details></section>`;
   }
   function apexChart(key = "legit") {
     const st = apexStrategy(key);
     const pts = st?.backtest?.equity || [];
     if (pts.length < 2) return `<div class="empty">Grafico APEX disponibile dopo il primo export del motore.</div>`;
-    return `<div class="notice info apex-chart-note"><strong>Come leggere il grafico</strong><br>${esc(st.chart_explainer || "Simulazione con capitale iniziale 10.000 EUR.")} Valore finale: ${eur(Number(st.backtest?.final || 0), 0)}.</div>${lineChart(pts, `${st.name}: simulazione 10.000 EUR`, v => eur(v, 0), `apex-${key}`, { height: 190, changeLabel: `${pct(Number(st.backtest?.cagr || 0), 1)} CAGR`, axisFmt: v => compactEur(v) })}`;
+    return `<div class="notice info apex-chart-note"><strong>Come leggerlo</strong><br>${esc(st.chart_explainer || "Simulazione con capitale iniziale 10.000 EUR.")} Valore finale: ${eur(Number(st.backtest?.final || 0), 0)}.</div>${lineChart(pts, `${st.name}: simulazione 10.000 EUR`, v => eur(v, 0), `apex-${key}`, { height: 190, changeLabel: `${pct(Number(st.backtest?.cagr || 0), 1)} CAGR`, axisFmt: v => compactEur(v), cleanAxes: true })}`;
   }
   function apexHistoryTable(key = "legit") {
     const st = apexStrategy(key);
@@ -2365,21 +2734,19 @@
     const s = (state.octaData?.signals || []).find(x => x.ticker === ticker) || (state.octaData?.candidates || []).find(x => x.ticker === ticker) || {};
     toast("Analisi AI in corso...");
     try {
-      const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mode: "explain", ticker, context: s }) });
-      const j = await r.json();
-      alert(j.answer || j.error || "Nessuna risposta AI.");
-    } catch { alert("AI non disponibile in locale o chiave mancante."); }
+      const j = await callAI({ mode: "explain", ticker, context: s });
+      showAIAnswer(`AI su ${ticker}`, j.answer || j.error || "Nessuna risposta AI.");
+    } catch (e) { showAIAnswer("AI non disponibile", String(e.message || e)); }
   }
   async function askPortfolioAI() {
     if (!state.openPf) return;
     const st = portfolioStats(state.openPf);
-    const body = { mode: "pf_rebalance", portfolio: { name: state.openPf.name, value: Math.round(st.value), invested: Math.round(st.invested), gain: eur(st.gain), holdings: st.holdings.map(h => ({ symbol: h.symbol, name: h.name, weight: h.weight.toFixed(1), value: Math.round(h.value), pl: pct(h.plPct) })) } };
+    const body = { mode: "pf_rebalance", portfolio: { name: state.openPf.name, value: Math.round(st.value), invested: Math.round(st.invested), gain: eur(st.gain), dividends: Math.round(st.dividends || 0), holdings: st.holdings.map(h => ({ symbol: h.symbol, name: h.name, type: h.type, sector: h.sector, weight: h.weight.toFixed(1), value: Math.round(h.value), pl: pct(h.plPct) })) } };
     toast("Analisi AI in corso...");
     try {
-      const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      const j = await r.json();
-      alert(j.answer || j.error || "Nessuna risposta AI.");
-    } catch { alert("AI non disponibile in locale o chiave mancante."); }
+      const j = await callAI(body);
+      showAIAnswer(`AI portafoglio ${state.openPf.name}`, j.answer || j.error || "Nessuna risposta AI.");
+    } catch (e) { showAIAnswer("AI non disponibile", String(e.message || e)); }
   }
   async function askOctaAI() {
     const stats = octaStats();
@@ -2431,10 +2798,45 @@
     };
     toast("Analisi AI OCTA in corso...");
     try {
-      const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      const j = await r.json();
-      alert(j.answer || j.error || "Nessuna risposta AI.");
-    } catch { alert("AI non disponibile in locale o chiave mancante."); }
+      const j = await callAI(body);
+      showAIAnswer("AI OCTA", j.answer || j.error || "Nessuna risposta AI.");
+    } catch (e) { showAIAnswer("AI non disponibile", String(e.message || e)); }
+  }
+  async function askApexAI(key = "legit") {
+    const st = apexStrategy(key);
+    if (!st) return;
+    const cur = st.current || {};
+    const body = {
+      mode: "pf_ask",
+      question: `Analizza la strategia ${st.name}: segnale attuale ${apexAssetLabel(key, cur.asset)}, radar ${apexRadarLabel(st.radar)}, metriche e rischi. Dimmi cosa devo capire prima di operare.`,
+      portfolio: {
+        name: st.name,
+        value: Math.round(Number(st.backtest?.final || 0)),
+        invested: 10000,
+        gain: `${pct(Number(st.backtest?.cagr || 0), 1)} CAGR`,
+        holdings: [{ symbol: cur.asset || "n/d", name: apexAssetLabel(key, cur.asset), type: "Strategia APEX", sector: st.execution || "n/d", weight: "100", value: Math.round(Number(st.backtest?.final || 0)), pl: `${pct(Number(st.backtest?.max_drawdown || 0), 1)} MaxDD` }],
+      },
+    };
+    toast("Analisi AI APEX in corso...");
+    try {
+      const j = await callAI(body);
+      showAIAnswer(`AI ${st.name}`, j.answer || j.error || "Nessuna risposta AI.");
+    } catch (e) { showAIAnswer("AI non disponibile", String(e.message || e)); }
+  }
+  async function callAI(body) {
+    const r = await fetch(API.ai, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "AI non disponibile");
+    return j;
+  }
+  function formatAIAnswer(text) {
+    return esc(text || "").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
+  }
+  function showAIAnswer(title, text) {
+    $("#info-eyebrow").textContent = "Assistente AI";
+    $("#info-title").textContent = title;
+    $("#info-body").innerHTML = `<section class="detail-section ai-answer">${formatAIAnswer(text)}</section>`;
+    if (!$("#info-dialog").open) $("#info-dialog").showModal();
   }
 
   document.addEventListener("input", e => {

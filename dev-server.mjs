@@ -19,6 +19,20 @@ const QUOTE_TYPE = {
 
 await fs.mkdir(localDir, { recursive: true });
 
+async function loadEnvFile(file) {
+  try {
+    const raw = await fs.readFile(file, "utf8");
+    for (const line of raw.split(/\r?\n/)) {
+      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/i);
+      if (!m || process.env[m[1]]) continue;
+      process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch {}
+}
+await loadEnvFile(path.join(root, ".env"));
+await loadEnvFile(path.join(root, ".local", ".env"));
+await loadEnvFile(path.join(root, "..", "super-investor-dashboard", ".env"));
+
 function send(res, status, body, type = "application/json") {
   res.writeHead(status, { "Content-Type": type, "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "Content-Type,X-Octa-Token,X-Tracker-Token,X-Octa-Expected-Updated" });
   res.end(body);
@@ -145,7 +159,16 @@ async function routeFunction(req, res, url) {
     if (m?.regularMarketPrice != null) return json(res, 200, { vix: Math.round(m.regularMarketPrice * 10) / 10, ts: new Date().toISOString(), source: "yahoo" });
     return json(res, 500, { error: "vix_unavailable" });
   }
-  if (url.pathname.endsWith("/ai")) return json(res, 503, { error: "AI locale non configurata. In deploy usa GROQ_API_KEY." });
+  if (url.pathname.endsWith("/ai") && req.method === "POST") {
+    try {
+      const { handler } = require(path.join(root, "netlify/functions/ai.js"));
+      const event = { httpMethod: "POST", headers: req.headers, body: await bodyText(req) };
+      const out = await handler(event);
+      return send(res, out.statusCode || 200, out.body || "{}", out.headers?.["Content-Type"] || "application/json");
+    } catch (e) {
+      return json(res, 500, { error: String(e.message || e) });
+    }
+  }
   if (url.pathname.endsWith("/run-engines") && req.method === "POST") {
     return json(res, 501, { ok: false, error: "Run GitHub disponibile solo in deploy con GITHUB_ACTIONS_TOKEN." });
   }
