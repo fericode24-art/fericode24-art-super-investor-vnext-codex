@@ -2386,6 +2386,22 @@
     const w = Number(st?.lookback_weeks || st?.lookback || 0);
     return w > 0 ? `ultime ${w} settimane` : "finestra momentum del motore";
   }
+  function apexSincePreviousSignalMap(key, cur) {
+    const st = apexStrategy(key);
+    const series = (st?.changes || st?.history || []).filter(r => r?.date && r?.prices).sort((a,b) => String(a.date).localeCompare(String(b.date)));
+    const idx = series.findIndex(r => String(r.date).slice(0, 10) === String(cur?.date || "").slice(0, 10));
+    const prev = idx > 0 ? series[idx - 1] : null;
+    const now = idx >= 0 ? series[idx] : cur;
+    const out = {};
+    if (!prev?.prices || !now?.prices) return out;
+    Object.keys(now.prices).forEach(asset => {
+      const a = Number(now.prices[asset]);
+      const b = Number(prev.prices[asset]);
+      if (Number.isFinite(a) && Number.isFinite(b) && b) out[asset] = (a / b - 1) * 100;
+    });
+    out._prevDate = prev.date;
+    return out;
+  }
   function apexDoneBadge(key, st) {
     const done = state.apexExecuted?.[key];
     const cur = st?.current;
@@ -2396,13 +2412,16 @@
     const key = cur?.strategy_key || "legit";
     const st = apexStrategy(key);
     const m = cur?.momentum || {};
+    const since = apexSincePreviousSignalMap(key, cur);
     const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== apexSafeAsset(key) && k !== "CASH" && k !== "XEON" && (st?.dual ? k !== "SP500" : true));
     const rows = universe.map(k => {
       const v = Number(m[k]);
+      const sinceVal = scoreValue(since[k]);
       const w = Math.max(4, Math.min(100, Math.abs(v) * 3));
-      return `<div class="apex-momentum-row"><span>${esc(apexAssetLabel(key, k))}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
+      return `<div class="apex-momentum-row"><span><b>${esc(apexAssetLabel(key, k))}</b>${sinceVal == null ? "" : `<small>dal segnale precedente ${pct(sinceVal, 1)}</small>`}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
     }).join("");
-    return `<p class="detail-source apex-momentum-note">Queste percentuali sono il momentum usato per il segnale: rendimento degli asset nelle ${esc(apexLookbackLabel(st))}. Non sono il rendimento del tuo portafoglio.</p>${rows}`;
+    const prevText = since._prevDate ? ` In piccolo trovi anche il movimento dal segnale precedente (${dateIT(since._prevDate)}).` : "";
+    return `<p class="detail-source apex-momentum-note">La percentuale grande e il momentum usato per il segnale: rendimento degli asset nelle ${esc(apexLookbackLabel(st))}. Non e' il rendimento del tuo portafoglio.${esc(prevText)}</p>${rows}`;
   }
   function apexCurrentPanel(key = "legit", primary = false) {
     const st = apexStrategy(key);

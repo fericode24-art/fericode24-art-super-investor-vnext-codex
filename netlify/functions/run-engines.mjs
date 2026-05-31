@@ -45,6 +45,7 @@ export default async (req) => {
       inputs: {
         force_run: "true",
         run_apex: mode === "all" || mode === "apex" ? "true" : "false",
+        source: `app_button_${mode}`,
       },
     }),
   });

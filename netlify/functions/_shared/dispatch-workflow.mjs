@@ -53,6 +53,7 @@ export async function dispatchWorkflow({ mode = "all", reason = "scheduled" } = 
       inputs: {
         force_run: "true",
         run_apex: runApex ? "true" : "false",
+        source: reason,
       },
     }),
   });

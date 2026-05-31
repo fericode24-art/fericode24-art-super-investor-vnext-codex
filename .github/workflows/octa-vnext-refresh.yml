@@ -30,6 +30,10 @@ on:
         description: "Genera anche segnale APEX"
         type: boolean
         default: true
+      source:
+        description: "Origine dispatch: app_button, netlify_schedule_octa, netlify_schedule_apex"
+        type: string
+        default: "manual"
 
 permissions:
   contents: write

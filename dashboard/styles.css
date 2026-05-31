@@ -274,6 +274,8 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .apex-momentum-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .apex-momentum-row:last-child { border-bottom: 0; }
 .apex-momentum-row span { color: var(--muted); font-size: 13px; }
+.apex-momentum-row span b { display: block; color: var(--soft); font-size: 13px; }
+.apex-momentum-row span small { display: block; color: var(--muted); font-size: 11px; line-height: 1.25; margin-top: 2px; }
 .apex-momentum-note { margin-bottom: 9px; }
 .apex-momentum-row i { grid-column: 1 / -1; height: 7px; border-radius: 999px; background: #0d1012; overflow: hidden; }
 .apex-momentum-row em { display: block; height: 100%; border-radius: inherit; }
