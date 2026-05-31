@@ -198,6 +198,11 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .chart-scroll { position: relative; overflow: hidden; border-radius: 8px; touch-action: pan-y; cursor: crosshair; }
 .chart-grid line { stroke: rgba(255,255,255,.08); }
 .chart-grid text, .chart-axis text { fill: var(--muted); font-size: 10px; }
+/* assi come overlay HTML: nitidi su qualsiasi schermo (mai stirati dall'SVG), allineati 1:1 al viewBox */
+.chart-y-axis, .chart-x-axis { position: absolute; inset: 0; pointer-events: none; font-variant-numeric: tabular-nums; color: var(--muted); }
+.chart-y-axis span { position: absolute; left: 6px; transform: translateY(-50%); font-size: 10px; line-height: 1; padding: 1px 4px; border-radius: 4px; background: rgba(16,19,22,.6); white-space: nowrap; }
+.chart-x-axis span { position: absolute; bottom: 5px; font-size: 10px; line-height: 1; white-space: nowrap; }
+.chart-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 3px rgba(16,19,22,.85), 0 0 8px rgba(255,255,255,.25); pointer-events: none; }
 .clean-chart .chart-scroll { background: linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,.005)); }
 .clean-chart .chart-grid line { stroke: rgba(255,255,255,.10); }
 .clean-chart .line-chart { height: 190px; }
@@ -353,11 +358,19 @@ input:focus, select:focus, textarea:focus { outline: 2px solid rgba(103,214,232,
 .fund-list span { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--soft); font-size: 11px; }
 .detail-source, .legend-desc { color: var(--muted); font-size: 12px; line-height: 1.4; margin: 0; }
 .legend-desc { margin: -5px 0 8px; }
-.radar-summary { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; }
+.radar-summary { display: grid; grid-template-columns: 1.3fr .7fr; gap: 12px; align-items: start; }
+.radar-summary h3 { margin: 0 0 5px; }
 .radar-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
-.radar-chip { min-height: 54px; border: 1px solid var(--line); border-radius: 8px; background: #111518; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px; }
-.radar-chip span { color: var(--green); font-weight: 800; }
+.radar-chip { min-height: 92px; border: 1px solid var(--line); border-radius: 8px; background: #111518; color: var(--text); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 8px; padding: 10px; text-align: left; align-content: start; }
+.radar-chip.good { border-color: rgba(66,211,146,.30); }
+.radar-chip.warn { border-color: rgba(241,189,91,.42); }
+.radar-chip.bad { border-color: rgba(255,107,107,.45); }
+.radar-chip .radar-rank { color: var(--muted); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.radar-chip strong { font-size: 15px; line-height: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.radar-chip em { grid-column: 1 / -1; color: var(--soft); font-size: 11px; font-style: normal; line-height: 1.2; }
+.radar-chip b { grid-column: 1 / -1; color: var(--green); font-size: 12px; }
 .radar-chip:hover { border-color: rgba(103,214,232,.55); }
+.table-note { color: var(--muted); font-size: 12px; line-height: 1.4; margin-bottom: 8px; }
 .pos { color: var(--green); }
 .neg { color: var(--red); }
 .today-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; border-color: rgba(103,214,232,.28); background: linear-gradient(180deg, rgba(103,214,232,.05), var(--surface) 58%); }
@@ -375,6 +388,16 @@ button.today-card:hover { border-color: rgba(103,214,232,.55); background: #151a
 .today-card strong { font-size: 24px; line-height: 1.05; overflow-wrap: anywhere; }
 .today-card em { color: var(--soft); font-size: 13px; font-style: normal; }
 .today-card small { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.today-card-apex { gap: 10px; }
+.today-card-apex > strong { font-size: 21px; }
+.today-apex-mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.today-apex-mini { border: 1px solid var(--line); border-radius: 8px; background: #0d1012; padding: 8px; min-width: 0; }
+.today-apex-mini.good { border-color: rgba(66,211,146,.28); }
+.today-apex-mini.warn { border-color: rgba(241,189,91,.42); }
+.today-apex-mini.bad { border-color: rgba(255,107,107,.44); }
+.today-apex-mini span { display: block; color: var(--muted); font-size: 10px; text-transform: none; letter-spacing: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.today-apex-mini strong { display: block; margin-top: 3px; font-size: 13px; line-height: 1.1; overflow-wrap: anywhere; }
+.today-apex-mini em { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .today-focus .signal-list { gap: 10px; }
 .today-run-list .kv { padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .today-run-list .kv:last-child { border-bottom: 0; padding-bottom: 0; }
@@ -423,6 +446,7 @@ button.today-card:hover { border-color: rgba(103,214,232,.55); background: #151a
   .today-hero-side { justify-items: stretch; }
   .today-card-row { display: flex; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x proximity; }
   .today-card { min-width: min(82vw, 340px); scroll-snap-align: start; }
+  .today-apex-mini-grid { grid-template-columns: repeat(3, minmax(84px, 1fr)); overflow-x: auto; padding-bottom: 2px; }
   .today-market-grid { grid-template-columns: 1fr; }
   .today-shortcuts { justify-content: stretch; }
   .today-shortcuts .button { flex: 1 1 180px; }
@@ -485,4 +509,90 @@ button.today-card:hover { border-color: rgba(103,214,232,.55); background: #151a
   .table .muted { display: none; }
   .pf-bank-value strong { font-size: 26px; }
   .pf-action-bar { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   LIGHT LOOK REFRESH v41 — rifinitura design-system (Claude)
+   Solo estetica: profondità, colori, bottoni, badge, spazi,
+   gerarchia, micro-interazioni, focus accessibile. Nessun
+   cambio di layout o di logica. Mobile-first, override coerenti
+   coi token esistenti (cascade: vincono sull'equivalente sopra).
+   ============================================================ */
+:root {
+  /* superfici a strati: prima era tutto molto piatto, ora c'è profondità */
+  --bg: #0d1013;
+  --surface: #1a1f24;
+  --surface-2: #242b31;
+  --muted: #b0b7b3;                 /* +leggibilità su testo secondario */
+  --shadow: 0 18px 50px rgba(0,0,0,.34);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,.22);
+  --ring: 0 0 0 2px rgba(103,214,232,.5);
+  --ctrl: 42px;                     /* altezza standard dei controlli */
+  --ease: cubic-bezier(.2,.7,.3,1);
+}
+
+/* tipografia più nitida + cifre tabellari dove i numeri contano (niente "ballo") */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+.metric strong, .metric.compact strong, .today-card strong, .today-market-tile strong,
+.pf-bank-value strong, .pf-home-stats strong, .score-top strong, .signal-score strong,
+.apex-radar-status > strong, .kv strong, .badge, .rank-badge, .chart-foot strong,
+.apex-card h2, .apex-card-metrics strong { font-variant-numeric: tabular-nums; }
+::selection { background: rgba(66,211,146,.30); color: #fff; }
+
+/* focus accessibile e coerente su TUTTO ciò che è interattivo (segue il raggio dell'elemento) */
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; box-shadow: var(--ring); }
+
+/* scrollbar discrete (desktop) — meno rumore visivo */
+* { scrollbar-width: thin; scrollbar-color: #38424a transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: #38424a; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+
+/* superfici: un filo di ombra per separare dal fondo (gerarchia senza appesantire) */
+.panel { box-shadow: var(--shadow-sm); transition: border-color .18s var(--ease), box-shadow .18s var(--ease); }
+.status-item, .metric, .chart-card, .today-card, .pf-card, .apex-card,
+.detail-section, .today-market-tile { transition: border-color .18s var(--ease), transform .18s var(--ease), background .18s var(--ease); }
+
+/* ---- BOTTONI: una sola famiglia, stati chiari, primario che "chiama" ---- */
+.button { min-height: var(--ctrl); letter-spacing: .01em; transition: background .16s var(--ease), border-color .16s var(--ease), transform .08s var(--ease), box-shadow .16s var(--ease); }
+.button:hover { background: var(--surface-2); border-color: #3b454c; }
+.button:active { transform: translateY(1px); }
+.button.primary { background: linear-gradient(180deg, #4ce0a0, #37c187); border-color: transparent; color: #06120c; box-shadow: 0 6px 18px rgba(66,211,146,.26); }
+.button.primary:hover { background: linear-gradient(180deg, #5cebac, #40cf90); border-color: transparent; }
+.button.ghost { background: transparent; border-color: var(--line); }
+.button.ghost:hover { background: rgba(255,255,255,.05); }
+.button.danger:hover { background: rgba(255,107,107,.18); border-color: rgba(255,107,107,.6); }
+.icon-action, .mini-action { transition: background .16s var(--ease), border-color .16s var(--ease), color .16s var(--ease), transform .08s var(--ease); }
+.icon-action:active, .mini-action:active { transform: translateY(1px); }
+
+/* ---- BADGE: stessa metrica e stesso peso per tutta la famiglia ---- */
+.badge, .badge-button { min-height: 24px; padding: 0 10px; font-weight: 600; letter-spacing: .01em; }
+.badge-button { transition: border-color .16s var(--ease), background .16s var(--ease), color .16s var(--ease); }
+.badge-button:hover { background: rgba(255,255,255,.05); }
+
+/* ---- NAV: lo stato attivo dice chiaramente "sei qui" ---- */
+.nav-btn.active { color: var(--green); border-color: rgba(66,211,146,.35); background: rgba(66,211,146,.10); }
+.nav-btn.active svg { color: var(--green); }
+
+/* ---- controlli compatti (range grafico / segmented): accento coerente al brand ---- */
+.chart-ranges button, .segmented button { transition: background .14s var(--ease), color .14s var(--ease), border-color .14s var(--ease); }
+.chart-ranges button.active { background: rgba(66,211,146,.12); color: var(--text); border-color: rgba(66,211,146,.45); }
+.segmented button.active { background: rgba(66,211,146,.12); color: var(--text); }
+
+/* ---- input: focus coerente con l'anello del resto dell'app ---- */
+input:focus, select:focus, textarea:focus { outline: none; box-shadow: var(--ring); border-color: var(--cyan); }
+
+/* ---- card cliccabili: micro-feedback tattile uniforme ---- */
+button.today-card:hover, .apex-radar-status:hover, .today-apex-row:hover { transform: translateY(-1px); }
+
+/* hero/callout AI: un filo di profondità per farli leggere per primi */
+.ai-callout, .pf-ai-callout, .today-hero, .apex-hero, .octa-hero { box-shadow: var(--shadow-sm); }
+
+@media (max-width: 980px) {
+  /* target touch più generosi su mobile (44px) e nav attiva ben visibile */
+  .button { min-height: 44px; }
+  .icon-action { width: 44px; height: 44px; }
+  .nav-btn.active { background: rgba(66,211,146,.12); }
+  .nav-btn.active::after { content: ""; position: absolute; top: 4px; width: 16px; height: 3px; border-radius: 999px; background: var(--green); }
+  .nav-btn { position: relative; }
 }

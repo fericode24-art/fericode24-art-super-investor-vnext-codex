@@ -116,28 +116,28 @@
     { symbol: "GC=F", label: "Oro" },
   ];
   const STATUS_INFO = {
-    FRESH_BREAKOUT: { label: "Compra: slancio", cls: "good", desc: "Nuovo massimo/forza relativa: ingresso ammesso se il titolo e in top score." },
-    PULLBACK_IN_TREND: { label: "Compra: sconto sano", cls: "good", desc: "Trend ancora valido con ritracciamento gestibile." },
-    NEUTRAL: { label: "Compra: neutro", cls: "good", desc: "Nessun veto tecnico: si compra solo se lo score lo tiene in lista." },
-    CONSOLIDATION: { label: "Aspetta breakout", cls: "warn", desc: "Titolo in range: meglio aspettare conferma." },
-    EXTENDED: { label: "Non entrare: esteso", cls: "warn", desc: "Prezzo gia tirato rispetto al trend." },
-    BROKEN: { label: "Vendi: trend rotto", cls: "bad", desc: "Veto tecnico di uscita." },
-    AVOID: { label: "Non toccare", cls: "bad", desc: "Rischio eccessivo o veto del motore." },
-    ROTATION_OUT: { label: "Esci: rotazione", cls: "warn", desc: "Titolo sostituito da candidati migliori." },
+    FRESH_BREAKOUT: { label: "Compra: breakout", cls: "good", desc: "Il prezzo sta rompendo verso l'alto: il motore lo considera comprabile se resta alto in classifica." },
+    PULLBACK_IN_TREND: { label: "Compra: ritracciamento", cls: "good", desc: "Il trend e ancora buono, ma il prezzo ha respirato: ingresso piu ordinato rispetto a comprare sui massimi." },
+    NEUTRAL: { label: "Compra: ok", cls: "good", desc: "Non ci sono divieti tecnici: si compra solo se score e portafoglio lo richiedono." },
+    CONSOLIDATION: { label: "Aspetta: laterale", cls: "warn", desc: "Il titolo e in una fase laterale: meglio aspettare una rottura piu chiara." },
+    EXTENDED: { label: "Aspetta: tirato", cls: "warn", desc: "Il prezzo e gia salito molto: il rischio e comprare troppo tardi." },
+    BROKEN: { label: "Vendi: trend rotto", cls: "bad", desc: "Il trend tecnico si e rotto: il motore segnala uscita o forte prudenza." },
+    AVOID: { label: "Evita: rischio alto", cls: "bad", desc: "Il motore vede troppi rischi o un veto tecnico: non e un candidato operativo." },
+    ROTATION_OUT: { label: "Vendi: sostituito", cls: "warn", desc: "Il titolo esce perche oggi ci sono candidati migliori nella rotazione." },
   };
   const SCORE_TIPS = {
-    radar: "Quanto i fondi qualificati lo tengono o lo accumulano.",
-    entry: "Qualita del punto di ingresso: momentum, filtri tecnici e segnali esterni cached se attivi.",
-    opp: "Punteggio finale usato per ordinare i candidati.",
-    momentum: "Percentile di forza relativa nel paniere.",
-    insider: "Segnali esterni di supporto, solo quando il profilo li abilita.",
-    funds: "Numero di fondi osservati che hanno il titolo in portafoglio.",
+    radar: "Quanto il titolo e presente nei fondi osservati e se stanno aumentando esposizione.",
+    entry: "Dice se il prezzo e in un punto sensato per comprare o se e meglio aspettare.",
+    opp: "La priorita finale nella lista OCTA: piu e alto, piu il titolo e interessante oggi.",
+    momentum: "Quanto il titolo sta correndo rispetto agli altri.",
+    insider: "Segnali extra di supporto, usati solo quando il motore li abilita.",
+    funds: "Quanti fondi osservati hanno questo titolo in portafoglio.",
   };
   const LIVE_SIGNAL_PROFILE = {
     active: [
-      ["Radar 13F", "Conviction, accumulation e crowding"],
-      ["Momentum", "Forza relativa prezzi"],
-      ["Entry status", "Filtro tecnico ingresso/uscita"],
+      ["Fondi", "Presenza e accumulo nei fondi osservati"],
+      ["Forza", "Quanto il titolo corre rispetto agli altri"],
+      ["Ingresso tecnico", "Breakout, ritracciamento, laterale o trend rotto"],
       ["VIX e optimizer", "Regime, 8 slot, settore, anti-churn"],
     ],
     inactive: [
@@ -1165,7 +1165,7 @@
       </section>
       <section class="today-card-row">
         ${todayDecisionCard("OCTA", octaTone, actionText, `${buys.length} buy · ${sells.length} sell`, `P/L ${eurMaybe(stats.pnl, 0)} · ${pct(stats.pnlPct)}`, "octa")}
-        ${todayDecisionCard("APEX", apexTone, apex.label, apex.sub, apex.radar, "strategy")}
+        ${todayApexDecisionCard(apexTone, apex)}
         ${todayDecisionCard("Mercato", todayVixTone(), todayMarketHeadline(), "VIX · S&P 500 · BTC · Oro", todayMarketShort(), "")}
       </section>
       <section class="panel wide today-focus">
@@ -1196,19 +1196,42 @@
       <small>${esc(foot)}</small>
     </${tag}>`;
   }
+  function todayApexDecisionCard(cls, apex) {
+    const mini = (apex.items || []).map(x => `<div class="today-apex-mini ${esc(x.cls)}">
+      <span>${esc(x.name)}</span>
+      <strong>${esc(x.asset)}</strong>
+      <em>${esc(x.radar)}</em>
+    </div>`).join("");
+    return `<button class="today-card today-card-apex ${cls}" data-view="strategy">
+      <span>APEX</span>
+      <strong>${esc(apex.label)}</strong>
+      <div class="today-apex-mini-grid">${mini || `<em>Segnali non caricati</em>`}</div>
+      <small>${esc(apex.radar)}</small>
+    </button>`;
+  }
   function todayApexSummary() {
     const keys = apexStrategyKeys();
     const active = keys.map(k => ({ key: k, st: apexStrategy(k) })).filter(x => x.st?.current);
     const needAction = active.filter(({ key, st }) => st.current.changed && !(state.apexExecuted?.[key]?.date === st.current.date && state.apexExecuted?.[key]?.asset === st.current.asset));
     const alerts = active.filter(({ st }) => st.radar?.level && st.radar.level !== "ok");
-    const legit = apexStrategy("legit") || active[0]?.st;
-    const cur = legit?.current;
+    const items = active.map(({ key, st }) => {
+      const r = st.radar || {};
+      const changed = st.current.changed && !(state.apexExecuted?.[key]?.date === st.current.date && state.apexExecuted?.[key]?.asset === st.current.asset);
+      const cls = changed ? "warn" : r.level === "alert" ? "bad" : r.level === "watch" ? "warn" : "good";
+      return {
+        name: (st.name || key).replace(/^APEX\s*/i, ""),
+        asset: apexAssetLabel(key, st.current.asset),
+        radar: r.level && r.level !== "ok" ? apexRadarLabel(r) : "radar ok",
+        cls,
+      };
+    });
     return {
       needAction: needAction.length,
       alerts: alerts.length,
       label: needAction.length ? `${needAction.length} cambio da registrare` : "Nessun cambio richiesto",
-      sub: cur ? `Legit: ${apexAssetLabel("legit", cur.asset)}` : "Segnale non caricato",
-      radar: alerts.length ? `${alerts.length} radar da guardare` : "Radar allineati",
+      sub: active.length ? active.map(({ key, st }) => `${st.name}: ${apexAssetLabel(key, st.current.asset)}`).join(" · ") : "Segnale non caricato",
+      radar: alerts.length ? `${alerts.length} radar da guardare` : "Tutti i radar allineati",
+      items,
     };
   }
   function todayApexMini() {
@@ -1405,6 +1428,11 @@
     if (n == null) return "n.d.";
     return `${n >= 0 ? "+" : ""}${n.toFixed(dec)}`;
   }
+  function pointsLabel(v, dec = 1) {
+    const n = scoreValue(v);
+    if (n == null) return "n.d.";
+    return `${n >= 0 ? "+" : ""}${n.toFixed(dec)} pt`;
+  }
   function scoreCell(label, val, tip) {
     const n = scoreValue(val);
     const w = n == null ? 0 : Math.max(0, Math.min(100, n));
@@ -1416,10 +1444,10 @@
   }
   function scoreGrid(item) {
     return `<div class="score-grid">
-      ${scoreCell("Radar", item.radar_score, SCORE_TIPS.radar)}
-      ${scoreCell("Entry", item.entry_score, SCORE_TIPS.entry)}
-      ${scoreCell("Opportunity", item.opportunity_score ?? item.score, SCORE_TIPS.opp)}
-      ${scoreCell("Momentum", item.momentum_pct ?? item.components?.momentum, SCORE_TIPS.momentum)}
+      ${scoreCell("Fondi", item.radar_score, SCORE_TIPS.radar)}
+      ${scoreCell("Ingresso", item.entry_score, SCORE_TIPS.entry)}
+      ${scoreCell("Priorita", item.opportunity_score ?? item.score, SCORE_TIPS.opp)}
+      ${scoreCell("Forza", item.momentum_pct ?? item.components?.momentum, SCORE_TIPS.momentum)}
     </div>`;
   }
   function componentRows(item) {
@@ -1488,13 +1516,13 @@
       rows.push(externalMetric("Delta shadow", comp.market_shadow_delta, "scenario congressional/squeeze, non pesa", { delta: true }));
     }
     const text = mode === "cached"
-      ? "Questi valori modificano Entry e quindi Opportunity, classifica Radar 40 e portafoglio target."
-      : "Profilo non ancora pesato nel file corrente.";
+      ? "Questi segnali extra sono gia dentro al punteggio finale e possono cambiare classifica e portafoglio target."
+      : "Questi segnali sono visibili, ma oggi non stanno cambiando il punteggio finale.";
     const shadowText = comp.market_shadow_cached
-      ? `<div class="notice info">Congressional e squeeze sono in shadow: li vedi per valutare l'impatto, ma non cambiano ancora classifica o portafoglio.</div>`
+      ? `<div class="notice info">Congressional e squeeze sono in prova: li vedi per capire l'impatto, ma non spostano ancora soldi o classifica.</div>`
       : "";
     return `<section class="detail-section">
-      <h3>Impatto esterni</h3>
+      <h3>Segnali extra</h3>
       <div class="notice ${mode === "cached" ? "good" : "warn"}">${esc(text)}</div>
       ${shadowText}
       <div class="impact-list">${rows.join("")}</div>
@@ -1611,23 +1639,24 @@
       <section class="detail-section full-detail">${tickerChart(t, item)}</section>
       ${posHtml}
       <div class="detail-actions"><button class="button ghost" data-action="ai-ticker" data-ticker="${esc(t)}">${icon("brain")}Spiega con AI</button></div>
-      <p class="detail-source">Score live da data-octa.json. I segnali esterni compaiono solo nei profili motore che li abilitano.</p>`;
+      <p class="detail-source">Lettura semplice: guarda prima status, priorita e prezzo. Fondi/forza/extra spiegano perche il motore lo mette alto o basso.</p>`;
   }
   function openOctaLegend() {
     $("#info-eyebrow").textContent = "Legenda OCTA";
-    $("#info-title").textContent = "Score, badge e azioni";
+    $("#info-title").textContent = "Motivi, score e azioni";
     $("#info-body").innerHTML = `
       <div class="detail-grid">
         <section class="detail-section">
-          <h3>Entry status</h3>
-          ${Object.entries(STATUS_INFO).map(([k,v]) => `<div class="legend-row"><span class="badge ${v.cls}">${esc(v.label)}</span><strong>${esc(k)}</strong></div><p class="legend-desc">${esc(v.desc)}</p>`).join("")}
+          <h3>Motivo del segnale</h3>
+          ${Object.entries(STATUS_INFO).map(([,v]) => `<div class="legend-row"><span class="badge ${v.cls}">${esc(v.label)}</span></div><p class="legend-desc">${esc(v.desc)}</p>`).join("")}
         </section>
         <section class="detail-section">
           <h3>Score</h3>
-          <div class="kv"><span>Radar</span><strong>fondi 13F + accumulation</strong></div>
-          <div class="kv"><span>Entry</span><strong>momento tecnico e segnali esterni</strong></div>
-          <div class="kv"><span>Opportunity</span><strong>classifica finale</strong></div>
-          <div class="kv"><span>Momentum</span><strong>forza relativa del titolo</strong></div>
+          <div class="kv"><span>Fondi</span><strong>presenza e accumulo nei fondi osservati</strong></div>
+          <div class="kv"><span>Ingresso</span><strong>se il prezzo e in un punto sensato</strong></div>
+          <div class="kv"><span>Priorita</span><strong>classifica finale OCTA</strong></div>
+          <div class="kv"><span>Forza</span><strong>quanto corre rispetto agli altri</strong></div>
+          <div class="kv"><span>Extra score</span><strong>punti aggiunti o tolti dai segnali extra</strong></div>
         </section>
       </div>
       <section class="detail-section">
@@ -1640,15 +1669,27 @@
     if (!$("#info-dialog").open) $("#info-dialog").showModal();
   }
   function radarSummary(cands) {
-    const top = cands.slice(0, 8).map(c => `<button class="radar-chip" data-action="octa-detail" data-ticker="${esc(c.ticker)}"><strong>${esc(c.ticker)}</strong><span>${Math.round(Number(c.score || 0))}</span></button>`).join("");
+    const top = cands.slice(0, 8).map((c, i) => {
+      const item = octaItem(c.ticker);
+      const status = statusMeta(c.entry_status || item.entry_status);
+      return `<button class="radar-chip ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">
+        <span class="radar-rank">#${i + 1}</span>
+        <strong>${esc(c.ticker)}</strong>
+        <em>${esc(status.label)}</em>
+        <b>score ${Math.round(Number(c.score || 0))}</b>
+      </button>`;
+    }).join("");
     const sectors = Object.entries(cands.reduce((m,c) => {
       const k = c.sector || "Non classificato";
       m[k] = m[k] || { n: 0, sum: 0 };
       m[k].n += 1; m[k].sum += Number(c.score || 0);
       return m;
     }, {})).sort((a,b) => (b[1].sum / b[1].n) - (a[1].sum / a[1].n)).slice(0, 5)
-      .map(([k,v]) => `<div class="legend-row"><span>${esc(k)}</span><strong>${Math.round(v.sum / v.n)}</strong></div>`).join("");
-    return `<div class="radar-summary"><div class="radar-chips">${top}</div><div>${sectors}</div></div>`;
+      .map(([k,v]) => `<div class="legend-row"><span>${esc(k)}</span><strong>score medio ${Math.round(v.sum / v.n)}</strong></div>`).join("");
+    return `<div class="radar-summary"><div><h3>Top 8 radar</h3><p class="detail-source">La classifica completa resta sotto. Qui vedi subito chi guida e perche e comprabile o no.</p><div class="radar-chips">${top}</div></div><div><h3>Settori forti</h3>${sectors || `<div class="empty">Settori non disponibili.</div>`}</div></div>`;
+  }
+  function signalActionLabel(action) {
+    return action === "SELL" ? "Vendi" : action === "BUY" ? "Compra" : action || "Segnale";
   }
   function signalCard(s) {
     const done = isSignalDone(s);
@@ -1658,10 +1699,10 @@
     const status = statusMeta(s.entry_status);
     return `<article class="signal-card ${cls}">
       <div class="signal-main">
-        <div class="signal-title"><button class="ticker-link" data-action="octa-detail" data-ticker="${esc(s.ticker)}">${esc(s.ticker)}</button><span class="badge ${s.action === "SELL" ? "bad" : "good"}">${esc(s.action)}</span><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(s.ticker)}">${esc(status.label)}</button>${done ? `<span class="badge good">eseguito</span>` : ""}</div>
-        <div class="signal-meta">${esc(s.name || s.sector || "")}<br>${esc(s.reason || "")}<br>Prezzo EUR ${eurMaybe(px, 2)} · score ${esc(s.score ?? "n/d")}</div>
+        <div class="signal-title"><button class="ticker-link" data-action="octa-detail" data-ticker="${esc(s.ticker)}">${esc(s.ticker)}</button><span class="badge ${s.action === "SELL" ? "bad" : "good"}">${esc(signalActionLabel(s.action))}</span><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(s.ticker)}">${esc(status.label)}</button>${done ? `<span class="badge good">eseguito</span>` : ""}</div>
+        <div class="signal-meta">${esc(s.name || s.sector || "")}<br><strong>Motivo:</strong> ${esc(status.desc)}${s.reason ? `<br><span class="muted">Nota motore: ${esc(s.reason)}</span>` : ""}<br>Prezzo EUR ${eurMaybe(px, 2)} · priorita ${esc(s.score ?? "n/d")}</div>
       </div>
-      <div class="toolbar"><button class="signal-score" data-action="octa-detail" data-ticker="${esc(s.ticker)}"><strong>${Math.round(Number(s.score || 0))}</strong><span>score</span></button><button class="button primary" data-action="trade" data-signal="${esc(s.id)}" ${done ? "disabled" : ""}>${icon("check")}Fatto</button><button class="button ghost" data-action="ai-ticker" data-ticker="${esc(s.ticker)}">${icon("brain")}AI</button></div>
+      <div class="toolbar"><button class="signal-score" data-action="octa-detail" data-ticker="${esc(s.ticker)}"><strong>${Math.round(Number(s.score || 0))}</strong><span>priorita</span></button><button class="button primary" data-action="trade" data-signal="${esc(s.id)}" ${done ? "disabled" : ""}>${icon("check")}Fatto</button><button class="button ghost" data-action="ai-ticker" data-ticker="${esc(s.ticker)}">${icon("brain")}AI</button></div>
     </article>`;
   }
   function chartRangeValue(id) {
@@ -1703,15 +1744,25 @@
     const col = change >= 0 ? "#42d392" : "#ff6b6b";
     const fmt = valueFmt || (v => eur(v));
     const axisFmt = opts.axisFmt || compactEur;
-    const grid = [0, .5, 1].map(f => {
+    // griglia: SOLO linee nell'SVG. Numeri e date = overlay HTML (nitidi, mai stirati).
+    const grid = [0, .25, .5, .75, 1].map(f => {
+      const yy = padT + f * (H - padT - padB);
+      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line>`;
+    }).join("");
+    const yLabels = [0, .5, 1].map(f => {
       const val = min + (max - min) * (1 - f);
       const yy = padT + f * (H - padT - padB);
-      return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}"></line>${opts.cleanAxes ? "" : `<text x="${padL - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end">${esc(axisFmt(val))}</text>`}`;
+      return `<span style="top:${(yy / H * 100).toFixed(2)}%">${esc(axisFmt(val))}</span>`;
     }).join("");
-    const dates = [0, .5, 1].map(f => {
+    const xLabels = [0, .5, 1].map(f => {
       const i = Math.min(clean.length - 1, Math.round((clean.length - 1) * f));
-      return opts.cleanAxes ? "" : `<text x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="${f === 0 ? "start" : f === 1 ? "end" : "middle"}">${dateIT(clean[i].d)}</text>`;
+      const leftPct = (x(i) / W * 100).toFixed(2);
+      const tx = f === 0 ? "0" : f === 1 ? "-100%" : "-50%";
+      return `<span style="left:${leftPct}%;transform:translateX(${tx})">${dateIT(clean[i].d)}</span>`;
     }).join("");
+    const dotLeft = (x(clean.length - 1) / W * 100).toFixed(2);
+    const dotTop = (y(last) / H * 100).toFixed(2);
+    const dates = "";
     const context = opts.context ? ` data-context="${esc(opts.context)}"` : "";
     const rangeTitles = { "1D": "1 giorno", "1W": "1 settimana", "1M": "1 mese", "3M": "3 mesi", "1Y": "1 anno", "5Y": "5 anni", MAX: "Massimo disponibile" };
     const controls = CHART_RANGES.map(([key, label]) => `<button class="${key === rangeKey ? "active" : ""}" data-action="chart-range" data-chart="${esc(chartId)}" data-range="${key}" title="${esc(rangeTitles[key] || label)}" aria-label="${esc(rangeTitles[key] || label)}"${context}>${label}</button>`).join("");
@@ -1721,7 +1772,7 @@
     const compareSvg = comparePath ? `<path d="${comparePath}" fill="none" stroke="${esc(opts.compareColor || "#83a8ff")}" stroke-width="2.2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"></path>` : "";
     const legend = comparePath ? `<div class="chart-legend"><span><i style="background:${col}"></i>${esc(opts.primaryLabel || "Portafoglio")}</span><span><i class="dash" style="background:${esc(opts.compareColor || "#83a8ff")}"></i>${esc(opts.compareLabel || "Confronto")}</span></div>` : "";
     chartStore.set(chartId, { points: clean, fmt });
-    return `<div class="chart-card ${opts.cleanAxes ? "clean-chart" : ""}" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${opts.changeLabel ? esc(opts.changeLabel) : pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}<g class="chart-axis">${dates}</g></svg><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${dateIT(clean[0].d)} · ${fmt(first)}</span><strong>${dateIT(clean[clean.length - 1].d)} · ${fmt(last)}</strong></div></div>`;
+    return `<div class="chart-card ${opts.cleanAxes ? "clean-chart" : ""}" data-chart="${esc(chartId)}"><div class="chart-head"><div><h3>${esc(title)}</h3><p>${dateIT(clean[0].d)} - ${dateIT(clean[clean.length-1].d)} · ${clean.length} punti</p></div><span class="badge ${change >= 0 ? "good" : "bad"}">${opts.changeLabel ? esc(opts.changeLabel) : pct(change)}</span></div><div class="chart-ranges">${controls}</div>${legend}<div class="chart-scroll" aria-label="${esc(title)}"><svg class="line-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g class="chart-grid">${grid}</g><path d="${area}" fill="${col}" opacity="0.16"></path><path d="${d}" fill="none" stroke="${col}" stroke-width="3" vector-effect="non-scaling-stroke"></path>${compareSvg}</svg><div class="chart-y-axis">${yLabels}</div><div class="chart-x-axis">${xLabels}</div><div class="chart-dot" style="left:${dotLeft}%;top:${dotTop}%;background:${col}"></div><div class="chart-marker" hidden></div><div class="chart-tip" hidden></div></div><div class="chart-foot"><span>${dateIT(clean[0].d)} · ${fmt(first)}</span><strong>${dateIT(clean[clean.length - 1].d)} · ${fmt(last)}</strong></div></div>`;
   }
   function octaSeries() {
     const entries = Object.entries(state.octaPortfolio || {}).map(([ticker, pos]) => {
@@ -1916,9 +1967,9 @@
       const item = octaItem(c.ticker);
       const status = statusMeta(c.entry_status);
       const ext = scoreValue(c.external_delta ?? item.external_delta ?? item.components?.external_delta);
-      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button></td><td class="right"><span class="${(ext || 0) >= 0 ? "pos" : "neg"}">${esc(signedDelta(ext))}</span></td><td class="right hide-sm">${esc(c.momentum_pct ?? "")}</td></tr>`;
+      return `<tr><td><button class="table-link" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(c.ticker)}</button><div class="muted">${esc(item.name && item.name !== c.ticker ? item.name : c.sector || "")}</div></td><td class="right">${esc(c.score ?? "")}</td><td><button class="badge-button ${status.cls}" data-action="octa-detail" data-ticker="${esc(c.ticker)}">${esc(status.label)}</button></td><td class="right"><span class="${(ext || 0) >= 0 ? "pos" : "neg"}">${esc(pointsLabel(ext))}</span></td><td class="right hide-sm">${c.momentum_pct != null ? esc(Math.round(Number(c.momentum_pct))) + "/100" : "n.d."}</td></tr>`;
     }).join("");
-    return rows ? `<table class="table"><thead><tr><th>Ticker</th><th class="right">Score</th><th>Status</th><th class="right">Ext</th><th class="right hide-sm">Mom</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
+    return rows ? `<div class="table-note">Extra score = punti aggiunti o tolti dai segnali extra. Forza = momentum relativo del titolo.</div><table class="table"><thead><tr><th>Ticker</th><th class="right">Priorita</th><th>Motivo</th><th class="right">Extra score</th><th class="right hide-sm">Forza</th></tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Radar 40 non disponibile.</div>`;
   }
 
   const BENCH_PRESETS = [
