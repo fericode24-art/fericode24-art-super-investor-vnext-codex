@@ -2382,6 +2382,10 @@
   function apexStrategy(key = "legit") {
     return state.apexData?.strategies?.[key] || null;
   }
+  function apexLookbackLabel(st) {
+    const w = Number(st?.lookback_weeks || st?.lookback || 0);
+    return w > 0 ? `ultime ${w} settimane` : "finestra momentum del motore";
+  }
   function apexDoneBadge(key, st) {
     const done = state.apexExecuted?.[key];
     const cur = st?.current;
@@ -2393,11 +2397,12 @@
     const st = apexStrategy(key);
     const m = cur?.momentum || {};
     const universe = (st?.universe || ["BTC", "GOLD", "SP500"]).filter(k => k !== apexSafeAsset(key) && k !== "CASH" && k !== "XEON" && (st?.dual ? k !== "SP500" : true));
-    return universe.map(k => {
+    const rows = universe.map(k => {
       const v = Number(m[k]);
       const w = Math.max(4, Math.min(100, Math.abs(v) * 3));
       return `<div class="apex-momentum-row"><span>${esc(apexAssetLabel(key, k))}</span><strong class="${v >= 0 ? "pos" : "neg"}">${pct(v, 1)}</strong><i><em style="width:${w}%" class="${v >= 0 ? "good" : "bad"}"></em></i></div>`;
     }).join("");
+    return `<p class="detail-source apex-momentum-note">Queste percentuali sono il momentum usato per il segnale: rendimento degli asset nelle ${esc(apexLookbackLabel(st))}. Non sono il rendimento del tuo portafoglio.</p>${rows}`;
   }
   function apexCurrentPanel(key = "legit", primary = false) {
     const st = apexStrategy(key);
@@ -2470,7 +2475,7 @@
       </div>
       ${apexRadarPressureBar(key, r)}
       <p class="detail-source">${esc(r.body || "Radar informativo, non e' un ordine operativo.")} · As of ${dateIT(r.as_of)}</p>
-      ${compact ? "" : `<div class="apex-radar-grid"><div>${ranking}</div><div>${filters}</div></div>`}
+      ${compact ? "" : `<div class="apex-radar-grid"><div><p class="detail-source apex-momentum-note">Classifica radar sulla stessa finestra del motore: ${esc(apexLookbackLabel(st))}.</p>${ranking}</div><div>${filters}</div></div>`}
     </section>`;
   }
   function apexOverviewCard(key) {
@@ -2650,7 +2655,7 @@
     const head = universe.map(k => `<th class="right">${esc(apexAssetLabel(key, k))}</th>`).join("");
     const rows = list.map(r => `<tr><td><strong>${dateIT(r.date)}</strong><div class="muted">${esc(r.current_marker ? "stato attuale" : r.reason || "")}</div></td><td><span class="badge ${r.changed ? "warn" : "good"}">${esc(apexAssetLabel(key, r.asset))}</span></td>${universe.map(k => `<td class="right">${pct(Number(r.momentum?.[k] || 0), 1)}</td>`).join("")}</tr>`).join("");
     const toggle = all.length > 6 ? `<div class="toolbar apex-history-actions"><button class="button ghost" data-action="toggle-apex-history" data-strategy="${esc(key)}">${open ? "Mostra meno" : `Mostra tutti i ${all.length} cambi`}</button></div>` : "";
-    return rows ? `${toggle}<table class="table"><thead><tr><th>Quando cambia</th><th>Asset</th>${head}</tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Nessun cambio segnale disponibile.</div>`;
+    return rows ? `${toggle}<div class="table-note">Le percentuali sono momentum ${esc(apexLookbackLabel(st))}: servono a scegliere l'asset, non sono performance del tuo conto.</div><table class="table"><thead><tr><th>Quando cambia</th><th>Asset</th>${head}</tr></thead><tbody>${rows}</tbody></table>` : `<div class="empty">Nessun cambio segnale disponibile.</div>`;
   }
   function apexExecutionHistory(key = "legit") {
     const rows = (state.apexHistory || []).filter(r => r.strategy_key === key).slice(0, 20).map(r => {
